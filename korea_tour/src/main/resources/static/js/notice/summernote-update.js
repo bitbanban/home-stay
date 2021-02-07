@@ -68,7 +68,7 @@ function updateDetail(noticeNum){
 		a+=`<input type="text" class="notice-title" id="notice-title" name="title" value="${item.title}"></input>`;
 	    a+= `<textarea name="content" id="summernote" class="summernote">${item.content}</textarea>`;
 		a+= `<div class="notice-buttons">`;
-		a+= `<button id="subBtn" type="button">수정하기</button>`;
+		a+= `<button id="subBtn" type="button">수정하기</button>&nbsp;&nbsp;`;
 		a+= `<button id="bacBtn" type="button" onclick="window.location.href='/admin/notice/detail?noticeNum='+${item.noticeNum}">돌아가기</button>`;
 		a+= `</div>`;
 

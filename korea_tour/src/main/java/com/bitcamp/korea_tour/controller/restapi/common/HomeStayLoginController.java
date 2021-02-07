@@ -37,11 +37,11 @@ public class HomeStayLoginController {
 		userDto.setName(name);
 		userDto.setPhoto(photo);
 		
-		if(sns.equals("kakao")) {
+		if(sns.equals("KAKAO")) {
 			userDto.setKakaoKey(key);
-		}else if(sns.equals("naver")) {
+		}else if(sns.equals("NAVER")) {
 			userDto.setNaverKey(key);
-		}else if(sns.equals("google")) {
+		}else if(sns.equals("GOOGLE")) {
 			userDto.setGoogleKey(key);
 		}
 		

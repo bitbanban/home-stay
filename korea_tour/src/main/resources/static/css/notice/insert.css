@@ -1,4 +1,3 @@
-
 .all-summernote {
     height: 100%;
     text-align: center;
@@ -11,7 +10,6 @@
 .notice-wrap {
     display: inline-block; vertical-align: middle;
 }
-
 
 .notice-wrap{
 	width:70%;
@@ -44,7 +42,7 @@ h2{
 	
 }
 
+#bacBtn{
+	font-family: 'regular';
+}
 
-/*@media all and (min-width: 768px) and (max-width: 1023px)
-@media all and (max-width:767px)
-@media all and (max-width: 360px) */

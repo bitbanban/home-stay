@@ -3,8 +3,13 @@ package com.bitcamp.korea_tour.controller.restapi.homestay;
 import java.io.File;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,9 +23,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bitcamp.korea_tour.fileupload.SpringFileWriter;
 import com.bitcamp.korea_tour.model.homestay.HomeStayPhotoDto;
+import com.bitcamp.korea_tour.model.homestay.HomeStayReservationDto;
 import com.bitcamp.korea_tour.model.homestay.JoinHomeStayDetailDto;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostService;
+import com.bitcamp.korea_tour.model.service.homestay.HomeStayReservationService;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,8 +38,11 @@ import lombok.RequiredArgsConstructor;
 public class HomeStayHostController {
 	private final HomeStayHostService hsas;
 	private final HomeStayHostPhotoService hshps;
+	private final HomeStayReservationService hsrs;
+	@Autowired
+	private JavaMailSender mailSender;
 
-
+	
 	/**
 	 * 예약 승인,거절(호스트용)
 	 * @param homeStayReservationNum
@@ -43,7 +53,40 @@ public class HomeStayHostController {
 			@PathVariable(value="homeStayReservationNum")int homeStayReservationNum,
 			@PathVariable(value="approval") int approval) {
 		hsas.updateApproval(homeStayReservationNum,approval);
+		HomeStayReservationDto dto = hsrs.getData(homeStayReservationNum);
+		String name= dto.getName();
+		String email1 = dto.getEmail1();
+		String email2 = dto.getEmail2();
+		
+		MimeMessage message=mailSender.createMimeMessage();
+
+		
+		try {
+			//메일제목
+			if(approval==1) {
+			message.setSubject(name+"님의 예약이 완료되었습니다.");
+			message.setText("승인 승인 승인");
+			message.setRecipients(MimeMessage.RecipientType.TO,
+					InternetAddress.parse(email1+"@"+email2));
+			}
+			if(approval==2) {
+			message.setSubject(name+"님의 예약신청이 거절 되었습니다.");			
+			//메일 본문
+			message.setText("거절 거절 거절");
+			//받을 메일 주소
+			message.setRecipients(MimeMessage.RecipientType.TO,
+					InternetAddress.parse(email1+"@"+email2));
+			//메일전송
+			}
+			mailSender.send(message);
+			//포워드파일로 메세지 보내기
+		} catch (MessagingException e) 	{
+		
+		}
+	
 	}
+	
+	
 	
 	
 	

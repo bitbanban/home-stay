@@ -22,7 +22,7 @@ public class HomeStayReservationDetailController {
 	 * @param homeStayReservationNum
 	 * @return
 	 */
-	@GetMapping("/homestay/reservation/{homeStayReservationNum}")
+	@GetMapping("/homestays/reservation/{homeStayReservationNum}")
 	@ResponseBody
 	public JsonData getReservationDetail(
 			@PathVariable(name="homeStayReservationNum") int homeStayReservationNum

@@ -1,8 +1,6 @@
-
-
-    .container {
+  .container {
 	    position:relative; 
-		width:560px; 
+		width:43.750em; 
 		margin:0 auto; 
 		padding:0;  
 		height:auto;
@@ -17,39 +15,22 @@
 		padding:0;
 		border:none;
 		outline:none;
-    font-family: 'FontAwesome';
-  font-style: normal;
-  font-weight: normal;
+  
+  		font-style: normal;
+  		font-weight: normal;
     }
 	
-	.noticedetail-multi-column .column-full { width:500px; }
-    .noticedetail-multi-column .column-half { width:245px; }
-    .noticedetail-multi-column .column-one-third { width:160px; }
-    .noticedetail-multi-column .column-fouth { width:117.5px; }
-    .noticedetail-multi-column .column-fifth { width:92px; }
-	.noticedetail-multi-column .column-sixth { width:75px; }
 	
-    .noticedetail-multi-column .column-full,
-    .noticedetail-multi-column .column-half,
-    .noticedetail-multi-column .column-one-third,
-    .noticedetail-multi-column .column-fourth,
-    .noticedetail-multi-column .column-fifth,
-	.noticedetail-multi-column .column-sixth{
-	    display:inline-block;
-	    float:left;
-	    margin-left:5px;
-		margin-right:5px;
-    }
 	
 /*	--------------------------------------------------
 	:: Top Bar
 	-------------------------------------------------- */
 	
     .top-form-bar {
-        height:5px;
+        height:0.313em;
         overflow:hidden;
         width:100%;
-        margin:15px auto 0 auto;
+        margin:0.938em auto 0 auto;
     }
 
     .top-form-bar .top-bar{
@@ -57,38 +38,36 @@
         float:left;
     }
 
-    .top-bar-green { background-color:#89bf55; width:100%; }
+    .top-bar-green { background-color:#3CBD82; width:100%; }
 
 /*	--------------------------------------------------
 	:: Form Header
 	-------------------------------------------------- */
 	
     .noticedetail-form .header{ 
-		padding:30px 25px;
+		padding:1.875em 1.563em;
 		text-align:right;
 		overflow:hidden;
 		background-color:#f5f5f5;
-		border-bottom:1px solid #e5e5e5;
+		border-bottom:0.063em solid #e5e5e5;
 	}
 	
 	.noticedetail-form .header h4 { 
         text-align:left;	
 	    font-style:normal; 
 	    font-weight:normal; 
-	    font-family:"Open Sans"; 
-	    font-size:16px; 
+	    font-size:1.200em; 
 		color:#777;
         margin:0;
 		padding:0;		 
 	}
 	
 	.noticedetail-form .header i { 
-  font-family: 'FontAwesome';
   font-style: normal;
   font-weight: normal;
-		font-size:16px; 
+		font-size:1.200em; 
 		color:#777;
-		margin-right:10px;
+		margin-right:0.625em;
 		vertical-align:baseline;		 
 	}
 	
@@ -97,114 +76,39 @@
 	-------------------------------------------------- */
 	
     .noticedetail-form .section { 
-		padding:30px 25px;
+		padding:1.875em 1.563em;
 		background-color:#f9f9f9;
 	}
 	
-	.noticedetail-form .section .input-group{
-        position:relative;
-	    display:block;
-    }
-
-	.noticedetail-form .section .input-group input[type="text"],
-    .noticedetail-form .section .input-group input[type="email"]{
-	    border:1px solid #ccc;
-		padding:10px;
-		margin-bottom:10px;
-	    outline:none;		
-	    font-family:"Open Sans"; 
-	    font-size:13px;
-        color:#999;		
-		box-shadow:none;
-		font-style:normal;  
-	    font-weight:normal;
-		background-color:#fff;
-	    -webkit-box-sizing:border-box;
-	       -moz-box-sizing:border-box; 
-	            box-sizing:border-box;
-	}
 	
-	.noticedetail-form .section .input-group input[type="text"],
-    .noticedetail-form .section .input-group input[type="email"]{
-		width:100%;
-	}
 	
-	.noticedetail-form .section .input-group input[type="text"]:focus,
-    .noticedetail-form .section .input-group input[type="email"]:focus{
-	    border-color:#bbb;
-		color:#333;
-		outline:none;
-	}
-
-	.noticedetail-form .section .input-group label i{
-        position:absolute;
-		cursor:pointer;
-		top:13px;
-		right:20px;
-		display:block;
-		color:#aaa;
-		font-weight:normal; 
-		font-style:normal;
-		font-size:15px; 
-		vertical-align:baseline;
-	    -webkit-box-sizing:border-box;
-	       -moz-box-sizing:border-box; 
-	            box-sizing:border-box;
-    }
-
+	
+	
 	.noticedetail-form .section fieldset {
         margin:0;
 		padding:0;
 		border:0;
     }
+    
+    
 	
-	.noticedetail-error-message { 
-	    display:block; 
-        font-family:"Open Sans";		
-		font-weight:normal; 
-		font-style:normal;
-		font-size:13px; 
-		background-color:#e0635b;
-		border:1px solid #c14b44;
-	    border-radius:2px;
-	    -moz-border-radius:2px;
-	    -webkit-border-radius:2px; 
-		padding:8px 20px; 
-		margin:0 0 10px 0;
-		color:#fff; 
-		line-height:18px;
-		-webkit-font-smoothing:antialiased;
+	.column-full-inside{
+	text-align:right;
+	color:gray;
+	font-size:0.875em;
 	}
 	
-	.noticedetail-error-message a{ 
-	    display:block; 
-        font-family:"Open Sans";		
-		font-weight:normal; 
-		font-style:normal;
-		font-size:13px; 
-		color:#fff; 
-		text-decoration:none;
-		-webkit-font-smoothing:antialiased;
-	}
-
-	.noticedetail-success-message { 
-	    display:block; 
-        font-family:"Open Sans";		
-		font-weight:normal; 
-		font-style:normal;
-		font-size:13px; 
-		background-color:#96aa39;
-		border:1px solid #7b8b2f;
-	    border-radius:2px;
-	    -moz-border-radius:2px;
-	    -webkit-border-radius:2px; 
-		padding:8px 20px; 
-		margin:0 0 10px 0;
-		color:#fff; 
-		-webkit-font-smoothing:antialiased;
+	.column-full-title{
+	text-align:center;
+	font-weight:bold;
+	
 	}
 	
-	#newsletter-message { margin:0; padding:0; }
+	.column-full-content{
+	text-align:center;
+	
+	
+	}
 	
 	.noticedetail-form .section button { 
 	    float:right;
@@ -215,172 +119,50 @@
         background-image:url(../Images/loader.gif); 
         background-repeat:no-repeat;
 		background-position:0 0;
-		margin-top:14px;
-		margin-left:230px;
-        width:16px;
-        height:16px;
+		margin-top:0.875em;
+		margin-left:14.375em;
+        width:1.000em;
+        height:1.000em;
         display:none;		
 	}
 	
-/*	--------------------------------------------------
-	:: Button Container & Sizes
-	-------------------------------------------------- */	
-	
-	button.button-large {  
-		padding:15px 30px 14px 30px;
-		margin:0 0 5px 0;
-	}
-	
-	button.button-large i{  
-		font-style:normal; 
-	    font-weight:normal; 
-	    font-size:13px; 
-	    color:#fff;
-        margin-right:10px;
-		vertical-align:baseline;
-	}
-	
-	button.button-normal{ 
-		padding:13px 25px 12px 25px;
-		margin:0 0 5px 0;
-	}
-	
-	button.button-normal i{  
-		font-style:normal; 
-	    font-weight:normal; 
-	    font-size:13px; 
-	    color:#fff;
-        margin-right:10px;
-		vertical-align:baseline;
-	}
-	
-	button.button-small{ 
-		padding:11px 20px 10px 20px;
-		margin:0 0 5px 0;
-	}
-	
-	button.button-small i{  
-		font-style:normal; 
-	    font-weight:normal; 
-	    font-size:13px; 
-	    color:#fff;
-        margin-right:10px;
-		vertical-align:baseline;
-	}
-	
-	button.button-mini{ 
-		padding:9px 15px 8px 15px;
-		margin:0 0 5px 0;
-	}
-	
-	button.button-mini i{  
-		font-style:normal; 
-	    font-weight:normal; 
-	    font-size:13px; 
-	    color:#fff;
-        margin-right:10px;
-		vertical-align:baseline;
-	}
 
-/*	--------------------------------------------------
-	:: Button Configuration
-	-------------------------------------------------- */
-	
-    .button{
-	    display:inline-block;
-	    position:relative;
-        font-style:normal; 
-	    font-weight:normal; 
-	    font-family:"Open Sans"; 
-	    font-size:14px;
-		margin:0;
-	    color:#fff;
-		border:none;
-		outline:none;
-	    text-decoration:none;
-        text-align:center;
-		cursor:pointer;
-		-webkit-border-radius:2px;
-        -moz-border-radius:2px;
-        border-radius:2px;
-    }
-	
-/*	--------------------------------------------------
-	:: Button Blue
-	-------------------------------------------------- */
-	
-	.button-blue {
-	    background-color:#618da1;
-		border-bottom:1px solid #447085;
-    }
-	
-	.button-blue:hover {
-        background-color:#5b879a;
-		border-bottom:1px solid #447085;
-    }
-	
-	.button-blue:active {
-        background-color:#618da1;
-		border-bottom:1px solid #447085;
-    }
-	
-/*	--------------------------------------------------
-	:: Button Red
-	-------------------------------------------------- */
 
-	.button-red {
-	    background-color:#e0635b;
-		border-bottom:1px solid #c14b44;
-    }
+
 	
-	.button-red:hover {
-        background-color:#d76059;
-		border-bottom:1px solid #c14b44;
+.notice-up-button{
+	font-family:'regular';
+	background-color:#e0635b;
+	font-size:0.813em;
+}
+
+.notice-up-button:hover {
+        background-color:#CC3D3D;
     }
-	
-	.button-red:active {
+
+.notice-up-button:active {
         background-color:#e0635b;
-		border-bottom:1px solid #c14b44;
+    }
+
+
+
+.notice-bac-button{
+	font-family:'regular';
+	font-size:0.813em;
+	background-color:#9FC93C
+}
+.notice-bac-button:hover {
+        background-color:#22741C;
+		
     }
 	
-/*	--------------------------------------------------
-	:: Button Green
-	-------------------------------------------------- */
-	
-	.button-green {
-	    background-color:#96aa39;
-		border-bottom:1px solid #7b8b2f;
+.notice-bac-button:active {
+        background-color:#9FC93C
+		
     }
-	
-	.button-green:hover {
-        background-color:#8ea134;
-		border-bottom:1px solid #7b8b2f;
-    }
-	
-	.button-green:active {
-        background-color:#96aa39;
-		border-bottom:1px solid #7b8b2f;
-    }
-	
-/*	--------------------------------------------------
-	:: Button Orange
-	-------------------------------------------------- */
-	
-	.button-orange {
-	    background-color:#de5f41;
-		border-bottom:1px solid #be4527;
-    }
-	
-	.button-orange:hover {
-        background-color:#d45639;
-		border-bottom:1px solid #be4527;
-    }
-	
-	.button-orange:active {
-        background-color:#de5f41;
-		border-bottom:1px solid #be4527;
-    }	
-	
+
+
+
 /*	--------------------------------------------------
 	:: Note: Design for a width of 768px
 	-------------------------------------------------- */

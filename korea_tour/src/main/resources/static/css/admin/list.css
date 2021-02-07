@@ -1,7 +1,11 @@
 * {
-	font-size: 13px
+	font-size: 12px;
 }
 
+h1 {
+	text-align: center;
+	font-size:15px;
+}
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -74,20 +78,22 @@ Object Title
 	color: #333;
 }
 
+
 .page_wrap {
 	text-align: center;
+	
 	font-size: 0;
 	padding: 10px;
 }
 
 .page_nation {
 	display: block;
+	
 	text-align: center;
 }
 
 
 .page_nation a {
-	
 	margin: 0 3px;
 	float: left;
 	border: 1px solid #e6e6e6;
@@ -102,7 +108,7 @@ Object Title
 }
 
 .page-list{
-	float: center;
+	display: inline-block;
 }
 .page_nation .arrow {
 	border: 1px solid #ccc;

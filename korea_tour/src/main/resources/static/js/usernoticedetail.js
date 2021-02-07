@@ -27,12 +27,10 @@ xhr.send();
             console.log(item);
 
         let a="";{
-			a+= `<div></div>`
-			a+= `<div>작성날짜: ${item.writeDay}</div>`
-			a+= `<div>조회수: ${item.views}</div>`
-			a+= `<div>제목: ${item.title}</div>`
-			a+= `<div>내용: ${item.content}</div>`
-			a+=` <button type="button" onclick="history.back()" class="button button-small button-green">돌아가기</button>`
+			a+= `<div class="column-full-title">제목: ${item.title}</div><br>`
+			a+= `<div class="column-full-inside">작성날짜: ${item.writeDay} &nbsp;&nbsp; 조회수: ${item.views}</div>`
+			a+= `<div class="column-full-content">${item.content}</div>`
+			a+=` <button type="button" onclick="history.back()" class="notice-bac-button">돌아가기</button>`
 			
 
 

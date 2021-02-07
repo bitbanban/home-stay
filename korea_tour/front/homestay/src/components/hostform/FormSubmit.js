@@ -42,7 +42,7 @@ function FormSubmit(props) {
       setLoading(true);
       try {
         const response = await axios
-          .post(`http://localhost:9003/homestay/house?userNum=228`, data)
+          .post(`http://localhost:9003/homestays/house?userNum=228`, data)
           .then(() => {
             alert('완료!');
           });
@@ -55,7 +55,7 @@ function FormSubmit(props) {
     sendData();
   }, []);
   useEffect(() => {
-    let url = `http://localhost:9003/homestay/photo/228`;
+    let url = `http://localhost:9003/homestays/photo/228`;
 
     // async를 사용하는 함수 따로 선언
     const sendPhoto = async () => {

@@ -27,13 +27,11 @@ function noticeDetailList(noticeNum){
             console.log(item);
 
         let a="";{
-			a+= `<div></div>`
-			a+= `<div>작성날짜: ${item.writeDay}</div>`
-			a+= `<div>조회수: ${item.views}</div>`
-			a+= `<div>제목: ${item.title}</div>`
-			a+= `<div>내용: ${item.content}</div>`
-			a+=` <button type="button" onclick="location.href='/admin/notice/updateform?noticeNum='+noticeNum" class="button button-small button-red">수정하기</button>`
-			a+=` <button type="button" onclick="location.href='/admin/noticelist?currentPage=1'" class="button button-small button-green">목록으로</button>`
+			a+= `<div class="column-full-title">제목: ${item.title}</div><br>`
+			a+= `<div class="column-full-inside">작성날짜: ${item.writeDay} &nbsp;&nbsp; 조회수: ${item.views}</div>`
+			a+= `<div class="column-full-content">${item.content}</div>`
+			a+=` <button type="button" onclick="location.href='/admin/notice/updateform?noticeNum='+noticeNum" class="notice-up-button" >수정하기</button>&nbsp;`
+			a+=` <button type="button" onclick="location.href='/admin/noticelist?currentPage=1'"class="notice-bac-button" >목록으로</button>`
 
 
 		}

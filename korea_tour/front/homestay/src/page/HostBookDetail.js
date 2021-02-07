@@ -13,7 +13,7 @@ function HostBookDetail({ match, history }) {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:9003/homestay/reservation/${bookNum}`
+          `http://localhost:9003/homestays/reservation/${bookNum}`
         );
         setData(response.data.detail);
         console.log(response.data);
