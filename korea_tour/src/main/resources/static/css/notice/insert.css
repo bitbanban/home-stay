@@ -1,0 +1,50 @@
+
+.all-summernote {
+    height: 100%;
+    text-align: center;
+}
+.all-summernote:before {
+    content: ""; display: inline-block;
+    width: 0.1rem; height: 100%;
+    margin-right: 0; vertical-align: middle;
+}
+.notice-wrap {
+    display: inline-block; vertical-align: middle;
+}
+
+
+.notice-wrap{
+	width:70%;
+	position: relative;
+	float: center;
+	
+}
+
+h2{
+	text-align: center; 
+	color:#3b270d
+}
+
+#notice-title{
+	width: 99%;
+	border-radius: 0.3rem;
+	margin-bottom:0.5rem;
+}
+
+.notice-buttons{
+	float: center;
+	border-radius: 0.3rem;
+	margin-top:0.8em;
+	text-align: center;
+	
+}
+
+#subBtn{
+	font-family: 'regular';
+	
+}
+
+
+/*@media all and (min-width: 768px) and (max-width: 1023px)
+@media all and (max-width:767px)
+@media all and (max-width: 360px) */

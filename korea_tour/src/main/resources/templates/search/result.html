@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/search.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script th:src="@{/js/search.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+	<div class="list-container">
+		<h1 class="keyword-title" th:keyword=${keyword}>"[[${keyword}]]" 검색 결과</h1>
+		
+		<ul class="array-list sort-place">
+			<li class="sort active" id="placeTitle" th:place="title" >제목순</li>
+			<li class="sort" id="placeLike" th:place="like" >좋아요순</li>
+		  </ul>
+		  <ul class="array-list sort-course">
+			<li class="sort active" id="courseTime" th:course="time" >최신순</li>
+			<li class="sort" id="courseLike" th:course="like" >좋아요순</li>
+		  </ul>
+		<div class="list"></div>
+		<ul class="pagination" th:currentPage=${currentPage}></ul>
+	</div>
+
+	<div class="categories">
+		<ul class="category__search">
+			<li class='search-list' th:search='tourplace'>관광지검색결과</li>
+			<li class='search-list' th:search='courses'>코스검색결과</li>
+			
+		</ul>
+		
+	</div>
+</div>
+
+</html>

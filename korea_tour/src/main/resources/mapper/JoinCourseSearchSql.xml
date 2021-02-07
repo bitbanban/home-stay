@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.JoinCourseSearchMapper">
+
+	<sql id="courseA">  <!-- 메인코스목록 / 마이코스목록 / 검색코스 목록-->
+		SELECT * FROM course 
+		INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		AND coursePlace.orderNum=1 AND course.open=1 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+	</sql>
+	<sql id="courseCnt">
+		SELECT count(*) FROM course 
+		INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		AND coursePlace.orderNum=1 AND course.open=1 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+	</sql>
+
+	<!-- 통합검색코스(검색어에 해당하는 관광지가 들어있는 코스까지) 검색쿼리 최신순-->
+	<select id="getSearchCourseByTime" parameterType="HashMap" resultType="joincourse">
+		<include refid="courseA"/>
+        WHERE course.name LIKE CONCAT('%', #{keyword}, '%') 
+        OR course.content LIKE CONCAT('%', #{keyword}, '%')
+        OR place.title LIKE CONCAT('%', #{keyword}, '%') 
+        OR place.addr1 LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY course.courseNum DESC 
+        LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- 통합검색코스(검색어에 해당하는 관광지가 들어있는 코스까지) 검색쿼리 인기순-->
+	<select id="getSearchCourseByLike" parameterType="HashMap" resultType="joincourse">
+		<include refid="courseA"/>
+       	WHERE course.name LIKE CONCAT('%', #{keyword}, '%') 
+        OR course.content LIKE CONCAT('%', #{keyword}, '%')
+        OR place.title LIKE CONCAT('%', #{keyword}, '%') 
+        OR place.addr1 LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY course.totalLike DESC 
+        LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- 맞춤코스(태그) 검색(최신순) -->
+	<select id="getCustomCourseByTime" parameterType="hashmap" resultType="joincourse">
+		<include refid="courseA"/>
+		WHERE course.who LIKE CONCAT('%', #{who}, '%') 
+        AND course.during LIKE CONCAT('%', #{during}, '%') 
+        AND course.how LIKE CONCAT('%', #{how}, '%')
+        ORDER BY course.courseNum DESC 
+        LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- 맞춤코스(태그) 검색(인기순) -->
+	<select id="getCustomCourseByLike" parameterType="hashmap" resultType="joincourse">
+		<include refid="courseA"/>
+		WHERE course.who LIKE CONCAT('%', #{who}, '%') 
+        AND course.during LIKE CONCAT('%', #{during}, '%') 
+        AND course.how LIKE CONCAT('%', #{how}, '%')
+        ORDER BY course.totalLike DESC 
+        LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- 통합검색 -->
+	<select id="getSearchTotalCount" resultType="int" parameterType="String">
+		<include refid="courseCnt"/>
+		
+			WHERE course.name LIKE CONCAT('%', #{keyword}, '%') 
+	        OR course.content LIKE CONCAT('%', #{keyword}, '%')
+	        OR place.title LIKE CONCAT('%', #{keyword}, '%') 
+	        OR place.addr1 LIKE CONCAT('%', #{keyword}, '%')
+	</select>	
+	
+	<!-- 맞춤코스 검색 , 태그검색 -->
+	<select id="getCustomTotalCount" resultType="int" parameterType="HashMap">
+		<include refid="courseCnt"/>
+			WHERE course.who LIKE CONCAT('%', #{who}, '%') 
+	        AND course.during LIKE CONCAT('%', #{during}, '%') 
+	        AND course.how LIKE CONCAT('%', #{how}, '%')
+	</select>
+</mapper>

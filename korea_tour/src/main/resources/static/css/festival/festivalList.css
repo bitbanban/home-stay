@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+.categories {
+  background-color: var(--c-color);
+  border-radius: 1rem;
+  width: 15vw;
+  padding: 1em;
+  position: fixed;
+  top: 25vh;
+  right: 15vw;
+}
+
+.area-list,
+.month-list {
+  display: inline-block;
+  margin: 0.2em 0.5em;
+}
+
+.categories ul {
+  border-top: 0.1em solid var(--d-color);
+  border-bottom: 0.1em solid var(--d-color);
+}
+
+.area-title {
+  margin-top: 2vw;
+  margin-bottom: 1vw;
+  margin-left: 5vh;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: inherit;
+  width: 50vw;
+  border-bottom: 1px solid var(--d-color);
+  border-top: 1px solid var(--d-color);
+  margin-right: 5vw;
+  padding: 1em;
+  height: 20vh;
+}
+
+.card img {
+  max-width: 10vw;
+  width: 10vw;
+  max-height: 20vh;
+  height: 20vh;
+  border: 3px solid var(--b-color);
+  vertical-align: middle;
+}
+
+.list-container {
+  float: left;
+  width: 51vw;
+  margin-left: 5vw;
+}
+
+.info {
+  width: 35vw;
+  float: right;
+  padding: 1em;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+.date,
+.place,
+.title {
+  display: block;
+}
+
+/*선택됬을시 class*/
+.active {
+  border-bottom: 3px solid var(--b-color);
+  color: var(--b-color);
+}
+
+/*페이징 처리 css!!!!*/
+
+/*.page_wrap {
+   text-align:center;
+   font-size:0;
+ }*/
+.pagination {
+  text-align: center;
+}
+.pagination .none {
+  display: none;
+}
+.pagination li {
+  display: inline-block;
+  margin: 20px 3px;
+  border: 1px solid #e6e6e6;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background-color: #fff;
+  font-size: 13px;
+  color: #999999;
+  text-decoration: none;
+}
+
+.pagination .arrow {
+  border: 1px solid #ccc;
+}
+.pagination .pprev {
+  background: #f8f8f8 url('img/page_pprev.png') no-repeat center center;
+  margin-left: 0;
+}
+.pagination .prev {
+  background: #f8f8f8 url('img/page_prev.png') no-repeat center center;
+  margin-right: 7px;
+}
+.pagination .next {
+  background: #f8f8f8 url('img/page_next.png') no-repeat center center;
+  margin-left: 7px;
+}
+.pagination .nnext {
+  background: #f8f8f8 url('img/page_nnext.png') no-repeat center center;
+  margin-right: 0;
+}
+.pagination a.active {
+  background-color: #42454c;
+  color: #fff;
+  border: 1px solid #42454c;
+}

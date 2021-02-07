@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/festival/festivalList.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script th:src="@{/js/festivalList.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+	<div class="list-container">
+		<h1 class="area-title"></h1>
+		<div class="list"></div>
+		<ul class="pagination"></ul>
+	</div>
+
+	<div class="categories">
+		<ul class="category__area">
+			<li class='area-list' th:area='all'>전국</li>
+			<li class='area-list' th:area='1'>서울</li>
+			<li class='area-list' th:area='2'>인천</li>
+			<li class='area-list' th:area='31'>경기</li>
+			<li class='area-list' th:area='32'>강원</li>
+			<li class='area-list' th:area='3'>대전</li>
+			<li class='area-list' th:area='8'>세종</li>
+			<li class='area-list' th:area='33'>충북</li>
+			<li class='area-list' th:area='34'>충남</li>
+			<li class='area-list' th:area='4'>대구</li>
+			<li class='area-list' th:area='6'>부산</li>
+			<li class='area-list' th:area='7'>울산</li>
+			<li class='area-list' th:area='35'>경북</li>
+			<li class='area-list' th:area='36'>경남</li>
+			<li class='area-list' th:area='5'>광주</li>
+			<li class='area-list' th:area='37'>전북</li>
+			<li class='area-list' th:area='38'>전남</li>
+			<li class='area-list' th:area='39'>제주</li>
+		</ul>
+		<ul class="category__month">
+			<li class="month-list" th:month="all">전체보기</li>
+			<li class="month-list" th:month="1">1월</li>
+			<li class="month-list" th:month="2">2월</li>
+			<li class="month-list" th:month="3">3월</li>
+			<li class="month-list" th:month="4">4월</li>
+			<li class="month-list" th:month="5">5월</li>
+			<li class="month-list" th:month="6">6월</li>
+			<li class="month-list" th:month="7">7월</li>
+			<li class="month-list" th:month="8">8월</li>
+			<li class="month-list" th:month="9">9월</li>
+			<li class="month-list" th:month="10">10월</li>
+			<li class="month-list" th:month="11">11월</li>
+			<li class="month-list" th:month="12">12월</li>
+		</ul>
+	</div>
+</div>
+
+</html>

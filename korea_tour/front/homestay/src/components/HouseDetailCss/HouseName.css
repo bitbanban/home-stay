@@ -1,0 +1,30 @@
+body{
+    width: 70%;
+    margin: auto;
+}
+#infoBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+#share, #favorite{
+    cursor: pointer;
+    vertical-align: middle;
+    
+}
+
+#star, #mapicon{
+    vertical-align: middle;
+}
+
+#star{
+    margin-right: 5px;
+}
+#share, #favorite{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#mapicon{
+    margin-right: 5px;
+}

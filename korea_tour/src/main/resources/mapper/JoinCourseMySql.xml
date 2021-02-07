@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.JoinCourseMyMapper">
+
+	<sql id="courseA">  <!-- 메인코스목록 / 마이코스목록 / 검색코스 목록-->
+		SELECT * FROM course 
+		INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		AND coursePlace.orderNum=1 AND course.userNum=#{loginNum} 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+	</sql>
+	
+	<sql id="courseC"> <!-- 마이코스마크목록 -->
+		SELECT * FROM courseMark 
+		JOIN course ON courseMark.courseNum=course.courseNum
+		AND courseMark.loginNum=#{loginNum} AND course.open=1
+		JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		AND coursePlace.orderNum=1 
+		JOIN place ON place.contentId=coursePlace.contentId 
+	</sql>
+	
+	
+	<!-- mypage-->
+	<!-- 내코스 목록보기 ->(사진은 어차피 1번만가져오면 되니까 orderNum으로 구분) -->
+	<select id="getMyCourseList" parameterType="hashmap" resultType="joincourse">
+		<include refid="courseA"/>
+		ORDER BY course.courseNum 
+		LIMIT #{start},#{perPage}
+	</select>
+
+	<!-- 내 즐겨찾기 코스 모아보기 ->userNum으로 내 즐겨찾기만 모아볼수 있도록(사진은 어차피 1번만가져오면 되니까 orderNum으로 구분) -->
+	<select id="getMyMarkCourse" resultType="joincoursemark" parameterType="HashMap">
+		<include refid="courseC"/>
+		ORDER BY courseMark.courseMarkNum 
+		LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- 마이페이지 코스목록 총갯수 -->
+	<!-- 내코스 -->
+	<select id="getMyTotalCount" resultType="int" parameterType="int">
+		SELECT count(*) FROM course 
+		INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		AND coursePlace.orderNum=1 AND course.userNum=#{loginNum} 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+	</select>
+	
+	<!-- 내 즐겨찾기 -->
+	<select id="getMarkTotalCount" resultType="int" parameterType="int">
+		SELECT count(*) FROM courseMark 
+		JOIN course ON courseMark.courseNum=course.courseNum
+		AND courseMark.loginNum=#{loginNum} AND course.open=1
+		JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		AND coursePlace.orderNum=1 
+		JOIN place ON place.contentId=coursePlace.contentId 
+	</select>
+</mapper>

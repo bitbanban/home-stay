@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.JoinCourseMainMapper">
+
+	<sql id="courseA">  <!-- 메인코스목록 / 마이코스목록 / 검색코스 목록-->
+		SELECT * FROM course 
+		INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+	</sql>
+
+	
+	<!-- main페이지 -->
+	<!-- 모든코스 모아보기(최신순) -->
+	<select id="getAllCourseByTime" parameterType="HashMap" resultType="joincourse">
+		<include refid="courseA"/>
+		WHERE coursePlace.orderNum=1 AND course.open=1 
+		ORDER BY course.courseNum DESC 
+		LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- 모든코스 모아보기(인기순) -->
+	<select id="getAllCourseByLike" parameterType="HashMap" resultType="joincourse">
+		<include refid="courseA"/>
+		WHERE coursePlace.orderNum=1 AND course.open=1 
+		ORDER BY course.totalLike DESC 
+		LIMIT #{start},#{perPage}
+	</select>
+	
+	<!-- main코스 목록 총개수 (페이징)-->
+	<select id="getAllTotalCount" resultType="int">
+		SELECT count(*) FROM course 
+		INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+		WHERE coursePlace.orderNum=1 AND course.open=1
+	</select>
+</mapper>

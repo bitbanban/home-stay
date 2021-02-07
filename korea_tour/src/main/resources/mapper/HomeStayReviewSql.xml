@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayReviewMapper">
+	<!-- 리뷰출력(글쓴이, 내용) -->
+	<select id="getAllReview" parameterType="int" resultType="homestayreview">
+	SELECT * FROM homeStayReview
+	WHERE homeStayNum=#{homeStayNum} ORDER BY regroup desc
+	</select>
+	
+	<!-- 리뷰출력(해당 댓글에 해당하는 사진) -->
+	<select id="getAllReviewPhoto" parameterType="int" resultType="homestayreviewphoto">
+	SELECT * FROM homeStayReviewPhoto WHERE homeStayReviewNum=#{homeStayReviewNum}
+	</select>
+	
+	<!-- Regroup Max 값 구하기 -->
+	<select id="maxOfRegroup" resultType="int">
+	SELECT MAX(regroup) from homeStayReview
+	</select>
+	
+	<!-- 댓글쓰기 -->
+	<insert id="insertReview" parameterType="homestayreview">
+	INSERT into homeStayReview
+	(userNum,homeStayNum,relevel,regroup,loginNum,loginId,loginPhoto,content,writeday,deleted)
+	VALUES ((SELECT userNum from homeStay WHERE homeStayNum=#{homeStayNum}),#{homeStayNum},0,
+	#{regroup},#{loginNum},#{loginId},#{loginPhoto},#{content},now(),0)
+	</insert>
+	
+	<!-- 답글쓰기 -->
+	<insert id="insertAnswerReview" parameterType="homestayreview">
+	INSERT into homeStayReview 
+	(userNum,homeStayNum,relevel,regroup,loginNum,loginId,loginPhoto,content,writeday,deleted)
+	VALUES (#{userNum},#{homeStayNum},1,#{regroup},#{loginNum},#{loginId},#{loginPhoto},#{content},now(),0)
+	</insert>
+	
+	<!-- 이미 후기를 썼는지 체크 -->
+	<select id="checkReviewWritten" parameterType="int" resultType="int">
+		select count(*) from homeStayReview where homeStayNum = #{homeStayNum} and loginNum = #{loginNum}
+	</select>
+	
+	<!-- homeStayReviewNum 찾기 -->
+	<select id="getReviewNum" parameterType="hashmap" resultType="int">
+		select homeStayReviewNum from homeStayReview where homeStayNum=#{homeStayNum} and loginNum=#{loginNum}
+	</select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.UserMapper">
+	<select id="getUserList" parameterType="HashMap" resultType="user">
+		select * from user order by userNum asc limit #{start},#{perPage}
+	</select>
+	<select id="getUserTotalCount" resultType="int">
+		select count(*) from user
+	</select>
+	<!-- 관리자 + 홈스테이 로그인정보 가져오기 -->
+	<select id="getUserData" parameterType="int" resultType="user">
+		select * from user where userNum=#{userNum}
+	</select>
+	<insert id="insertUser" parameterType="user">
+		insert into user (name, photo, kakaoKey, naverKey, googleKey) 
+		values
+		(#{name}, #{photo}, #{kakaoKey}, #{naverKey}, #{googleKey})
+	</insert>
+	<delete id="deleteUser" parameterType="int">
+		delete from user where userNum=#{loginNum}
+	</delete>
+	<select id="hasKey" parameterType="hashmap" resultType="int">
+		select count(*) from user where 
+		<if test="sns == 'KAKAO'">kakaoKey=#{key}</if>
+		<if test="sns == 'NAVER'">naverKey=#{key}</if>
+		<if test="sns == 'GOOGLE'">googleKey=#{key}</if>
+	</select>
+	<select id="getUserByKey" parameterType="hashmap" resultType="user">
+		select * from user where 
+		<if test="sns == 'KAKAO'">kakaoKey=#{key}</if>
+		<if test="sns == 'NAVER'">naverKey=#{key}</if>
+		<if test="sns == 'GOOGLE'">googleKey=#{key}</if>
+	</select>
+	
+	
+	<!-- user강퇴 -->
+	<delete id="deleteUserByAdmin" parameterType="int">
+		delete from user where userNum=#{userNum}
+	</delete>
+	
+	<!-- 호스트인지 알아보기 -->
+	<select id="ifHost" parameterType="int" resultType="int">
+		select count(*) from homeStay where userNum=#{loginNum}
+	</select>
+</mapper>

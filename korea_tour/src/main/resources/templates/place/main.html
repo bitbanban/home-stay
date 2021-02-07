@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+ <link rel="stylesheet" th:href="@{css/placemain.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script" >
+	<script th:src="@{js/placemain.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+<!--/* 슬라이드 구성 */-->
+ <div class="slideshow-container">
+
+      <!-- Full-width images with number and caption text -->
+      <div class="mySlides fade">
+        <img class="simg" src="img/83tower.jpg">
+        <div class="text">대구광역시 83타워</div>
+      </div>
+
+      <div class="mySlides fade">
+        <img class="simg" src="img/ducksugung.jpg">
+        <div class="text">서울특별시 덕수궁</div>
+      </div>
+
+      <div class="mySlides fade">
+        <img class="simg" src="img/serangji.jpg">
+        <div class="text">전라남도 화순 세량지</div>
+      </div>
+
+      <div class="mySlides fade">
+        <img class="simg" src="img/subjicoji.jpg">
+        <div class="text">제주도 섭지코지</div>
+      </div>
+
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="moveSlides(-1)">&#10094;</a>
+      <a class="next" onclick="moveSlides(1)">&#10095;</a>
+    </div>
+    <br/>
+
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(0)"></span>
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+<!--/* 슬라이드 구성 끝 */-->
+<form>
+<input type="hidden" id = "hiddenCity" th:areaCode="1"></input> 
+<input type="text" id="mainCity" th:value="서울특별시" th:areaCode="1" readonly="readonly"></input>
+<a class="all-city" id="region" th:text="더보기"  onclick="moveList()"></a>
+</form>
+<hr/>
+
+<div class="city-btn">
+	<button class="city-list clicked " id="cityList" th:value="서울특별시" th:areaCode="1" onclick="printName(this)">서울</button>
+	<button class="city-list" th:value="부산" th:areaCode="6" onclick="printName(this)">부산</button>
+	<button class="city-list" th:value="대구" th:areaCode="4" onclick="printName(this)">대구</button>
+	<button class="city-list" th:value="인천" th:areaCode="2" onclick="printName(this)">인천</button>
+	<button class="city-list" th:value="광주" th:areaCode="5" onclick="printName(this)">광주</button>
+	<button class="city-list" th:value="대전" th:areaCode="3" onclick="printName(this)">대전</button>
+	<button class="city-list" th:value="울산" th:areaCode="7" onclick="printName(this)">울산</button>
+	<button class="city-list" th:value="세종특별자치시" th:areaCode="8" onclick="printName(this)">세종</button>
+	<button class="city-list" th:value="경기도" th:areaCode="31" onclick="printName(this)">경기</button>
+	<button class="city-list" th:value="강원도" th:areaCode="32" onclick="printName(this)">강원</button>
+	<button class="city-list" th:value="충청북도" th:areaCode="33" onclick="printName(this)">충북</button>
+	<button class="city-list" th:value="충청남도" th:areaCode="34" onclick="printName(this)">충남</button>
+	<button class="city-list" th:value="전라북도" th:areaCode="37" onclick="printName(this)">전북</button>
+	<button class="city-list" th:value="전라남도" th:areaCode="38" onclick="printName(this)">전남</button>
+	<button class="city-list" th:value="경상북도" th:areaCode="35" onclick="printName(this)">경북</button>
+	<button class="city-list" th:value="경상남도" th:areaCode="36" onclick="printName(this)">경남</button>
+	<button class="city-list" th:value="제주도" th:areaCode="39" onclick="printName(this)">제주</button>
+</div>	
+
+<div class="city-place-menu" id="place">
+
+</div>
+</div>
+   
+</html>

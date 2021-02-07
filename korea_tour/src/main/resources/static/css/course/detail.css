@@ -1,0 +1,292 @@
+.top-box__h3 {
+  color: #b6b0a9;
+}
+
+#topBox {
+  width: 80%;
+  margin: auto;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  background-color: #353535;
+  border: 0;
+}
+
+.hr2 {
+  width: 100%;
+  height: 2px;
+  background-color: #353535;
+  border: 0;
+}
+.hr3 {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  border: 0;
+}
+#middleBox {
+  display: flex;
+  justify-content: center;
+}
+
+#mainBox {
+  width: 80%;
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+.course-box {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.image-box {
+  width: 20%;
+  height: 150px;
+  background-color: #353535;
+}
+.image-box img {
+  width: 100%;
+  height: 150px;
+}
+.course-info__box {
+  display: flex;
+  justify-content: space-between;
+  width: 78%;
+  margin-left: 2%;
+}
+
+.course-icon {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.course-name {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.course-start {
+  margin-bottom: 10px;
+}
+
+.course-info span {
+  margin-right: 10px;
+}
+
+#courseTitle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.course-km {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#iconBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  margin-bottom: 10px;
+}
+#likeIcon {
+  margin-right: 10px;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+#shareIcon {
+  font-size: 1.3em;
+  cursor: pointer;
+}
+#favoriteIcon {
+  margin-left: 10px;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+#saveIcon {
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+#temaBox {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.duringBox,
+.whoBox,
+.howBox {
+  margin: 0px 20px;
+  font-size: 1.8rem;
+}
+
+.tema-icon {
+  color: #b6b0a9;
+}
+
+#contentBox {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+#mapBox {
+  margin-top: 50px;
+  width: 100%;
+  height: 85vh;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto;
+
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.liked {
+  color: dodgerblue;
+}
+
+.favorite {
+  color: orange;
+}
+
+
+#createAnswerBox{
+  display: flex;
+  background-color: #f0ece6;
+  padding: 10px;
+  margin-top: 40px;
+  font-size: 1.4em;
+}
+
+#answerCount{
+  margin-right: 20px;
+}
+
+#textBox{
+  width: 70%;
+  resize: none;
+  line-height: 1.4;
+}
+.answer-box{
+  border: 0.5px solid #f0ece6;
+}
+
+
+.profile-text-icon{
+  display: flex;
+  width: 100%;
+}
+
+.profile-box{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background-color: #353535;
+  margin: 10px;
+}
+
+.profile-box img{
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
+
+.text-icon{
+  width: 45%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon-box{
+  cursor: pointer;
+}
+
+.reanswer-btn{
+  width: 8vh;
+  height: 20px;
+  padding: 5px;
+  text-align: center;
+  background-color: #b6b0a9;
+  color: white;
+  cursor: pointer;
+  margin-left: 70px;
+  margin-bottom: 20px;
+}
+
+.reanswer-box{
+  width: 90%;
+  padding-left: 10%;
+  background-color: #f0ece6;
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.reprofile-box{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background-color: #353535;
+  margin: 10px;
+}
+
+.reprofile-box img{
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+}
+
+.retext-icon{
+  width: 39%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.reicon-box{
+  cursor: pointer;
+}
+
+.create-ReAnswerBox{
+  width: 90%;
+  margin: auto;
+}
+
+.reanswer-mainbox{
+  background-color: #f0ece6;
+  padding: 10px 0;
+}
+
+.hrline{
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hide-btn{
+  display: none;
+}
+
+.show-btn{
+  display: block;
+}

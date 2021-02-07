@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+ 
+ <link rel="stylesheet" th:href="@{/css/mypage/favorite.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script" >
+      <script th:src="@{/js/myfavorite.js}" defer ></script>
+</th:block>
+
+<div layout:fragment="content">
+      <div id="topBox">
+            <h3 class="top-box__h3">마이페이지</h3>
+            <h1 class="top-box__h1">즐겨찾기</h1>
+            <hr>
+      </div>
+      <div id="middleBox">
+            <div id="mainBox">
+                  <div class="count-box">
+                        <h4 id="totalCount">총n건</h4>
+                        <div class="favorite-temabox">
+                              <h4 id="courseMark" class="favorite-box__course-text" onclick="courseMarkForm(currentPage)">코스</h4>|
+                              <h4 id="placeMark" class="favorite-box__tourist-text" onclick="placeMarkspage(currentPage)">관광지</h4>
+                        </div>
+                  </div>
+                  <hr class="hr2">
+                  <!-- 반복문 -->
+                  <div id="t1">
+                  <div class="favorite-infobox">
+                        <div class="image-box">
+                              <img src="" alt="">
+                        </div>
+                        <div class="favorite-info__box">
+                              <div class="favorite-info">
+                                    <p class="favorite-name">관광지 이름</p>
+                                    <p class="favorite-start">관광지 지역</p>
+                                    
+                              </div>
+                              <i class="fas fa-ellipsis-v favorite-icon"></i>
+                        </div>
+                  </div>
+                  <hr class="hr2">
+                  </div>
+                  <!-- 반복문 -->
+                 
+                  
+                  
+            </div>
+            <div id="navBox">
+                  <a th:href="@{/tourmypage/courselist}" class="nav-text">코스</a>
+                  <a th:href="@{/tourmypage/favorite}" class="nav-text">즐겨찾기</a>
+                  <a th:href="@{/tourmypage/answer}" class="nav-text">댓글</a>
+            </div>
+
+      </div>
+
+
+      <div id="paging" th:currentPage="${currentPage}"></div>
+</div>
+   
+</html>

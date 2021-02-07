@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayHostMapper">
+   <insert id="insertHomeStay" parameterType="joinhomestaydetail">
+      insert into homeStay (userNum,title,addr1,addr2,content,approval,checkIn1,checkIn2,
+      checkOut1,checkOut2,xpos,ypos,price,open)
+      values (#{userNum},#{title},#{addr1},#{addr2},#{content},0,#{checkIn1},#{checkIn2},
+      #{checkOut1},#{checkOut2},#{xpos},#{ypos},#{price},1)
+   </insert>
+    <select id="getHomeStayNum" resultType="int" >
+ 	 select MAX(homeStayNum) from homeStay 
+ 	</select>
+ 	 <select id="getUserNum" parameterType="int" resultType="int" >
+ 	 select userNum from homeStay where homeStayNum=#{homeStayNum}
+ 	</select>
+ 	<select id="getHomeStayData" parameterType="int" resultType="joinhomestaydetail">
+ 	 select * from homeStay where userNum=#{userNum}
+ 	</select>
+ 	<select id="getHomeStayDetailData" parameterType="int" resultType="joinhomestaydetail">
+ 	 select * from homeStayDetail where userNum=#{userNum}
+ 	</select>
+ 	<select id="getHomeStayNum2" parameterType="int" resultType="int">
+ 	select homeStayNum from homeStay where userNum=#{userNum}
+ 	</select>
+   <insert id="insertHomeStayDetail" parameterType="joinhomestaydetail">
+      insert into homeStayDetail (userNum, homeStayNum, dogOk,smokingOk,maxPeople,email1,email2,hp,wifi,towel,breakfast,aircon,
+      elecProduct,kitchen,bathroom,parking)
+      values (#{dto.userNum}, #{homeStayNum}, #{dto.dogOk},#{dto.smokingOk},#{dto.maxPeople},#{dto.email1},#{dto.email2},#{dto.hp},#{dto.wifi},#{dto.towel},
+      #{dto.breakfast},#{dto.aircon},#{dto.elecProduct},#{dto.kitchen},#{dto.bathroom},#{dto.parking})
+   </insert>      
+   <update id="updateHomeStay" parameterType="hashmap">
+   	update homeStay set title=#{dto.title}, addr1=#{dto.addr1},addr2=#{dto.addr2},content=#{dto.content},approval=0,checkIn1=#{dto.checkIn1},checkIn2=#{dto.checkIn2},
+      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},xpos=#{dto.xpos},ypos=#{dto.ypos},price=#{dto.price},open=#{dto.open}
+      where homeStayNum=#{homeStayNum}
+   </update>
+   <update id="updateHomeStayDetail" parameterType="hashmap">
+   update homeStayDetail set dogOk=#{dto.dogOk},smokingOk=#{dto.smokingOk},maxPeople=#{dto.maxPeople},email1=#{dto.email1},email2=#{dto.email2},
+   hp=#{dto.hp},wifi=#{dto.wifi},towel=#{dto.towel},breakfast=#{dto.breakfast},aircon=#{dto.aircon},
+   elecProduct=#{dto.elecProduct},kitchen=#{dto.kitchen},bathroom=#{dto.bathroom},parking=#{dto.parking}
+    where homeStayNum=#{homeStayNum}
+   </update>
+   <select id="getTotalCount" parameterType="int" resultType="int">
+   	select count(*) from homeStayReservation where homestayNum=#{homestayNum} and deleted=0
+   </select>
+   <select id="getAllReservation" parameterType="hashmap" resultType="homestayreservation">
+   	select * from homeStayReservation where homestayNum=#{homestayNum} and approval=#{approval} and deleted=0 order by homeStayReservationNum asc Limit #{start},#{perPage}
+   </select>
+   <select id="getApprovalCount" parameterType="int" resultType="int">
+    select count(*) from homeStayReservation where homeStayNum=#{homeStayNum} and approval=2 and deleted=0
+   </select>
+   <select id="getApprovalReservation" parameterType="hashmap" resultType="homestayreservation">
+   	select * from homeStayReservation where homeStayNum=#{homeStayNum} and approval=2 and deleted=0 order by homeStayReservationNum asc Limit #{start},#{perPage}
+   </select>
+   <select id="getRefusedCount" parameterType="int" resultType="int">
+    select count(*) from homeStayReservation where homeStayNum=#{homeStayNum} and approval=1 and deleted=0
+   </select>
+   <select id="getRefusedReservation" parameterType="hashmap" resultType="homestayreservation">
+   	select * from homeStayReservation where homeStayNum=#{homeStayNum} and approval=1 and deleted=0 order by homeStayReservationNum asc Limit #{start},#{perPage}
+   </select>
+   <select id="getPendingCount" parameterType="int" resultType="int">
+   	select count(*) from hoeStayReservation where homeStayNum=#{homeStayNum} and approval=0 and deleted=0
+   </select>
+   <select id="getPendingReservation" parameterType="hashmap" resultType="homestayreservation">
+    select * from homeStayReservation where homeStayNum=#{homeStayNum} and approval=2  and deleted=0 order by homeStayReservationNum asc Limit #{start},#{perPage}
+   </select>
+   <select id="getReservation" parameterType="int" resultType="homestayreservation">
+    select * from homeStayReservation where homeStayReservationNum=#{homeStayReservationNum}
+   </select>
+ 	
+ 	<update id="updateApproval" parameterType="hashmap">
+ 		update homeStayReservation set approval=#{approval} where homeStayReservationNum=#{homeStayReservationNum}
+ 	</update>
+ 	
+
+</mapper>

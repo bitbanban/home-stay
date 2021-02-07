@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.NoticeMapper">
+   <select id="getTotalCount" resultType="int">
+      select count(*) from notice
+   </select>
+   <select id="getAllDatas"  parameterType="hashmap" resultType="notice">
+         select * from notice order by noticeNum desc limit #{start}, #{perPage}
+   </select>
+   <insert id="insertNotice" parameterType="notice">
+      insert into notice (title,content,views,writeDay)
+       values (#{title},#{content},0,now())
+   </insert>
+   <update id="countViews" parameterType="hashmap">
+      update notice set views=views+1 where noticeNum=#{noticeNum}
+   </update>
+   <select id="getData" parameterType="int" resultType="notice">
+      select * from notice where noticeNum=#{noticeNum}
+   </select>
+   <update id="updateNotice" parameterType="hashmap">
+      update notice set title=#{dto.title},content=#{dto.content}
+       where noticeNum=#{noticeNum}
+   </update>
+   <delete id="deleteNotice" parameterType="int">
+      delete from notice where noticeNum=#{noticeNum}
+   </delete>
+   <select id="getNewNotice" resultType="notice"> <!-- 메인페이지 공지사항 -->
+         select * from notice order by writeDay desc limit 0, 3
+   </select>
+
+</mapper>

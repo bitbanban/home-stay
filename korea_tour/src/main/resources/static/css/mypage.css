@@ -1,0 +1,93 @@
+
+#topBox{
+    margin-top: 3%;
+    margin-left: 10%;
+}
+
+hr{
+    width: 89%;
+    height: 3px;
+    background-color: #353535;
+    border: 0;
+
+}
+#mainBox{
+    padding: 5% 10%;
+}
+#myPageBoxTop{
+    margin-bottom: 4%;
+}
+#myPageBoxTop,#myPageBoxBottom{
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+#profileBoxSub{
+    display: flex;
+    flex-direction: column;
+    margin: 6% 8%;
+    text-align: center;
+}
+
+.profile-image{
+    background-color: #353535;
+    border: none;
+    border-radius: 100px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: white;
+    margin: auto;
+}
+
+
+.menu-icon{
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+.mypage-box__text-box{
+    /* margin: 20px 40px 40px 40px; */
+    margin: 6% 8%;
+    
+}
+.text-box{
+    font-size: 1.5em;
+}
+
+#myTotalMark, #myTotalCourse, #myTotalAnswer{
+    float: right;
+    font-size: 40px;
+}
+
+#myPageBoxTop .mypage-box,#myPageBoxBottom .mypage-box{
+    width: 48%;
+    height: 25vh;
+    background-color: #f0ece6;
+    transition: 0.5s;
+}
+
+#myPageBoxTop .mypage-box:hover,#myPageBoxBottom .mypage-box:hover{
+    
+    background-color: #acaca4;
+    
+}
+
+#mainCourseBox, #mainFavoriteBox, #mainAnswerBox{
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .top-box__h1 {
+        font-size: 1.5em;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .top-box__h1 {
+        font-size: 1.2em;
+    }
+}

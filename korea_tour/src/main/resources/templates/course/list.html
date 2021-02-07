@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+ 
+ 
+ <link rel="stylesheet" th:href="@{/css/course/list.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script" >
+<script th:src="@{/js/courselist.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+      <div id="header">
+            <h1>코스</h1>
+           
+      </div>
+      <div class="container">
+            <div class="main">
+                  <div class="count-box">
+                        <h4></h4>
+                        <div class="sort">
+                              <h4 class="sort-list" th:sort="like">인기</h4>
+                              <h4 class="sort-list active" th:sort="time">최신</h4>
+                        </div>
+                  </div>
+                  <div class="course-list">
+<!--/*ajax 출력*/-->
+                  </div>
+                  
+                  
+            </div>
+            <div class="nav">
+                  <ul id="tag-list">
+                        <li class='tag tag__who' th:who="W1">혼자여행</li>
+                        <li class='tag tag__who' th:who="W2">가족여행</li>
+                        <li class='tag tag__who' th:who="W3">커플여행</li>
+                        <li class='tag tag__who' th:who="W4">우정여행</li>
+                  </ul>
+                  <ul id="tag-list">
+                        <li class='tag tag__during' th:during="D1">당일치기</li>
+                        <li class='tag tag__during' th:during="D2">1박2일</li>
+                        <li class='tag tag__during' th:during="D3">2박3일</li>
+                  </ul>
+                  <ul id="tag-list">
+                        <li class='tag tag__how' th:how="H1">뚜벅이</li>
+                        <li class='tag tag__how' th:how="H2">자전거</li>
+                        <li class='tag tag__how' th:how="H3">드라이브</li>
+                        <li class='tag tag__how' th:how="H4">기차여행</li>
+                  </ul>
+            </div>
+      </div>
+      <div class="pagination" th:currentPage="${currentPage}" ></div>
+</div>
+   
+</html>

@@ -1,0 +1,39 @@
+div.slider {
+  min-height: 500px;
+}
+.main-logo {
+  position: absolute;
+  left: 33.33%;
+  top: 20%;
+}
+div.search-container {
+  margin-top: 33%;
+}
+
+.search-container h1 {
+  display: none;
+}
+
+div.card-container {
+  max-height: 85vh;
+  flex-wrap: wrap;
+  margin: 5vh 0;
+  min-height: 855.68px;
+}
+div.card {
+  margin: 0;
+  padding: 120px 0;
+  max-width: 400px;
+  width: 40%;
+}
+
+.card-btn {
+  color: var(--c-color);
+  background-color: var(--brown);
+}
+
+.course-search-1 {
+  display: block;
+  margin: auto;
+  width: 60%;
+}

@@ -1,0 +1,223 @@
+#layoutFooter {
+  margin-top: 0px;
+}
+/* 이미지 슬라이더 */
+div.slider {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 80vh;
+  min-height: 350px;
+  animation: slide 20s infinite;
+  color: var(--c-color);
+}
+div.load {
+  animation: slide 2s;
+}
+div.slider-content {
+  width: 100%;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+/* 헤더 */
+header.header {
+  display: flex;
+  margin: 0 5vw;
+  padding: 3vh;
+  justify-content: space-between;
+}
+
+img.main-logo {
+  width: 220px;
+}
+/* 통합검색 */
+div.search-container {
+  margin: auto;
+  margin-top: 5vh;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+div.search-container h1 {
+  margin: 2vh 0;
+}
+input.search-bar__input {
+  all: none;
+  width: 50vw;
+  font-family: 'light';
+  font-size: var(--font-medium);
+  background-color: white;
+}
+.search-btn {
+  font-size: var(--font-medium);
+  padding: 0.25em 0.5em;
+}
+/* 카드 */
+div.card-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+div.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 21.25%;
+  padding: 120px 0 230px 0;
+  margin: 7vh 0;
+  color: var(--brown);
+}
+
+div.place-card {
+  background: #f8f1e4 url(/img/card-bg-02.png) no-repeat left bottom;
+}
+div.course-card {
+  background: #f7c326 url(/img/card-bg-03.png) no-repeat left bottom;
+}
+div.festival-card {
+  background: #77a6d9 url(/img/card-bg-04.png) no-repeat left bottom;
+}
+div.homestay-card {
+  background: #005493 url(/img/card-bg-01.png) no-repeat left bottom;
+}
+span.card-title {
+  font-family: 'bold';
+  font-size: var(--font-large);
+}
+
+span.card-description {
+  margin: 1vh 0 0 0;
+}
+.card-btn {
+  margin-top: 5vh;
+  font-size: var(--font-medium);
+  color: var(--brown);
+  border-radius: var(--font-medium);
+  border: 1px solid var(--brown);
+  padding: var(--btn-padding);
+}
+.card-btn:hover {
+  color: var(--c-color);
+  background-color: var(--brown);
+}
+
+/* 공지 */
+div.notice {
+  width: 85%;
+  height: 250px;
+  margin: auto;
+}
+/* 코스검색 */
+div.course-search {
+  width: 100%;
+  height: 70vh;
+  min-height: 400px;
+  background-image: url(/img/search-bg.jpg);
+  background-size: cover;
+  color: var(--c-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form * {
+  font-size: var(--font-large);
+  display: inline;
+}
+
+#courseSearchBtn {
+  display: block;
+  margin: auto;
+  margin-top: 3vh;
+}
+
+h1 {
+  font-family: 'bold';
+  font-size: var(--font-xxl);
+}
+
+select {
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: #f8f1e4 solid 1px;
+  color: white;
+  cursor: pointer;
+}
+.h-line {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  transition: all 0.8s;
+}
+
+#userPhoto {
+  height: 70px;
+  width: 70px;
+  padding: -3rem;
+  border-radius: 50%;
+}
+
+#homeLogout {
+  font-size: 15px;
+  text-align: center;
+  padding: -0.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table th {
+  border-bottom: 1px solid black;
+}
+table td {
+  border-bottom: 1px solid black;
+}
+table .tb__title {
+  width: 65%;
+}
+table .tb__writeday {
+  width: 20%;
+}
+table .tb__views {
+  width: 10%;
+}
+
+@keyframes slide {
+  0% {
+    background-image: url(/img/slide-bg-05.jpg);
+  }
+  20% {
+    background-image: url(/img/slide-bg-05.jpg);
+  }
+  20.01% {
+    background-image: url(/img/slide-bg-01.jpg);
+  }
+  40% {
+    background-image: url(/img/slide-bg-01.jpg);
+  }
+  40.01% {
+    background-image: url(/img/slide-bg-03.jpg);
+  }
+  60% {
+    background-image: url(/img/slide-bg-03.jpg);
+  }
+  60.01% {
+    background-image: url(/img/slide-bg-04.jpg);
+  }
+  80% {
+    background-image: url(/img/slide-bg-04.jpg);
+  }
+  80.01% {
+    background-image: url(/img/slide-bg-02.jpg);
+  }
+  100% {
+    background-image: url(/img/slide-bg-02.jpg);
+  }
+}

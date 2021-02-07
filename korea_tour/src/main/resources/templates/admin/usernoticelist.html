@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/admin/list.css}">
+</th:block>
+
+<th:block layout:fragment="script" >
+	<script th:src="@{/js/usernoticelist.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+
+<!-- Sub Title -->
+	<div class="opt_tit">
+
+		<div class="opt_tit_right">
+			<div class="elmt">
+			
+				
+			</div>
+		</div>
+	</div>
+	<!-- //Sub Title -->
+	
+
+	<!-- Board List -->
+	<div class="board_list">
+		<table class="board_list_table">
+			<colgroup>
+				<col width="55" />
+				<col width="90" />
+				<col width="" />
+				<col width="100" />
+				<col width="70" />
+			
+			</colgroup>
+			<thead>
+				<tr class="board_list_row">
+					<th class="board_list_head" scope="col">번호</th>
+					<th class="board_list_head" scope="col">게시물번호</th>
+					<th class="board_list_head" scope="col">제목</th>
+					<th class="board_list_head" scope="col">등록일</th>
+					<th class="board_list_head" scope="col">조회수</th>
+				
+				
+
+				</tr>
+			</thead>
+			<tbody class="list-low">	
+			</tbody>
+		</table>
+	</div>
+	<!-- //Board List -->
+
+	<!-- Page Navigation -->
+	<div class="page_wrap">
+		<div class="page_nation">
+			
+		</div>
+	</div>
+</div>
+
+
+
+
+</html>

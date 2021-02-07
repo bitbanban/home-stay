@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayDetailMapper">
+ <!--   <insert id="insertHomeStayDetail" parameterType="homestaydetial">
+      insert into homestaydetail (dogOk,smokingOk,maxPeople,email1,email2,hp,wifi,towel,breakfast,aircon,
+      elecProduct,kitchen,bathroom,parking)
+      values (#{dogOk},#{smokingOk},#{maxPeople},#{email1},#{email2},#{hp},#{wifi},#{towel},
+      #{breakfast},#{aircon},#{elecProduct},#{kitchen},#{bathroom},#{parking})
+   </insert>    -->
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.AdminMapper">
+	<insert id="insertAdmin" parameterType="admin">
+		insert into admin (id, password, relevel) values (#{id}, #{password}, 1)
+	</insert>
+	<select id="getAllAdmin" resultType="admin">
+		select * from admin order by adminNum
+	</select>
+	<select id="getAdminData" parameterType="HashMap" resultType="admin">
+		select * from admin where id=#{id} and password=#{password}
+	</select>
+	<delete id="deleteAdmin" parameterType="int">
+		delete * from admin where adminNum=#{adminNum}
+	</delete>
+	<!-- 관리자 계정 로그인 검사 -->
+	<select id="checkAdmin" parameterType="HashMap" resultType="int">
+		select count(*) from admin where id=#{id} and password=#{password}
+	</select>
+	<!-- 관리자 데이터 조회-->
+	<select id="getAdminDataByNum" parameterType="int" resultType="admin">
+		select * from admin where adminNum=#{adminNum}
+	</select>
+</mapper>

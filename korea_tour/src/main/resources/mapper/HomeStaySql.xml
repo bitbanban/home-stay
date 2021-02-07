@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayMapper">
+
+	<!-- 홈스테이 디테일 -  해당 집의 집이름, 주소1(출력) -->
+	<select id="getHomeStayNameAndAddr" parameterType="int" resultType="homestay">
+	SELECT title,addr1 FROM homeStay WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 해당집의 후기 수 (출력) -->
+	<select id="countOfHouseAnswer" parameterType="int" resultType="int">
+	SELECT count(*) FROM homeStayReview WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 해당 집의 각 항목별 평균별점 구하기 -->
+	<!-- 1.cleanliness -->
+	<select id="avgOfCleanliness" parameterType="int" resultType="double">
+	SELECT round(avg(cleanliness),2) FROM homeStayStar WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 2.communication -->
+	<select id="avgOfCommunication" parameterType="int" resultType="double">
+	SELECT round(avg(communication),2) FROM homeStayStar WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 3.checkIn -->
+	<select id="avgOfCheckIn" parameterType="int" resultType="double">
+	SELECT round(avg(checkIn),2) FROM homeStayStar WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 4.accuracy -->
+	<select id="avgOfAccuracy" parameterType="int" resultType="double">
+	SELECT round(avg(accuracy),2) FROM homeStayStar WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 5.location -->
+	<select id="avgOfLocation" parameterType="int" resultType="double">
+	SELECT round(avg(location),2) FROM homeStayStar WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 6.satisfactionForPrice -->
+	<select id="avgOfSatisfactionForPrice" parameterType="int" resultType="double">
+	SELECT round(avg(satisfactionForPrice),2) FROM homeStayStar WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 호스트 집 사진 (출력) -->
+	<select id="getHomeStayPhoto" parameterType="int" resultType="homestayphoto">
+	SELECT * FROM homeStayPhoto WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	
+	<!-- 소개글(출력) -->
+	<select id="getHomeStayContent" parameterType="int" resultType="String">
+	SELECT content FROM homeStay WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 편의시설(8개)및 ,애견동반, 흡연 (출력) -->
+	<select id="getHomeStayFacility" parameterType="int" resultType="homestaydetail">
+	SELECT * FROM homeStayDetail WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 집 위치 지도표시 -->
+	<select id="getHomeStayMap" parameterType="int" resultType="homestay">
+	SELECT addr1,xpos,ypos FROM homeStay WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 최대 인원수(출력) -->
+	<select id="getHomeStayMaxPeople" parameterType="int" resultType="int">
+	SELECT maxPeople FROM homeStayDetail WHERE homeStayNum=#{homeStayNum}
+	</select>
+	
+	<!-- 예약불가날짜 표시하기(출력) -->
+	<select id="getDayImpossible" parameterType="int" resultType="homestayreservation">
+	SELECT checkInDay,checkOutDay FROM homeStayReservation WHERE homeStayNum=#{homeStayNum} order by checkInDay asc
+	</select>
+	
+	<!-- Host이름 출력하기 -->
+	<select id="getHostName" parameterType="int" resultType="String">
+	SELECT user.name FROM homeStay LEFT JOIN user
+	ON homeStay.userNum=user.userNum WHERE homeStayNum=#{homeStayNum};
+	</select>
+	
+	<!-- 집 가격출력하기 -->
+	<select id="getHomeStayPrice" parameterType="int" resultType="int">
+	SELECT price FROM homeStay WHERE homeStayNum=#{homeStayNum}
+	</select>
+</mapper>

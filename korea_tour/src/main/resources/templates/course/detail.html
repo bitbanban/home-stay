@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+ <link rel="stylesheet" th:href="@{/css/course/detail.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+
+<th:block layout:fragment="script" >
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31ce38fe7ad5a778d898c960e51d1167"></script>
+      <script th:src="@{/js/courseDetail.js}" defer></script>
+      <script th:src="@{/js/coursedetailreply.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+      <th:block th:if="${session.user == null}">
+            <span id="num" data-id="out"></span>
+            </th:block>
+            <th:block th:unless="${session.user == null}">
+                  <span id="num" th:data-id="${session.user.userNum}"></span>
+                  </th:block>
+            <div id="topBox" >
+            <h3 class="top-box__h3">코스</h3>
+            <h1 id="courseTitle">관광지 타이틀</h1>
+            <h4 class="course-km">코스총거리</h4>
+            <div id="iconBox">
+                  <div id="leftIconBox">
+                        
+                  </div>
+                  <div id="rightIconBox">
+                        <i id="likeIcon" class="far fa-thumbs-up" onclick="clickLike()"></i>
+                        <i id="shareIcon" class="fas fa-share-alt"></i>
+                        <i id="favoriteIcon" class="fas fa-star" onclick="clickFavorite()"></i>
+                  </div>
+            </div>
+            <!-- 모달 -->
+            <div id="myModal" class="modal">
+                  <div class="modal-content">
+                        <h2>공유하기</h2>
+                        <button onclick="getURL()">공유하기</button>
+                        <p id="urlText"></p>
+                        
+                  </div>
+            </div>
+            <!-- ㅡ -->
+            <hr>
+      </div>
+      <div id="middleBox">
+            <div id="mainBox">
+                  
+                  <div id="temaBox">
+                        <div class="duringBox">
+                              <i class="far fa-calendar-alt tema-icon"></i>
+                              <span id="duringText" class="tema-text">1박2일</span>
+                        </div>
+                        <div class="whoBox">
+                              <i class="fas fa-user-friends tema-icon"></i>
+                              <span id="whoText" class="tema-text">나홀로여행</span>
+                        </div>
+                        <div class="howBox">
+                              <i class="fas fa-bus tema-icon"></i>
+                              <span id="howText" class="tema-text">기차여행</span>
+                        </div>
+                  </div>
+
+
+                  <div id="contentBox">
+                        컨텐츠 박스
+                  </div>
+                  
+                  <hr class="hr2">
+                  <!-- 반복문 -->
+
+                  <div id="placeBox">
+                  <div class="course-box">
+                        <div class="image-box">
+                              <img src="" alt="">
+                        </div>
+                        <div class="course-info__box">
+                              <div class="course-info">
+                                    <p class="course-name">관광지 이름</p>
+                                    <p class="course-start">관광지 지역</p>
+                                    
+                              </div>
+                              <i class="fas fa-ellipsis-v course-icon"></i>
+                        </div>
+                  </div>
+                  <hr class="hr2">
+                  </div>
+                  <!-- 반복문 -->
+              
+
+                  <div id="mapBox"></div>
+
+                  <!-- 댓글입력창 -->
+                  <div id="createAnswerBox">
+                        <div id="answerCount"><i class="far fa-comment-dots"></i>&nbsp;여행톡 2</div>
+                        <input type="hidden" id="userLoginNum" name="loginNum" th:value=${session.user.userNum}></input>
+                        <input type="hidden" id="userId" name="loginId" th:value=${session.user.name}></input>
+                        <input type="hidden" id="userPhotoGo" name="loginPhoto" th:value=${session.user.photo}></input>
+                        <textarea id="textBox" name="textBox" onblur="forceOut(this.value)" placeholder="소중한 댓글을 남겨주세요."></textarea>
+                        <button onclick="insertAnswer()">보내기</button>
+                  </div>
+
+                  <!-- 반복문 댓글출력창 -->
+                  <div id="printAnswer">
+                        <div class="answer-box">
+                              <!-- 프로필사진 텍스트 아이콘상자 -->
+                              <div class="profile-text-icon"> 
+                                    <!-- 프사 -->
+                                    <div class="profile-box"><img src="" alt=""></div>
+
+                                    <!-- 텍스트 아이콘 -->
+                                    <div class="text-icon">
+                                          <!-- 텍스트 -->
+                                          <div class="text-box">
+                                                <p>content</p>
+                                                <p><span style="margin-right: 5px;">작성자</span>|<span style="margin-left: 5px;">작성일</span></p>
+                                          </div>
+                                          <!-- 아이콘 -->
+                                          <div class="icon-box"><i class='fas fa-trash-alt answer-delete-icon'></i></div>
+                                    </div>
+                              </div>
+
+                              <!-- 답글버튼, 숨겨진답글출력창 -->
+                              <div class="reanswer-btn" name="1" onclick="ReAnswer(this)">답글</div>
+                              <!-- 답글출력창 -->
+                              <div class="reanswer-mainbox hide-btn">
+                                    <div>
+                                          <!-- 프사 -->
+                                          <div class="reanswer-box">
+                                                <div class="reprofile-box"><img src="" alt=""></div>
+
+                                                <!-- 텍스트 아이콘 -->
+                                                <div class="retext-icon">
+                                                      <!-- 텍스트 -->
+                                                      <div class="retext-box">
+                                                            <p>content</p>
+                                                            <p><span style="margin-right: 5px;">작성자</span>|<span style="margin-left: 5px;">작성일</span></p>
+                                                      </div>
+                                                      <!-- 아이콘 -->
+                                                      <div class="reicon-box"><i class='fas fa-trash-alt answer-delete-icon'></i></div>
+                                                </div>
+                                          </div>      
+                                          <hr class="hrline">
+                                    </div>
+                                    
+                                    
+
+                                    
+                                    <!-- 답글입력창 -->
+                                    <div class="create-ReAnswerBox">
+                                          
+                                          <input type="hidden" id="reUserLoginNum" name="reLoginNum" th:value=${session.user.userNum}></input>
+                                          <input type="hidden" id="reUserId" name="reLoginId" th:value=${session.user.name}></input>
+                                          <input type="hidden" id="reUserPhotoGo" name="reLoginPhoto" th:value=${session.user.photo}></input>
+                                          <textarea class="reTextBox" name="textBox" onblur="ReforceOut(this.value)" placeholder="답글을 남겨주세요."></textarea>
+                                          <button class="reAnswer-push" onclick="insertReAnswer()">보내기</button>
+                                    </div>
+                              </div>
+                        </div>
+                        
+                        
+                  </div>
+
+            </div>
+      </div>
+</div>
+   
+</html>

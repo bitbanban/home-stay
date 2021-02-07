@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.PlaceLikeMapper">
+	<select id="getAllPlaceLikeCount" parameterType="int" resultType="int">
+		select count(*) from placeLike where contentId=#{contentId}
+	</select>
+	<insert id="plusPlaceLikes" parameterType="placelike">
+		insert into placeLike (contentId,loginNum) values (#{contentId},#{loginNum})
+	</insert>
+	<delete id="deletePlaceLikes" parameterType="int">
+		delete from placeLike where placeLikeNum=#{placeLikeNum}
+	</delete>
+	<!-- 경오 -->
+	<select id="getDataByUser" parameterType="placelike" resultType="placelike">
+		select * from placeLike where contentId=#{contentId} and loginNum=#{loginNum}
+	</select>
+	<select id="getPlaceLikeCountByUser" parameterType="placelike" resultType="int">
+		select count(*) from placeLike where contentId=#{contentId} and loginNum=#{loginNum}
+	</select>
+	<delete id="deletePlaceLikeByUser" parameterType="placelike">
+		delete from placeLike where contentId=#{contentId} and loginNum=#{loginNum}
+	</delete>
+</mapper>

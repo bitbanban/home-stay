@@ -1,0 +1,18 @@
+#tomacat port
+server:
+  port: 9003
+#thymleaf
+spring: 
+  thymeleaf:
+        prefix : classpath:templates/
+        suffix : .html
+        cache : false
+  devtools:
+    livereload:
+      enabled: true
+#mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://dbinstance.cx1rhgjruzom.ap-northeast-2.rds.amazonaws.com:3306/mydb?serverTimezone=Asia/Seoul
+    username: root
+    password: koreatour

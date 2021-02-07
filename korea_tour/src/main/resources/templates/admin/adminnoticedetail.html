@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+
+	<link rel="stylesheet" th:href="@{/css/admin/notice.css}">
+</th:block>
+
+<!-- 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+<script th:src="@{/js/adminnoticedetail.js}" defer></script>
+</th:block>
+
+<!-- 에이작스로 값불러서 넣어주기? -->
+
+<div layout:fragment="content">
+<div class="container">
+            <div class="top-form-bar">
+                <div class="top-bar top-bar-green"></div>
+            </div>
+		    <div class="noticedetail-form">
+			    <div class="noticedetail-multi-column">
+					<div class="header">
+				        <div class="column-full">
+							<h4><i class="icon-envelop-2"></i>공지사항 상세보기</h4>
+						</div>
+				    </div>
+				    <div class="section">
+						<form  id="newsletter">
+							<fieldset>
+						        <div class="column-full">
+								    <div id="newsletter-message"></div>
+							    </div>
+
+								<div class="column-half-title">
+								  
+								</div>
+						        <div class="column-full-content">
+								    
+								</div>
+					            <div class="column-full">
+					               
+									<div id="loader"></div>
+								</div>
+							</fieldset>
+					    </form>
+				    </div>	
+       </div>
+			</div>
+		</div>
+</div>
+
+</html>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.bitcamp.korea_tour.model.mapper.TourAnswerMapper">
+	<!-- 플레이스 답글 쿼리 -->
+	<insert id="insertPlaceAnswer" parameterType="touranswer">
+		<selectKey resultType="int" keyProperty="regroup"
+			order="BEFORE">
+			SELECT IFNULL(MAX(regroup),0)+1 FROM tourAnswer where
+			contentId=#{contentId}
+		</selectKey>
+		INSERT INTO tourAnswer (contentId, loginNum, loginId, loginPhoto,
+		content, writeDay, regroup, relevel, restep)
+		VALUES
+		(#{contentId}, #{loginNum}, #{loginId}, #{loginPhoto}, #{content},
+		now(),#{regroup},0,0)
+	</insert>
+	<insert id="insertPlaceReAnswer" parameterType="touranswer">
+		<selectKey resultType="int" keyProperty="restep"
+			order="BEFORE">
+			SELECT IFNULL(MAX(restep),0)+1 FROM tourAnswer where
+			contentId=#{contentId} and regroup=#{regroup}
+		</selectKey>
+		insert into tourAnswer (contentId, loginNum, loginId, loginPhoto,
+		content, writeDay, regroup, relevel, restep)
+		values
+		(#{contentId}, #{loginNum}, #{loginId}, #{loginPhoto}, #{content},
+		now(),#{regroup},1,#{restep})
+	</insert>
+	<select id="getTotalCountPlaceAnswer" parameterType="int"
+		resultType="int"><!-- courseNum이 널값인 경우에 Place로 구분 -->
+		select count(*) from tourAnswer where relevel=0 and courseNum is null
+		and loginNum=#{loginNum}
+	</select>
+	<select id="getTotalCountPlaceReAnswer" parameterType="int"
+		resultType="int">
+		select count(*) from tourAnswer where relevel=1 and courseNum is null and
+		loginNum=#{loginNum}
+	</select>
+	<update id="deletePlaceAnswerByUser" parameterType="int">
+		update tourAnswer set deleted=1 where tourAnswerNum=#{tourAnswerNum}
+	</update>
+	<update id="deletePlaceAnswerByAdmin" parameterType="int">
+		update tourAnswer set deleted=2 where tourAnswerNum=#{tourAnswerNum}
+	</update>
+	<select id="getAnswerOfPlace" parameterType="int"
+		resultType="touranswer">
+		select * from tourAnswer where contentId=#{contentId} order by regroup asc,relevel asc,restep asc
+	</select>
+
+	<!-- 코스답글 쿼리 -->
+	<insert id="insertCourseAnswer" parameterType="touranswer">
+		<selectKey resultType="int" keyProperty="regroup"
+			order="BEFORE">
+			SELECT IFNULL(MAX(regroup),0)+1 FROM tourAnswer where
+			courseNum=#{courseNum}
+		</selectKey>
+		INSERT INTO tourAnswer (courseNum, loginNum,loginId, loginPhoto,
+		content, writeDay, regroup, relevel, restep)
+		VALUES
+		(#{courseNum}, #{loginNum}, #{loginId}, #{loginPhoto}, #{content},
+		now(),#{regroup},0,0)
+	</insert>
+	<insert id="insertCourseReAnswer" parameterType="touranswer">
+		<selectKey resultType="int" keyProperty="restep"
+			order="BEFORE">
+			SELECT IFNULL(MAX(restep),0)+1 FROM tourAnswer where
+			contentId=#{courseNum} and regroup=#{regroup}
+		</selectKey>
+		insert into tourAnswer (courseNum, loginNum, loginId, loginPhoto,
+		content, writeDay, regroup, relevel, restep)
+		values
+		(#{courseNum}, #{loginNum}, #{loginId}, #{loginPhoto}, #{content},
+		now(),#{regroup},1,#{restep})
+	</insert>
+	<update id="deleteCourseAnswerByUser" parameterType="int">
+		update tourAnswer set deleted=1 where tourAnswerNum=#{tourAnswerNum}
+	</update>
+	<update id="deleteCourseAnswerByAdmin" parameterType="int">
+		update tourAnswer set deleted=2 where tourAnswerNum=#{tourAnswerNum}
+	</update>
+	<select id="getAnswerOfCourse" resultType="touranswer">
+		select * from tourAnswer where courseNum=#{courseNum} order by regroup asc,relevel asc,restep asc
+	</select>
+	<select id="getTotalCountCourseAnswer" parameterType="int"
+		resultType="int">
+		select count(*) from tourAnswer where relevel=0 and courseNum is not null
+		and loginNum=#{loginNum}
+	</select>
+	<select id="getTotalCountCourseReAnswer" parameterType="int"
+		resultType="int">
+		select count(*) from tourAnswer where relevel=1 and courseNum is not null
+		and loginNum=#{loginNum}
+	</select>
+	<!-- 마이 페이지용 댓글 답글 출력 -->
+	<select id="getTotalCountAnswer" parameterType="int"
+		resultType="int">
+		select count(*) from tourAnswer where relevel=0 and loginNum=#{loginNum}
+	</select>
+	<select id="getTotalCountReAnswer" parameterType="int"
+		resultType="int">
+		select count(*) from tourAnswer where relevel=1 and loginNum=#{loginNum}
+	</select>
+	<select id="getUserAnswer" parameterType="hashmap"
+		resultType="joinanswer"><!-- 내 댓글보기 -->
+		SELECT * FROM tourAnswer
+		LEFT JOIN course ON tourAnswer.courseNum=course.courseNum
+		LEFT JOIN place
+		ON tourAnswer.contentId=place.contentId
+		where loginNum=#{loginNum} and relevel=0 order by tourAnswerNum desc LIMIT
+		#{start},#{perPage}
+	</select>
+	<select id="getUserReAnswer" parameterType="hashmap"
+		resultType="joinanswer"><!-- 내 답글보기 -->
+		SELECT * FROM tourAnswer
+		LEFT JOIN course ON tourAnswer.courseNum=course.courseNum
+		LEFT JOIN place
+		ON tourAnswer.contentId=place.contentId
+		where loginNum=#{loginNum} and relevel=1 order by tourAnswerNum desc LIMIT
+		#{start},#{perPage}
+	</select>
+
+	<!-- 관리자용 전체 답글 출력 쿼리 -->
+	<select id="getTotalCountAnswerAdmin" resultType="int">
+		select count(*) from tourAnswer where relevel=0 and deleted=0
+	</select>
+	<select id="getAdminAnswer" resultType="touranswer">
+		select * from tourAnswer where relevel=0 and deleted=0 order by tourAnswerNum desc LIMIT
+		#{start},#{perPage}
+	</select>
+	<select id="getTotalCountReAnswerAdmin" resultType="int">
+		select count(*) from tourAnswer where relevel=1 and deleted=0
+	</select>
+	<select id="getAdminReAnswer" resultType="touranswer">
+		select * from tourAnswer where relevel=1 and deleted=0 order by tourAnswerNum desc LIMIT
+		#{start},#{perPage}
+	</select>
+</mapper>

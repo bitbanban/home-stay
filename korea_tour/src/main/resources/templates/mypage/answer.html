@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+
+ 
+ <link rel="stylesheet" th:href="@{/css/mypage/answer.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script" >
+	<script th:src="@{/js/myanswer.js}" defer ></script>
+</th:block>
+
+<div layout:fragment="content">
+      <div id="topBox">
+            <h3 class="top-box__h3">마이페이지</h3>
+            <h1 class="top-box__h1">댓글</h1>
+            <hr>
+      </div>
+      <div id="middleBox">
+            <div id="mainBox">
+                  <div class="count-box">
+                        <h4 id="totalCount">총n건</h4>
+                        <div class="count-box__answer">
+                              <h4 class="count-box__answer-text" onclick="myAnswerList()">댓글</h4>|
+                              <h4 class="count-box__reanswer-text" onclick="reAnserList()">답글</h4>
+                        </div>
+                  </div>
+                  <hr class="hr2">
+                  <!-- 반복문 -->
+                  <div id="printBox">
+                  <div class="answer-box">
+                        <div class="image-box">
+                              <img src="" alt="">
+                        </div>
+                        <div class="answer-info__box">
+                              <div class="answer-info">
+                                    <p class="answer-name">댓글단 글 제목</p>
+                                    <p class="answer-start">댓글 내용</p>
+                                    <span>user</span><span>|</span><span>writeday</span>
+                              </div>
+                              <i class="fas fa-ellipsis-v answer-icon"></i>
+                        </div>
+                  </div>
+                  <hr class="hr2">
+                  </div>
+                  <!-- 반복문 -->
+                  
+                  
+                  
+            </div>
+            <div id="navBox">
+                  <a th:href="@{/tourmypage/courselist}" class="nav-text">코스</a>
+                  <a th:href="@{/tourmypage/favorite}" class="nav-text">즐겨찾기</a>
+                  <a th:href="@{/tourmypage/answer}" class="nav-text">댓글</a>
+            </div>
+
+      </div>
+      <div id="paging"></div>
+</div>
+   
+</html>

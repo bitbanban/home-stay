@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.PlaceApiPhotoMapper">
+	<insert id="insertApiPhoto" parameterType="placeApiPhoto">
+		insert into placeApiPhoto (contentId,originImgUrl) values (#{contentId},#{originImgUrl})
+	</insert>
+	<select id="checkIsNewData" parameterType="int" resultType="int">
+		select count(*) from placeApiPhoto where contentId=#{contentId}
+	</select>
+	<select id="getCountToContentId" resultType="int">
+		select count(*) from place where contentId &lt;= (select max(contentId) from placeApiPhoto)
+	</select>
+</mapper>

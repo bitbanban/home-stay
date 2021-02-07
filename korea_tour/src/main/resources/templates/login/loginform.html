@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/login/login.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script th:src="@{/js/login.js}"></script>
+</th:block>
+
+<div layout:fragment="content">
+
+	<div class="login-wrap">
+		<form class="login-box">
+			<div class="form-wrap">
+				<div class="form-group">
+					<br>
+					<h2>로그인 페이지</h2>
+					<hr>
+					<h3>
+						아이디와 비밀번호 입력하기 귀찮으시죠?<br> 이제 카카오로 간편하게 로그인 하세요.
+					</h3>
+				</div>
+				<div class="login-btn">
+				
+				
+					<button class="movebtn" id="btnKakao" type="button">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Kakao_Corp._symbol_-_2012.svg"
+							alt="kakao" width="30"> <a href="/login/kakao">카카오로 로그인하기</a>
+					</button>
+				
+				
+					
+					<!-- <button class="movebtn" id="btnKakao" type="button"
+						th:onclick="'ajaxReq(\'kakao\');'">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Kakao_Corp._symbol_-_2012.svg"
+							alt="Kakao" width="30"> 카카오로 로그인하기
+					</button>        -->
+					<br>
+					<br>
+					<div class="relative">
+						<hr>
+						<span class="login-text">OR</span>
+					</div>
+					<br>
+					<button class="movebtn" id="btnNaver" type="button">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Naver_logo_initial.svg"
+							alt="naver" width="30"> <a href="/login/naver"> Naver로 로그인하기 </a>
+					</button>
+					<button class="movebtn" id="btnGoogle" type="button">
+						<img
+							src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+							alt="google" width="30"> <a href="/login/google"> Google로 로그인하기 </a>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</html>

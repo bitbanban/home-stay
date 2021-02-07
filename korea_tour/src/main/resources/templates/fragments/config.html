@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:fragment="configFragment">
+    <meta charset="UTF-8" />
+    <title>라온나드리 | 대한민국 여행 길라잡이</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 공통으로 쓰이는 css파일을넣는다.-->
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    	<script src="/js/main.js" defer></script>
+    <!-- 컨텐츠페이지의 CSS 영역이 들어감 -->
+    <th:block layout:fragment="css"></th:block>
+    <!-- 컨텐츠페이지의 스크립트 영역이 들어감 -->
+    <th:block layout:fragment="script"></th:block>
+</head>
+
+</html>

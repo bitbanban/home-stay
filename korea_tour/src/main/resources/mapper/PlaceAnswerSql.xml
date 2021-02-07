@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.PlaceAnswerMapper">
+	<!-- <insert id="insertPlaceAnswer" parameterType="placeanswer">
+		insert into
+		placeAnswer
+		(userNum,placeNum,content,writeDay,relevel,regroup,loginId,loginPhoto,deleted)
+		values
+		(#{userNum},#{placeNum},#{content},now(),0,#{regroup+1},#{loginId},#{loginPhoto},#{deleted})
+	</insert>
+	<insert id="insertPlaceAnswerRE" parameterType="placeanswer">
+		insert into
+		placeAnswer
+		(userNum,placeNum,content,writeDay,relevel,regroup,loginId,loginPhoto,deleted)
+		values
+		(#{userNum},#{placeNum},#{content},now(),1,#{regroup},#{loginId},#{loginPhoto},#{deleted})
+	</insert>
+	<update id="deletePlaceAnswerByUser" parameterType="int">
+		update placeAnswer set deleted=1 where placeAnswerNum=#{placeAnswerNum}
+	</update>
+	<update id="deletePlaceAnswerByAdmin" parameterType="int">
+		update placeAnswer set deleted=2 where placeAnswerNum=#{placeAnswerNum}
+	</update>
+	<select id="getAnswerOfPlace" parameterType="int" resultType="placeanswer">
+		select * from placeAnswer where contentId=#{contentId} order by regroup asc,relevel asc
+	</select>
+	<select id="getUserAnswer" parameterType="HashMap" resultType="placeanswer">
+		select * from placeAnswer where userNum=#{userNum} and relevel=#{relevel} order by placeAnswerNum desc 
+	</select>
+	<select id="getAdminAnswer" parameterType="int" resultType="placeanswer">
+		select * from placeAnswer where relevel=#{relevel} order by placeAnswerNum desc
+	</select> -->
+</mapper>

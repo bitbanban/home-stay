@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.CourseMarkMapper">
+	<insert id="insertCourseMark" parameterType="coursemark">
+		insert into courseMark (userNum,courseNum,loginNum) values (#{userNum},#{courseNum},#{loginNum})
+	</insert>
+	<delete id="deleteCourseMark" parameterType="int">
+		delete from courseMark where courseMarkNum=#{courseMarkNum}
+	</delete>
+	<select id="getCourseMark" parameterType="HashMap" resultType="String">
+		select concat(courseMarkNum) from courseMark where courseNum=#{courseNum} and loginNum=#{loginNum}
+	</select>
+	<!-- 내가 즐겨찾기한 코스의 개수 -->
+ 	<select id="getMyCourseMarkCount" parameterType="int" resultType="int">
+		select count(*) from courseMark where loginNum=#{loginNum}
+	</select>
+	<!-- 해당 코스 즐겨찾기된 개수 -->
+	<select id="getCourseMarkTotal" parameterType="int" resultType="int">
+		select count(*) from courseMark where courseNum=#{courseNum}
+	</select>
+</mapper>

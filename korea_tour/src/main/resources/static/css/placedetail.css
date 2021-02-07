@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+h1 {
+  text-align: center;
+  font-size: var(--font-xl);
+}
+
+/*좋아요*/
+.heart {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: url(https://cssanimation.rocks/images/posts/steps/heart.png)
+    no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  animation: fave-heart 1s steps(28);
+}
+.heart:hover {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+
+.liked .heart {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+
+.favorite i {
+  color: orange;
+  cursor: pointer;
+}
+@keyframes fave-heart {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -2800px 0;
+  }
+}
+
+#picture {
+  text-align: center;
+}
+
+#mainImage {
+  margin: 1em;
+  width: 50vw;
+  height: 30vw;
+  border: 2px solid var(--brown);
+}
+
+#subImage {
+  display: none;
+}
+
+.sub-image {
+  display: block;
+  margin: 0 auto;
+  width: 50vw;
+  height: 30vw;
+  margin-top: 5vw;
+  border: 2px solid var(--brown);
+}
+
+#placeInfo {
+  margin: 1em auto;
+  width: 80%;
+  font-size: var(--font-middle);
+}
+
+#placeMap {
+  margin: 1em auto;
+  width: 60%;
+  height: 60vh;
+}
+
+hr {
+  margin: 1em auto;
+  border: 0px;
+  height: 2px;
+  background-color: var(--b-color);
+  width: 85%;
+}
+
+/*댓글*/
+#loginPhoto {
+  width: 4em;
+  height: 4em;
+  border-radius: 2.5em;
+}
+
+.ReAnswer-List {
+	display: none;
+}
+
+.ReAnswer, .Answer{
+   height: 10vh;
+   border-bottom: 1px solid gray;
+}
+
+.ReAnswer {
+	margin-left: 5vw;
+	background: pink;
+	
+}
+
+.Answer {
+	background: yellow;
+}
+
+
+
+
+
+/*class추가(보이기)용*/
+.active {
+	display: block;
+}
+
+
+/* 유저사진 입력 모달 */
+ .user-modal {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ .user-modal .bg {
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modalBox {
+     position: absolute;
+     background-color: #fff;
+     width: 400px;
+     height: 200px;
+     padding: 15px;
+}
+
+.modalBox button {
+     display: block;
+     width: 80px;
+     margin: 0 auto;
+}
+
+.hidden {
+     display: none;
+}

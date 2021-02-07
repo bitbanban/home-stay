@@ -1,0 +1,135 @@
+* {
+	font-size: 13px
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Board List */
+.board_list {
+	border-top: 1px solid #4b4750;
+}
+
+.board_list_table {
+	width: 100%;
+	table-layout: fixed;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-width: 1px 0px;
+	color: #333333;
+}
+
+.board_list .board_list_row {
+	border-bottom: 1px solid #ccd2de;
+}
+
+.board_list .board_list_row:hover, .board_list .board_list_row.selected
+	{
+	background-color: #e7eaef;
+}
+
+.board_list .board_list_data {
+	color: #333;
+	height: 24px;
+	padding: 4px 10px;
+	border-left: 1px solid #ccd2de;
+}
+
+.board_list .board_list_data:first-child {
+	border-left-width: 0;
+}
+
+.board_list .board_list_data.tit {
+	font-weight: bold;
+	text-align: left;
+}
+
+.board_list thead .board_list_head {
+	color: #333;
+	font-weight: bold;
+	padding: 8px 10px;
+	border-left: 1px solid #ccd2de;
+	background-color: #f0ece6;
+}
+
+/*==================================
+Object Title
+==================================*/
+.opt_tit {
+	margin-bottom: 8px;
+	height: 24px;
+}
+
+.opt_tit .opt_tit_left {
+	float: left;
+}
+
+.opt_tit .opt_tit_right {
+	float: right;
+}
+
+.opt_tit .opt_tit_left .elmt .txt {
+	color: #333;
+}
+
+.page_wrap {
+	text-align: center;
+	font-size: 0;
+	padding: 10px;
+}
+
+.page_nation {
+	display: block;
+	text-align: center;
+}
+
+
+.page_nation a {
+	
+	margin: 0 3px;
+	float: left;
+	border: 1px solid #e6e6e6;
+	width: 28px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	background-color: #fff;
+	font-size: 13px;
+	color: #999999;
+	text-decoration: none;
+}
+
+.page-list{
+	float: center;
+}
+.page_nation .arrow {
+	border: 1px solid #ccc;
+}
+
+.page_nation .pprev {
+	background: #f8f8f8 url('/img/page_pprev.png') no-repeat center center;
+	margin-left: 0;
+}
+
+.page_nation .prev {
+	background: #f8f8f8 url('/img/page_prev.png') no-repeat center center;
+	margin-right: 7px;
+}
+
+.page_nation .next {
+	background: #f8f8f8 url('/img/page_next.png') no-repeat center center;
+	margin-left: 7px;
+}
+
+.page_nation .nnext {
+	background: #f8f8f8 url('/img/page_nnext.png') no-repeat center center;
+	margin-right: 0;
+}
+
+.page_nation a.active {
+	background-color: #42454c;
+	color: #fff;
+	border: 1px solid #42454c;
+}

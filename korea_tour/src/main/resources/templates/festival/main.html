@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/festival/festivalMain.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script th:src="@{/js/festivalMain.js}" defer ></script>
+	
+</th:block>
+
+<div layout:fragment="content">
+
+	<div class="festival-calendar">
+		<h1>지금 열리는 지역축제</h1>
+		
+		<div class='cal-month'>
+			<span class='pre-month'><i class="fas fa-angle-left"></i></span>
+			<span class='current-month'></span>
+			<span class='next-month'><i class="fas fa-angle-right"></i></span>
+		</div>
+		<div class="cal-dates"></div>
+	</div>
+	<div class='festival-main'>
+
+	</div>
+	<div class="festival-list">
+		
+	</div>
+	<div class="festival-area">
+	<h1> 지역으로 보기</h1>
+	
+	<ul class="area">
+		<li class='area-list' th:area='all'><a href="/festival/list?areaCode=&pageNum=1&month=">전국</a></li>
+		<li class='area-list' th:area='1'><a href="/festival/list?areaCode=1&pageNum=1&month=">서울</a></li>
+		<li class='area-list' th:area='2'><a href="/festival/list?areaCode=2&pageNum=1&month=">인천</a></li>
+		<li class='area-list' th:area='31'><a href="/festival/list?areaCode=31&pageNum=1&month=">경기</a></li>
+		<li class='area-list' th:area='32'><a href="/festival/list?areaCode=32&pageNum=1&month=">강원</a></li>
+		<li class='area-list' th:area='3'><a href="/festival/list?areaCode=3&pageNum=1&month=">대전</a></li>
+		<li class='area-list' th:area='8'><a href="/festival/list?areaCode=8&pageNum=1&month=">세종</a></li>
+		<li class='area-list' th:area='33'><a href="/festival/list?areaCode=33&pageNum=1&month=">충북</a></li>
+		<li class='area-list' th:area='34'><a href="/festival/list?areaCode=34&pageNum=1&month=">충남</a></li>
+		<li class='area-list' th:area='4'><a href="/festival/list?areaCode=4&pageNum=1&month=">대구</a></li>
+		<li class='area-list' th:area='6'><a href="/festival/list?areaCode=6&pageNum=1&month=">부산</a></li>
+		<li class='area-list' th:area='7'><a href="/festival/list?areaCode=7&pageNum=1&month=">울산</a></li>
+		<li class='area-list' th:area='35'><a href="/festival/list?areaCode=35&pageNum=1&month=">경북</a></li>
+		<li class='area-list' th:area='36'><a href="/festival/list?areaCode=36&pageNum=1&month=">경남</a></li>
+		<li class='area-list' th:area='5'><a href="/festival/list?areaCode=5&pageNum=1&month=">광주</a></li>
+		<li class='area-list' th:area='37'><a href="/festival/list?areaCode=37&pageNum=1&month=">전북</a></li>
+		<li class='area-list' th:area='38'><a href="/festival/list?areaCode=38&pageNum=1&month=">전남</a></li>
+		<li class='area-list' th:area='39'><a href="/festival/list?areaCode=39&pageNum=1&month=">제주</a></li>
+	</ul>
+</div>
+</div >
+
+
+
+</html>

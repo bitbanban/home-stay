@@ -1,0 +1,10 @@
+.textarea{
+    width: 25%;
+}
+.star {
+    display: inline-block;
+}
+
+button {
+    display: block;
+}

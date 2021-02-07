@@ -1,0 +1,19 @@
+#layoutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ul.nav {
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-around;
+}
+.fes-map {
+  width: 80vw;
+  height: 50vh;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/home">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/home/home.css}">
+	<link rel="stylesheet" th:href="@{/css/home/homeTablet.css}" media="all and (min-width: 768px) and (max-width: 1023px)">
+	<link rel="stylesheet" th:href="@{/css/home/homeMobile.css}" media="all and (max-width:767px)">
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script th:src="@{/js/home.js}" defer></script>
+</th:block>
+
+<main layout:fragment="content">	
+	<div class="slider">
+		<div class="load">
+			<div class="slider-content">
+			<header class="header">
+				<a th:href="@{/}"><img th:src="@{/img/logo_white.png}" alt="logo" class="main-logo"></a>
+				<div class="hamburger-menu">
+					<div class="h-line line1" ></div>
+					<div class="h-line line2" ></div>
+					<div class="h-line line3" ></div>
+				</div>
+			</header>
+			
+			<nav class="navbar">
+					
+					<ul class="nav-list">
+						<li class="nav-item"><a th:href="@{/tourplace}" class="nav-link">지역</a></li>
+						<li class="nav-item"><a th:href="@{/tourcourse?who=&during=&how=}" class="nav-link">코스</a></li>
+						<li class="nav-item"><a th:href="@{/festival}" class="nav-link">축제</a></li>
+						<li class="nav-item"><a th:href="@{/login}" th:if="${session.user == null}" class="nav-link">로그인</a></li>
+						<th:block th:unless="${session.user == null}">
+						<li class="nav-item"><a th:href="@{/tourmypage}"> <img th:src="${session.user.photo}" id="userPhoto" class="nav-link"></a></li>
+						<li class="nav-item" ><a th:href="@{/logout}" class="nav-link" id="homeLogout">로그아웃</a></li>
+						</th:block>
+					</ul >
+			</nav>
+			
+			
+			
+				<!--/* 통합검색 */-->
+				<div class="search-container">
+				<h1>"오늘은 어디로 떠날까요?"</h1>
+
+				<div class="search-bar">
+				<input type="text" placeholder="관광지를 입력하세요" id="searchBar" class="search-bar__input">
+				<button type="button" id="btnSearch" class="search-btn">
+					<i class="fas fa-search fa-xs"></i>
+				</button></div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+
+ <!--/* 카드 컨테이너 */-->
+	<div class="card-container">
+		<div class="place-card card">
+			<span class="card-title">지역별보기</span>
+			<span class="card-description">대한민국팔도의 </span>
+			<span class="card-description">매력을 느껴보세요</span>
+			<a th:href="@{/tourplace}"><div class="card-btn" role="button">자세히 보기<i class="fas fa-angle-double-right"></i></div></a>
+		</div>
+	
+	
+		<div class="course-card card">
+			<span class="card-title">코스별보기</span>
+			<span class="card-description">취향에 꼭 맞는 코스로</span>
+			<span class="card-description">여행을 가요</span>
+			<a th:href="@{/tourcourse?who=&during=&how=}"><div class="card-btn">자세히 보기<i class="fas fa-angle-double-right"></i></div></a>
+		</div>
+	
+	
+		<div class="festival-card card">
+			<span class="card-title">지역축제찾기</span>
+			<span class="card-description">특별한 축제를 찾아</span>
+			<span class="card-description">떠나보아요</span>
+			<a th:href="@{/festival}"><div class="card-btn">자세히 보기<i class="fas fa-angle-double-right"></i></div></a>
+		</div>
+		<div class="homestay-card card">
+			<span class="card-title">Homestay</span>
+			<span class="card-description"> Feel the family culture</span>
+			<span class="card-description">of Koreans </span>
+			<a th:href="@{/homestay}"><div class="card-btn"> Book now<i class="fas fa-angle-double-right"></i></div></a>
+		</div>
+	
+	</div>
+
+	<div class="notice">
+		<h2>공지사항</h2>
+		<a href="/noticelist?currentPage=1"><span>더보기</span></a>
+		<table>
+			<thead>
+				<tr>
+					<td class="tb__title">
+						제목
+					</td>
+					<td class="tb__writeday">
+						작성일
+					</td>
+					<td class="tb__views">
+						조회수
+					</td>
+				</tr>
+			</thead>
+			<tbody id="notice">
+
+			</tbody>
+		</table>
+	</div>
+	<!--/* 코스 검색 */-->
+	<div class="course-search">
+	<form th:action="@{/tourcourse}" method="GET">
+		<span class="course-search-1" >아름다운 대한민국에서</span>
+		
+		<div class="course-search-2"><select name="who"  >
+			<option value="W1">혼자서</option>
+			<option value="W2">가족과</option>
+			<option value="W3">연인과</option>
+			<option value="W4">친구와</option>
+		</select>
+		
+		<select name="during" >
+			<option value="D1">당일치기</option>
+			<option value="D2">1박2일</option>
+			<option value="D3">2박3일</option>
+		</select></div>
+		<div class="course-search-3"> 여행을 </div>
+		<div class="course-search-4"><select name="how" >
+			<option value="H1">뚜벅이</option>
+			<option value="H2">자전거</option>
+			<option value="H3">자동차</option>
+			<option value="H4">기차</option>
+		</select>
+		<span >로 떠나요</span></div>
+	
+		<button type="submit" id="courseSearchBtn" class="medium">맞춤코스</button>
+	</form>
+	</div>
+</main>
+
+</html>

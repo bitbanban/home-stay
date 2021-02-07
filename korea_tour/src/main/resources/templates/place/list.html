@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+ <link rel="stylesheet" th:href="@{/css/placelist.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script" >
+	<script th:src="@{/js/placelist.js}" defer></script>
+</th:block>
+
+<div layout:fragment="content">
+
+
+
+<div class="sidebar" id="sidebar"> 
+<div class="city-btn">
+    <button class="city-list" value="전국" th:areaCode="100" onclick="printName(this)">전국</button>
+	<button class="city-list" value="서울특별시" th:areaCode="1" onclick="printName(this)">서울</button>
+	<button class="city-list" value="부산" th:areaCode="6" onclick="printName(this)">부산</button>
+	<button class="city-list" value="대구" th:areaCode="4" onclick="printName(this)">대구</button>
+	<button class="city-list" value="인천" th:areaCode="2" onclick="printName(this)">인천</button>
+	<button class="city-list" value="광주" th:areaCode="5" onclick="printName(this)">광주</button>
+	<button class="city-list" value="대전" th:areaCode="3" onclick="printName(this)">대전</button>
+	<button class="city-list" value="울산" th:areaCode="7" onclick="printName(this)">울산</button>
+	<button class="city-list" value="세종특별자치시" th:areaCode="8" onclick="printName(this)">세종</button>
+	<button class="city-list" value="경기도" th:areaCode="31" onclick="printName(this)">경기</button>
+	<button class="city-list" value="강원도" th:areaCode="32" onclick="printName(this)">강원</button>
+	<button class="city-list" value="충청북도" th:areaCode="33" onclick="printName(this)">충북</button>
+	<button class="city-list" value="충청남도" th:areaCode="34" onclick="printName(this)">충남</button>
+	<button class="city-list" value="전라북도" th:areaCode="37" onclick="printName(this)">전북</button>
+	<button class="city-list" value="전라남도" th:areaCode="38" onclick="printName(this)">전남</button>
+	<button class="city-list" value="경상북도" th:areaCode="35" onclick="printName(this)">경북</button>
+	<button class="city-list" value="경상남도" th:areaCode="36" onclick="printName(this)">경남</button>
+	<button class="city-list" value="제주도" th:areaCode="39" onclick="printName(this)">제주</button>
+</div>
+</div>
+
+<div class="hide-list" id="target">
+ <i class="fas fa-times"></i>
+  <div class="hide-btn">
+    <button class="city-list" value="전국" th:areaCode="100" onclick="printName(this)">전국</button>
+	<button class="city-list" value="서울특별시" th:areaCode="1" onclick="printName(this)">서울</button>
+	<button class="city-list" value="부산" th:areaCode="6" onclick="printName(this)">부산</button>
+	<button class="city-list" value="대구" th:areaCode="4" onclick="printName(this)">대구</button>
+	<button class="city-list" value="인천" th:areaCode="2" onclick="printName(this)">인천</button>
+	<button class="city-list" value="광주" th:areaCode="5" onclick="printName(this)">광주</button>
+	<button class="city-list" value="대전" th:areaCode="3" onclick="printName(this)">대전</button>
+	<button class="city-list" value="울산" th:areaCode="7" onclick="printName(this)">울산</button>
+	<button class="city-list" value="세종특별자치시" th:areaCode="8" onclick="printName(this)">세종</button>
+	<button class="city-list" value="경기도" th:areaCode="31" onclick="printName(this)">경기</button>
+	<button class="city-list" value="강원도" th:areaCode="32" onclick="printName(this)">강원</button>
+	<button class="city-list" value="충청북도" th:areaCode="33" onclick="printName(this)">충북</button>
+	<button class="city-list" value="충청남도" th:areaCode="34" onclick="printName(this)">충남</button>
+	<button class="city-list" value="전라북도" th:areaCode="37" onclick="printName(this)">전북</button>
+	<button class="city-list" value="전라남도" th:areaCode="38" onclick="printName(this)">전남</button>
+	<button class="city-list" value="경상북도" th:areaCode="35" onclick="printName(this)">경북</button>
+	<button class="city-list" value="경상남도" th:areaCode="36" onclick="printName(this)">경남</button>
+	<button class="city-list" value="제주도" th:areaCode="39" onclick="printName(this)">제주</button>
+  </div>
+</div>
+<div class="place">
+  <input type="text" id="mainCity" th:value="${areaCode}" th:areaCode="${areaCode}" readonly="readonly"></input>
+  <img class="slide-img" src="/img/slide_btn.png">
+  <ul class="array-list">
+    <li class="list choice" id="namelist" th:value="title" onclick="choiceList(this)">제목순</li>
+    <li class="list" id="updatelist" th:value="like" onclick="choiceList(this)">좋아요순</li>
+  </ul>
+  <input type="hidden" id ="sortList" th:value="title"></input>
+  <div class="card" id="card">
+     
+  </div>
+  
+</div>
+<div id="paging" th:currentPage="${currentPage}"></div>
+</div>   
+</html>

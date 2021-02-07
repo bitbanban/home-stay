@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/login/adminlogin.css}">
+</th:block>
+
+
+<!-- index.html 고유 스크립트 추가 -->
+
+
+
+<div layout:fragment="content">
+
+	<div class="login-wrap">
+		
+			<div class="form-wrap">
+				<h2>* 관리자용 로그인</h2>
+				<hr>
+				<div class="form-group">
+					<h3>
+						<br> 이곳은 관리자 계정 접속 페이지입니다.<br> 보안을 위해 계정 사용 후 로그아웃에 신경써
+						주시면 감사하겠습니다.
+					</h3>
+					<br>
+				</div>
+				<div class="insert-wrap">
+				<form th:action="@{/login/admin/check}" method="post">
+					<input type="text" placeholder="Username" name="id"/> 
+					<input type="password" placeholder="Password" name="password" />
+					<button type="submit">Login</button>
+				</form>
+				</div>
+			</div>
+		
+	</div>
+</div>
+</html>

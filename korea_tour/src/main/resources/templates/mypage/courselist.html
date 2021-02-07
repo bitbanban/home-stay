@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+ <th:block layout:fragment="css">
+ <link rel="stylesheet" th:href="@{/css/mypage/courselist.css}">
+</th:block> 
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script" >
+      <script th:src="@{/js/mycourselist.js}" defer ></script>
+</th:block>
+
+<div layout:fragment="content">
+      <div id="topBox">
+            <h3 class="top-box__h3">마이페이지</h3>
+            <h1 class="top-box__h1">코스</h1>
+            <hr>
+      </div>
+      <div id="middleBox">
+            <div id="mainBox">
+                  <div id="infoBox">
+                        <h4 class="count-box">총0건</h4>
+                        <div id="makeCourse">코스 만들기</div>
+                  </div>
+                  <hr class="hr2">
+                  <!-- 반복문 -->
+                  <div id="printBox">
+                  <div class="courselist-box">
+                        <div class="image-box">
+                              <img src="" alt="">
+                        </div>
+                        <div class="courselist-info__box">
+                              <div class="courselist-info">
+                                    <p class="courselist-name">코스이름</p>
+                                    <p class="courselist-start">코스시작 지역</p>
+                                    <span>#여행기간</span><span>#여행유형</span><span>#이동수단</span>
+                              </div>
+                              <i class="fas fa-ellipsis-v courselist-icon"></i>
+                        </div>
+                  </div>
+                  <hr class="hr2">
+                  </div>
+                  <!-- 반복문 -->
+                  
+                  
+                  
+
+                  
+                  
+            </div>
+            <div id="navBox">
+                  <a th:href="@{/tourmypage/courselist}" class="nav-text">코스</a>
+                  <a th:href="@{/tourmypage/favorite}" class="nav-text">즐겨찾기</a>
+                  <a th:href="@{/tourmypage/answer}" class="nav-text">댓글</a>
+            </div>
+
+      </div>
+      <div id="paging"></div>
+      
+</div>
+   
+</html>

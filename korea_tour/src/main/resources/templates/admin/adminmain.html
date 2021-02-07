@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/default">
+
+<!-- index.html 고유 CSS 추가 -->
+<th:block layout:fragment="css">
+	<link rel="stylesheet" th:href="@{/css/admin/main.css}">
+</th:block>
+
+<!-- index.html 고유 스크립트 추가 -->
+<th:block layout:fragment="script">
+	<script th:src="@{js/admin.js}"></script>
+</th:block>
+
+<div layout:fragment="content">
+
+	<div class='all'>
+		<div class='admin-header'>
+			<div class='header-text'>
+				<h2>* 관리자 메인페이지</h2>
+				<hr>
+				<a id="adminLogout" th:href="@{/logout}"><h3>
+						<i class="fa">&#xf011;</i> 로그아웃
+					</h3></a>
+			</div>
+		</div>
+	</div>
+
+	<div class='all-border'>
+		<div class='site-info'>
+			<div class='all-quick-info'>
+				<div class='info-icon'>
+					<i class="fa">&#xf0c0;</i>
+				</div>
+				<div class='text-right'>
+					<br> <br>
+					<div class='info-desc'>회원</div>
+				</div>
+				<div class='info-box-footer'>
+					<a href='/admin/member/list?currentPage=1' class='user-href'><span class="pull-left">해당
+							페이지로 이동 >></span> <span class='pull-right'></span></a>
+				</div>
+			</div>
+
+			<div style='background: #f0ad4e; border-color: #f0ad4e;'
+				class='all-quick-info'>
+				<div class='info-icon'>
+					<i class="fa">&#xf236;</i>
+				</div>
+				<div class='text-right'>
+					<br> <br>
+					<div class='info-desc'>호스트</div>
+				</div>
+
+				<div class='info-box-footer'>
+					<a href='/admin/host/list?currentPage=1' class='user-href' style='color: #f0ad4e;'><span
+						class="pull-left">해당 페이지로 이동 >></span> <span class='pull-right'></span></a>
+				</div>
+			</div>
+
+			<div style='background: #5cb85c; border-color: #5cb85c;'
+				class='all-quick-info'>
+				<div class='info-icon'>
+					<i class="fa">&#xf086;</i>
+				</div>
+				<div class='text-right'>
+					<br> <br>
+					<div class='info-desc'>댓글</div>
+				</div>
+				<div class='info-box-footer'>
+					<a href='/admin/comment/list?currentPage=1' class='user-href' style='color: #5cb85c;'><span
+						class="pull-left">해당 페이지로 이동 >></span> <span class='pull-right'></span></a>
+				</div>
+			</div>
+
+			<div style='background: #9253EB; border-color: #9253EB;'
+				class='all-quick-info'>
+				<div class='info-icon'>
+					<i class="fa">&#xf030;</i>
+				</div>
+				<div class='text-right'>
+					<br> <br>
+					<div class='info-desc'>사진</div>
+				</div>
+				<div class='info-box-footer'>
+					<a href='/admin/placephoto/list' class='user-href' style='color: #9253EB;'><span
+						class="pull-left">해당 페이지로 이동 >></span> <span class='pull-right'></span></a>
+				</div>
+			</div>
+			
+			<div style='background: #ff5256; border-color: #ff5256;'
+				class='all-quick-info'>
+				<div class='info-icon'>
+					<i class="fa">&#xf0a1;</i>
+				</div>
+				<div class='text-right'>
+					<br> <br>
+					<div class='info-desc'>공지</div>
+				</div>
+				<div class='info-box-footer'>
+					<a href='/admin/noticelist?currentPage=1' class='user-href' style='color: #ff5256;'><span
+						class="pull-left">해당 페이지로 이동 >></span> <span class='pull-right'></span></a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+</html>

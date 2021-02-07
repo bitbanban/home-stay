@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayHostPhotoMapper">
+	<insert id="insertPhoto" parameterType="homestayphoto">
+		insert into homeStayPhoto (userNum,homeStayNum,photoName) 
+		values (#{userNum},#{homeStayNum},#{photoName})
+	</insert>
+	<delete id="deletePhoto" parameterType="int">
+		delete from homeStayPhoto where homeStayPhotoNum=#{homeStayPhotoNum}
+	</delete>
+	<update id="updatePhoto" parameterType="int">
+		update homeStayPhoto set photoName=#{photoName} where homeStayPhotoNum=#{homeStayPhotoNum}
+	</update>
+	<select id="getData" parameterType="int" resultType="homestayphoto">
+		select * from homeStayPhoto where homeStayPhotoNum=#{homeStayPhotoNum}
+	</select>
+	<select id="getData2" parameterType="int" resultType="homestayphoto">
+		select * from homeStayPhoto where userNum=#{userNum}
+	</select>
+</mapper>

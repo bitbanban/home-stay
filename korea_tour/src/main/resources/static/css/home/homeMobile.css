@@ -1,0 +1,70 @@
+main {
+  min-width: 280px;
+}
+
+.search-container h1 {
+  display: none;
+}
+div.card-container {
+  flex-wrap: wrap;
+  padding: 5vh 1.25vw;
+}
+div.card {
+  min-width: 200px;
+  width: 80%;
+  height: 20vh;
+  max-width: 400px;
+  min-height: 150px;
+  padding: 7vh 0 0 0px;
+  margin: 0;
+}
+div.card-btn {
+  margin-top: 20px;
+}
+span.card-description {
+  display: none;
+}
+.course-search form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card-btn {
+  color: var(--c-color);
+  background-color: var(--brown);
+}
+.course-search-1,
+.course-search-4 {
+  display: block;
+  margin: auto;
+}
+
+input.search-bar__input {
+  font-size: 15px;
+  padding: 0.53em 0 0.42em 0.3em;
+}
+
+@media all and (max-width: 360px) {
+  .main-logo {
+    display: none;
+  }
+  .search-container h1 {
+    display: block;
+    font-size: var(--font-small);
+    font-family: 'light';
+  }
+  .course-search form * {
+    font-size: var(--font-medium);
+  }
+  .course-search-1,
+  .course-search-2,
+  .course-search-3 {
+    display: block;
+    margin: auto;
+  }
+}
+
+.notice {
+  display: none;
+}

@@ -1,0 +1,283 @@
+@charset "UTF-8";
+
+:focus {
+  outline: none;
+}
+
+.allCity {
+  font-size: var(--font-small);
+  font-family: 'regular';
+  float: right;
+  margin-right: 10vw;
+  margin-top: 3vh;
+  cursor: pointer;
+}
+
+#mainCity {
+  font-size: var(--font-large);
+  font-family: 'bold';
+  margin-left: 3vh;
+  border: none;
+  cursor: default;
+  width: 60%;
+}
+
+#mainCity:focus {
+  outline: none;
+}
+
+.city-list {
+  font-size: var(--font-small);
+  font-family: 'bold';
+  background: none;
+  border: none;
+  outline: none;
+}
+.city-btn {
+  margin: 0.5em auto;
+  text-align: center;
+  width: 80%;
+}
+
+.clicked {
+  border: none;
+  color: white;
+  background: var(--b-color);
+}
+
+.city-list:active {
+  border: none;
+  color: white;
+  background: var(--b-color);
+}
+
+/*사이드바*/
+
+/*사이드바 1023미만일때 버튼*/
+.slide-img,
+.hide-list {
+  display: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 25vh;
+  width: 15vw;
+  right: 15vw;
+  background-color: var(--c-color);
+  border-radius: 1rem;
+}
+
+/*목록*/
+.place {
+  float: left;
+  width: 51vw;
+  margin-left: 5vw;
+}
+
+.choice {
+  font-weight: bold;
+  color: var(--b-color);
+  border-bottom: 3px solid var(--b-color);
+}
+
+.array-list {
+  border-top: 1px solid gray;
+}
+
+.array-list li {
+  display: inline-block;
+  float: right;
+  margin: 1vh 2vw 1vh 0;
+  cursor: pointer;
+  color: var(--b-color);
+}
+
+.card {
+  display: inline-block;
+  margin-bottom: 5vh;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+.place-list {
+  width: 49vw;
+  display: block;
+  border-top: 1px solid var(--d-color);
+  padding: 1em;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.place-list:nth-last-of-type(1) {
+  border-bottom: 1px solid var(--d-color);
+}
+
+.place-list img {
+  max-width: 10vw;
+  width: 10vw;
+  height: 20vh;
+  display: inline-block;
+  vertical-align: middle;
+  border: 3px solid var(--b-color);
+  margin-left: 2vw;
+}
+
+.list-content {
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 2em;
+}
+
+#paging {
+  display: inline-block;
+}
+
+#paging li {
+  display: block;
+  margin: 0 3px;
+  float: left;
+  border: 1px solid #e6e6e6;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background-color: #fff;
+  font-size: 13px;
+  color: #999999;
+  text-decoration: none;
+  cursor: pointer;
+}
+#paging li a {
+  color: #999999;
+}
+
+#paging .arrow {
+  border: 1px solid #ccc;
+}
+
+#paging li.active {
+  background-color: #42454c;
+
+  border: 1px solid #42454c;
+}
+
+#paging li.active {
+  color: #fff;
+}
+
+.placeName {
+  font-size: var(--font-medium);
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .slide-img {
+    display: inline-block;
+    width: 5vw;
+    margin-bottom: -1vw;
+    margin-left: 19vw;
+  }
+
+  .hide-list {
+    background-color: var(--c-color);
+    height: 80%;
+    display: none;
+    z-index: 99;
+    position: absolute;
+    padding: 5vw;
+    left: 0%;
+    top: 0%;
+    z-index: 120;
+  }
+  .hide-list i {
+    margin: 2vh 2vw;
+    font-size: var(--font-xl);
+  }
+  .hide-btn {
+    width: 95%;
+    margin: 0px auto;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .place {
+    float: none;
+    width: 100%;
+    margin: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .place-list {
+    width: 95%;
+  }
+
+  #mainCity {
+    font-size: var(--font-medium);
+  }
+}
+
+@media all and (max-width: 767px) {
+  .slide-img {
+    display: inline-block;
+    width: 7vw;
+    margin-bottom: -1vw;
+    margin-left: 17vw;
+  }
+
+  .hide-list {
+    background-color: var(--c-color);
+    height: 80%;
+    z-index: 99;
+    position: absolute;
+    padding: 5vw;
+    left: 0%;
+    top: 0%;
+    z-index: 120;
+    display: none;
+  }
+  .hide-list i {
+    margin: 2vh 2vw;
+    font-size: var(--font-xl);
+  }
+  .hide-btn {
+    width: 95%;
+    margin: 0px auto;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .place {
+    float: none;
+    width: 100%;
+    margin: 0;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .place-list {
+    width: 100%;
+  }
+
+  #mainCity {
+    font-size: var(--font-medium);
+    margin: 0;
+  }
+}

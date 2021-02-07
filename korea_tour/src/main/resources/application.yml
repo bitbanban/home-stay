@@ -1,0 +1,39 @@
+#tomacat port
+server:
+  port: 9003
+#thymleaf
+spring: 
+  thymeleaf:
+        prefix : classpath:templates/
+        suffix : .html
+        cache : false
+  devtools:
+    livereload:
+      enabled: true
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    password: bit301301@
+    port: 587
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        transport: 
+          protocol: smtp
+      mailmime:
+        charset: UTF-8
+    username: raonnaduri@gmail.com
+  servlet:
+    multipart: 
+     maxFileSize: 10MB
+     maxRequestSize: 10MB
+#mysql
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://dbinstance.cx1rhgjruzom.ap-northeast-2.rds.amazonaws.com:3306/mydb?serverTimezone=Asia/Seoul
+    username: root
+    password: koreatour

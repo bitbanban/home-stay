@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.CourseLikeMapper">
+	<select id="getTotalCourseLike" parameterType="int" resultType="int">
+		select count(*) from courseLike where courseNum=#{courseNum}
+	</select>
+	<insert id="insertCourseLike" parameterType="courselike">
+		insert into courseLike (userNum,courseNum,loginNum) values (#{userNum},#{courseNum},#{loginNum})
+	</insert> 
+	<delete id="deleteCourseLike" parameterType="HashMap">
+		delete from courseLike where likeNum=#{likeNum}
+	</delete>
+	<select id="getCourseLike" parameterType="HashMap" resultType="String">
+		select concat(likeNum) from courseLike where courseNum=#{courseNum} and loginNum=#{loginNum}
+	</select>
+		<!-- 해당 코스 좋아요된 개수 -->
+	<select id="getCoursLikeTotal" parameterType="int" resultType="int">
+		select count(*) from courseLike where courseNum=#{courseNum}
+	</select>
+</mapper>

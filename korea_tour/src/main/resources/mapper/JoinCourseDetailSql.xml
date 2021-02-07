@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.JoinCourseDetailMapper">
+
+	<sql id="courseB"> <!-- 코스디테일 -->
+		SELECT * FROM coursePlace 
+		INNER JOIN place ON place.contentId=coursePlace.contentId
+	</sql>
+	
+	<!-- mypage -->
+	<!-- 내코스 자세히보기(수정폼) -->
+	<select id="getMyCourseDetail" parameterType="HashMap" resultType="joincoursedetail">
+		<include refid="courseB"/>
+		WHERE coursePlace.courseNum=#{courseNum} AND coursePlace.userNum=#{loginNum}
+	</select>
+
+	<!-- main페이지 -->
+	<!-- 메인페이지 코스 자세히보기 -->
+	<select id="getCourseDetail" parameterType="int" resultType="joincoursedetail">
+		<include refid="courseB"/>
+		WHERE coursePlace.courseNum=#{courseNum}
+		ORDER BY coursePlace.orderNum ASC;
+	</select>
+	
+</mapper>

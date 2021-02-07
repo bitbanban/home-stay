@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.PlaceMapper">
+	<!-- api데이터 긁어오기 -->
+	<select id="checkPlace" parameterType="int" resultType="int">
+		select count(*) from place where contentId=#{contentId} and overview is null and linkedURL is null and firstImage is null
+	</select>
+	<insert id="insertApiPlaces" parameterType="place">
+		insert into place (contentId,title,overview,addr1,addr2,mapX,mapY,mLevel,areaCode,linkedURL,firstImage)
+		values (#{contentId},#{title},#{overview},#{addr1},#{addr2},#{mapX},#{mapY},#{mLevel},#{areaCode},#{linkedURL},#{firstImage})
+	</insert>
+	<select id="getAllApiPlace" resultType="place">
+		select * from place order by contentId asc;
+	</select>
+	<update id="updatePlaceDetail" parameterType="place">
+		update place set overview=#{overview}, linkedURL=#{linkedURL},firstImage=#{firstImage} where contentId=#{contentId}
+	</update>
+	<delete id="deleteAllApiPlace">
+		delete from place
+	</delete>
+	<select id="getUpdateStartNum" resultType="int">
+		select count(*) from place where overview is not null or linkedURL is not null or firstImage is not null
+	</select>
+</mapper>

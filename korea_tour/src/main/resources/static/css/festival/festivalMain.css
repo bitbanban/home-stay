@@ -1,0 +1,121 @@
+h1 {
+  margin: 15px 0 10px 0;
+  border-bottom: 2px solid var(--d-color);
+}
+hr {
+  margin: 5px 0 15px 0;
+}
+ul.area {
+  display: flex;
+  flex-direction: row;
+}
+.festival-calendar {
+  width: 90%;
+  margin: auto;
+}
+div.cal-dates {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 15px 0;
+}
+
+div.cal-month {
+  font-size: var(--font-large);
+  text-align: center;
+}
+span.next-month,
+span.pre-month {
+  padding: 5px;
+  cursor: pointer;
+  color: var(--e-color);
+}
+span.cal-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23px;
+  height: 23px;
+  font-size: var(--font-small);
+  cursor: pointer;
+  margin: 1px;
+}
+span.active {
+  border-radius: 24px;
+  text-align: center;
+  background-color: var(--a-color);
+}
+
+.festival-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: auto;
+}
+div.fes-main-card {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 60vh;
+  margin: auto;
+}
+.festival-list a {
+  width: 33.33%;
+}
+.fes-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 30vh;
+}
+div.overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fes-img {
+  width: 100%;
+
+  border-radius: 5%;
+}
+.fes-main-card .fes-title {
+  font-size: var(--font-xl);
+}
+.fes-title {
+  font-size: var(--font-medium);
+  width: 80%;
+  display: inline-block;
+  font-family: 'bold';
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+.festival-area {
+  width: 90%;
+  margin: auto;
+}
+.area {
+  background-color: var(--a-color);
+  color: white;
+  border-radius: 40px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.area-list {
+  margin: 2px 5px;
+}
+.area-list a {
+  color: white;
+}

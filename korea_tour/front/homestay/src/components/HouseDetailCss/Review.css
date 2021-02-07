@@ -1,0 +1,38 @@
+.review-box{
+    width: 45%;
+    margin-bottom: 60px;
+    
+}
+
+.review-box:nth-child(2n){
+    margin-left: 10%;
+}
+
+.review-writer-box{
+    display: flex;
+    justify-content: space-between;
+}
+.profile-box{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.profile-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 150px;
+    background-color: #3d3d3d;
+    margin-right: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.room-img{
+    width: 100px;
+    height: 100px;
+    background-color: #3d3d3d;
+}
+
+.review-text-box{
+    margin-top: 20px;
+}

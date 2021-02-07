@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.CourseMapper">
+	<insert id="insertCourseTitle" parameterType="HashMap">
+		<!-- 일단 첫 작성은 기본 비공개로 -->
+		insert into course (name,userNum) values (#{name},#{loginNum})
+	</insert>
+	<delete id="deleteMyCourse" parameterType="int">
+      delete from course where courseNum=#{courseNum}
+   </delete>
+	<update id="updateShare" parameterType="int">
+		<!-- share하면 공유+1 -->
+		update course set share=share+1 where courseNum=#{courseNum}
+	</update>
+	<update id="updateCourseDetail" parameterType="course">
+		<!-- 코스detail에서 내 코스 수정(orderNum뺴고 : coursePlace) -->
+		update course set name=#{name},content=#{content},open=#{open},who=#{who},during=#{during},how=#{how} where courseNum=#{courseNum}
+	</update>
+	<select id="getMyCourseCount" parameterType="int" resultType="int">
+		<!-- 내가 만든 코스의 개수 -->
+		select count(*) from course where userNum=#{loginNum}
+	</select>
+	<select id="getCourseData" parameterType="int" resultType="course">
+      select * from course where courseNum=#{courseNum}
+   </select>
+	<select id="getMyCourseData" parameterType="HashMap" resultType="course">
+      select * from course where courseNum=#{courseNum} and userNum=#{loginNum}
+   </select>
+	<!-- 내 코스 이름 보기 -->
+	<select id="getMyCourseName" parameterType="int" resultType="course">
+      select * from course where userNum=#{loginNum}
+   </select>
+	<!-- 좋아요 수 +1 -->
+	<update id="UpCourseLike">
+      update course set totalLike=totalLike+1
+   </update>
+	<!-- 좋아요 수 -1 -->
+	<update id="DownCourseLike">
+      update course set totalLike=totalLike-1
+   </update>
+
+</mapper>

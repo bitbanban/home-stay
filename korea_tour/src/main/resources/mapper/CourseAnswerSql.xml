@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.bitcamp.korea_tour.model.mapper.CourseAnswerMapper">
+	<insert id="insertCourseAnswer" parameterType="courseanswer">
+		insert into
+		courseAnswer
+		(userNum,courseNum,comment,writeday,
+		relevel,regroup,loginId,loginPhoto,deleted)
+		values
+		(#{userNum},#{courseNum},#{comment},now()
+		<if test="courseAnswerNum==null">,0
+			<if test="max(courseAnswerNum)==null">,0</if>
+			<if test="max(courseAnswerNum)!=null">,max(courseAnswerNum)+1</if>
+		</if>
+		<if test="courseAnswerNum!=null">1,#{regroup}</if>
+		,#{loginId},#{loginPhoto},#{deleted})
+	</insert>
+	<update id="deleteCourseAnswerByUser" parameterType="int">
+		update courseAnswer set deleted=1 where courseAnswerNum=#{courseAnswerNum}
+	</update>
+	<update id="deleteCourseAnswerByAdmin" parameterType="int">
+		update courseAnswer set deleted=2 where courseAnswerNum=#{courseAnswerNum}
+	</update>
+	<select id="getAnswerOfCourse" resultType="courseanswer">
+		select * from courseAnswer order by group asc,relevel asc
+	</select>
+	<select id="getUserAnswer" parameterType="HashMap" resultType="courseanswer">
+		select * from courseAnswer where loginNum=#{loginNum} and relevel=#{relevel} order by courseAnswerNum desc 
+	</select>
+	<select id="getAdminAnswer" parameterType="int" resultType="courseanswer">
+		select * from courseAnswer where relevel=#{relevel} order by courseAnswerNum desc
+	</select>
+	
+</mapper>

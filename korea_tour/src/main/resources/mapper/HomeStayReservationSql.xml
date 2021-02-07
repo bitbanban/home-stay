@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayReservationMapper">
+	<select id="getTotalCount" parameterType="int" resultType="int">
+		select count(*) from homeStayReservation where loginNum=#{loginNum}
+	</select>
+	<select id="getCountByWating" parameterType="int" resultType="int">
+		select count(*) from homeStayReservation where approval=0 and loginNum=#{loginNum} and deleted=0
+	</select>
+	<select id="getCountByCancel" parameterType="int" resultType="int">
+		select count(*) from homeStayReservation where (loginNum=#{loginNum} and approval=1) 
+		or (loginNum=#{loginNum} and deleted=1)
+	</select>
+	<select id="getCountByApproved" parameterType="int" resultType="int">
+		select count(*) from homeStayReservation where approval=2 and loginNum=#{loginNum} and deleted=0
+	</select>
+	<select id="getAllDatas" parameterType="hashmap" resultType="joinreservation">
+		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
+		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
+		where a.loginNum=#{loginNum} 
+		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+	</select>
+	<select id="getDatasByWating" parameterType="hashmap" resultType="joinreservation">
+		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
+		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
+		where a.approval=0 and a.loginNum=#{loginNum} and deleted=0 
+		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+	</select>
+	<select id="getDatasByCancel" parameterType="hashmap" resultType="joinreservation">
+		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
+		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
+		where (a.loginNum=#{loginNum} and a.approval=1) or (a.loginNum=#{loginNum} and a.deleted=1)
+		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+	</select>
+	<select id="getDatasByApproved" parameterType="hashmap" resultType="joinreservation">
+		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
+		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
+		where a.approval=2 and a.loginNum=#{loginNum} and a.deleted=0 
+		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+	</select>
+	<select id="getHomeStaySummary" parameterType="int" resultType="joinhomestaysummary">
+		select i.homeStayNum, i.photoName, i.homeTitle, j.name as hostName, i.addr1, i.addr2 from 
+		(select n.homeStayNum, n.userNum, m.photoName, n.homeTitle, n.addr1, n.addr2 from 
+		(select a.homeStayNum, a.userNum, a.title as homeTitle, a.addr1, a.addr2 from homeStay a 
+		left join homeStayReservation b on a.homeStayNum = b.homeStayNum where b.homeStayReservationNum=#{homeStayReservationNum}) n
+		left join homeStayPhoto m on (n.homeStayNum = m.homeStayNum) limit 1) i 
+		left join user j on (i.userNum = j.userNum)
+	</select>
+	<select id="getHomeStayDetail" parameterType="int" resultType="joinreservationdetail">
+		select r.homeStayReservationNum, u.name as customName, r.email1, r.email2, r.writeday, r.checkInDay, r.checkOutDay, r.numberOfPeople,
+		r.totalPrice, r.approval, r.deleted from homeStayReservation r 
+		left join user u on (r.userNum = u.userNum) where homeStayReservationNum = #{homeStayReservationNum}
+	</select>
+	<select id="getData" parameterType="int" resultType="homestayreservation">
+		select * from homeStayReservation where homeStayReservationNum = #{homeStayReservationNum} 
+	</select>
+	<update id="cancelReservationByUser" parameterType="int">
+		update homeStayReservation set deleted=1 where homeStayReservationNum = #{homeStayReservationNum}
+	</update>
+	
+	<!-- 마이페이지 아직후기작성안한 완료된 예약 목록 개수 출력 -->
+	<select id="getTotalCountOfReservationsForReview" parameterType="int" resultType="int">
+		select count(*) from homeStayReservation where loginNum = #{loginNum} and approval=2 and deleted=0 and checkOutDay &lt; now()
+	</select>
+	
+	<!-- 마이페이지 아직후기작성안한 완료된 예약 목록 출력 -->
+	<select id="getDoneReservationsByUser" parameterType="hashmap" resultType="joinmypagedonereservation">
+		select a.homeStayReservationNum, a.hostNum, a.homeStayNum, a.homeStayTitle,b.photoName as homeStayPhoto, b. a.customerNum, 
+		a.checkInDay, a.checkOutDay from (select r.homeStayReservationNum, r.userNum as hostNum, r.homeStayNum, h.title as homeStayTitle, r.loginNum as customerNum, 
+		r.checkInDay, r.checkOutDay from homeStayReservation r left join homeStay h on r.homeStayNum = h.homeStayNum 
+		where r.loginNum = #{loginNum} and r.approval=2 and r.deleted=0 and r.checkOutDay &lt; now()) a 
+		left join homeStayPhoto b on a.homeStayNum = b.homeStayNum group by a.homeStayReservationNum 
+        limit #{start}, #{perPage}
+	</select>
+	
+	<!-- 해당 예약에 리뷰 썻나안썻나 체크 -->
+	<select id="checkReviewWritten" parameterType="joinmypagedonereservation" resultType="int">
+		select count(*) from homeStayReview where homeStayNum = #{homeStayNum} and loginNum = #{customerNum} and deleted = 0
+	</select>	
+	
+	<!-- 숙소 예약하기 -->
+	<select id="insertMyReservation" parameterType="homestayreservation">
+		INSERT INTO homeStayReservation 
+		(userNum,homeStayNum,loginNum,checkInDay,checkOutDay,numberOfPeople,totalPrice,approval,writeday,name,email1,email2,gender,birthYear,birthMonth,birthDay,deleted)
+		VALUES
+		((SELECT userNum from homeStay WHERE homeStayNum=#{homeStayNum}),#{homeStayNum},#{loginNum},#{checkInDay},#{checkOutDay},#{numberOfPeople},#{totalPrice},0,now(),#{name},#{email1},#{email2},#{gender},#{birthYear},#{birthMonth},#{birthDay},0)
+	</select>
+</mapper>

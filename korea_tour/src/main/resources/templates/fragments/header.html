@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<header th:fragment="headerFragment" id="layoutHeader">
+
+	<a th:href="@{/}"><img th:src="@{/img/logo_color.png}" alt="logo"
+		class="header-logo"></a>
+
+	<div class="search-bar">
+		<input type="text" placeholder="어디로 떠나볼까요?" id="searchBar" class="search-bar__input">
+		<button type="button" id="btnSearch" class="search-bar__btn">
+					<i class="fas fa-search fa-xs"></i>
+				</button>
+	</div>
+	<div class="menu">
+		<div class="hamburger-menu">
+		<div class="line line1"></div>
+		<div class="line line2"></div>
+		<div class="line line3"></div>
+		</div>
+	</div>
+	<nav class="navbar">			
+		<ul class="nav-list">
+			<li class="nav-item"><a th:href="@{/tourplace}" class="nav-link">지역</a></li>
+			<li class="nav-item"><a th:href="@{/tourcourse?who=&during=&how=}" class="nav-link">코스</a></li>
+			<li class="nav-item"><a th:href="@{/festival}" class="nav-link">축제</a></li>
+		    <li class="nav-item"><a th:href="@{/login}" th:if="${session.user == null}" class="nav-link">로그인</a></li>
+			<th:block th:unless="${session.user == null}">
+			<li class="nav-item"><a th:href="@{/tourmypage}"> <img th:src="${session.user.photo}" id="userPhoto" class="nav-link"></a></li>
+			<li class="nav-item" ><a th:href="@{/logout}" class="nav-link" id="homeLogout">로그아웃</a></li>
+			</th:block>
+		</ul >
+	</nav>
+
+</header>
+
+</html>
