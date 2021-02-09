@@ -9,9 +9,9 @@ import org.apache.ibatis.annotations.Param;
 import com.bitcamp.korea_tour.model.homestay.JoinHomeStayMarkDto;
 
 public interface HomeStayMarkService {
-	int getTotalCountOfMarkByUser(int loginNum);
+	int getTotalCountOfMarkByUser(@Param("userNum")int loginNum);
 	List<JoinHomeStayMarkDto> getMarkListByUser(HashMap<String, Object> map);
-	void insertMark(@Param("homeStayNum") int homeStayNum, int loginNum);
-	void deleteMark(@Param("homeStayNum") int homeStayNum, int loginNum);
-	int countOfMyMark(int homeStayNum, int loginNum);
+	void insertMark(@Param("homeStayNum") int homeStayNum, @Param("userNum")int loginNum);
+	void deleteMark(@Param("homeStayNum") int homeStayNum, @Param("userNum")int loginNum);
+	int countOfMyMark(int homeStayNum, @Param("userNum")int loginNum);
 }
