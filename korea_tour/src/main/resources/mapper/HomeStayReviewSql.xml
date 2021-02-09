@@ -61,4 +61,5 @@
 	<select id="getReviewByHomeStayReviewNum" parameterType="int" resultType="homestayreview">
 		select * from homeStayReview where homeStayReviewNum=#{homeStayReviewNum}
 	</select>
+	
 </mapper>
