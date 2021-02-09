@@ -6,8 +6,8 @@ import NavBar from 'page/NavBar';
 function App() {
   return (
     <React.Fragment>
-      <NavBar position="fixed" />
       <BrowserRouter>
+        <NavBar />
         <RouteMain />
       </BrowserRouter>
     </React.Fragment>

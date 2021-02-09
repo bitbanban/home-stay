@@ -34,6 +34,6 @@ spring:
 #mysql
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://dbinstance.cx1rhgjruzom.ap-northeast-2.rds.amazonaws.com:3306/mydb?serverTimezone=Asia/Seoul
+    jdbc-url: jdbc:mysql://dbinstance.cx1rhgjruzom.ap-northeast-2.rds.amazonaws.com:3306/mydb?serverTimezone=Asia/Seoul&zeroDateTimeBehavior=convertToNull
     username: root
     password: koreatour

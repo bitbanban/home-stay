@@ -1,3 +1,26 @@
-#carousel11{
-    border: 1px solid red;
+
+
+.carousel-img{
+    margin: auto;
+    border-radius: 20px;
+    width: 100vh;
+    height: 60vh;
 }
+
+.slick-prev:before,
+.slick-next:before {
+  color: red;
+}
+
+.slick-prev{
+    left: 15%;
+}
+.slick-next{
+    right: 15%;
+}
+
+.slick-dots li.slick-active button:before {
+    color: red;
+  }
+
+ 

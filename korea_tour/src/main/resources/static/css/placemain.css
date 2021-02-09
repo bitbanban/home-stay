@@ -187,6 +187,12 @@ width:0.3rem;height:0.3rem;background:transparent;}
 	margin: 0.5em auto;
 	}
 	
+/*Ajax부분*/
+.mainImage{
+   width: 35vw;	
+   border-radius: 1em;
+}
+	
 
 	
 @media all and (min-width: 768px) and (max-width: 1023px) {

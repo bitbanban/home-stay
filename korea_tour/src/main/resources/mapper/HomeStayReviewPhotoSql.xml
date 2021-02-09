@@ -5,4 +5,7 @@
 		insert into homeStayReviewPhoto (homeStayNum,homeStayReviewNum, photoName) values 
 		((SELECT homeStayNum from homeStayReview WHERE homeStayReviewNum=#{homeStayReviewNum}),#{homeStayReviewNum}, #{photoName})
 	</insert>
+	<select id="getPhotosByHomeStayReviewNum" parameterType="int" resultType="homestayreviewphoto">
+		select * from homeStayReviewPhoto where homeStayReviewNum=#{homeStayReviewNum}
+	</select>
 </mapper>

@@ -49,7 +49,7 @@
 	<select id="getHomeStayDetail" parameterType="int" resultType="joinreservationdetail">
 		select r.homeStayReservationNum, u.name as customName, r.email1, r.email2, r.writeday, r.checkInDay, r.checkOutDay, r.numberOfPeople,
 		r.totalPrice, r.approval, r.deleted from homeStayReservation r 
-		left join user u on (r.userNum = u.userNum) where homeStayReservationNum = #{homeStayReservationNum}
+		left join user u on (r.loginNum = u.userNum) where homeStayReservationNum = #{homeStayReservationNum}
 	</select>
 	<select id="getData" parameterType="int" resultType="homestayreservation">
 		select * from homeStayReservation where homeStayReservationNum = #{homeStayReservationNum} 
@@ -66,23 +66,25 @@
 	<!-- 마이페이지 아직후기작성안한 완료된 예약 목록 출력 -->
 	<select id="getDoneReservationsByUser" parameterType="hashmap" resultType="joinmypagedonereservation">
 		select a.homeStayReservationNum, a.hostNum, a.homeStayNum, a.homeStayTitle,b.photoName as homeStayPhoto, b. a.customerNum, 
-		a.checkInDay, a.checkOutDay from (select r.homeStayReservationNum, r.userNum as hostNum, r.homeStayNum, h.title as homeStayTitle, r.loginNum as customerNum, 
-		r.checkInDay, r.checkOutDay from homeStayReservation r left join homeStay h on r.homeStayNum = h.homeStayNum 
+		a.checkInDay, a.checkOutDay, a.reviewWrite 
+		from (select r.homeStayReservationNum, r.userNum as hostNum, r.homeStayNum, h.title as homeStayTitle, 
+		r.loginNum as customerNum, r.checkInDay, r.checkOutDay, r.reviewWrite from homeStayReservation r 
+		left join homeStay h on r.homeStayNum = h.homeStayNum 
 		where r.loginNum = #{loginNum} and r.approval=2 and r.deleted=0 and r.checkOutDay &lt; now()) a 
 		left join homeStayPhoto b on a.homeStayNum = b.homeStayNum group by a.homeStayReservationNum 
         limit #{start}, #{perPage}
 	</select>
 	
-	<!-- 해당 예약에 리뷰 썻나안썻나 체크 -->
-	<select id="checkReviewWritten" parameterType="joinmypagedonereservation" resultType="int">
-		select count(*) from homeStayReview where homeStayNum = #{homeStayNum} and loginNum = #{customerNum} and deleted = 0
-	</select>	
+	<!-- 후기 작성시 reviewWrite=1로 수정 -->
+	<update id="updateReviewWrite" parameterType="int">
+		update homeStayReservation set reviewWrite=1 where homeStayReservationNum=#{homeStayReservationNum}
+	</update>
 	
 	<!-- 숙소 예약하기 -->
-	<select id="insertMyReservation" parameterType="homestayreservation">
+	<insert id="insertMyReservation" parameterType="homestayreservation">
 		INSERT INTO homeStayReservation 
 		(userNum,homeStayNum,loginNum,checkInDay,checkOutDay,numberOfPeople,totalPrice,approval,writeday,name,email1,email2,gender,birthYear,birthMonth,birthDay,deleted)
 		VALUES
 		((SELECT userNum from homeStay WHERE homeStayNum=#{homeStayNum}),#{homeStayNum},#{loginNum},#{checkInDay},#{checkOutDay},#{numberOfPeople},#{totalPrice},0,now(),#{name},#{email1},#{email2},#{gender},#{birthYear},#{birthMonth},#{birthDay},0)
-	</select>
+	</insert>
 </mapper>

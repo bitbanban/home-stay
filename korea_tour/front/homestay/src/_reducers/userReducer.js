@@ -1,11 +1,33 @@
-import { LOGIN_USER, LOGOUT_USER } from '../_actions/types';
+import { SIGN_IN, SIGN_OUT } from '_actions/types';
 
-export default function (state = {}, action) {
+const initialState = {
+  num: 0,
+  avatar: '',
+  name: '',
+  host: 'N',
+  auth: false,
+};
+
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_USER:
-      return { ...state, loginSuccess: action.payload };
-    case LOGOUT_USER:
-      return { ...state, success: action.payload };
+    case SIGN_IN:
+      const userNum = action.userData.userNum;
+      const host = action.userData.host;
+      const avatar = action.APIdata.img;
+      const name = action.APIdata.nickname;
+      const auth = true;
+      console.log(action);
+      return {
+        ...initialState,
+        num: userNum,
+        avatar: avatar,
+        name: name,
+        host: host,
+        auth: auth,
+      };
+    case SIGN_OUT:
+      return { ...initialState };
+
     default:
       return state;
   }

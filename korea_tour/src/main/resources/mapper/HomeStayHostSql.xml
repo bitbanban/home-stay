@@ -19,6 +19,10 @@
  	<select id="getHomeStayDetailData" parameterType="int" resultType="joinhomestaydetail">
  	 select * from homeStayDetail where userNum=#{userNum}
  	</select>
+ 	<select id="getHomeStayAllData" parameterType="int" resultType="joinhomestaydetail">
+ 	 select * from homeStay, homeStayDetail where homeStay.userNum=homeStayDetail.userNum and homeStay.userNum=#{userNum}
+ 	
+ 	</select>
  	<select id="getHomeStayNum2" parameterType="int" resultType="int">
  	select homeStayNum from homeStay where userNum=#{userNum}
  	</select>

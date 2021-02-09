@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import Slider from "react-slick";
+import axios from 'axios';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import './HouseDetailCss/Carousel.css';
 
 function HouseCarousel(props) {
@@ -13,28 +14,51 @@ function HouseCarousel(props) {
         slidesToScroll: 1,
         className:"carousel11"
       };
+
+    const [content, setContent] = useState(null);
+    const [loading,setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+
+    let linkurl = document.location.href;
+    let courseNum = linkurl.split('=')[1];
+
+    useEffect( () => {
+        const getModalPhotos = async () => {
+            try {
+                setContent(null);
+                setError(null);
+                setLoading(true);
+                const response = await axios.get(
+                    `http://localhost:9003/homestays/${courseNum}/photos`
+                );
+                setContent(response.data.photo);
+            } catch(e) {
+                setError(e);
+            }
+            setLoading(false);
+        };
+        getModalPhotos();
+    }, []);
+
+    if (loading) return <p>로딩중....</p>;
+    if (error) return <p>에러가 발생했습니다.!!</p>;
+    if (!content) return null;
+
+
     return (
         <div>
             <Slider {...settings}>
-                <div>
-                <h3>1</h3>
-                </div>
-                <div>
-                <h3>2</h3>
-                </div>
-                <div>
-                <h3>3</h3>
-                </div>
-                <div>
-                <h3>4</h3>
-                </div>
-                <div>
-                <h3>5</h3>
-                </div>
-                <div>
-                <h3>6</h3>
-                </div>
+            {
+                content.map((i)=>{  
+                    return ( <div className="modal-imgbox">
+                    <img src={"http://localhost:9003/homeStayImg/"+i.photoName} className="carousel-img" />
+                    </div>
+                    )
+                })
+            }
             </Slider>
+            
         </div>
     );
 }

@@ -1,6 +1,9 @@
 package com.bitcamp.korea_tour.controller.restapi.homestay;
 
 import java.io.File;
+import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -42,7 +45,7 @@ public class HomeStayHostController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	
+
 	/**
 	 * 예약 승인,거절(호스트용)
 	 * @param homeStayReservationNum
@@ -54,42 +57,80 @@ public class HomeStayHostController {
 			@PathVariable(value="approval") int approval) {
 		hsas.updateApproval(homeStayReservationNum,approval);
 		HomeStayReservationDto dto = hsrs.getData(homeStayReservationNum);
-		String name= dto.getName();
-		String email1 = dto.getEmail1();
-		String email2 = dto.getEmail2();
 		
+
 		MimeMessage message=mailSender.createMimeMessage();
 
-		
+
 		try {
+			String name= dto.getName();
+			String email1 = dto.getEmail1();
+			String email2 = dto.getEmail2();
+			Date checkInDay = dto.getCheckInDay();
+			Date checkOutDay = dto.getCheckOutDay();
+			int numberOfPeople = dto.getNumberOfPeople();
+			int totalPrice = dto.getTotalPrice();
+			Date writeDay = dto.getWriteday();
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일");
+			String cid = sdf.format(checkInDay);
+			String cod = sdf.format(checkOutDay);
+			String wd = sdf.format(writeDay);
+
+			DecimalFormat dcf = new DecimalFormat("###,###,###,###");
+			String price = dcf.format(totalPrice);
+
+			int homeStayNum = dto.getHomeStayNum();
+			int userNum = hsas.getUserNum(homeStayNum);
+			JoinHomeStayDetailDto ddto = hsas.getHomeStayDetailData(userNum);
+			String hEmail1 = ddto.getEmail1();
+			String hEmail2 = ddto.getEmail2();
+			String hp = ddto.getHp();
+			String hp1 = hp.substring(0,3);
+			String hp2 = hp.substring(3,7);
+			String hp3 = hp.substring(7,11);
 			//메일제목
 			if(approval==1) {
-			message.setSubject(name+"님의 예약이 완료되었습니다.");
-			message.setText("승인 승인 승인");
-			message.setRecipients(MimeMessage.RecipientType.TO,
-					InternetAddress.parse(email1+"@"+email2));
+				message.setSubject(name+"님의 예약이 완료되었습니다.");
+
+				message.setText("아래의 예약 내용을 확인해 주세요" +"\n"+"\n"
+						+"체크인 날짜 : "+cid+"\n"
+						+"체크아웃 날짜 : "+cod+"\n"
+						+ "예약 인원 : "+numberOfPeople+"명"+"\n"
+						+"총 금액 : "+price+"원"+"\n"
+						+"예약 날짜 : "+wd+"\n"+"\n"
+						+" 자세한 문의는 아래의 연락처로 주시길 바랍니다."+"\n" +"\n"
+						+"호스트 연락처" +"\n"
+						+"Email : "+hEmail1+"@"+hEmail2+"\n"
+						+"Hp : "+hp1+"-"+hp2+"-"+hp3);
+				message.setRecipients(MimeMessage.RecipientType.TO,
+						InternetAddress.parse(email1+"@"+email2));
 			}
 			if(approval==2) {
-			message.setSubject(name+"님의 예약신청이 거절 되었습니다.");			
-			//메일 본문
-			message.setText("거절 거절 거절");
-			//받을 메일 주소
-			message.setRecipients(MimeMessage.RecipientType.TO,
-					InternetAddress.parse(email1+"@"+email2));
-			//메일전송
+				message.setSubject(name+"님의 예약 신청이 거절되었습니다.");			
+				//메일 본문
+				message.setText("호스트의 개인 사정으로 예약신청이 거절 되었습니다. 죄송합니다.");
+				//받을 메일 주소
+				message.setRecipients(MimeMessage.RecipientType.TO,
+						InternetAddress.parse(email1+"@"+email2));
+				//메일전송
 			}
 			mailSender.send(message);
 			//포워드파일로 메세지 보내기
 		} catch (MessagingException e) 	{
-		
+			System.out.println("알수없는 오류로 인한 메일 전송 실패");
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("메일전송 실패. 호스트나 회원 정보에 잘못입력된값 있음");
+		} catch (NullPointerException e) {
+			System.out.println("메일전송 실패. 호스트나 회원 정보에 비어있는곳 있음");
 		}
-	
+
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	/**
 	 * 호스트 집정보 수정
 	 * @param userNum
@@ -104,9 +145,9 @@ public class HomeStayHostController {
 		hsas.updateHomeStay(dto, homeStayNum);
 		hsas.updateHomeStayDetail(dto, homeStayNum);
 	}
-	
-	
-	
+
+
+
 	/**
 	 * userNum으로 집정보 얻기(수정폼에서 사용)
 	 * @param userNum
@@ -114,46 +155,14 @@ public class HomeStayHostController {
 	 */
 	@GetMapping("/homestays/house/{userNum}")
 	public JsonData getHomeStayData(@PathVariable(value = "userNum")int userNum) {
-		JoinHomeStayDetailDto dto = hsas.getHomeStayData(userNum);
-		JoinHomeStayDetailDto ddto = hsas.getHomeStayDetailData(userNum);
-		int homeStayNum = dto.getHomeStayNum();
-		/* int userNum = dto.getUserNum(); */
-		String title = dto.getTitle();
-		String addr1 = dto.getAddr1();
-		String addr2 = dto.getAddr2();
-		String content = dto.getContent();
-		int approval = dto.getApproval();
-		String checkIn1 = dto.getCheckIn1();
-		String checkIn2 = dto.getCheckIn2();
-		String checkOut1 = dto.getCheckOut1();
-		String checkOut2 = dto.getCheckOut2();
-		String xpos = dto.getXpos();
-		String ypos = dto.getYpos();
-		int price = dto.getPrice();
-		int open = dto.getOpen();
-
-
-		int dogOk = dto.getDogOk();
-		int smokingOk = dto.getSmokingOk();
-		int maxPeople = dto.getMaxPeople();
-		String email1 = dto.getEmail1();
-		String email2 = dto.getEmail2();
-		String hp = dto.getHp();
-		int wifi = dto.getWifi();
-		int towel = dto.getTowel();
-		int breakfast = dto.getBreakfast();
-		int aircon = dto.getAircon();
-		int elecProduct = dto.getElecProduct();
-		int kitchen = dto.getKitchen();
-		int bathroom = dto.getBathroom();
-		int parking = dto.getParking();
-		return new JsonData(homeStayNum,parking, title,addr1,addr2,content,parking, checkIn1
-				,checkIn2,checkOut1,checkOut2,xpos,ypos,price,open,dogOk,smokingOk,
-				maxPeople,parking, email1,email2,hp,wifi,towel,breakfast,aircon,elecProduct,kitchen,bathroom,parking);
+		JoinHomeStayDetailDto dto = hsas.getHomeStayAllData(userNum);
+		
+		return new JsonData(dto);
+		
 	}
+	
 
-	
-	
+
 	/**
 	 * 호스트 집 사진 올리기
 	 * @param userNum
@@ -187,7 +196,7 @@ public class HomeStayHostController {
 			hshps.insertPhoto(dto);
 		}
 	}
-	
+
 
 	/**
 	 * 호스트 집 사진 삭제하기
@@ -208,14 +217,14 @@ public class HomeStayHostController {
 		// db데이터 삭제
 		hshps.deletePhoto(homeStayPhotoNum);
 	}
-	
-	
+
+
 	/**
 	 * 호스트 집 사진정보 얻기
 	 * @param userNum
 	 * @param request
 	 */
-	
+
 	@GetMapping("/homestays/photo/{userNum}")
 	public JsonName<List<HomeStayPhotoDto>> getPhotoName(@PathVariable(name="userNum")int userNum
 			,HttpServletRequest request) {
@@ -228,37 +237,7 @@ public class HomeStayHostController {
 	@Data
 	@AllArgsConstructor
 	static class JsonData{
-		private int homeStayNum;
-		private int userNum;
-		private String title;
-		private String addr1;
-		private String addr2;
-		private String content;
-		private int approval;
-		private String checkIn1;
-		private String checkIn2;
-		private String checkOut1;
-		private String checkOut2;
-		private String xpos;
-		private String ypos;
-		private int price;
-		private int open;
-
-		private int homeStayDetailNum;
-		private int dogOk;
-		private int smokingOk;
-		private int maxPeople;
-		private String email1;
-		private String email2;
-		private String hp;
-		private int wifi;
-		private int towel;
-		private int breakfast;
-		private int aircon;
-		private int elecProduct;
-		private int kitchen;
-		private int bathroom;
-		private int parking;
+			private JoinHomeStayDetailDto dto;
 	}
 	@Data
 	@AllArgsConstructor

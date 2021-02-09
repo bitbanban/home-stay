@@ -54,12 +54,27 @@ public class HomeStayReviewServiceImpl implements HomeStayReviewService{
 	}
 
 	@Override
-	public int checkReviewWritten(int homeStayNum, int loginNum) {
+	public int checkReviewWritten(int homeStayReservationNum) {
 		// TODO Auto-generated method stub
-		return m.checkReviewWritten(homeStayNum, loginNum);
+		return m.checkReviewWritten(homeStayReservationNum);
 	}
 
-	
+	@Override
+	public List<HomeStayReviewDto> getReviewByloginNum(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return m.getReviewByloginNum(map);
+	}
 
-	
+	@Override
+	public int getTotalCountOfReviewsByLoginNum(int loginNum) {
+		// TODO Auto-generated method stub
+		return m.getTotalCountOfReviewsByLoginNum(loginNum);
+	}
+
+	@Override
+	public HomeStayReviewDto getReviewByHomeStayReviewNum(int homeStayReviewNum) {
+		// TODO Auto-generated method stub
+		return m.getReviewByHomeStayReviewNum(homeStayReviewNum);
+	}
+
 }

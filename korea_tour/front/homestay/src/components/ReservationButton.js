@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -12,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-  
 
-export default function ReservationButton() {
+
+
+export default function ReservationButton(props) {
 
   const classes = useStyles();
   
@@ -27,7 +29,7 @@ export default function ReservationButton() {
       className={classes.button}
       startIcon={<ListIcon />}
     >
-       <Link to="/homestay/mypage/ReservationList"> 
+       <Link to="/homestay/mypage/Reservation"> 
       목록으로
       </Link>
     </Button>
@@ -36,6 +38,7 @@ export default function ReservationButton() {
      color="default"
      className={classes.button}
      startIcon={<EventBusyIcon />}
+     onClick={props.patchNum}
     >
       예약취소
       </Button>

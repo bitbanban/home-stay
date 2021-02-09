@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Rating from '@material-ui/lab/Rating';
 
 function ReviewStarAvg(props) {
     const [content, setContent] = useState(null);
     const [loading,setLoading] = useState(false);
     const [error, setError] = useState(null);
+    
+
+    const [value, setValue] = React.useState(2);
 
     let linkurl = document.location.href;
     let courseNum = linkurl.split('=')[1];
@@ -34,22 +38,40 @@ function ReviewStarAvg(props) {
     return (
         <div id="reviewPoint">
             <div className="reviewPoint-box">
-                <span>청결도</span><span>{content.cleanliness}</span>  
+                <span className="star-title">청결도</span>
+                <span className="star-point">
+                    <span className="star-point__text">{content.cleanliness}</span><Rating name="read-only" value={content.cleanliness} readOnly />
+                </span>
             </div>
             <div className="reviewPoint-box">
-                <span>정확성</span><span>{content.accuracy}</span>  
+                <span className="star-title">정확성</span>
+                <span className="star-point">
+                    <span className="star-point__text">{content.accuracy}</span><Rating name="read-only" value={content.accuracy} readOnly />
+                </span>  
             </div>
             <div className="reviewPoint-box">
-                <span>의사소통</span><span>{content.communication}</span> 
+                <span className="star-title">의사소통</span>
+                <span className="star-point">
+                    <span className="star-point__text">{content.communication}</span><Rating name="read-only" value={content.communication} readOnly />
+                </span>   
             </div>
             <div className="reviewPoint-box">
-                <span>위치</span><span>{content.location}</span> 
+                <span className="star-title">위치</span>
+                <span className="star-point">
+                    <span className="star-point__text">{content.location}</span> <Rating name="read-only" value={content.location} readOnly />
+                </span>  
             </div>
             <div className="reviewPoint-box">
-                <span>체크인</span><span>{content.checkIn}</span>
+                <span className="star-title">체크인</span>
+                <span className="star-point">
+                    <span className="star-point__text">{content.checkIn}</span> <Rating name="read-only" value={content.checkIn} readOnly />
+                </span> 
             </div>
             <div className="reviewPoint-box">
-                <span>가격 대비 만족</span><span>{content.satisfactionForPrice}</span>
+                <span className="star-title">가격 대비 만족</span>
+                <span className="star-point">
+                    <span className="star-point__text">{content.satisfactionForPrice}</span> <Rating name="read-only" value={content.satisfactionForPrice} readOnly />
+                </span>
             </div>
         </div>
     );

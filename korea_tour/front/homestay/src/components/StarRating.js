@@ -3,8 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 
-import AllStarRating from './AllStarRating';
-
 const labels = {
   0.5: '0.5',
   1: '1.0',
@@ -27,7 +25,7 @@ const useStyles = makeStyles({
 });
 
 export default function HoverRating(props) {
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(3);
   const [hover, setHover] = React.useState(-1);
   const classes = useStyles();
 

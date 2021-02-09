@@ -10,31 +10,30 @@ import "./ReviewInput.css"
 
 import StarRating from './AllStarRating';
 import ReTextarea from './ReviewTextarea';
-
-const ReviewInput = ({addReview}) => {
+import ReviewFileUpload from './ReviewFileUpload';
+const ReviewInput = () => {
+    const [review,SetReview] = useState({
+        clean:0,
+        communicate:0,
+        checkIn:0,
+        accuracy:0,
+        location:0,
+        contentment:0,
+        photo: '',
+        content:'',
+    })
+   
 
         return (
             <div>
-               <form>
-                
-
+                <form>
                 <div>
                 <StarRating />
-                <input accept="image/*" id="icon-button-file" type="file" multiple />
-                <label htmlFor="icon-button-file">
-                   <IconButton
-                    color="primary"
-                    aria-label="upload picture"
-                    component="span"
-                   >
-                   <PhotoCamera />
-                   </IconButton>
-                </label>
+                <ReviewFileUpload/>
                 </div>
-
                <ReTextarea/>
                 <button type="submit">리뷰작성</button>
-                </form> 
+                </form>
             </div>
         );
     }

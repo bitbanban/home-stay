@@ -11,7 +11,7 @@ function createCousre() {
   const xhr = new XMLHttpRequest();
   const input = document.querySelector('input#courseName');
   const name = input.value;
-  const url = `/api/courses?name="${name}"`;
+  const url = `/api/courses?name=${name}`;
   xhr.open('POST', url);
   xhr.setRequestHeader('Content-type', 'application/json');
 

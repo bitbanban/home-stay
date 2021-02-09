@@ -5,19 +5,26 @@ import Grid from "@material-ui/core/Grid";
 import HouseCard from "./HouseCard";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
-//import HouseListSort from "./HouseListSort";
+import HouseListSort from "./HouseListSort";
+import Button from '@material-ui/core/Button';
+//import Pagination2 from './Pagination2';
+import store from '_store/Store';
+
 
 const HouseListFeatured = () =>{
 
   const [contents,setContents] = useState(null);
   const [loading,setLoading] = useState(false);
+  const userNum = store.getState().userReducer.num;
+  console.log(userNum)
 
 useEffect(() =>{
   const startday =new Date("2021-02-04");
   const endday=new Date("2021-02-14");
   const data={ keyword:"서울",maxPeople:"1",
   checkInDay:"2021-02-23",
-  checkOutDay:"2021-02-26"}
+  checkOutDay:"2021-02-26",
+  userNum:1}
   console.log(data)
   const fatchData = async ()=> {
       setLoading(true);
@@ -43,14 +50,37 @@ if (loading) {
 if (!contents) {
 return null;
 }
+
+const byCost = async () => {
+  try {
+    const response = await axios.post(
+      `/homestays/price/1`
+    );
+    console.log("성공");
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const byStars = async () => {
+  try {
+    const response = await axios.post(
+      `/homestays/review/1`
+    );
+    console.log("성공2");
+  } catch (e) {
+    console.log(e);
+  }
+};
 // articles 값이 유효할때
 return (
 <div>
     {
-    
     <Grid container spacing={3}>
       <Grid item xs={12}>
-      {/**<HouseListSort /> */}
+      <HouseListSort />
+      <Button variant="contained" size="small" onClick={byCost}>요금순</Button>&nbsp;&nbsp;
+      <Button variant="contained" color="secondary" size="small" id="orderByStars" onClick={byStars}>평점순</Button>
       </Grid>
 
       {contents.map(content => (
@@ -62,6 +92,8 @@ return (
         ))}
     </Grid>
     }
+    {/*<Pagination2 /> */}
+
      </div>
   );
 }

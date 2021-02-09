@@ -39,7 +39,6 @@ function HouseDetail(props) {
 
             {/* DetailMap */}
             <DetailMap />
-            <HouseCarousel />
             
             
 

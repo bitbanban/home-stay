@@ -36,7 +36,7 @@ function HouseStarAvg(props) {
     return (
         <div>
             <span>
-                <span id="star"><StarIcon color="error" /></span><span>{content.allOfAvg}({content.countOfReview})</span>
+                <span id="star"><StarIcon color="error" /></span><span>{content.allOfAvg}(후기 {content.countOfReview}개)</span>
             </span>
         </div>
     );

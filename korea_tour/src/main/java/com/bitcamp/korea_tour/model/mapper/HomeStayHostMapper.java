@@ -31,5 +31,5 @@ public interface HomeStayHostMapper {
    void updateApproval(Map<String, Object> map);
    JoinHomeStayDetailDto getHomeStayData(int userNum);
    JoinHomeStayDetailDto getHomeStayDetailData(int userNum);
-   
+   JoinHomeStayDetailDto getHomeStayAllData(int userNum);
 }
