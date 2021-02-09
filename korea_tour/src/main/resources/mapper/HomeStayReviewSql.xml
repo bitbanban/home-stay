@@ -32,6 +32,11 @@
 	VALUES (#{userNum},#{homeStayNum},1,#{regroup},#{loginNum},#{loginId},#{loginPhoto},#{content},now(),0)
 	</insert>
 	
+	<!-- 답글썼는지 체크-->
+   <select id="ifReply" parameterType="HashMap" resultType="int">
+      select count(*) from homeStayReview where regroup=#{regroup} and homeStayNum=#{homeStayNum} and relevel=1
+   </select>
+	
 	<!-- 이미 후기를 썼는지 체크 -->
 	<select id="checkReviewWritten" parameterType="int" resultType="int">
 		select reviewWrite from homeStayReservation where homeStayReservationNum=#{homeStayReservationNum}

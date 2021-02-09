@@ -42,10 +42,13 @@ public class HomeStayReviewController implements SessionNames{
 
 	//해당 집의 댓글 출력
 	@GetMapping("/homestays/{homeStayNum}/allreview")
-	public JsonAllReviews<List<HomeStayReviewDto>>getAllReview(@PathVariable(value = "homeStayNum")int homeStayNum){
-		List<HomeStayReviewDto> reviews = s.getAllReview(homeStayNum);
-		return new JsonAllReviews<List<HomeStayReviewDto>>(reviews);
-	}
+	   public JsonAllReviews<List<HomeStayReviewDto>>getAllReview(@PathVariable(value = "homeStayNum")int homeStayNum){
+	      List<HomeStayReviewDto> reviews = s.getAllReview(homeStayNum);
+	      for(HomeStayReviewDto dto:reviews) {
+	         dto.setDap(s.ifReply(dto.getHomeStayNum(), dto.getRegroup()));
+	      }
+	      return new JsonAllReviews<List<HomeStayReviewDto>>(reviews);
+	   }
 
 	//해당 집의 댓글에 해당하는 사진 출력
 	@GetMapping("/homestays/{homeStayNum}/allreview/{homeStayReviewNum}")

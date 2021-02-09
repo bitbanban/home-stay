@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import store from '_store/Store';
 
 function FormSubmit(props) {
+  const num = store.getState().userReducer.num;
   const hostInfo = props.info;
   const houseIntro = props.intro;
   const amenities = props.amenity;
@@ -9,7 +11,7 @@ function FormSubmit(props) {
   const [contents, setContents] = useState(null);
   const [loading, setLoading] = useState(false);
   const data = {
-    userNum: 227,
+    userNum: num,
     addr1: hostInfo.addr1,
     addr2: hostInfo.addr2,
     email1: hostInfo.email1,

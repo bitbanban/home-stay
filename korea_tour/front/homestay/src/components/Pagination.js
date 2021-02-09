@@ -1,34 +1,40 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
+import { CenterFocusStrong } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      marginTop: theme.spacing(2),
-      justifyContent:"center",
-      display:'flex',
-      marginBottom: theme.spacing(2),
+      marginTop: theme.spacing(3),
+      
     },
   },
 }));
 
-export default function PaginationRounded(props) {
+
+const Paginationrounded = (postsPerPage, totalPosts, paginate) => {
   const classes = useStyles();
-  //const [currentPage, setPage] = React.useState(1);
-  //const handleChange = (event, value) => {
-  //  setPage(value);
-  //}
-
-  
-
-  
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <div className={classes.root}>
-      
-      <Pagination count={10}  variant="outlined" shape="rounded" />
+    <div>
+      <div className={classes.root}>
+      {pageNumbers.map(number => (
+        <div key={number} className="page-item">
+      <Pagination  onClick={() => paginate(number)} className="page-link" variant="outlined" shape="rounded" />
+      {number}
+        </div>
+           
+          ))}
+      </div>
     </div>
-  );
-}
 
+    
+  );
+};
+
+export default Pagination;

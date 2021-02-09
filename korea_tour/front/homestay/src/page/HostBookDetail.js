@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-function HostBookDetail({ match, history }) {
-  const { num } = match.params;
+
+function HostBookDetail(props) {
+  let history = useHistory();
+  let { num } = useParams();
   const bookNum = num.split('=')[1];
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);

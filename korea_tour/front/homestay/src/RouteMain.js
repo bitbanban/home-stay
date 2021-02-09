@@ -25,38 +25,35 @@ function RouteMain(props) {
       {/* 네브바 */}
 
       {/* 메인 */}
-      <Route exact path="/homestay" component={Home} />
+      <Route exact path="/" component={Home} />
       {/* 홈스테이 신청폼 */}
-      <Route path="/homestay/apply" component={HostForm} />
+      <Route path="/apply" component={HostForm} />
       {/* 집목록 */}
-      <Route path="/homestay/houselistfeatured" component={HouseListFeatured} />
+      <Route
+        path="/search/:area/:checkin/:checkout/:guest"
+        component={HouseListFeatured}
+      />
       {/* 관리자페이지 */}
-      <Route
-        path="/homestay/adminhousedetail/:num"
-        component={AdminHouseDetail}
-      />
+      <Route path="/adminhousedetail/:num" component={AdminHouseDetail} />
       {/* 집상세 및 예약 */}
-      <Route path="/homestay/housedetail" component={HouseDetail} />
-      <Route
-        path="/homestay/reservationconfirm"
-        component={ReservationConfirm}
-      />
+      <Route path="/housedetail" component={HouseDetail} />
+      <Route path="/reservationconfirm" component={ReservationConfirm} />
       {/* 마이페이지 */}
-      <Route path="/homestay/mypage" component={Mypage} />
-      <Route path="/homestay/mypage/reviewlist" component={MyReviewList} />
-      <Route path="/homestay/mypage/reviewwrite:num" component={ReviewForm} />
-      <Route path="/homestay/mypage/likeList" component={LikeList} />
-      <Route path="/homestay/mypage/Reservation" component={ReservationList} />
+      <Route path="/mypage" component={Mypage} />
+      <Route path="/mypage/reviewlist" component={MyReviewList} />
+      <Route path="/mypage/reviewwrite/:num" component={ReviewForm} />
+      <Route path="/mypage/likeList" component={LikeList} />
+      <Route path="/mypage/Reservation" component={ReservationList} />
       <Route
-        path="/homestay/mypage/Reservationdetail:num"
+        path="/mypage/Reservationdetail/:num"
         component={ReservationDetail}
       />
       {/* 호스트페이지 */}
-      <Route path="/homestay/host" component={HostMain} />
-      <Route exact path="/homestay/host/books" component={HostMyBooks} />
-      <Route path="/homestay/host/manage/books" component={HostPenddingBooks} />
-      <Route path="/homestay/host/books/:num" component={HostBookDetail} />
-      <Route path="/homestay/host/manage/house" component={HostManageHouse} />
+      <Route path="/host" component={HostMain} />
+      <Route exact path="/host/books" component={HostMyBooks} />
+      <Route path="/host/manage/books" component={HostPenddingBooks} />
+      <Route path="/host/books/:num" component={HostBookDetail} />
+      <Route path="/host/manage/house" component={HostManageHouse} />
     </div>
   );
 }

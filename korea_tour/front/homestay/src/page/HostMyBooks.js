@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MyBookRow from 'components/MyBookRow';
-import { withRouter } from 'react-router-dom';
+import store from '_store/Store';
+
 function HostMyBooks({ history }) {
   const [contents, setContents] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const num = store.getState().userReducer.num;
   useEffect(() => {
     // async를 사용하는 함수 따로 선언
     const fatchData = async (userNum, currentPage) => {
@@ -22,7 +23,7 @@ function HostMyBooks({ history }) {
       }
       setLoading(false);
     };
-    fatchData(200, 1);
+    fatchData(num, 1);
   }, []);
 
   if (loading) {

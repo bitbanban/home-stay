@@ -90,7 +90,7 @@ public class HomeStayHostController {
 			String hp2 = hp.substring(3,7);
 			String hp3 = hp.substring(7,11);
 			//메일제목
-			if(approval==1) {
+			if(approval==2) {
 				message.setSubject(name+"님의 예약이 완료되었습니다.");
 
 				message.setText("아래의 예약 내용을 확인해 주세요" +"\n"+"\n"
@@ -106,7 +106,7 @@ public class HomeStayHostController {
 				message.setRecipients(MimeMessage.RecipientType.TO,
 						InternetAddress.parse(email1+"@"+email2));
 			}
-			if(approval==2) {
+			if(approval==1) {
 				message.setSubject(name+"님의 예약 신청이 거절되었습니다.");			
 				//메일 본문
 				message.setText("호스트의 개인 사정으로 예약신청이 거절 되었습니다. 죄송합니다.");

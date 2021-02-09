@@ -2,6 +2,7 @@ package com.bitcamp.korea_tour.model.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -23,6 +24,7 @@ public interface HomeStayReviewMapper {
 		void insertReview(HomeStayReviewDto dto);
 		void insertAnswerReview(HomeStayReviewDto dto);
 		int getReviewNum(HashMap<String, Object> map);
+		int ifReply(Map<String, Integer> map);
 		int checkReviewWritten(int homeStayReservationNum);
 		List<HomeStayReviewDto> getReviewByloginNum(HashMap<String, Object> map);
 		int getTotalCountOfReviewsByLoginNum(int loginNum);
