@@ -5,7 +5,6 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ShareIcon from "@material-ui/icons/Share";
@@ -17,7 +16,9 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { pink } from '@material-ui/core/colors';
 import { withRouter } from 'react-router-dom';
-//import HouseListSort from './HouseListSort';
+import './HouseCard.css';
+import store from '_store/Store';
+
 
 const useStyles = makeStyles(() => ({
   root: { maxwidth: 365 },
@@ -31,10 +32,13 @@ function HouseCard(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(2);
   const [state, setState] = useState(true);
+  
+  const userNum = store.getState().userReducer.num;
+  console.log(userNum)
 
   const UpdateMark = async () => {
     try {
-     const url=`http://localhost:9003/homestays/mark?homeStayNum=${props.homeStayNum}`
+     const url=`http://localhost:9003/homestays/mark?homeStayNum=${props.homeStayNum}&userNum=${userNum}`
       console.log(url);
       const response = await axios.post(
         url
@@ -49,7 +53,7 @@ function HouseCard(props) {
   const DeleteMark = async () => {
     try {
       const response = await axios.delete(
-        `http://localhost:9003/homestays/mark?homeStayNum=${props.homeStayNum}`
+        `http://localhost:9003/homestays/mark?homeStayNum=${props.homeStayNum}&userNum=${userNum}`
       );
       console.log("삭제성공");
        
@@ -83,21 +87,19 @@ function HouseCard(props) {
         <Typography variant="body2" color="textSecondary" component="p">
          {props.addr1}
         </Typography>
-        <Star /> {props.avgOfStar}
-         <Box component="fieldset" mb={3} borderColor="transparent">
+        <div class="starAndReview">
+         <Star />
+         <Typography component="legend" color="textSecondary"> {props.avgOfStar}({props.countOfReview})</Typography></div>
          <Typography id="rate" variant="legend" color="textSecondary" component="p">
-        {props.price}</Typography>
-         <Typography component="legend" id="reviewCnt" color="textSecondary">({props.countOfReview})</Typography>
-         <Typography component="legend" id="price" color="textSecondary"></Typography>
-        </Box>
+         ₩ {props.price}원</Typography>
       </CardContent>
-      <CardActions disableSpacing>
-      <Button color="secondary" onClick={() => {
+     
+      <div class="goDetail">
+      <Button  color="secondary" onClick={() => {
         props.history.push(
         `/homestay/housedetail/${props.homeStayNum}` )
-      }}>자세히보기>></Button>
-      </CardActions>
-      {/*<HouseListSort /> */}
+      }}>자세히보기>></Button></div>
+
     </Card>
   );
 }

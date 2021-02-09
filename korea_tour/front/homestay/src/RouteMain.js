@@ -7,6 +7,9 @@ import ReservationConfirm from 'components/ReservationConfirm';
 import ReviewForm from 'page/ReviewForm';
 import ReservationList from 'page/ReservationList';
 import ReservationDetail from 'page/ReservationDetail';
+import Mypage from 'page/Mypage';
+import LikeList from 'page/LikeList';
+import MyReviewList from 'page/MyReviewList';
 import HostPenddingBooks from 'page/HostPenddingBooks';
 import HostBookDetail from 'page/HostBookDetail';
 import HostManageHouse from 'page/HostManageHouse';
@@ -39,10 +42,13 @@ function RouteMain(props) {
         component={ReservationConfirm}
       />
       {/* 마이페이지 */}
-      <Route path="/homestay/mypage/review/:num" component={ReviewForm} />
+      <Route path="/homestay/mypage" component={Mypage} />
+      <Route path="/homestay/mypage/reviewlist" component={MyReviewList} />
+      <Route path="/homestay/mypage/reviewwrite:num" component={ReviewForm} />
+      <Route path="/homestay/mypage/likeList" component={LikeList} />
       <Route path="/homestay/mypage/Reservation" component={ReservationList} />
       <Route
-        path="/homestay/mypage/Reservation/:num"
+        path="/homestay/mypage/Reservationdetail:num"
         component={ReservationDetail}
       />
       {/* 호스트페이지 */}

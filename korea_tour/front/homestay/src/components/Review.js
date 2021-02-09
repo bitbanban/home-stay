@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HouseDetailCss/Review.css';
+import ReviewPhotos from './ReviewPhotos';
 
 function Review(props) {
     const [content, setContent] = useState(null);
@@ -45,31 +46,31 @@ function Review(props) {
                         <p>{content[0].writeday}</p>
                     </div>
                 </div>
-
-                {/* <div className="room-img"><img src={"https://localhost:9003/homeStayReviewImg/"+content[0].photoName}/></div> */}
+                <div className="room-img"><ReviewPhotos reviewNum={content[0].homeStayReviewNum}/></div> 
             </div>
-        
             <div className="review-text-box">
                 {content[0].content} 
             </div>
         </div>
+
+
         <div className="review-box">
             <div className="review-writer-box">
                 <div className="profile-box">
-                    <div className="profile-img"><img src={content[1].loginPhoto}/></div>
+                    <div className="profile-img"><img src={content[0].loginPhoto}/></div>
                     <div className="writer-writeday">
                         <p><b>{content[1].loginId}</b></p>
                         <p>{content[1].writeday}</p>
                     </div>
                 </div>
-
-                <div className="room-img"><img src={content[1].photoName}/></div>
+                <div className="room-img"><ReviewPhotos reviewNum={content[1].homeStayReviewNum}/></div>
             </div>
-        
             <div className="review-text-box">
                 {content[1].content} 
             </div>
         </div>
+
+
         <div className="review-box">
             <div className="review-writer-box">
                 <div className="profile-box">
@@ -79,14 +80,14 @@ function Review(props) {
                         <p>{content[2].writeday}</p>
                     </div>
                 </div>
-
-                <div className="room-img"><img src={content[2].photoName}/></div>
+                <div className="room-img"><ReviewPhotos reviewNum={content[2].homeStayReviewNum}/></div>
             </div>
-        
             <div className="review-text-box">
                 {content[2].content} 
             </div>
         </div>
+
+
         <div className="review-box">
             <div className="review-writer-box">
                 <div className="profile-box">
@@ -96,14 +97,14 @@ function Review(props) {
                         <p>{content[3].writeday}</p>
                     </div>
                 </div>
-
-                <div className="room-img"><img src={content[3].photoName}/></div>
+                <div className="room-img"><ReviewPhotos reviewNum={content[3].homeStayReviewNum}/></div>
             </div>
-        
             <div className="review-text-box">
                 {content[3].content} 
             </div>
         </div>
+
+
         <div className="review-box">
             <div className="review-writer-box">
                 <div className="profile-box">
@@ -113,14 +114,14 @@ function Review(props) {
                         <p>{content[4].writeday}</p>
                     </div>
                 </div>
-
-                <div className="room-img"><img src={content[4].photoName}/></div>
+                <div className="room-img"><ReviewPhotos reviewNum={content[4].homeStayReviewNum}/></div>
             </div>
-        
             <div className="review-text-box">
                 {content[4].content} 
             </div>
         </div>
+
+
         <div className="review-box">
             <div className="review-writer-box">
                 <div className="profile-box">
@@ -130,10 +131,8 @@ function Review(props) {
                         <p>{content[5].writeday}</p>
                     </div>
                 </div>
-
-                <div className="room-img"><img src={content[5].photoName}/></div>
+                <div className="room-img"><ReviewPhotos reviewNum={content[5].homeStayReviewNum}/></div>
             </div>
-        
             <div className="review-text-box">
                 {content[5].content} 
             </div>

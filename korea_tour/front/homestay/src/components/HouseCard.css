@@ -1,0 +1,10 @@
+.starAndReview{
+    display: flex;
+    flex-direction: row;
+}
+
+.goDetail button{
+    float: right;
+    text-align: center;
+    margin: 0.5em;
+}

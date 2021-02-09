@@ -24,6 +24,6 @@ public interface HomeStayReservationService {
 	HomeStayReservationDto getData(int homeStayReservationNum);
 	int getTotalCountOfReservationsForReview(int loginNum);
 	List<JoinMypageReviewWithPhotoDto> getDoneReservationsByUser(HashMap<String, Object> map);
-	int checkReviewWritten(JoinMypageReviewWithPhotoDto dto);
+	void updateReviewWrite(int homeStayReservationNum);
 	void insertMyReservation(HomeStayReservationDto dto);
 }

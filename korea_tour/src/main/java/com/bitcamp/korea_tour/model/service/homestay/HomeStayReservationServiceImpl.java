@@ -103,11 +103,11 @@ public class HomeStayReservationServiceImpl implements HomeStayReservationServic
 		// TODO Auto-generated method stub
 		return mapper.getTotalCountOfReservationsForReview(loginNum);
 	}
-
+	
 	@Override
-	public int checkReviewWritten(JoinMypageReviewWithPhotoDto dto) {
+	public void updateReviewWrite(int homeStayReservationNum) {
 		// TODO Auto-generated method stub
-		return mapper.checkReviewWritten(dto);
+		mapper.updateReviewWrite(homeStayReservationNum);
 	}
 	
 	@Override
@@ -115,5 +115,5 @@ public class HomeStayReservationServiceImpl implements HomeStayReservationServic
 		// TODO Auto-generated method stub
 		mapper.insertMyReservation(dto);
 	}
-	
+
 }

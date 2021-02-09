@@ -28,4 +28,5 @@ public class HomeStayReservationDto {
 	private String birthMonth;	//예약자 생월
 	private String birthDay;	//예약자 생일
 	private int deleted;	//1: 예약자가취소했을때, 0: 아직 취소안함 
+	private int reviewWrite; // 0:아직안씀, 1:후기씀
 }

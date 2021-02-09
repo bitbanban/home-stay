@@ -54,12 +54,8 @@ public class HomeStayListController implements SessionNames {
 	@PostMapping(value="/price/{currentPage}", produces = "application/json;charset=utf8")
 	public JsonList<List<HomeStayListDto>> getHomeStayListByPrice (
 			@PathVariable(value="currentPage") int currentPage,
-			@RequestBody Map<String, Object> json,
-			HttpServletRequest request
+			@RequestBody Map<String, Object> json
 			) {
-		
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto) session.getAttribute(USER);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		start=pagingService.getPagingStart(currentPage, perPage);
@@ -67,6 +63,7 @@ public class HomeStayListController implements SessionNames {
 		Integer maxPeople=Integer.parseInt(json.get("maxPeople").toString());
 		String checkInDay=json.get("checkInDay").toString();
 		String checkOutDay=json.get("checkOutDay").toString();
+		Integer loginNum=Integer.parseInt(json.get("userNum").toString());
 		map.put("start", start);
 		map.put("perPage", perPage);
 		map.put("keyword", keyword);
@@ -79,7 +76,7 @@ public class HomeStayListController implements SessionNames {
 			int homeStayNum=dto.getHomeStayNum();
 			
 			photoName=homeStayListService.getHomeStayPhotoOfList(homeStayNum);
-			if(user!=null) isMarked=homeStayListService.isMarked(homeStayNum, user.getUserNum());
+			if(loginNum!=null) isMarked=homeStayListService.isMarked(homeStayNum, loginNum);
 			
 			countOfReview=homeStayService.countOfHouseAnswer(homeStayNum);
 			if(countOfReview==0) avgOfStar=0.0;
@@ -103,12 +100,8 @@ public class HomeStayListController implements SessionNames {
 	@PostMapping(value="/review/{currentPage}", produces = "application/json;charset=utf8")
 	public JsonList<List<HomeStayListDto>> getHomeStayListByReview (
 			@PathVariable(value="currentPage") int currentPage,
-			@RequestBody Map<String, Object> json,
-			HttpServletRequest request
+			@RequestBody Map<String, Object> json
 			) {
-		
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto) session.getAttribute(USER);
 		
 		Map<String, Object> map=new HashMap<String, Object>();
 		start=pagingService.getPagingStart(currentPage, perPage);
@@ -116,6 +109,7 @@ public class HomeStayListController implements SessionNames {
 		Integer maxPeople=Integer.parseInt(json.get("maxPeople").toString());
 		String checkInDay=json.get("checkInDay").toString();
 		String checkOutDay=json.get("checkOutDay").toString();
+		Integer loginNum=Integer.parseInt(json.get("userNum").toString());
 		map.put("start", start);
 		map.put("perPage", perPage);
 		map.put("keyword", keyword);
@@ -128,7 +122,7 @@ public class HomeStayListController implements SessionNames {
 			int homeStayNum=dto.getHomeStayNum();
 			
 			photoName=homeStayListService.getHomeStayPhotoOfList(homeStayNum);
-			if(user!=null) isMarked=homeStayListService.isMarked(homeStayNum, user.getUserNum());
+			if(loginNum!=null) isMarked=homeStayListService.isMarked(homeStayNum, loginNum);
 			
 			countOfReview=homeStayService.countOfHouseAnswer(homeStayNum);
 			if(countOfReview==0) avgOfStar=0.0;

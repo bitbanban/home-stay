@@ -1,30 +1,23 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { signIn } from '_actions/user';
+
 const clientId =
   '779685065070-lbrojg14lasf8j3g0gcapnctskou7pct.apps.googleusercontent.com';
-
-export default function GoogleButton({ onSocial }) {
-  const onSuccess = async res => {
+let data;
+function GoogleButton({ signIn }) {
+  const sendApi = async res => {
     const name = res.profileObj.name;
     const avatar = res.profileObj.imageUrl;
     const id = res.googleId;
-    const type = 'google';
-    const data = {
+    const type = 'GOOGLE';
+    return (data = {
       name: name,
       id: id,
       type: type,
       img: avatar,
-    };
-    try {
-      const response = await axios.post(
-        `http://localhost:9003/homestays/signin/`,
-        data
-      );
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    });
   };
 
   const onFailure = error => {
@@ -34,8 +27,12 @@ export default function GoogleButton({ onSocial }) {
   return (
     <GoogleLogin
       clientId={clientId}
-      onSuccess={onSuccess}
+      onSuccess={res => sendApi(res).then(signIn)}
       onFailure={onFailure}
     />
   );
 }
+
+export default connect(null, dispatch => ({
+  signIn: () => dispatch(signIn(data)),
+}))(GoogleButton);

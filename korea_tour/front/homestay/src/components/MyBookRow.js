@@ -8,7 +8,7 @@ function MyBookRow(props) {
       const num = props.content.homeStayReservationNum;
       console.log(num);
       const response = await axios.patch(
-        `http://localhost:9003/homestay/reservation/${num}/2`
+        `http://localhost:9003/homestays/reservation/${num}/2`
       );
       props.history.push(`/homestay/host/manage/books`);
     } catch (e) {
@@ -20,7 +20,7 @@ function MyBookRow(props) {
       const num = props.content.homeStayReservationNum;
       console.log(num);
       const response = await axios.patch(
-        `http://localhost:9003/homestay/reservation/${num}/1`
+        `http://localhost:9003/homestays/reservation/${num}/1`
       );
       props.history.push(`/homestay/host/manage/books`);
     } catch (e) {

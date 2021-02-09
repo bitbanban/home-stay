@@ -27,4 +27,5 @@ public interface HomeStayHostService {
 	   void updateApproval(int homeStayReservationNum, int approval);
 	   JoinHomeStayDetailDto getHomeStayData(int userNum);
 	   JoinHomeStayDetailDto getHomeStayDetailData(int userNum);
+	   JoinHomeStayDetailDto getHomeStayAllData(int userNum);
 }

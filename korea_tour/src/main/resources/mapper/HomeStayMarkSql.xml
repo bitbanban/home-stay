@@ -5,10 +5,12 @@
 		select count(*) from homeStayMark where loginNum=#{loginNum}
 	</select>
 	<select id="getMarkListByUser" parameterType="hashmap" resultType="joinmark">
-		select a.homeStayMarkNum, a.homeStayNum, a.title, a.hostNum, b.name as hostName, a.addr1, a.addr2 from 
+		select i.homeStayMarkNum, i.homeStayNum, i.title, i.hostNum, i.hostName, i.addr1, i.addr2,j.photoName as homeStayPhoto 
+		from (select a.homeStayMarkNum, a.homeStayNum, a.title, a.hostNum, b.name as hostName, a.addr1, a.addr2 from 
 		(select m.homeStayMarkNum, m.userNum as customNum, m.homeStayNum, h.userNum as hostNum, h.title, h.addr1, h.addr2, h.content, h.approval, h.price, h.open  
 		from homeStayMark m left join homeStay h on m.homeStayNum=h.homeStayNum where m.loginNum=#{loginNum}) a 
-        join user b on a.hostNum = b.userNum 
+        join user b on a.hostNum = b.userNum) i 
+        left join homeStayPhoto j on i.homeStayNum = j.homeStayNum group by i.homeStayMarkNum 
         order by homeStayMarkNum desc limit #{start},#{perPage}
 	</select>
 	

@@ -3,9 +3,11 @@ import axios from 'axios';
 
 const ReservationContent = () =>{
 
-       const [contents,setContents] = useState(null);
+       const [content,setContent] = useState(null);
        const [loading,setLoading] = useState(false);
-   
+       
+       let reservationUrl = window.location.href;
+       let reservationNum = reservationUrl.split('detail:')[1];
 
    useEffect(() =>{
        // async를 사용하는 함수 따로 선언
@@ -13,9 +15,10 @@ const ReservationContent = () =>{
            setLoading(true);
            try {
                const response = await axios.get(
-                   'http://localhost:9003/homeStays/mypage/reservation/detail/1'
+                   'http://localhost:9003/homestays/mypage/reservation/detail/'+reservationNum
                );
-               setContents(response.data.content);
+               setContent(response.data);
+               console.log(response.data)
            } catch (e) {
                console.log(e);
            }
@@ -28,25 +31,36 @@ const ReservationContent = () =>{
        return <p>대기중....</p>;
    }
    //articles 값이 설정되지 않았을때
-   if (!contents) {
+   if (!content) {
     return null;
    }
    // articles 값이 유효할때
+   let approval = content.approval;
    return (
+
     <div>
-        {contents.map(content => (
-          <li key={content}>
-          {content.customName} ({content.email1})
-        </li>
-        ))}
-    <p>예약자명 : </p>
-    <p>e-mail :</p>
-    <p>신청날짜 :</p>
-    <p>체크인 :</p>
-    <p>체크아웃 :</p>
-    <p>인원수 :</p>
-    <p>승인여부 :</p>
-    <p>총금액: </p>
+    <b>예약자명 : </b>{content.customName}
+    <br/>
+    <b>e-mail : </b>{content.email1}@{content.email2}
+    <br/>
+    <b>신청날짜 : </b>{content.writeday}
+    <br/>
+    <b>체크인 : </b>{content.checkInDay}
+    <br/>
+    <b>체크아웃 : </b>{content.checkOutDay}
+    <br/>
+    <b>인원수 : </b>{content.numberOfPeople}
+    <br/>
+    <b>예약여부 : </b>
+        {approval===0
+        ? 
+        "예약대기"
+        : (approval===1
+            ? "예약취소"
+            :"예약승인")
+         } 
+    <br/>
+    <b>총금액 : </b>{content.totalPrice}
     </div>
 
     

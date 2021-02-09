@@ -3,9 +3,6 @@ package com.bitcamp.korea_tour.controller.restapi.homestay;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bitcamp.korea_tour.controller.restapi.tour.PlaceController;
-import com.bitcamp.korea_tour.model.JoinPlaceListDto;
-import com.bitcamp.korea_tour.model.UserDto;
-import com.bitcamp.korea_tour.model.homestay.HomeStayMarkDto;
 import com.bitcamp.korea_tour.model.homestay.JoinHomeStayMarkDto;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayListService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayMarkService;
@@ -64,7 +57,6 @@ public class HomeStayMarkController implements SessionNames {
 			Double avgOfStars = homeStayListService.getAvgOfStar(homeStayNum);
 			mdto.setAvgOfStars(avgOfStars);
 		}
-		System.out.println(marks);
 		
 		return new JsonMypageMarkList(marks, totalCount, totalPage);
 	}
@@ -73,15 +65,15 @@ public class HomeStayMarkController implements SessionNames {
 	
 	//디테일에서 즐겨찾기 확인하기
 	@GetMapping("/{homeStayNum}/mark")
-	public int checkMyMark(@PathVariable(value = "homeStayNum")int homeStayNum,
-							HttpServletRequest request) {
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto)session.getAttribute(USER);
-		int loginNum = user.getUserNum();
+	public int checkMyMark(
+			@PathVariable(value = "homeStayNum")int homeStayNum,
+			@RequestParam(value = "userNum") Integer userNum 		
+							) {
+		System.out.println("디테일즐겨찾기 로그인넘 : "+userNum);
 		
-		System.out.println("디테일즐겨찾기 로그인넘 : "+loginNum);
+		if(userNum!=null) return homeStayMarkService.countOfMyMark(homeStayNum, userNum);
 		
-		return homeStayMarkService.countOfMyMark(homeStayNum, loginNum);
+		return 0;
 		
 	}
 	
@@ -94,12 +86,10 @@ public class HomeStayMarkController implements SessionNames {
 	@PostMapping("/mark")
 	public String insertMark(
 			@RequestParam(value="homeStayNum") int homeStayNum,
-			HttpServletRequest request
+			@RequestParam(value="userNum") Integer userNum
 			) {
 		
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto)session.getAttribute(USER);
-		if(user!=null) homeStayMarkService.insertMark(homeStayNum, user.getUserNum());
+		if(userNum!=null) homeStayMarkService.insertMark(homeStayNum, userNum);
 		
 		return "즐겨찾기 추가 성공";
 	}
@@ -113,12 +103,10 @@ public class HomeStayMarkController implements SessionNames {
 	@DeleteMapping("/mark")
 	public String deleteMark(
 			@RequestParam(value="homeStayNum") int homeStayNum,
-			HttpServletRequest request
+			@RequestParam(value="userNum") Integer userNum
 			) {
 		
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto)session.getAttribute(USER);
-		if(user!=null) homeStayMarkService.deleteMark(homeStayNum, user.getUserNum());
+		if(userNum!=null) homeStayMarkService.deleteMark(homeStayNum, userNum);
 		
 		return "즐겨찾기 취소 성공";
 	}

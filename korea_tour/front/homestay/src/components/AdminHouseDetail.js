@@ -13,7 +13,7 @@ function AdminHouseDetail({match,history}) {
   const detailnum=num.split("=")[1];
   const handleConfirm = async () => {
     try {
-      const url=`http://localhost:9003/homestays/admin/${num}/approve`
+      const url=`http://localhost:9003/homestays/admin/${detailnum}/approve`
       console.log(url);
       const response = await axios.patch(
         url
@@ -28,9 +28,9 @@ function AdminHouseDetail({match,history}) {
   const handleDeny = async () => {
     try {
      
-      console.log(num);
+      console.log(detailnum);
       const response = await axios.patch(
-        `http://localhost:9003/homestays/admin/${num}/deny`
+        `http://localhost:9003/homestays/admin/${detailnum}/deny`
       );
       history.push(`/admin/host/list?currentPage=1`);
     } catch (e) {
@@ -44,12 +44,12 @@ function AdminHouseDetail({match,history}) {
             {/* header */}
             {/* HouseName -> AdminHouseName 으로 custom을 하였으나 custom시 HouseName이  최종본이 아니였음 수정필요 */}
             {/* 집이름,즐겨찾기,별점 */}
-            <HouseName />
-            <HouseAddr />
-                <Button variant="contained" size="small" onClick={handleConfirm}>
-                승인
-                </Button>
-                 <Button variant="contained" color="secondary" onClick={handleDeny}>
+            <HouseName /> 
+            <HouseAddr /> <br></br>
+                <Button variant="contained" size="small" onClick={handleConfirm} >
+                승인 
+                </Button > {'   '}
+                 <Button variant="contained" size="small" color="secondary" onClick={handleDeny}>
                 거절
                 </Button>
             {/* 사진 DetailPhotos */}

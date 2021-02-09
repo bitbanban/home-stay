@@ -7,7 +7,16 @@ body{
     justify-content: space-between;
 }
 
-#share, #favorite{
+.infoBox__sub{
+    display: flex;
+}
+
+#houseStar__span{
+    margin-right: 20px;
+}
+
+
+#share, .favorite{
     cursor: pointer;
     vertical-align: middle;
     
@@ -20,7 +29,7 @@ body{
 #star{
     margin-right: 5px;
 }
-#share, #favorite{
+#share, .favorite{
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -28,3 +37,6 @@ body{
 #mapicon{
     margin-right: 5px;
 }
+
+
+

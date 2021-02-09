@@ -100,12 +100,12 @@ public class HomeStayController {
 		return new HomeDetailMap(addr1, xpos, ypos);
 	}
 	
-	//최대 인원수(출력)
-	@GetMapping("/homestays/{homeStayNum}/maxpeople")
-	public JsonMaxPeople getHomeStayMaxPeople(@PathVariable(value = "homeStayNum")int homeStayNum) {
+	//최대 인원수, 가격(출력)
+	@GetMapping("/homestays/{homeStayNum}/maxpeopleprice")
+	public JsonMaxPeopleNPrice getHomeStayMaxPeople(@PathVariable(value = "homeStayNum")int homeStayNum) {
 		int maxPeople = s.getHomeStayMaxPeople(homeStayNum);
-		
-		return new JsonMaxPeople(maxPeople);
+		int price = s.getHomeStayPrice(homeStayNum);
+		return new JsonMaxPeopleNPrice(maxPeople, price);
 	}
 	
 	//예약불가날짜 표시하기(출력)
@@ -127,13 +127,6 @@ public class HomeStayController {
 	public JsonHostName getHostName(@PathVariable(value = "homeStayNum")int homeStayNum) {
 		String name = s.getHostName(homeStayNum);
 		return new JsonHostName(name);
-	}
-	
-	//집 가격 출력하기
-	@GetMapping("/homestays/{homeStayNum}/price")
-	public JsonHomePrice getHomeStayPrice(@PathVariable(value = "homeStayNum")int homeStayNum) {
-		int price = s.getHomeStayPrice(homeStayNum);
-		return new JsonHomePrice(price);
 	}
 	
 ////////////////////////////////////////////////////////////////////////////	
@@ -187,8 +180,9 @@ public class HomeStayController {
 	
 	@Data
 	@AllArgsConstructor
-	static class JsonMaxPeople{
+	static class JsonMaxPeopleNPrice{
 		private int maxPeople;
+		private int price;
 	}
 	
 	@Data
@@ -210,9 +204,4 @@ public class HomeStayController {
 		private String name;
 	}
 	
-	@Data
-	@AllArgsConstructor
-	static class JsonHomePrice{
-		private int price;
-	}
 }

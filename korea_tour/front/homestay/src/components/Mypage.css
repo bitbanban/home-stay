@@ -1,0 +1,14 @@
+.mypage {
+    position: relative;
+    top:64px;
+}
+
+.mypage-btn {
+    width: 100vw;
+    
+}
+
+.click-btn {
+    float: left;
+    flex: 100%;
+}

@@ -19,7 +19,7 @@ public class HomeStayMarkServiceImpl implements HomeStayMarkService {
 	private final HomeStayMarkMapper homeStayMarkMapper;
 	
 	@Override
-	public void insertMark(@Param("homeStayNum") int homeStayNum, int loginNum) {
+	public void insertMark(@Param("homeStayNum") int homeStayNum, @Param("userNum") int loginNum) {
 		Map<String, Integer> map=new HashMap<String, Integer>();
 		map.put("homeStayNum", homeStayNum);
 		map.put("loginNum", loginNum);
@@ -27,7 +27,7 @@ public class HomeStayMarkServiceImpl implements HomeStayMarkService {
 	}
 	
 	@Override
-	public void deleteMark(@Param("homeStayNum") int homeStayNum, int loginNum) {
+	public void deleteMark(@Param("homeStayNum") int homeStayNum, @Param("userNum") int loginNum) {
 		Map<String, Integer> map=new HashMap<String, Integer>();
 		map.put("homeStayNum", homeStayNum);
 		map.put("loginNum", loginNum);

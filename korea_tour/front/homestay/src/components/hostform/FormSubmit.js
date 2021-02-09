@@ -42,7 +42,7 @@ function FormSubmit(props) {
       setLoading(true);
       try {
         const response = await axios
-          .post(`http://localhost:9003/homestays/house?userNum=228`, data)
+          .post(`http://localhost:9003/homestays/house`, data)
           .then(() => {
             alert('완료!');
           });
