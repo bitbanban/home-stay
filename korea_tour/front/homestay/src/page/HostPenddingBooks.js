@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import MyBookRow from 'components/MyBookRow';
+import store from '_store/Store';
 import { withRouter } from 'react-router-dom';
 function HostPenddingBooks({ history }) {
   const [contents, setContents] = useState(null);
   const [loading, setLoading] = useState(false);
+  const num = store.getState().userReducer.num;
 
   useEffect(() => {
     const fatchData = async (userNum, currentPage) => {
@@ -21,7 +23,7 @@ function HostPenddingBooks({ history }) {
       }
       setLoading(false);
     };
-    fatchData(200, 1);
+    fatchData(num, 1);
   }, []);
 
   if (loading) {

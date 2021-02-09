@@ -23,6 +23,7 @@ export function signIn(APIdata) {
       );
   };
 }
+
 export function signOut() {
   return {
     type: SIGN_OUT,

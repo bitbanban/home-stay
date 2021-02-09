@@ -6,7 +6,7 @@ import NavBar from 'page/NavBar';
 function App() {
   return (
     <React.Fragment>
-      <BrowserRouter>
+      <BrowserRouter basename="/homestay">
         <NavBar />
         <RouteMain />
       </BrowserRouter>

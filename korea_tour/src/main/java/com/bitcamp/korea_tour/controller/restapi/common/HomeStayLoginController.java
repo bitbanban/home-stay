@@ -57,14 +57,16 @@ public class HomeStayLoginController {
 		//호스트인지 여부
 		if(userService.ifHost(userNum)==1) host="Y";
 		else host="N";
+		String userName=user.getName();
 		
-		return new JsonData(userNum, host);
+		return new JsonData(userNum, userName, host);
 	}
 	
 	@Data
 	@AllArgsConstructor
 	static class JsonData {
 		private int userNum;
+		private String name;
 		private String host;
 	}
 }

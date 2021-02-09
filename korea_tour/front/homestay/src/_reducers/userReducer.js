@@ -14,9 +14,8 @@ export default function userReducer(state = initialState, action) {
       const userNum = action.userData.userNum;
       const host = action.userData.host;
       const avatar = action.APIdata.img;
-      const name = action.APIdata.nickname;
+      const name = action.userData.name;
       const auth = true;
-      console.log(action);
       return {
         ...initialState,
         num: userNum,
