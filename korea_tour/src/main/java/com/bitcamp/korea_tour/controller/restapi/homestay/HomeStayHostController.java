@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -145,7 +147,19 @@ public class HomeStayHostController {
 		hsas.updateHomeStay(dto, homeStayNum);
 		hsas.updateHomeStayDetail(dto, homeStayNum);
 	}
-
+	/**
+	 * 홈스테이 오픈여부 수정
+	 * @param userNum
+	 * @param map
+	 */
+	@PatchMapping("/homestays/house/{userNum}")
+	public void updateHouseOpen(@PathVariable(value = "userNum") int userNum,
+			@RequestBody Map<String, Object> map) {
+		int open=Integer.parseInt(map.get("open").toString());
+		hsas.updateHomeStayOpen(userNum, open);
+	}
+			
+	
 
 
 	/**
@@ -160,6 +174,8 @@ public class HomeStayHostController {
 		return new JsonData(dto);
 		
 	}
+	
+	
 	
 
 

@@ -6,10 +6,11 @@ import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import "./ReviewInput.css"
 
 
-const ReviewFileUpload = () => {
+const ReviewFileUpload = (props) => {
 
     const uploadImage = e => {
-        const uploadFile = e.target.files;
+        let uploadFile = props.photo; 
+        uploadFile = e.target.files;
         const imageFile = new FormData();
         if (uploadFile.length >4 ) {
           alert('사진은 4장 이하만 가능합니다!');
@@ -25,6 +26,7 @@ const ReviewFileUpload = () => {
                 <input accept="image/*" 
                 id="icon-button-file" 
                 type="file" 
+                name="photos"
                 onChange={uploadImage}
                 style={{ display: 'none' }}
                 multiple />

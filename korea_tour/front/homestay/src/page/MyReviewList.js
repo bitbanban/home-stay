@@ -11,15 +11,8 @@ const MyReviewList =()=>{
     const [loading,setLoading] = useState(false);
     const [user,setUser] = useState({
         num: '',
-    });
-
-    store.subscribe(() => {
-        setUser({
-          num: store.getState().userReducer.num,
-        });
-      });
-    
-      let userNum=user.num;
+    }); 
+      let userNum=store.getState().userReducer.num;
       console.log(userNum);
     useEffect(() =>{
     // async를 사용하는 함수 따로 선언
@@ -62,6 +55,7 @@ const MyReviewList =()=>{
               
               {reviewList.map((reviewList,index)=>
                 (<MyRow
+                  ReservationNum = {reviewList.homeStayReservationNum}
                   checkIn ={reviewList.checkInDay}
                   checkOut ={reviewList.checkOutDay}
                   homeStayNum = {reviewList.homeStayNum}

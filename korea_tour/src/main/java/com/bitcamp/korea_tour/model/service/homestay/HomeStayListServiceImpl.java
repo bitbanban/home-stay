@@ -24,8 +24,8 @@ public class HomeStayListServiceImpl implements HomeStayListService {
 	}
 	
 	@Override
-	public int getTotalHomeStayList() {
-		return homeStayListMapper.getTotalHomeStayList();
+	public int getTotalHomeStayList(Map<String, Object> map) {
+		return homeStayListMapper.getTotalHomeStayList(map);
 	}
 	
 	@Override

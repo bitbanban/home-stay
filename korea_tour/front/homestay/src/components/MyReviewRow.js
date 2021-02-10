@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 const MyReviewRow  =(props)=> {
 
     let date1= new Date();
-    let date2= new Date(props.checkIn);
+    let date2= new Date(props.checkOut);
     let photo= 'http://localhost:9003/homeStayImg/'+ props.housePhoto;
-    console.log(date1>date2);
+    console.log(date1-date2);
         return (
             <div className="myReview-Row"> 
               <div className="myReview-title">
@@ -19,7 +19,7 @@ const MyReviewRow  =(props)=> {
                      ? 
                      <button onClick={() => {
                         props.history.push(
-                          `/homestay/mypage/reviewwrite:${props.homeStayNum}`
+                          `/mypage/review/${props.homeStayNum}/${props.ReservationNum}`
                         );
                       }}>리뷰작성</button>
                      : (props.review===1

@@ -18,6 +18,22 @@
 		JOIN place ON place.contentId=coursePlace.contentId 
 	</sql>
 	
+	<!-- 내 코스 리스트(페이징) -->
+   <select id="getMyCourseNumList" parameterType="HashMap" resultType="course">
+        SELECT * FROM course 
+        WHERE userNum=#{loginNum}
+        ORDER BY courseNum ASC
+      LIMIT #{start},#{perPage};
+    </select>
+    
+   <!-- 내 코스 데이터(관광지정보 포함) -->
+   <select id="getMyCoursePlaceData" parameterType="int" resultType="joincourse">
+      SELECT * FROM course 
+      INNER JOIN coursePlace ON course.courseNum=coursePlace.courseNum 
+      AND coursePlace.orderNum=1 AND coursePlace.courseNum=#{courseNum}
+      INNER JOIN place ON place.contentId=coursePlace.contentId
+   </select>
+	
 	
 	<!-- mypage-->
 	<!-- 내코스 목록보기 ->(사진은 어차피 1번만가져오면 되니까 orderNum으로 구분) -->

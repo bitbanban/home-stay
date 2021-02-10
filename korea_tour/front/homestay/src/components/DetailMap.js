@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './HouseDetailCss/DetailMap.css';
 import axios from 'axios';
+import { URL } from '_utils/api';
 
 const { kakao } = window;
 
@@ -8,7 +9,7 @@ const DetailMap = () => {
 
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     const [content, setContent] = useState(null);
     const [loading,setLoading] = useState(false);
@@ -26,7 +27,7 @@ const DetailMap = () => {
           setError(null);
           setLoading(true);
           const response = await axios.get(
-              `http://localhost:9003/homestays/${courseNum}/addr`
+              `${URL}/${houseNum}/addr`
           );
           setContent(response.data.addr1);
           console.log(response.data);

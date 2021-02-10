@@ -20,13 +20,17 @@ import com.bitcamp.korea_tour.model.UserDto;
 import com.bitcamp.korea_tour.model.homestay.HomeStayReservationDto;
 import com.bitcamp.korea_tour.model.homestay.HomeStayReviewDto;
 import com.bitcamp.korea_tour.model.homestay.HomeStayReviewPhotoDto;
+import com.bitcamp.korea_tour.model.homestay.HomeStayStarDto;
 import com.bitcamp.korea_tour.model.homestay.JoinHomeStayReservationDto;
 import com.bitcamp.korea_tour.model.homestay.JoinHomeStaySummary;
 import com.bitcamp.korea_tour.model.homestay.JoinMypageReviewWithPhotoDto;
 import com.bitcamp.korea_tour.model.homestay.JoinReservationDetail;
+import com.bitcamp.korea_tour.model.service.homestay.HomeStayPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReservationService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewService;
+import com.bitcamp.korea_tour.model.service.homestay.HomeStayService;
+import com.bitcamp.korea_tour.model.service.homestay.HomeStayStarService;
 import com.bitcamp.korea_tour.model.service.login.setting.SessionNames;
 import com.bitcamp.korea_tour.model.service.paging.PagingService;
 
@@ -39,9 +43,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/homestays")
 public class HomeStayMyPageController implements SessionNames{
 
+	private final HomeStayService hs;
 	private final HomeStayReservationService reservationService;
 	private final HomeStayReviewService reviewService;
 	private final HomeStayReviewPhotoService reviewPhotoService;
+	private final HomeStayStarService starService;
+	private final HomeStayPhotoService ps;
 	private final PagingService pagingService;
 	int totalCount = 0;
 	int start = 0;
@@ -69,6 +76,8 @@ public class HomeStayMyPageController implements SessionNames{
 		private int homeStayReviewNum;
 		private int hostNum;
 		private int homeStayNum;
+		private String homeStayPhoto; 
+		private String hostName;
 		private int relevel;
 		private int regroup;
 		private int loginNum;
@@ -77,6 +86,12 @@ public class HomeStayMyPageController implements SessionNames{
 		private String content;
 		private Date writeday;
 		private int deleted;
+		private double cleanliness;
+		private double communication;
+		private double checkIn;
+		private double accuracy;
+		private double location;
+		private double satisfactionForPrice;
 		private List<HomeStayReviewPhotoDto> reviewPhotos;
 	}
 	
@@ -246,6 +261,8 @@ public class HomeStayMyPageController implements SessionNames{
 			int homeStayReviewNum = rdto.getHomeStayReviewNum();
 			int hostNum = rdto.getUserNum();
 			int homeStayNum = rdto.getHomeStayNum();
+			String homeStayPhoto = ps.getHomeStayPhoto(homeStayNum);
+			String hostName = hs.getHostName(homeStayNum);
 			int relevel = rdto.getRelevel();
 			int regroup = rdto.getRegroup();
 			String loginId = rdto.getLoginId();
@@ -253,9 +270,25 @@ public class HomeStayMyPageController implements SessionNames{
 			String content = rdto.getContent();
 			Date writeday = rdto.getWriteday();
 			int deleted = rdto.getDeleted();
+			double cleanliness = 0;
+			double communication = 0;
+			double checkIn = 0;
+			double accuracy = 0;
+			double location = 0;
+			double satisfactionForPrice = 0;
+			if(starService.getDataByHomeStayReviewNum(homeStayReviewNum) != null) {
+				HomeStayStarDto sdto = starService.getDataByHomeStayReviewNum(homeStayReviewNum);
+				cleanliness = sdto.getCleanliness();
+				communication = sdto.getCommunication();
+				checkIn = sdto.getCheckIn();
+				accuracy = sdto.getAccuracy();
+				location = sdto.getLocation();
+				satisfactionForPrice = sdto.getSatisfactionForPrice();
+			}
 			List<HomeStayReviewPhotoDto> reviewPhotos = reviewPhotoService.getPhotosByHomeStayReviewNum(homeStayReviewNum);
-			JsonReviewWithPhotos review = new JsonReviewWithPhotos(homeStayReviewNum, hostNum, homeStayNum,
-					relevel, regroup, loginNum, loginId, loginPhoto, content, writeday, deleted, reviewPhotos);
+			JsonReviewWithPhotos review = new JsonReviewWithPhotos(homeStayReviewNum, hostNum, homeStayNum, homeStayPhoto, hostName, relevel, regroup, loginNum,
+					loginId, loginPhoto, content, writeday, deleted, cleanliness, communication, checkIn, accuracy, 
+					location, satisfactionForPrice, reviewPhotos);
 			reviews.add(review);
 		}
 		
@@ -264,13 +297,14 @@ public class HomeStayMyPageController implements SessionNames{
 	
 	/**
 	 * 유저 후기 상세
-	 */
-	@GetMapping("/mypage/review/{homeStayReviewNum}")
+	 * @GetMapping("/mypage/review/{homeStayReviewNum}")
 	public JsonReviewWithPhotos getReviewDetail(
 			@PathVariable(name="homeStayReviewNum") int homeStayReviewNum) {
 		HomeStayReviewDto rdto = reviewService.getReviewByHomeStayReviewNum(homeStayReviewNum);
 		int hostNum = rdto.getUserNum();
 		int homeStayNum = rdto.getHomeStayNum();
+		String homeStayPhoto = ps.getHomeStayPhoto(homeStayNum);
+		String hostName = hs.getHostName(homeStayNum);
 		int relevel = rdto.getRelevel();
 		int regroup = rdto.getRegroup();
 		int loginNum = rdto.getLoginNum();
@@ -279,8 +313,26 @@ public class HomeStayMyPageController implements SessionNames{
 		String content = rdto.getContent();
 		Date writeday = rdto.getWriteday();
 		int deleted = rdto.getDeleted();
+		double cleanliness = 0;
+		double communication = 0;
+		double checkIn = 0;
+		double accuracy = 0;
+		double location = 0;
+		double satisfactionForPrice = 0;
+		if(starService.getDataByHomeStayReviewNum(homeStayReviewNum) != null) {
+			HomeStayStarDto sdto = starService.getDataByHomeStayReviewNum(homeStayReviewNum);
+			cleanliness = sdto.getCleanliness();
+			communication = sdto.getCommunication();
+			checkIn = sdto.getCheckIn();
+			accuracy = sdto.getAccuracy();
+			location = sdto.getLocation();
+			satisfactionForPrice = sdto.getSatisfactionForPrice();
+		}
 		List<HomeStayReviewPhotoDto> reviewPhotos = reviewPhotoService.getPhotosByHomeStayReviewNum(homeStayReviewNum);
-		return new JsonReviewWithPhotos(homeStayReviewNum, hostNum, homeStayNum, relevel, regroup, loginNum,
-				loginId, loginPhoto, content, writeday, deleted, reviewPhotos);
+		return new JsonReviewWithPhotos(homeStayReviewNum, hostNum, homeStayNum, homeStayPhoto, hostName, relevel, regroup, loginNum,
+				loginId, loginPhoto, content, writeday, deleted, cleanliness, communication, checkIn, accuracy, 
+				location, satisfactionForPrice, reviewPhotos);
 	}
+	 */
+	
 }

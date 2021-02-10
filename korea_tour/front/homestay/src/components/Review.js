@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HouseDetailCss/Review.css';
 import ReviewPhotos from './ReviewPhotos';
+import { URL } from '_utils/api';
 
 function Review(props) {
     const [content, setContent] = useState(null);
@@ -9,7 +10,7 @@ function Review(props) {
     const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getReviews = async () => {
@@ -18,7 +19,7 @@ function Review(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/allreview`
+                    `${URL}/${houseNum}/allreview`
                 );
                 setContent(response.data.reviews);
             } catch(e) {

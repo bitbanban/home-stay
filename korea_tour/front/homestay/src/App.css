@@ -1,0 +1,31 @@
+.Route {
+    width:85%;
+    margin: auto;
+    
+}
+
+:root {
+    --font-xxl: 3rem;
+    --font-xl: 2.5rem;
+    --font-large: 2rem;
+    --font-medium: 1.4rem;
+    --font-small: 1rem;
+    --btn-padding: 0.25em 0.8em;
+    --input-padding: 0.25em 0 0.25em 0.6em;
+}
+
+button {
+    padding: var(--btn-padding);
+    border-radius: var(--font-large);
+    font-family: regular;
+    border: none;
+    cursor: pointer;
+}
+  
+input {
+    border-radius: var(--font-large);
+    padding: var(--input-padding);
+    border: 1px solid var(--a-color);
+    font-family: regular;
+}
+  

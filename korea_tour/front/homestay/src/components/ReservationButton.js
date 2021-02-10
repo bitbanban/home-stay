@@ -29,7 +29,7 @@ export default function ReservationButton(props) {
       className={classes.button}
       startIcon={<ListIcon />}
     >
-       <Link to="/homestay/mypage/Reservation"> 
+       <Link to="/mypage/reservation"> 
       목록으로
       </Link>
     </Button>

@@ -2,11 +2,12 @@
     margin: 0 auto;
     width: 55vw;
     border-bottom: 3px solid gray;
+    clear: both;
 
 }
 
 .reservationTable th {
-    border: 1px solid gray;
+    border-bottom: 3px solid gray;
 }
 
 #writeDay {

@@ -4,6 +4,7 @@ import axios from 'axios';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './HouseDetailCss/Carousel.css';
+import { URL } from '_utils/api';
 
 function HouseCarousel(props) {
     let settings = {
@@ -21,7 +22,7 @@ function HouseCarousel(props) {
 
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getModalPhotos = async () => {
@@ -30,7 +31,7 @@ function HouseCarousel(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/photos`
+                    `${URL}/${houseNum}/photos`
                 );
                 setContent(response.data.photo);
             } catch(e) {

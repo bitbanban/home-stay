@@ -1,3 +1,25 @@
+#ReservationConfirm__mainBox{
+    width: 70%;
+    margin: auto;
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
 #ReservationConfirm__Box{
     display: flex;
+}
+
+#reservationPerson{
+    width: 45%;
+}
+
+#reservationInfo{
+    width: 40%;
+}
+
+#reservationBtn button{
+    margin: auto;
 }

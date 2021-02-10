@@ -18,4 +18,10 @@ public class HomeStayStarServiceImpl implements HomeStayStarService{
 		// TODO Auto-generated method stub
 		mapper.insertStar(dto);
 	}
+
+	@Override
+	public HomeStayStarDto getDataByHomeStayReviewNum(int homeStayReviewNum) {
+		// TODO Auto-generated method stub
+		return mapper.getDataByHomeStayReviewNum(homeStayReviewNum);
+	}
 }

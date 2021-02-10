@@ -5,12 +5,13 @@ import DetailPhotos from './DetailPhotos';
 import HouseCarousel from './HouseCarousel';
 import HouseHeader from './HouseHeader';
 import ReviewList from './ReviewList';
+import './HouseDetailCss/HouseName.css';
 
 
 function HouseDetail(props) {
     return (
-        <div>
-            홈디테일
+        <div id="HouseDetail__mainBox">
+            
             {/* header */}
 
             {/* 집이름,즐겨찾기,별점 */}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { URL } from '_utils/api';
 
 function HouseIntro(props) {
 
@@ -17,7 +18,7 @@ function HouseIntro(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${houseNum}/content`
+                    `${URL}/${houseNum}/content`
                 );
                 setContent(response.data);
             } catch(e) {

@@ -37,16 +37,19 @@ public class HomeStayHostServiceImpl implements HomeStayHostService {
 	}
 	
 	@Override
-	public int getTotalCount(int homestayNum) {
+	public int getTotalCount(int userNum, int approval) {
 		// TODO Auto-generated method stub
-		return mapper.getTotalCount(homestayNum);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("userNum",  userNum);
+		map.put("approval", approval);
+		return mapper.getTotalCount(map);
 	}
 
 	@Override
-	public List<HomeStayReservationDto> getAllReservation(int homestayNum,int approval, int start, int perPage) {
+	public List<HomeStayReservationDto> getAllReservation(int userNum,int approval, int start, int perPage) {
 		// TODO Auto-generated method stub
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("homestayNum", homestayNum);
+		map.put("userNum", userNum);
 		map.put("approval", approval);
 		map.put("start", start);
 		map.put("perPage", perPage);
@@ -176,6 +179,15 @@ public class HomeStayHostServiceImpl implements HomeStayHostService {
 	public JoinHomeStayDetailDto getHomeStayAllData(int userNum) {
 		// TODO Auto-generated method stub
 		return mapper.getHomeStayAllData(userNum);
+	}
+
+	@Override
+	public void updateHomeStayOpen(int userNum, int open) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("userNum", userNum);
+		map.put("open", open);
+		mapper.updateHomeStayOpen(map);
 	}
 
 

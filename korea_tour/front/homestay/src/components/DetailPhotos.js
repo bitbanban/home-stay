@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './HouseDetailCss/DetailPhotos.css';
 import HouseModal from './HouseModal';
+import { URL } from '_utils/api';
 
 function DetailPhotos(props) {
     const [content, setContent] = useState(null);
@@ -20,7 +21,7 @@ function DetailPhotos(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${houseNum}/photos`
+                    `${URL}/${houseNum}/photos`
                 );
                 setContent(response.data.photo);
             } catch(e) {

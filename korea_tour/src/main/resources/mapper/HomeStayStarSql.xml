@@ -7,4 +7,8 @@
 		((SELECT userNum from homeStay WHERE homeStayNum=#{homeStayNum}), #{homeStayNum}, #{homeStayReviewNum},
 		#{cleanliness}, #{communication}, #{checkIn}, #{accuracy}, #{location}, #{satisfactionForPrice})
 	</insert>
+	
+	<select id="getDataByHomeStayReviewNum" parameterType="int" resultType="homestaystar">
+		select * from homeStayStar where homeStayReviewNum=#{homeStayReviewNum}
+	</select>
 </mapper>

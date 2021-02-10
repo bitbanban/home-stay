@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
+import { URL } from '_utils/api';
 
 function ReviewStarAvg(props) {
     const [content, setContent] = useState(null);
@@ -11,7 +12,7 @@ function ReviewStarAvg(props) {
     const [value, setValue] = React.useState(2);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getStarAvg = async () => {
@@ -20,7 +21,7 @@ function ReviewStarAvg(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/staravg`
+                    `${URL}/${houseNum}/staravg`
                 );
                 setContent(response.data);
             } catch(e) {

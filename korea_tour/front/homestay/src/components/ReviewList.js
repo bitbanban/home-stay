@@ -6,6 +6,7 @@ import axios from 'axios';
 import ReviewStarAvg from './ReviewStarAvg';
 import Button from '@material-ui/core/Button';
 import ReviewModal from './ReviewModal';
+import { URL } from '_utils/api';
 
 
 function ReviewList(props) {
@@ -18,7 +19,7 @@ function ReviewList(props) {
     
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getStar = async () =>{
@@ -27,7 +28,7 @@ function ReviewList(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/star`
+                    `${URL}/${houseNum}/star`
                     );
                     setContent(response.data);
                     console.log(response.data);
@@ -69,7 +70,7 @@ function ReviewList(props) {
 
             {
                 modal === true
-                ? <ReviewModal setModal={setModal} />
+                ? <ReviewModal />
                 : null
             }
             <br/>

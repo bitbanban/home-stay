@@ -83,8 +83,8 @@
 	<!-- 숙소 예약하기 -->
 	<insert id="insertMyReservation" parameterType="homestayreservation">
 		INSERT INTO homeStayReservation 
-		(userNum,homeStayNum,loginNum,checkInDay,checkOutDay,numberOfPeople,totalPrice,approval,writeday,name,email1,email2,gender,birthYear,birthMonth,birthDay,deleted)
+		(userNum,homeStayNum,loginNum,checkInDay,checkOutDay,numberOfPeople,totalPrice,approval,writeday,name,email1,email2,hp,gender,birthYear,birthMonth,birthDay,deleted)
 		VALUES
-		((SELECT userNum from homeStay WHERE homeStayNum=#{homeStayNum}),#{homeStayNum},#{loginNum},#{checkInDay},#{checkOutDay},#{numberOfPeople},#{totalPrice},0,now(),#{name},#{email1},#{email2},#{gender},#{birthYear},#{birthMonth},#{birthDay},0)
+		((SELECT userNum from homeStay WHERE homeStayNum=#{homeStayNum}),#{homeStayNum},#{loginNum},#{checkInDay},#{checkOutDay},#{numberOfPeople},#{totalPrice},0,now(),#{name},#{email1},#{email2},#{hp},#{gender},#{birthYear},#{birthMonth},#{birthDay},0)
 	</insert>
 </mapper>

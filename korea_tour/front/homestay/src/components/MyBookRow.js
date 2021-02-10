@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { URL } from '_utils/api';
 import Button from '@material-ui/core/Button';
 
 import axios from 'axios';
@@ -7,10 +8,8 @@ function MyBookRow(props) {
     try {
       const num = props.content.homeStayReservationNum;
       console.log(num);
-      const response = await axios.patch(
-        `http://localhost:9003/homestays/reservation/${num}/2`
-      );
-      props.history.push(`/homestay/host/manage/books`);
+      const response = await axios.patch(`${URL}/reservation/${num}/2`);
+      props.history.push(`/host/manage/books`);
     } catch (e) {
       console.log(e);
     }
@@ -19,9 +18,7 @@ function MyBookRow(props) {
     try {
       const num = props.content.homeStayReservationNum;
       console.log(num);
-      const response = await axios.patch(
-        `http://localhost:9003/homestays/reservation/${num}/1`
-      );
+      const response = await axios.patch(`${URL}/reservation/${num}/1`);
       props.history.push(`/host/manage/books`);
     } catch (e) {
       console.log(e);

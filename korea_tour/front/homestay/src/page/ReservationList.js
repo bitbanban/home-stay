@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import store from '_store/Store';
+import { URL } from '_utils/api';
 import "components/ReservationList.css";
 import Row from "components/ReservationRow";
 
@@ -7,14 +9,65 @@ const ReservationList =()=>{
     const [list,setList] = useState(null);
     const [loading,setLoading] = useState(false);
 
-    
+    let loginNum=store.getState().userReducer.num;
+    console.log(loginNum);
+
+
+    const yesData = async ()=> {
+        try {
+            const response = await axios.get(
+                `${URL}/mypage/reservations/approved/${loginNum}/1`
+            );
+            setList(response.data.reservations);
+            console.log(response.data.reservations);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const waitData = async ()=> {
+        try {
+            const response = await axios.get(
+                `${URL}/mypage/reservations/wating/${loginNum}/1`
+            );
+            setList(response.data.reservations);
+            console.log(response.data.reservations);
+        } catch (e) {
+            console.log(e);
+        }
+    };  
+
+    const cancleData = async ()=> {
+        try {
+            const response = await axios.get(
+                `${URL}/mypage/reservations/cancel/${loginNum}/1`
+            );
+            setList(response.data.reservations);
+            console.log(response.data.reservations);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const fatchData = async ()=> {
+        try {
+            const response = await axios.get(
+                `${URL}/mypage/reservations/all/${loginNum}/1`
+            );
+            setList(response.data.reservations);
+            console.log(response.data.reservations);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+ 
     useEffect(() =>{
     // async를 사용하는 함수 따로 선언
     const fatchData = async ()=> {
         setLoading(true);
         try {
             const response = await axios.get(
-                'http://localhost:9003/homestays/mypage/reservations/all/686/1'
+                `${URL}/mypage/reservations/all/${loginNum}/1`
             );
             setList(response.data.reservations);
             console.log(response.data.reservations);
@@ -37,6 +90,10 @@ const ReservationList =()=>{
      let appoval = list.appoval;
         return (
             <div>
+                    <button onClick={fatchData}>전체보기</button>
+                    <button onClick={yesData}>예약승인</button>
+                    <button onClick={waitData}>예약대기</button>
+                    <button onClick={cancleData}>예약취소</button>
                 <table className="reservationTable">
                     <caption><h1>예약확인</h1></caption>
                     <thead>
@@ -56,6 +113,7 @@ const ReservationList =()=>{
                             checkIn = {list.checkInDay}
                             checkOut = {list.checkOutDay}
                             approval = {list.approval}
+                            cancle ={list.deleted}
                             key ={index}
                             />)
                             )}

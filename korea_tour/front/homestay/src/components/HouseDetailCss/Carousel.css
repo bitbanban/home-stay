@@ -14,6 +14,7 @@
 
 .slick-prev{
     left: 15%;
+    z-index: 1200;
 }
 .slick-next{
     right: 15%;

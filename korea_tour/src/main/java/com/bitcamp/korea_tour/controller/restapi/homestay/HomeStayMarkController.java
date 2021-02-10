@@ -112,4 +112,3 @@ public class HomeStayMarkController implements SessionNames {
 	}
 	
 }
-

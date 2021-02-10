@@ -23,6 +23,7 @@ public class HomeStayReservationDto {
 	private String name;	// 예약자 이름
 	private String email1;	// email
 	private String email2;	// 도메인주소
+	private String hp;	// 핸드폰번호
 	private String gender;	// 예약자 성별
 	private String birthYear;	//예약자 생년
 	private String birthMonth;	//예약자 생월

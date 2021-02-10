@@ -11,7 +11,7 @@ import com.bitcamp.korea_tour.model.homestay.HomeStayListDto;
 
 public interface HomeStayListService {
 	List<HomeStayListDto> getAllHomeStayList(Map<String, Object> map);
-	int getTotalHomeStayList();
+	int getTotalHomeStayList(Map<String, Object> map);
 	String getHomeStayPhotoOfList(int homeStayNum);
 	int isMarked(int homeStayNum, @Param("userNum")int loginNum);
 	Double getAvgOfStar(int homeStayNum);

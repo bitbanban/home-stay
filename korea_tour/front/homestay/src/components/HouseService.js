@@ -11,6 +11,7 @@ import Wifi from '@material-ui/icons/Wifi'; //와이파이
 import PetsIcon from '@material-ui/icons/Pets'; //반려동물동반
 import SmokingRoomsIcon from '@material-ui/icons/SmokingRooms'; //흡연
 import SmokeFreeIcon from '@material-ui/icons/SmokeFree'; //금연
+import { URL } from '_utils/api';
 
 function HouseService(props) {
 
@@ -19,7 +20,7 @@ function HouseService(props) {
     const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getIcon = async () => {
@@ -28,7 +29,7 @@ function HouseService(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/facility`
+                    `${URL}/${houseNum}/facility`
                 );
                 setContent(response.data);
             } catch(e) {
