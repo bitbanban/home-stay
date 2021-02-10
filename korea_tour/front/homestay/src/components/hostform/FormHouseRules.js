@@ -76,6 +76,17 @@ export default function FormHouseRules(props) {
         }}
         onChange={handleChange}
       />
+      <TextField
+        id="maxPeople"
+        label="수용인원"
+        type="number"
+        name="maxPeople"
+        value={houseRules.maxPeople}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        onChange={handleChange}
+      />
       <FormAmenities amenity={props.amenity} />
     </div>
   );

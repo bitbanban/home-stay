@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { URL } from '_utils/api';
 import { useHistory, useParams } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
@@ -15,9 +16,7 @@ function HostBookDetail(props) {
     const fatchData = async bookNum => {
       setLoading(true);
       try {
-        const response = await axios.get(
-          `http://localhost:9003/homestays/reservation/${bookNum}`
-        );
+        const response = await axios.get(`${URL}/reservation/${bookNum}`);
         setData(response.data.detail);
         console.log(response.data);
       } catch (e) {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { URL } from '_utils/api';
 
 
 
@@ -10,7 +11,7 @@ function HouseName(props) {
     const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
     //console.log(courseNum);
 
     
@@ -21,7 +22,7 @@ function HouseName(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/name`
+                    `${URL}/${houseNum}/name`
                     );
                     setContent(response.data);
                     console.log(response.data);

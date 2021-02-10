@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StarIcon from '@material-ui/icons/Star';
 import axios from 'axios';
+import { URL } from '_utils/api';
 
 function HouseStarAvg(props) {
     const [content, setContent] = useState(null);
@@ -8,7 +9,7 @@ function HouseStarAvg(props) {
     const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getStar = async () =>{
@@ -17,7 +18,7 @@ function HouseStarAvg(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/star`
+                    `${URL}/${houseNum}/star`
                     );
                     setContent(response.data);
                     console.log(response.data);

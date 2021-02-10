@@ -34,7 +34,7 @@
    </insert>      
    <update id="updateHomeStay" parameterType="hashmap">
    	update homeStay set title=#{dto.title}, addr1=#{dto.addr1},addr2=#{dto.addr2},content=#{dto.content},approval=0,checkIn1=#{dto.checkIn1},checkIn2=#{dto.checkIn2},
-      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},xpos=#{dto.xpos},ypos=#{dto.ypos},price=#{dto.price},open=#{dto.open}
+      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},xpos=#{dto.xpos},ypos=#{dto.ypos},price=#{dto.price}
       where homeStayNum=#{homeStayNum}
    </update>
    <update id="updateHomeStayDetail" parameterType="hashmap">
@@ -43,11 +43,25 @@
    elecProduct=#{dto.elecProduct},kitchen=#{dto.kitchen},bathroom=#{dto.bathroom},parking=#{dto.parking}
     where homeStayNum=#{homeStayNum}
    </update>
-   <select id="getTotalCount" parameterType="int" resultType="int">
-   	select count(*) from homeStayReservation where homestayNum=#{homestayNum} and deleted=0
+   <update id="updateHomeStayOpen" parameterType="hashmap">
+	   update homeStay set open=#{open} where userNum=#{userNum}
+   </update>
+   <select id="getTotalCount" parameterType="hashmap" resultType="int">
+   	select count(*) from homeStayReservation where userNum=#{userNum} and deleted=0 and approval=#{approval}
    </select>
    <select id="getAllReservation" parameterType="hashmap" resultType="homestayreservation">
-   	select * from homeStayReservation where homestayNum=#{homestayNum} and approval=#{approval} and deleted=0 order by homeStayReservationNum asc Limit #{start},#{perPage}
+   	select * from homeStayReservation where userNum=#{userNum} and approval=#{approval} and deleted=0
+   	<if test = 'approval==1'>
+   		and checkOutDay > now() - interval 1 day
+   	</if>
+   	<if test = 'approval==0'>
+    	and checkInDay > now() - interval 1 day
+   	 </if>
+   	 <if test = 'approval==2'>
+   	 	and checkinDay > now() - interval 1 day
+   	 </if>
+   	 
+   	  order by homeStayReservationNum asc Limit #{start},#{perPage}
    </select>
    <select id="getApprovalCount" parameterType="int" resultType="int">
     select count(*) from homeStayReservation where homeStayNum=#{homeStayNum} and approval=2 and deleted=0

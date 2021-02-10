@@ -3,15 +3,17 @@ import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import CalendarCheckIn from './CalendarCheckIn';
+import { URL } from '_utils/api';
 
 function AddPerson(props) {
   const [count, setCount] = useState(1);
   const [content, setContent] = useState(null);
-    const [loading,setLoading] = useState(false);
-    const [error, setError] = useState(null);
+  const [loading,setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getMaxPeople = async () => {
@@ -20,7 +22,7 @@ function AddPerson(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/maxpeople`
+                    `${URL}/${houseNum}/maxpeopleprice`
                 );
                 setContent(response.data);
             } catch(e) {
@@ -35,6 +37,7 @@ function AddPerson(props) {
     if (error) return <p>에러가 발생했습니다.!!</p>;
     if (!content) return null;
   return (
+    <>
     <div>
       <span>인원 수</span>
       <IconButton
@@ -61,6 +64,9 @@ function AddPerson(props) {
       </IconButton>
       <span id="maxPeople">최대 ({content.maxPeople}명)</span>
     </div>
+
+    <div><CalendarCheckIn count={count} price={content.price}/></div>
+  </>
   );
 }
 

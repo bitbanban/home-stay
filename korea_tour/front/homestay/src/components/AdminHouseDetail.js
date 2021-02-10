@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { URL } from '_utils/api';
 import { withRouter } from 'react-router-dom';
 import DetailInfo from './DetailInfo';
 import DetailMap from './DetailMap';
@@ -13,13 +14,13 @@ function AdminHouseDetail({match,history}) {
   const detailnum=num.split("=")[1];
   const handleConfirm = async () => {
     try {
-      const url=`http://localhost:9003/homestays/admin/${detailnum}/approve`
+      const url=`${URL}/admin/${detailnum}/approve`
       console.log(url);
       const response = await axios.patch(
         url
       ).then(res=>{console.log(res)});
-     
-       history.push(`/admin/host/list?currentPage=1`);
+      console.log("승인완료")
+       
     } catch (e) {
       console.log(e);
     }
@@ -30,9 +31,9 @@ function AdminHouseDetail({match,history}) {
      
       console.log(detailnum);
       const response = await axios.patch(
-        `http://localhost:9003/homestays/admin/${detailnum}/deny`
+        `${URL}/admin/${detailnum}/deny`
       );
-      history.push(`/admin/host/list?currentPage=1`);
+      console.log("거절완료")
     } catch (e) {
       console.log(e);
     }

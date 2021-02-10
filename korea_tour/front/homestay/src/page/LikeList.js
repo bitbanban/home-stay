@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import store from '_store/Store';
+
 import ListRow from "components/ListRow";
 
 const LikeList  =()=> {
@@ -8,14 +10,14 @@ const LikeList  =()=> {
 
     const [likeList,setLikeList] = useState(null);
     const [loading,setLoading] = useState(false);
-
+      let userNum=store.getState().userReducer.num;
    useEffect(() =>{
        // async를 사용하는 함수 따로 선언
        const fatchData = async ()=> {
            setLoading(true);
            try {
                const response = await axios.get(
-                   'http://localhost:9003/homestays/mypage/marks/681/1'
+                   `http://localhost:9003/homestays/mypage/marks/${userNum}/1`
                );
                setLikeList(response.data.marks);
                console.log(response.data.marks)
@@ -52,7 +54,7 @@ const LikeList  =()=> {
                {likeList.map((likeList,index)=>
               (<ListRow
                 likeNum ={likeList.homeStayMarkNum}
-                homeStayNum = {likeList.homeStayNum}
+                homeNum = {likeList.homeStayNum}
                 title = {likeList.title}
                 hostNum ={likeList.hostNum}
                 hostName = {likeList.hostName}

@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { URL } from '_utils/api';
 import { SIGN_IN, SIGN_OUT } from './types';
 
 export function signIn(APIdata) {
-  let url = `http://localhost:9003/homestays/signin/`;
+  let url = `${URL}/signin`;
   return function (dispatch) {
     axios
       .post(url, APIdata)

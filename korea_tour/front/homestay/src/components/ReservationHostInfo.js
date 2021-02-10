@@ -7,7 +7,7 @@ const ReservationHostInfo = () => {
     const [loading,setLoading] = useState(false);
     
     let reservationUrl = window.location.href;
-    let reservationNum = reservationUrl.split('detail:')[1];
+    let reservationNum = reservationUrl.split('reservation/')[1];
 
     useEffect(() =>{
     // async를 사용하는 함수 따로 선언
@@ -34,10 +34,11 @@ const ReservationHostInfo = () => {
    if (!hostInfo) {
     return null;
    }
+   let photo= 'http://localhost:9003/homeStayImg/'+ hostInfo.photoName;
    // articles 값이 유효할때 
     return (
           <div>
-            <img src={hostInfo.photoName}/>
+            <img src={photo}/>
             <b>{hostInfo.homTitle}</b>
             <b>{hostInfo.hostName}</b>
             <b>{hostInfo.addr2}</b>

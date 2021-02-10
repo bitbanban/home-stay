@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { URL } from '_utils/api';
 import axios from 'axios';
 import store from '_store/Store';
 
@@ -27,10 +28,10 @@ function FormSubmit(props) {
     wifi: amenities.wifi ? 1 : 0,
     smokingOk: amenities.smokingOk ? 1 : 0,
     bathroom: amenities.bathroom ? 1 : 0,
-    parking: amenities.parkin ? 1 : 0,
+    parking: amenities.parking ? 1 : 0,
     towel: amenities.towel ? 1 : 0,
-    breakfast: amenities.breackfast ? 1 : 0,
-    aircon: amenities.aricon ? 1 : 0,
+    breakfast: amenities.breakfast ? 1 : 0,
+    aircon: amenities.aircon ? 1 : 0,
     elecProduct: amenities.elecProduct ? 1 : 0,
     kitchen: amenities.kitchen ? 1 : 0,
     title: houseIntro.title,
@@ -43,11 +44,9 @@ function FormSubmit(props) {
     const sendData = async () => {
       setLoading(true);
       try {
-        const response = await axios
-          .post(`http://localhost:9003/homestays/house`, data)
-          .then(() => {
-            alert('완료!');
-          });
+        const response = await axios.post(`${URL}/house`, data).then(() => {
+          alert('완료!');
+        });
         console.log(data);
       } catch (e) {
         console.log(e);
@@ -57,10 +56,9 @@ function FormSubmit(props) {
     sendData();
   }, []);
   useEffect(() => {
-    let url = `http://localhost:9003/homestays/photo/228`;
-
     // async를 사용하는 함수 따로 선언
-    const sendPhoto = async () => {
+    const sendPhoto = async num => {
+      let url = `${URL}/photo/${parseInt(num)}`;
       setLoading(true);
       try {
         const response = await axios.post(url, imageFile).then(() => {
@@ -72,7 +70,7 @@ function FormSubmit(props) {
       }
       setLoading(false);
     };
-    sendPhoto();
+    sendPhoto(num);
   }, []);
 
   if (loading) {

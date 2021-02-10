@@ -26,6 +26,11 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+.profile-img img{
+    width: 80px;
+    height: 80px;
+    border-radius: 150px;
+}
 
 .room-img{
     width: 100px;

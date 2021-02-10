@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RoomIcon from '@material-ui/icons/Room';
+import { URL } from '_utils/api';
 
 function HouseAddr(props) {
 
@@ -9,7 +10,7 @@ function HouseAddr(props) {
     const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getAddress = async () =>{
@@ -18,7 +19,7 @@ function HouseAddr(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/name`
+                    `${URL}/${houseNum}/name`
                     );
                     setContent(response.data);
                     console.log(response.data);

@@ -7,7 +7,7 @@ const ReservationContent = () =>{
        const [loading,setLoading] = useState(false);
        
        let reservationUrl = window.location.href;
-       let reservationNum = reservationUrl.split('detail:')[1];
+       let reservationNum = reservationUrl.split('reservation/')[1];
 
    useEffect(() =>{
        // async를 사용하는 함수 따로 선언

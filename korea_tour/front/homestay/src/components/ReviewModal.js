@@ -3,6 +3,7 @@ import axios from 'axios';
 import './HouseDetailCss/Review.css';
 import './HouseDetailCss/ReviewList.css';
 import ReviewPhotos from './ReviewPhotos';
+import { URL } from '_utils/api';
 
 
 function ReviewModal(props) {
@@ -11,7 +12,7 @@ function ReviewModal(props) {
     const [error, setError] = useState(null);
 
     let linkurl = document.location.href;
-    let courseNum = linkurl.split('=')[1];
+    let houseNum = linkurl.split('=')[1];
 
     useEffect( () => {
         const getReviews = async () => {
@@ -20,7 +21,7 @@ function ReviewModal(props) {
                 setError(null);
                 setLoading(true);
                 const response = await axios.get(
-                    `http://localhost:9003/homestays/${courseNum}/allreview`
+                    `${URL}/${houseNum}/allreview`
                 );
                 setContent(response.data.reviews);
             } catch(e) {

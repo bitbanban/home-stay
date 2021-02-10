@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { URL } from '_utils/api';
 import MyBookRow from 'components/MyBookRow';
 import store from '_store/Store';
 
@@ -15,7 +16,7 @@ function HostMyBooks({ history }) {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:9003/homestays/reservation/${userNum}/${approval}/${currentPage}`
+          `${URL}/reservation/${userNum}/${approval}/${currentPage}`
         );
         setContents(response.data.list);
       } catch (e) {

@@ -22,7 +22,7 @@ public class HomeStayReservationListController {
 
 	int totalCount = 0;
 	int start = 0;
-	int perPage = 0;
+	int perPage = 15;
 	int totalPage = 0;
 	
 	/**
@@ -40,16 +40,18 @@ public class HomeStayReservationListController {
 	  @PathVariable(value="approval") int approval,
 	  @PathVariable(value="userNum") int userNum){
 	  System.out.println(userNum);
-	  int homestayNum = hhs.getHomeStayNum2(userNum);
 	  
-	  totalCount=hhs.getTotalCount(homestayNum);
+	  totalCount=hhs.getTotalCount(userNum, approval);
 	  start=pagingService.getPagingData(totalCount, currentPage).get("start");
 	  perPage=pagingService.getPagingData(totalCount, currentPage).get("perPage");
 	  totalPage=pagingService.getPagingData(totalCount,
 	  currentPage).get("totalPage");
 	  
-	  
-	  List<HomeStayReservationDto> list = hhs.getAllReservation(homestayNum, approval, start,
+	  System.out.println("totalcount"+totalCount);
+	  System.out.println("start"+start);
+	  System.out.println("perPage"+perPage);
+	  System.out.println("totalPage"+totalPage);
+	  List<HomeStayReservationDto> list = hhs.getAllReservation(userNum, approval, start,
 	  perPage);
 	  
 	  
