@@ -1,6 +1,4 @@
-# 라온나드리 
-[사이트로 이동](http://raonnadri.tk)
-___
+# [라온나드리](http://raonnadri.tk)
 ## 팀명 
 비트오대삼 
 
