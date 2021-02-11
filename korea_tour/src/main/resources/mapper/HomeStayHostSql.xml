@@ -3,9 +3,9 @@
 <mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayHostMapper">
    <insert id="insertHomeStay" parameterType="joinhomestaydetail">
       insert into homeStay (userNum,title,addr1,addr2,content,approval,checkIn1,checkIn2,
-      checkOut1,checkOut2,xpos,ypos,price,open)
+      checkOut1,checkOut2,price,open)
       values (#{userNum},#{title},#{addr1},#{addr2},#{content},0,#{checkIn1},#{checkIn2},
-      #{checkOut1},#{checkOut2},#{xpos},#{ypos},#{price},1)
+      #{checkOut1},#{checkOut2},#{price},1)
    </insert>
     <select id="getHomeStayNum" resultType="int" >
  	 select MAX(homeStayNum) from homeStay 
@@ -34,7 +34,7 @@
    </insert>      
    <update id="updateHomeStay" parameterType="hashmap">
    	update homeStay set title=#{dto.title}, addr1=#{dto.addr1},addr2=#{dto.addr2},content=#{dto.content},approval=0,checkIn1=#{dto.checkIn1},checkIn2=#{dto.checkIn2},
-      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},xpos=#{dto.xpos},ypos=#{dto.ypos},price=#{dto.price}
+      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},price=#{dto.price}
       where homeStayNum=#{homeStayNum}
    </update>
    <update id="updateHomeStayDetail" parameterType="hashmap">
