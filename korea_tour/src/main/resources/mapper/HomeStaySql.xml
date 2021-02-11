@@ -61,7 +61,7 @@
 	
 	<!-- 집 위치 지도표시 -->
 	<select id="getHomeStayMap" parameterType="int" resultType="homestay">
-	SELECT addr1,xpos,ypos FROM homeStay WHERE homeStayNum=#{homeStayNum}
+	SELECT addr1 FROM homeStay WHERE homeStayNum=#{homeStayNum}
 	</select>
 	
 	<!-- 최대 인원수(출력) -->
