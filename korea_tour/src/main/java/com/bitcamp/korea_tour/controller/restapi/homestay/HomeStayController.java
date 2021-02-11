@@ -95,9 +95,7 @@ public class HomeStayController {
 	public HomeDetailMap getHomeStayMap(@PathVariable(value = "homeStayNum")int homeStayNum) {
 		HomeStayDto dto = s.getHomeStayMap(homeStayNum);
 		String addr1 = dto.getAddr1();
-		String xpos = dto.getXpos();
-		String ypos = dto.getYpos();
-		return new HomeDetailMap(addr1, xpos, ypos);
+		return new HomeDetailMap(addr1);
 	}
 	
 	//최대 인원수, 가격(출력)
@@ -174,8 +172,6 @@ public class HomeStayController {
 	@AllArgsConstructor
 	static class HomeDetailMap{
 		private String addr1;
-		private String xpos;
-		private String ypos;
 	}
 	
 	@Data
