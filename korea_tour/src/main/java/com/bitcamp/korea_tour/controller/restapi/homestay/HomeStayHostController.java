@@ -84,23 +84,37 @@ public class HomeStayHostController {
 
 			int homeStayNum = dto.getHomeStayNum();
 			int userNum = hsas.getUserNum(homeStayNum);
-			JoinHomeStayDetailDto ddto = hsas.getHomeStayDetailData(userNum);
+			JoinHomeStayDetailDto ddto = hsas.getHomeStayAllData(userNum);
 			String hEmail1 = ddto.getEmail1();
 			String hEmail2 = ddto.getEmail2();
 			String hp = ddto.getHp();
 			String hp1 = hp.substring(0,3);
 			String hp2 = hp.substring(3,7);
 			String hp3 = hp.substring(7,11);
+			String addr1 = ddto.getAddr1();
+			String addr2 = ddto.getAddr2();
+			String checkIn1 = ddto.getCheckIn1();
+			String checkIn2 = ddto.getCheckIn2();
+			String checkOut1 = ddto.getCheckOut1();
+			String checkOut2 = ddto.getCheckOut2();
+			
+			String ci = (checkIn2.equals("0"))?"00":checkIn2;
+			String co = (checkOut2.equals("0"))?"00":checkOut2;
 			//메일제목
 			if(approval==2) {
 				message.setSubject(name+"님의 예약이 완료되었습니다.");
 
 				message.setText("아래의 예약 내용을 확인해 주세요" +"\n"+"\n"
+						+"예약자 명 : "+name+"\n"
 						+"체크인 날짜 : "+cid+"\n"
 						+"체크아웃 날짜 : "+cod+"\n"
 						+ "예약 인원 : "+numberOfPeople+"명"+"\n"
 						+"총 금액 : "+price+"원"+"\n"
-						+"예약 날짜 : "+wd+"\n"+"\n"
+						+"예약 날짜 : "+wd+"\n"
+						+"주소 : " + addr1+" "+addr2+"\n"
+						+"체크인 시간 : " + checkIn1+"시"+" "+ci+"분"+"\n"
+						+"체크아웃 시간 : " + checkOut1+"시"+" "+co+"분"+"\n"+"\n"
+						
 						+" 자세한 문의는 아래의 연락처로 주시길 바랍니다."+"\n" +"\n"
 						+"호스트 연락처" +"\n"
 						+"Email : "+hEmail1+"@"+hEmail2+"\n"
@@ -122,7 +136,7 @@ public class HomeStayHostController {
 		} catch (MessagingException e) 	{
 			System.out.println("알수없는 오류로 인한 메일 전송 실패");
 		} catch (StringIndexOutOfBoundsException e) {
-			System.out.println("메일전송 실패. 호스트나 회원 정보에 잘못입력된값 있음");
+			System.out.println("메일전송 실패. 호스트나 회원 정보에 잘못입력된값 있음(호스트 핸드폰 번호 11자리 인지 확인)");
 		} catch (NullPointerException e) {
 			System.out.println("메일전송 실패. 호스트나 회원 정보에 비어있는곳 있음");
 		}
