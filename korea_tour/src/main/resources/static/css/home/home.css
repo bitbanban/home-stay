@@ -113,6 +113,11 @@ div.notice {
   height: 250px;
   margin: auto;
 }
+
+div.notice h2 {
+  margin: 0 1% 2% 0;
+  display: inline-block;
+}
 /* 코스검색 */
 div.course-search {
   width: 100%;
@@ -174,10 +179,12 @@ table {
   border-collapse: collapse;
 }
 table th {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid var(--a-color);
+  text-align: start;
+  font-size: var(--font-medium);
 }
 table td {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--a-color);
 }
 table .tb__title {
   width: 65%;
@@ -188,7 +195,13 @@ table .tb__writeday {
 table .tb__views {
   width: 10%;
 }
+table tr {
+  height: 2.2rem;
+}
 
+a {
+  color: black;
+}
 @keyframes slide {
   0% {
     background-image: url(/img/slide-bg-05.jpg);
