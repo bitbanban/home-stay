@@ -53,8 +53,8 @@
 	</select>
 	
 	<!-- 유저의 리뷰목록출력 -->
-	<select id="getReviewByloginNum" parameterType="hashmap" resultType="homestayreview">
-		select * from homeStayReview where loginNum=#{loginNum} limit #{start},#{perPage}
+	<select id="getReviewByloginNum" parameterType="int" resultType="homestayreview">
+		select * from homeStayReview where loginNum=#{loginNum}
 	</select>
 	
 	<!-- 유저 리뷰 상세 -->

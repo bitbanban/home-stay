@@ -26,7 +26,7 @@ public interface HomeStayReviewMapper {
 		int getReviewNum(HashMap<String, Object> map);
 		int ifReply(Map<String, Integer> map);
 		int checkReviewWritten(int homeStayReservationNum);
-		List<HomeStayReviewDto> getReviewByloginNum(HashMap<String, Object> map);
+		List<HomeStayReviewDto> getReviewByloginNum(int loginNum);
 		int getTotalCountOfReviewsByLoginNum(int loginNum);
 		HomeStayReviewDto getReviewByHomeStayReviewNum(int homeStayReviewNum);
 }

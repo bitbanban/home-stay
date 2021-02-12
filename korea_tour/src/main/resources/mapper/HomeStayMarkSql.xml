@@ -11,7 +11,7 @@
 		from homeStayMark m left join homeStay h on m.homeStayNum=h.homeStayNum where m.loginNum=#{loginNum}) a 
         join user b on a.hostNum = b.userNum) i 
         left join homeStayPhoto j on i.homeStayNum = j.homeStayNum group by i.homeStayMarkNum 
-        order by homeStayMarkNum desc limit #{start},#{perPage}
+        order by homeStayMarkNum desc
 	</select>
 	
 	<!-- 즐겨찾기 추가 -->
