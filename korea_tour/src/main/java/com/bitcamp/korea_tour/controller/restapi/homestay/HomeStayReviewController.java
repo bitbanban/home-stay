@@ -151,7 +151,7 @@ public class HomeStayReviewController implements SessionNames{
 					filePath = "no";
 					break;
 				}else {
-					filePath = s3Service.upload(file);
+					filePath = s3Service.upload(file, basePath, fileName);
 					System.out.println(filePath);
 				}
 //

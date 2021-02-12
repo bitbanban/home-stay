@@ -43,10 +43,6 @@ public class S3Service {
                 .build();
     }
 
-    public String upload(MultipartFile file) throws IOException {
-        return upload(file, "", file.getOriginalFilename());
-    }
-
     public String upload(MultipartFile file, String dirName, String fileName) throws IOException {
         String filePath = dirName+"/"+fileName;
 
