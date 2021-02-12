@@ -1,3 +1,15 @@
+#aws s3
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIA5YQIMEDRTMF4ZCMH
+      secretKey: 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
+    s3:
+      bucket: raonnadri
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
 #tomacat port
 server:
   port: 9003

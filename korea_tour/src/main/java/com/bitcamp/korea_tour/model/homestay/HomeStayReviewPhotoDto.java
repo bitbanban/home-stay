@@ -12,5 +12,4 @@ public class HomeStayReviewPhotoDto {
 	private int homeStayReviewNum;
 	private String photoName;
 	
-
 }
