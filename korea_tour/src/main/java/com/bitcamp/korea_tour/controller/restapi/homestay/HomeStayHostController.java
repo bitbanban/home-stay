@@ -2,6 +2,7 @@ package com.bitcamp.korea_tour.controller.restapi.homestay;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -221,7 +222,8 @@ public class HomeStayHostController {
 				 * upload = writer.changeFilename(file.getOriginalFilename());
 				 * writer.writeFile(file, upload, path);
 				 */
-
+		
+		
 		String basePath = "homeStayImg";
 		for(MultipartFile file: images) {
 			String filePath = "";
@@ -231,8 +233,9 @@ public class HomeStayHostController {
 				String fileName = file.getOriginalFilename();
 				Calendar cal = Calendar.getInstance();
 				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
-				String changeFilename = "home" +day+ "_" + fileName;
-				filePath = s3Service.upload(file, basePath, changeFilename);
+				String changeFilename ="home" +day+ "_" + fileName;
+				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
+				System.out.println(changeFilename);
 				System.out.println(filePath);
 			}
 			
@@ -259,6 +262,7 @@ public class HomeStayHostController {
 		if(num != -1) {
 			num+=4;
 			String changeDeleteFile = deleteFile.substring(num);
+			System.out.println(changeDeleteFile);
 			s3Service.delete(changeDeleteFile);
 			hshps.deletePhoto(homeStayPhotoNum);
 		}else {
