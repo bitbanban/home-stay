@@ -246,7 +246,7 @@ function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
             list[i].getElementsByTagName('contentid')[0].childNodes[0].nodeValue
           }'/>`;
         } else {
-          n += `<span class='thumbnail'>대표이미지 없음 🖼 </span>`;
+          n += `<img src='/img/noimage.png' class='thumbnail' />`;
         }
         n += `<div class='info'><span class='title' contentid='${
           list[i].getElementsByTagName('contentid')[0].childNodes[0].nodeValue
@@ -313,3 +313,19 @@ function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
 
   xhr.send(null);
 }
+
+document.querySelector('#closeMenu').addEventListener('click', e => {
+  document.querySelector('.categories').style.display = 'none';
+});
+
+document.querySelector('#showMenu').addEventListener('click', e => {
+  document.querySelector('.categories').style.display = 'block';
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1024) {
+    document.querySelector('.categories').style.display = 'block';
+  } else {
+    document.querySelector('.categories').style.display = 'none';
+  }
+});

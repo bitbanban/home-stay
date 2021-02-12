@@ -232,6 +232,10 @@ a:visited {
   .place-list {
     width: 100%;
   }
+
+  .place {
+    display: none;
+  }
   .info .title {
     font-size: var(--font-medium);
     width: 80%;
