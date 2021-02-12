@@ -27,27 +27,27 @@ function hostList(currentPage){
 
     xhr.onreadystatechange = function(){
         if (this.readyState == 4) {
-	    let data = JSON.parse(this.responseText);
-    	let item = data.list;
+       let data = JSON.parse(this.responseText);
+       let item = data.list;
             console.log(item);
 
         let a="";
-		for(let i=0;i<item.length;i++){
-			a+= `<tr class="board_list_row">`
-			
-					a+= `<td class="board_list_data">${item[i].homeStayNum}</td>`
-					a+=`<td class="board_list_data">${item[i].userName}</td>`
-					//포트가 달라서 연결이 안됨 추후 수정필요
-					a+=`<td class="board_list_data" num="${item[i].homeStayNum}"><a target="_blank" href="http://localhost:3000/homestay/admin/house/num=${item[i].homeStayNum}">${item[i].title}</td>`
-					a+=`<td class="board_list_data">${item[i].addr1}</td>`
-		}
-	document.querySelector(".list-low").innerHTML=a;
-	
-	
-	
-	
-	
-	 const totalPage = data.totalPage; //
+      for(let i=0;i<item.length;i++){
+         a+= `<tr class="board_list_row">`
+         
+               a+= `<td class="board_list_data">${item[i].homeStayNum}</td>`
+               a+=`<td class="board_list_data">${item[i].userName}</td>`
+               //포트가 달라서 연결이 안됨 추후 수정필요
+               a+=`<td class="board_list_data" num="${item[i].homeStayNum}"><a target="_blank" href="http://localhost:3000/admin/house/${item[i].homeStayNum}">${item[i].title}</td>`
+               a+=`<td class="board_list_data">${item[i].addr1}</td>`
+      }
+   document.querySelector(".list-low").innerHTML=a;
+   
+   
+   
+   
+   
+    const totalPage = data.totalPage; //
       if (endPage > totalPage) {
         endPage = totalPage;
       }
@@ -72,8 +72,8 @@ function hostList(currentPage){
     }
 const delBtns = document.querySelectorAll(".delete-btn");
 for(const btn of delBtns){
-	btn.addEventListener("click",function(){
-	 const userNum=btn.parentElement.getAttribute("num");
+   btn.addEventListener("click",function(){
+    const userNum=btn.parentElement.getAttribute("num");
  deleteMember(userNum);
 
  console.log(userNum);
@@ -83,5 +83,3 @@ for(const btn of delBtns){
            
 }
 }
-
-
