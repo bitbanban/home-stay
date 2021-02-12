@@ -18,8 +18,6 @@ public class JoinHomeStayDetailDto {
 	private String checkIn2;
 	private String checkOut1;
 	private String checkOut2;
-	private String xpos;
-	private String ypos;
 	private int price;
 	private int open;
 	

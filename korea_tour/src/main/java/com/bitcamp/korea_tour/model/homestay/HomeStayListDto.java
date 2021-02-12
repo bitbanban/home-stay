@@ -7,9 +7,8 @@ import lombok.Data;
 @Data
 @Alias("homestaylist")
 public class HomeStayListDto {
-	
+
 	private int homeStayNum;
-	private int userNum;
 	private String title;
 	private String addr1;
 	private int price;
@@ -17,5 +16,5 @@ public class HomeStayListDto {
 	private int isMarked;
 	private int countOfReview;
 	private Double avgOfStar;
-	
+
 }

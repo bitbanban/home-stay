@@ -35,30 +35,21 @@ public class HomeStayMarkController implements SessionNames {
 	static class JsonMypageMarkList {
 		private List<JoinHomeStayMarkDto> marks;
 		private int totalCount;
-		private int totalPage;
 	}
 	
-	@GetMapping("/mypage/marks/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/marks/{loginNum}")
 	public JsonMypageMarkList getMarkList(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage
+			@PathVariable(name="loginNum") int loginNum
 			) {
 		int totalCount = homeStayMarkService.getTotalCountOfMarkByUser(loginNum);
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("perPage", perPage);
-		map.put("loginNum", loginNum);
-		List<JoinHomeStayMarkDto> marks = homeStayMarkService.getMarkListByUser(map);
+		List<JoinHomeStayMarkDto> marks = homeStayMarkService.getMarkListByUser(loginNum);
 		for(JoinHomeStayMarkDto mdto: marks) {
 			int homeStayNum = mdto.getHomeStayNum();
 			Double avgOfStars = homeStayListService.getAvgOfStar(homeStayNum);
 			mdto.setAvgOfStars(avgOfStars);
 		}
 		
-		return new JsonMypageMarkList(marks, totalCount, totalPage);
+		return new JsonMypageMarkList(marks, totalCount);
 	}
 	
 	
@@ -112,4 +103,3 @@ public class HomeStayMarkController implements SessionNames {
 	}
 	
 }
-

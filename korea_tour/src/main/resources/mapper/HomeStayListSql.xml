@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayListMapper">
-	<!-- 홈스테이 전체 목록 출력 --> <!-- 최저가 , 평점높은순 -->
-	<select id="getAllHomeStayList" parameterType="HashMap" resultType="homestaylist">
-		SELECT distinct(homeStay.homeStayNum),homeStay.title,homeStay.addr1,homeStay.price FROM homeStay
-		JOIN homeStayDetail 
-		ON homeStay.homeStayNum=homeStayDetail.homeStayNum
+   <!-- 홈스테이 전체 목록 출력 --> <!-- 최저가 , 평점높은순 -->
+   <select id="getAllHomeStayList" parameterType="HashMap" resultType="homestaylist">
+      SELECT distinct(homeStay.homeStayNum),homeStay.title,homeStay.addr1,homeStay.price FROM homeStay
+      JOIN homeStayDetail 
+      ON homeStay.homeStayNum=homeStayDetail.homeStayNum
         AND homeStay.approval=2 AND homeStay.open=1 
         AND homeStay.addr1 LIKE CONCAT('%',#{keyword},'%')
         <![CDATA[
@@ -14,27 +14,26 @@
         AND homeStay.homeStayNum 
         NOT IN 
         (SELECT distinct homeStayReservation.homeStayNum FROM homeStayReservation 
-			WHERE (homeStayReservation.approval=2 
-				<![CDATA[
-				AND homeStayReservation.checkOutDay>#{checkInDay}
-				AND homeStayReservation.checkInDay<=#{checkInDay}) 
-				]]>
-			OR (homeStayReservation.approval=2 
-				<![CDATA[
-				AND homeStayReservation.checkOutDay>=#{checkOutDay}
-				AND homeStayReservation.checkInDay<#{checkOutDay})
-				]]>
-		)
-	    ORDER BY price ASC
-	    LIMIT #{start},#{perPage}
-	</select>
-	<select id="getTotalHomeStayList" resultType="int">
-		SELECT count(*) FROM homeStay 
-		WHERE homeStayNum 
-		IN
-		(SELECT distinct homeStayNum FROM homeStay
-		JOIN homeStayDetail 
-		ON homeStay.homeStayNum=homeStayDetail.homeStayNum
+         WHERE (homeStayReservation.approval=2 
+            <![CDATA[
+            AND homeStayReservation.checkOutDay>#{checkInDay}
+            AND homeStayReservation.checkInDay<=#{checkInDay}) 
+            ]]>
+         OR (homeStayReservation.approval=2 
+            <![CDATA[
+            AND homeStayReservation.checkOutDay>=#{checkOutDay}
+            AND homeStayReservation.checkInDay<#{checkOutDay})
+            ]]>
+      )
+       ORDER BY price ASC
+   </select>
+   <select id="getTotalHomeStayList" parameterType="HashMap" resultType="int">
+      SELECT count(*) FROM homeStay 
+      WHERE homeStay.homeStayNum 
+      IN
+      (SELECT distinct homeStay.homeStayNum FROM homeStay
+      JOIN homeStayDetail 
+      ON homeStay.homeStayNum=homeStayDetail.homeStayNum
         AND homeStay.approval=2 AND homeStay.open=1 
         AND homeStay.addr1 LIKE CONCAT('%',#{keyword},'%')
         <![CDATA[
@@ -43,56 +42,56 @@
         AND homeStay.homeStayNum 
         NOT IN 
         (SELECT distinct homeStayReservation.homeStayNum FROM homeStayReservation 
-			WHERE (homeStayReservation.approval=2 
-				<![CDATA[
-				AND homeStayReservation.checkOutDay>#{checkInDay}
-				AND homeStayReservation.checkInDay<=#{checkInDay}) 
-				]]>
-			OR (homeStayReservation.approval=2 
-				<![CDATA[
-				AND homeStayReservation.checkOutDay>=#{checkOutDay}
-				AND homeStayReservation.checkInDay<#{checkOutDay})
-				]]>
-		))
-	</select>
-	<!-- 사진 한장 -->
-	<select id="getHomeStayPhotoNumOfList" parameterType="int" resultType="integer">
-		SELECT min(homeStayPhotoNum) FROM homeStay
-		JOIN homeStayPhoto 
-		ON homeStay.homeStayNum=homeStayPhoto.homeStayNum
+         WHERE (homeStayReservation.approval=2 
+            <![CDATA[
+            AND homeStayReservation.checkOutDay>#{checkInDay}
+            AND homeStayReservation.checkInDay<=#{checkInDay}) 
+            ]]>
+         OR (homeStayReservation.approval=2 
+            <![CDATA[
+            AND homeStayReservation.checkOutDay>=#{checkOutDay}
+            AND homeStayReservation.checkInDay<#{checkOutDay})
+            ]]>
+      ))
+   </select>
+   <!-- 사진 한장 -->
+   <select id="getHomeStayPhotoNumOfList" parameterType="int" resultType="integer">
+      SELECT min(homeStayPhotoNum) FROM homeStay
+      JOIN homeStayPhoto 
+      ON homeStay.homeStayNum=homeStayPhoto.homeStayNum
         WHERE homeStay.homeStayNum=#{homeStayNum}
-	</select>
-	<select id="getHomeStayPhotoOfList" parameterType="int" resultType="String">
-		SELECT photoName FROM homeStayPhoto WHERE homeStayPhotoNum=#{homeStayPhotoNum}
-	</select>
-	<!-- 즐겨찾기 여부 -->
-	<select id="isMarked" parameterType="HashMap" resultType="int">
-		SELECT count(*) FROM homeStayMark WHERE homeStayNum=#{homeStayNum} AND loginNum=#{loginNum}
-	</select>
-	<!-- 평점 평균 -->
-	<select id="getAvgOfStar" parameterType="int" resultType="java.lang.Double">
-		select truncate((avg(cleanliness)+avg(communication)+avg(checkIn)+avg(accuracy)+avg(location)+avg(satisfactionForPrice))/6,2) 
-		from homeStayStar 
-		where homeStayNum=#{homeStayNum}
-	</select>
-	<!-- 관리자 홈스테이 목록(대기중) -->
-	<select id="getAdminHomeStayList" parameterType="HashMap" resultType="homestay">
-		SELECT * FROM homeStay
-	    WHERE approval=0
-	    ORDER BY homeStayNum ASC
-	    LIMIT #{start}, #{perPage}
-	</select>
-	<!-- 관리자 홈스테이 목록(대기중) 개수 -->
-	<select id="getTotalAdminHomeStayList" resultType="int">
-		SELECT count(*) FROM homeStay
-	    WHERE approval=0
-	</select>
-	<!-- 관리자 홈스테이 승인 -->
-	<select id="approveHomeStay" parameterType="int">
-		UPDATE homeStay SET approval=2 WHERE homeStayNum=#{homeStayNum}
-	</select>
-	<!-- 관리자 홈스테이 거절 -->
-	<select id="denyHomeStay" parameterType="int">
-		UPDATE homeStay SET approval=1 WHERE homeStayNum=#{homeStayNum}
-	</select>
+   </select>
+   <select id="getHomeStayPhotoOfList" parameterType="int" resultType="String">
+      SELECT photoName FROM homeStayPhoto WHERE homeStayPhotoNum=#{homeStayPhotoNum}
+   </select>
+   <!-- 즐겨찾기 여부 -->
+   <select id="isMarked" parameterType="HashMap" resultType="int">
+      SELECT count(*) FROM homeStayMark WHERE homeStayNum=#{homeStayNum} AND loginNum=#{loginNum}
+   </select>
+   <!-- 평점 평균 -->
+   <select id="getAvgOfStar" parameterType="int" resultType="java.lang.Double">
+      select truncate((avg(cleanliness)+avg(communication)+avg(checkIn)+avg(accuracy)+avg(location)+avg(satisfactionForPrice))/6,2) 
+      from homeStayStar 
+      where homeStayNum=#{homeStayNum}
+   </select>
+   <!-- 관리자 홈스테이 목록(대기중) -->
+   <select id="getAdminHomeStayList" parameterType="HashMap" resultType="homestay">
+      SELECT * FROM homeStay
+       WHERE approval=0
+       ORDER BY homeStayNum ASC
+       LIMIT #{start}, #{perPage}
+   </select>
+   <!-- 관리자 홈스테이 목록(대기중) 개수 -->
+   <select id="getTotalAdminHomeStayList" resultType="int">
+      SELECT count(*) FROM homeStay
+       WHERE approval=0
+   </select>
+   <!-- 관리자 홈스테이 승인 -->
+   <select id="approveHomeStay" parameterType="int">
+      UPDATE homeStay SET approval=2 WHERE homeStayNum=#{homeStayNum}
+   </select>
+   <!-- 관리자 홈스테이 거절 -->
+   <select id="denyHomeStay" parameterType="int">
+      UPDATE homeStay SET approval=1 WHERE homeStayNum=#{homeStayNum}
+   </select>
 </mapper>

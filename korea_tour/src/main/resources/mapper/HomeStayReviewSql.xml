@@ -32,13 +32,34 @@
 	VALUES (#{userNum},#{homeStayNum},1,#{regroup},#{loginNum},#{loginId},#{loginPhoto},#{content},now(),0)
 	</insert>
 	
+	<!-- 답글썼는지 체크-->
+   <select id="ifReply" parameterType="HashMap" resultType="int">
+      select count(*) from homeStayReview where regroup=#{regroup} and homeStayNum=#{homeStayNum} and relevel=1
+   </select>
+	
 	<!-- 이미 후기를 썼는지 체크 -->
 	<select id="checkReviewWritten" parameterType="int" resultType="int">
-		select count(*) from homeStayReview where homeStayNum = #{homeStayNum} and loginNum = #{loginNum}
+		select reviewWrite from homeStayReservation where homeStayReservationNum=#{homeStayReservationNum}
 	</select>
 	
 	<!-- homeStayReviewNum 찾기 -->
 	<select id="getReviewNum" parameterType="hashmap" resultType="int">
-		select homeStayReviewNum from homeStayReview where homeStayNum=#{homeStayNum} and loginNum=#{loginNum}
+		select max(homeStayReviewNum) from homeStayReview where homeStayNum=#{homeStayNum} and loginNum=#{loginNum}
 	</select>
+	
+	<!-- 유저의 리뷰목록 총갯수 출력 -->
+	<select id="getTotalCountOfReviewsByLoginNum" parameterType="int" resultType="int">
+		select count(*) from homeStayReview where loginNum=#{loginNum}
+	</select>
+	
+	<!-- 유저의 리뷰목록출력 -->
+	<select id="getReviewByloginNum" parameterType="int" resultType="homestayreview">
+		select * from homeStayReview where loginNum=#{loginNum}
+	</select>
+	
+	<!-- 유저 리뷰 상세 -->
+	<select id="getReviewByHomeStayReviewNum" parameterType="int" resultType="homestayreview">
+		select * from homeStayReview where homeStayReviewNum=#{homeStayReviewNum}
+	</select>
+	
 </mapper>

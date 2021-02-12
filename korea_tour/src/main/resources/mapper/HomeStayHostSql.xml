@@ -3,9 +3,9 @@
 <mapper namespace="com.bitcamp.korea_tour.model.mapper.HomeStayHostMapper">
    <insert id="insertHomeStay" parameterType="joinhomestaydetail">
       insert into homeStay (userNum,title,addr1,addr2,content,approval,checkIn1,checkIn2,
-      checkOut1,checkOut2,xpos,ypos,price,open)
+      checkOut1,checkOut2,price,open)
       values (#{userNum},#{title},#{addr1},#{addr2},#{content},0,#{checkIn1},#{checkIn2},
-      #{checkOut1},#{checkOut2},#{xpos},#{ypos},#{price},1)
+      #{checkOut1},#{checkOut2},#{price},1)
    </insert>
     <select id="getHomeStayNum" resultType="int" >
  	 select MAX(homeStayNum) from homeStay 
@@ -19,6 +19,10 @@
  	<select id="getHomeStayDetailData" parameterType="int" resultType="joinhomestaydetail">
  	 select * from homeStayDetail where userNum=#{userNum}
  	</select>
+ 	<select id="getHomeStayAllData" parameterType="int" resultType="joinhomestaydetail">
+ 	 select * from homeStay, homeStayDetail where homeStay.userNum=homeStayDetail.userNum and homeStay.userNum=#{userNum}
+ 	
+ 	</select>
  	<select id="getHomeStayNum2" parameterType="int" resultType="int">
  	select homeStayNum from homeStay where userNum=#{userNum}
  	</select>
@@ -30,7 +34,7 @@
    </insert>      
    <update id="updateHomeStay" parameterType="hashmap">
    	update homeStay set title=#{dto.title}, addr1=#{dto.addr1},addr2=#{dto.addr2},content=#{dto.content},approval=0,checkIn1=#{dto.checkIn1},checkIn2=#{dto.checkIn2},
-      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},xpos=#{dto.xpos},ypos=#{dto.ypos},price=#{dto.price},open=#{dto.open}
+      checkOut1=#{dto.checkOut1},checkOut2=#{dto.checkOut2},price=#{dto.price}
       where homeStayNum=#{homeStayNum}
    </update>
    <update id="updateHomeStayDetail" parameterType="hashmap">
@@ -39,11 +43,36 @@
    elecProduct=#{dto.elecProduct},kitchen=#{dto.kitchen},bathroom=#{dto.bathroom},parking=#{dto.parking}
     where homeStayNum=#{homeStayNum}
    </update>
-   <select id="getTotalCount" parameterType="int" resultType="int">
-   	select count(*) from homeStayReservation where homestayNum=#{homestayNum} and deleted=0
+   <update id="updateHomeStayOpen" parameterType="hashmap">
+	   update homeStay set open=#{open} where userNum=#{userNum}
+   </update>
+   <select id="getTotalCount" parameterType="hashmap" resultType="int">
+   	select count(*) from homeStayReservation where userNum=#{userNum} and deleted=0 and approval=#{approval}
+   	   	<if test = 'approval==1'>
+   		and checkOutDay > now() - interval 1 day
+   	</if>
+   	<if test = 'approval==0'>
+    	and checkInDay > now() - interval 1 day
+   	 </if>
+   	 <if test = 'approval==2'>
+   	 	and checkinDay > now() - interval 1 day
+   	 </if>
+  
+   	 
    </select>
    <select id="getAllReservation" parameterType="hashmap" resultType="homestayreservation">
-   	select * from homeStayReservation where homestayNum=#{homestayNum} and approval=#{approval} and deleted=0 order by homeStayReservationNum asc Limit #{start},#{perPage}
+   	select * from homeStayReservation where userNum=#{userNum} and approval=#{approval} and deleted=0
+   	<if test = 'approval==1'>
+   		and checkOutDay > now() - interval 1 day
+   	</if>
+   	<if test = 'approval==0'>
+    	and checkInDay > now() - interval 1 day
+   	 </if>
+   	 <if test = 'approval==2'>
+   	 	and checkinDay > now() - interval 1 day
+   	 </if>
+   	 
+   	  order by checkInDay asc Limit #{start},#{perPage}
    </select>
    <select id="getApprovalCount" parameterType="int" resultType="int">
     select count(*) from homeStayReservation where homeStayNum=#{homeStayNum} and approval=2 and deleted=0

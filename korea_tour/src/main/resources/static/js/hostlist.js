@@ -38,7 +38,7 @@ function hostList(currentPage){
 					a+= `<td class="board_list_data">${item[i].homeStayNum}</td>`
 					a+=`<td class="board_list_data">${item[i].userName}</td>`
 					//포트가 달라서 연결이 안됨 추후 수정필요
-					a+=`<td class="board_list_data" num="${item[i].homeStayNum}"><a href="/homestay/adminhousedetail/num=${item[i].homeStayNum}">${item[i].title}</td>`
+					a+=`<td class="board_list_data" num="${item[i].homeStayNum}"><a target="_blank" href="http://localhost:3000/homestay/admin/house/num=${item[i].homeStayNum}">${item[i].title}</td>`
 					a+=`<td class="board_list_data">${item[i].addr1}</td>`
 		}
 	document.querySelector(".list-low").innerHTML=a;

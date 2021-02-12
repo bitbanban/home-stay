@@ -22,6 +22,7 @@ import com.bitcamp.korea_tour.model.homestay.HomeStayReviewDto;
 import com.bitcamp.korea_tour.model.homestay.HomeStayReviewPhotoDto;
 import com.bitcamp.korea_tour.model.homestay.HomeStayStarDto;
 import com.bitcamp.korea_tour.model.homestay.JoinHomeStayReviewDto;
+import com.bitcamp.korea_tour.model.service.homestay.HomeStayReservationService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayStarService;
@@ -36,14 +37,18 @@ import lombok.RequiredArgsConstructor;
 public class HomeStayReviewController implements SessionNames{
 	private final HomeStayReviewService s;
 	private final HomeStayStarService ss;
+	private final HomeStayReservationService rs;
 	private final HomeStayReviewPhotoService ps;
 
 	//해당 집의 댓글 출력
 	@GetMapping("/homestays/{homeStayNum}/allreview")
-	public JsonAllReviews<List<HomeStayReviewDto>>getAllReview(@PathVariable(value = "homeStayNum")int homeStayNum){
-		List<HomeStayReviewDto> reviews = s.getAllReview(homeStayNum);
-		return new JsonAllReviews<List<HomeStayReviewDto>>(reviews);
-	}
+	   public JsonAllReviews<List<HomeStayReviewDto>>getAllReview(@PathVariable(value = "homeStayNum")int homeStayNum){
+	      List<HomeStayReviewDto> reviews = s.getAllReview(homeStayNum);
+	      for(HomeStayReviewDto dto:reviews) {
+	         dto.setDap(s.ifReply(dto.getHomeStayNum(), dto.getRegroup()));
+	      }
+	      return new JsonAllReviews<List<HomeStayReviewDto>>(reviews);
+	   }
 
 	//해당 집의 댓글에 해당하는 사진 출력
 	@GetMapping("/homestays/{homeStayNum}/allreview/{homeStayReviewNum}")
@@ -84,17 +89,6 @@ public class HomeStayReviewController implements SessionNames{
 	@PostMapping("/homestays/{homeStayNum}/insertanswerofreview")
 	public void insertAnswerReview(@PathVariable(value="homeStayNum") int homeStayNum,
 			HttpServletRequest request, @ModelAttribute HomeStayReviewDto dto) {
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto)session.getAttribute(USER);
-		int loginNum = user.getUserNum();
-		String loginId = user.getName();
-		String loginPhoto = user.getPhoto();
-
-		dto.setHomeStayNum(homeStayNum);
-		dto.setLoginNum(loginNum);
-		dto.setLoginId(loginId);
-		dto.setLoginPhoto(loginPhoto);
-
 		System.out.println(dto);
 
 		s.insertAnswerReview(dto);
@@ -105,12 +99,12 @@ public class HomeStayReviewController implements SessionNames{
 	 */
 	@PostMapping("/homestays/mypage/review")
 	public String insertReviewByUser(
-			@RequestParam int homeStayNum, int loginNum, String loginId, String loginPhoto,
+			@RequestParam int homeStayReservationNum, int homeStayNum, int loginNum, String loginId, String loginPhoto,
 			String content, double cleanliness, double communication, double checkIn, double accuracy,
 			double location, double satisfactionForPrice, List<MultipartFile> photos,
 			HttpServletRequest request
 			) {
-		if(s.checkReviewWritten(homeStayNum, loginNum) == 0) {
+		if(s.checkReviewWritten(homeStayReservationNum) == 0) {
 			HomeStayReviewDto rdto = new HomeStayReviewDto();
 			int max = s.maxOfRegroup();
 			rdto.setHomeStayNum(homeStayNum);
@@ -120,6 +114,7 @@ public class HomeStayReviewController implements SessionNames{
 			rdto.setLoginPhoto(loginPhoto);
 			rdto.setContent(content);
 			s.insertReview(rdto);
+			rs.updateReviewWrite(homeStayReservationNum);
 
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("homeStayNum", homeStayNum);

@@ -77,13 +77,6 @@
 			<!--<version>2.3.0</version>-->
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
-		<dependency>
-		    <groupId>org.apache.maven.plugins</groupId>
-		    <artifactId>maven-jar-plugin</artifactId>
-		    <version>3.0.2</version>
-		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
 		    <groupId>commons-fileupload</groupId>
@@ -143,14 +136,6 @@
 		          <target>1.8</target>
 		        </configuration>
 		      </plugin>
-		      <plugin>
-		        <artifactId>maven-jar-plugin</artifactId>
-		        <configuration>
-		          <source>1.8</source>
-		          <target>1.8</target>
-		        </configuration>
-		      </plugin>
 		</plugins>
 	</build>
-
 </project>

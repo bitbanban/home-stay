@@ -19,7 +19,8 @@ public interface HomeStayHostMapper {
    void insertHomeStayDetail(Map<String, Object> map);
    void updateHomeStay(Map<String, Object> map);
    void updateHomeStayDetail(Map<String, Object> map);
-   int getTotalCount(int homestayNum);
+   void updateHomeStayOpen(Map<String, Object> map);
+   int getTotalCount(Map<String, Object> map);
    List<HomeStayReservationDto> getAllReservation(Map<String, Object> map);
    int getApprovalCount(int homeStayNum);
    List<HomeStayReservationDto> getApprovalReservation(Map<String, Object> map);
@@ -31,5 +32,5 @@ public interface HomeStayHostMapper {
    void updateApproval(Map<String, Object> map);
    JoinHomeStayDetailDto getHomeStayData(int userNum);
    JoinHomeStayDetailDto getHomeStayDetailData(int userNum);
-   
+   JoinHomeStayDetailDto getHomeStayAllData(int userNum);
 }

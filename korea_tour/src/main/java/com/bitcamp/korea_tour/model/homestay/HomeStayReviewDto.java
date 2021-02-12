@@ -20,4 +20,5 @@ public class HomeStayReviewDto {
 	private String loginPhoto;
 	private String content;
 	private int deleted;
+	private int dap;	//답글썻는지 안썻는지 확인하는 dto
 }

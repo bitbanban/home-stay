@@ -45,27 +45,27 @@ public class HomeStayReservationServiceImpl implements HomeStayReservationServic
 	}
 
 	@Override
-	public List<JoinHomeStayReservationDto> getAllDatas(HashMap<String, Object> map) {
+	public List<JoinHomeStayReservationDto> getAllDatas(int loginNum) {
 		// TODO Auto-generated method stub
-		return mapper.getAllDatas(map);
+		return mapper.getAllDatas(loginNum);
 	}
 
 	@Override
-	public List<JoinHomeStayReservationDto> getDatasByWating(HashMap<String, Object> map) {
+	public List<JoinHomeStayReservationDto> getDatasByWating(int loginNum) {
 		// TODO Auto-generated method stub
-		return mapper.getDatasByWating(map);
+		return mapper.getDatasByWating(loginNum);
 	}
 
 	@Override
-	public List<JoinHomeStayReservationDto> getDatasByCancel(HashMap<String, Object> map) {
+	public List<JoinHomeStayReservationDto> getDatasByCancel(int loginNum) {
 		// TODO Auto-generated method stub
-		return mapper.getDatasByCancel(map);
+		return mapper.getDatasByCancel(loginNum);
 	}
 
 	@Override
-	public List<JoinHomeStayReservationDto> getDatasByApproved(HashMap<String, Object> map) {
+	public List<JoinHomeStayReservationDto> getDatasByApproved(int loginNum) {
 		// TODO Auto-generated method stub
-		return mapper.getDatasByApproved(map);
+		return mapper.getDatasByApproved(loginNum);
 	}
 
 	@Override
@@ -93,9 +93,9 @@ public class HomeStayReservationServiceImpl implements HomeStayReservationServic
 	}
 
 	@Override
-	public List<JoinMypageReviewWithPhotoDto> getDoneReservationsByUser(HashMap<String, Object> map) {
+	public List<JoinMypageReviewWithPhotoDto> getDoneReservationsByUser(int loginNum) {
 		// TODO Auto-generated method stub
-		return mapper.getDoneReservationsByUser(map);
+		return mapper.getDoneReservationsByUser(loginNum);
 	}
 
 	@Override
@@ -103,11 +103,11 @@ public class HomeStayReservationServiceImpl implements HomeStayReservationServic
 		// TODO Auto-generated method stub
 		return mapper.getTotalCountOfReservationsForReview(loginNum);
 	}
-
+	
 	@Override
-	public int checkReviewWritten(JoinMypageReviewWithPhotoDto dto) {
+	public void updateReviewWrite(int homeStayReservationNum) {
 		// TODO Auto-generated method stub
-		return mapper.checkReviewWritten(dto);
+		mapper.updateReviewWrite(homeStayReservationNum);
 	}
 	
 	@Override
@@ -115,5 +115,5 @@ public class HomeStayReservationServiceImpl implements HomeStayReservationServic
 		// TODO Auto-generated method stub
 		mapper.insertMyReservation(dto);
 	}
-	
+
 }

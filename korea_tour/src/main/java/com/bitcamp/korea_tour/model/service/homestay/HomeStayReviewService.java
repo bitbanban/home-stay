@@ -14,5 +14,9 @@ public interface HomeStayReviewService {
 	void insertReview(HomeStayReviewDto dto);
 	void insertAnswerReview(HomeStayReviewDto dto);
 	int getReviewNum(HashMap<String, Object> map);
-	int checkReviewWritten(int homeStayNum, int loginNum);
+	int ifReply(int homeStayNum, int regroup);
+	int checkReviewWritten(int homeStayReservationNum);
+	List<HomeStayReviewDto> getReviewByloginNum(int loginNum);
+	int getTotalCountOfReviewsByLoginNum(int loginNum);
+	HomeStayReviewDto getReviewByHomeStayReviewNum(int homeStayReviewNum);
 }

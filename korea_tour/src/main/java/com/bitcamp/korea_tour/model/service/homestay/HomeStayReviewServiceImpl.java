@@ -2,6 +2,7 @@ package com.bitcamp.korea_tour.model.service.homestay;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -54,12 +55,36 @@ public class HomeStayReviewServiceImpl implements HomeStayReviewService{
 	}
 
 	@Override
-	public int checkReviewWritten(int homeStayNum, int loginNum) {
+	   public int ifReply(int homeStayNum, int regroup) {
+	      Map<String, Integer> map=new HashMap<String, Integer>();
+	      map.put("homeStayNum", homeStayNum);
+	      map.put("regroup", regroup);
+	      return m.ifReply(map);
+	   }
+
+	
+	@Override
+	public int checkReviewWritten(int homeStayReservationNum) {
 		// TODO Auto-generated method stub
-		return m.checkReviewWritten(homeStayNum, loginNum);
+		return m.checkReviewWritten(homeStayReservationNum);
 	}
 
-	
+	@Override
+	public List<HomeStayReviewDto> getReviewByloginNum(int loginNum) {
+		// TODO Auto-generated method stub
+		return m.getReviewByloginNum(loginNum);
+	}
 
-	
+	@Override
+	public int getTotalCountOfReviewsByLoginNum(int loginNum) {
+		// TODO Auto-generated method stub
+		return m.getTotalCountOfReviewsByLoginNum(loginNum);
+	}
+
+	@Override
+	public HomeStayReviewDto getReviewByHomeStayReviewNum(int homeStayReviewNum) {
+		// TODO Auto-generated method stub
+		return m.getReviewByHomeStayReviewNum(homeStayReviewNum);
+	}
+
 }

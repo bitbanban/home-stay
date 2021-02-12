@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.korea_tour.model.homestay.HomeStayDto;
@@ -23,8 +24,8 @@ public class HomeStayListServiceImpl implements HomeStayListService {
 	}
 	
 	@Override
-	public int getTotalHomeStayList() {
-		return homeStayListMapper.getTotalHomeStayList();
+	public int getTotalHomeStayList(Map<String, Object> map) {
+		return homeStayListMapper.getTotalHomeStayList(map);
 	}
 	
 	@Override
@@ -38,7 +39,7 @@ public class HomeStayListServiceImpl implements HomeStayListService {
 	}
 	
 	@Override
-	public int isMarked(int homeStayNum, int loginNum) {
+	public int isMarked(int homeStayNum, @Param("userNum")int loginNum) {
 		Map<String, Integer> map=new HashMap<String, Integer>();
 		map.put("homeStayNum", homeStayNum);
 		map.put("loginNum", loginNum);
