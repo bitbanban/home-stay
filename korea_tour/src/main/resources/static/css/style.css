@@ -217,3 +217,55 @@ li {
     margin-left: 10px;
   }
 }
+@media all and (max-width: 767px) {
+  .header-logo,
+  .reference,
+  .description {
+    display: none;
+  }
+  div.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 280px;
+  }
+
+  #layoutHeader {
+    justify-content: flex-start;
+  }
+
+  header .hamburger-menu {
+    right: 20px;
+  }
+
+  #searchBar {
+    margin-left: 10px;
+  }
+}
+@media all and (max-width: 370px) {
+  .reference,
+  .description {
+    display: none;
+  }
+  .header-logo {
+    display: block;
+  }
+  div.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 280px;
+  }
+
+  #layoutHeader {
+    justify-content: flex-start;
+  }
+
+  header .hamburger-menu {
+    right: 20px;
+  }
+  #btnSearch,
+  #searchBar {
+    display: none;
+  }
+}

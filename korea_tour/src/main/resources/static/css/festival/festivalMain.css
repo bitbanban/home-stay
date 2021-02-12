@@ -119,3 +119,9 @@ div.overlay {
 .area-list a {
   color: white;
 }
+@media all and (max-width: 390px) {
+  h1 {
+    font-family: 'bold';
+    font-size: 1.65rem;
+  }
+}
