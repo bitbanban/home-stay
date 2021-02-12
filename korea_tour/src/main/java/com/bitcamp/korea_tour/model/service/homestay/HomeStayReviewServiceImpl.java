@@ -70,9 +70,9 @@ public class HomeStayReviewServiceImpl implements HomeStayReviewService{
 	}
 
 	@Override
-	public List<HomeStayReviewDto> getReviewByloginNum(HashMap<String, Object> map) {
+	public List<HomeStayReviewDto> getReviewByloginNum(int loginNum) {
 		// TODO Auto-generated method stub
-		return m.getReviewByloginNum(map);
+		return m.getReviewByloginNum(loginNum);
 	}
 
 	@Override

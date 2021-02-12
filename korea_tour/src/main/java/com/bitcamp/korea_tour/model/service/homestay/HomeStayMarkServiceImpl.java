@@ -41,9 +41,9 @@ public class HomeStayMarkServiceImpl implements HomeStayMarkService {
 	}
 
 	@Override
-	public List<JoinHomeStayMarkDto> getMarkListByUser(HashMap<String, Object> map) {
+	public List<JoinHomeStayMarkDto> getMarkListByUser(int loginNum) {
 		// TODO Auto-generated method stub
-		return homeStayMarkMapper.getMarkListByUser(map);
+		return homeStayMarkMapper.getMarkListByUser(loginNum);
 	}
 
 	@Override

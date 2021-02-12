@@ -17,16 +17,16 @@ public interface HomeStayReservationMapper {
 	int getCountByWating(int loginNum);
 	int getCountByCancel(int loginNum);
 	int getCountByApproved(int loginNum);
-	List<JoinHomeStayReservationDto> getAllDatas(HashMap<String, Object> map);
-	List<JoinHomeStayReservationDto> getDatasByWating(HashMap<String, Object> map);
-	List<JoinHomeStayReservationDto> getDatasByCancel(HashMap<String, Object> map);
-	List<JoinHomeStayReservationDto> getDatasByApproved(HashMap<String, Object> map);
+	List<JoinHomeStayReservationDto> getAllDatas(int loginNum);
+	List<JoinHomeStayReservationDto> getDatasByWating(int loginNum);
+	List<JoinHomeStayReservationDto> getDatasByCancel(int loginNum);
+	List<JoinHomeStayReservationDto> getDatasByApproved(int loginNum);
 	JoinHomeStaySummary getHomeStaySummary(int homeStayReservationNum);
 	JoinReservationDetail getHomeStayDetail(int homeStayReservationNum);
 	void cancelReservationByUser(int homeStayReservationNum);
 	HomeStayReservationDto getData(int homeStayReservationNum);
 	int getTotalCountOfReservationsForReview(int loginNum);
-	List<JoinMypageReviewWithPhotoDto> getDoneReservationsByUser(HashMap<String, Object> map);
+	List<JoinMypageReviewWithPhotoDto> getDoneReservationsByUser(int loginNum);
 	void updateReviewWrite(int homeStayReservationNum);
 	void insertMyReservation(HomeStayReservationDto dto);
 }

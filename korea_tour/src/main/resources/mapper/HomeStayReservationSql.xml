@@ -14,29 +14,29 @@
 	<select id="getCountByApproved" parameterType="int" resultType="int">
 		select count(*) from homeStayReservation where approval=2 and loginNum=#{loginNum} and deleted=0
 	</select>
-	<select id="getAllDatas" parameterType="hashmap" resultType="joinreservation">
+	<select id="getAllDatas" parameterType="int" resultType="joinreservation">
 		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
 		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
 		where a.loginNum=#{loginNum} 
-		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+		order by homeStayReservationNum asc
 	</select>
-	<select id="getDatasByWating" parameterType="hashmap" resultType="joinreservation">
+	<select id="getDatasByWating" parameterType="int" resultType="joinreservation">
 		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
 		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
 		where a.approval=0 and a.loginNum=#{loginNum} and deleted=0 
-		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+		order by homeStayReservationNum asc
 	</select>
-	<select id="getDatasByCancel" parameterType="hashmap" resultType="joinreservation">
+	<select id="getDatasByCancel" parameterType="int" resultType="joinreservation">
 		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
 		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
 		where (a.loginNum=#{loginNum} and a.approval=1) or (a.loginNum=#{loginNum} and a.deleted=1)
-		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+		order by homeStayReservationNum asc
 	</select>
-	<select id="getDatasByApproved" parameterType="hashmap" resultType="joinreservation">
+	<select id="getDatasByApproved" parameterType="int" resultType="joinreservation">
 		select a.homeStayReservationNum, a.writeday, b.title as homeTitle, a.checkInDay, a.checkOutDay, a.approval, a.deleted 
 		from homeStayReservation a left join homeStay b on (a.homeStayNum=b.homeStayNum) 
 		where a.approval=2 and a.loginNum=#{loginNum} and a.deleted=0 
-		order by homeStayReservationNum asc LIMIT #{start},#{perPage}
+		order by homeStayReservationNum asc
 	</select>
 	<select id="getHomeStaySummary" parameterType="int" resultType="joinhomestaysummary">
 		select i.homeStayNum, i.photoName, i.homeTitle, j.name as hostName, i.addr1, i.addr2 from 
@@ -64,7 +64,7 @@
 	</select>
 	
 	<!-- 마이페이지 아직후기작성안한 완료된 예약 목록 출력 -->
-	<select id="getDoneReservationsByUser" parameterType="hashmap" resultType="joinmypagedonereservation">
+	<select id="getDoneReservationsByUser" parameterType="int" resultType="joinmypagedonereservation">
 		select a.homeStayReservationNum, a.hostNum, a.homeStayNum, a.homeStayTitle,b.photoName as homeStayPhoto, b. a.customerNum, 
 		a.checkInDay, a.checkOutDay, a.reviewWrite 
 		from (select r.homeStayReservationNum, r.userNum as hostNum, r.homeStayNum, h.title as homeStayTitle, 
@@ -72,7 +72,6 @@
 		left join homeStay h on r.homeStayNum = h.homeStayNum 
 		where r.loginNum = #{loginNum} and r.approval=2 and r.deleted=0 and r.checkOutDay &lt; now()) a 
 		left join homeStayPhoto b on a.homeStayNum = b.homeStayNum group by a.homeStayReservationNum 
-        limit #{start}, #{perPage}
 	</select>
 	
 	<!-- 후기 작성시 reviewWrite=1로 수정 -->

@@ -10,7 +10,7 @@ import com.bitcamp.korea_tour.model.homestay.JoinHomeStayMarkDto;
 
 public interface HomeStayMarkService {
 	int getTotalCountOfMarkByUser(@Param("userNum")int loginNum);
-	List<JoinHomeStayMarkDto> getMarkListByUser(HashMap<String, Object> map);
+	List<JoinHomeStayMarkDto> getMarkListByUser(int loginNum);
 	void insertMark(@Param("homeStayNum") int homeStayNum, @Param("userNum")int loginNum);
 	void deleteMark(@Param("homeStayNum") int homeStayNum, @Param("userNum")int loginNum);
 	int countOfMyMark(int homeStayNum, @Param("userNum")int loginNum);

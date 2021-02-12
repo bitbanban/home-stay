@@ -59,7 +59,6 @@ public class HomeStayMyPageController implements SessionNames{
 	static class JsonReservationDataList {
 		private List<JoinHomeStayReservationDto> reservations;
 		private int totalCount;
-		private int totalPage;
 	}
 	
 	@Data
@@ -67,7 +66,6 @@ public class HomeStayMyPageController implements SessionNames{
 	static class JsonReviewsByLoginNum {
 		private List<JsonReviewWithPhotos> reviews;
 		private int totalCount;
-		private int totalPage;
 	}
 	
 	@Data
@@ -98,80 +96,48 @@ public class HomeStayMyPageController implements SessionNames{
 	/*
 	 * 예약확인 리스트 출력(전체)
 	 */
-	@GetMapping("/mypage/reservations/all/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/reservations/all/{loginNum}")
 	public JsonReservationDataList getAllReservationDataList(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage
+			@PathVariable(name="loginNum") int loginNum
 			) {
 		int totalCount = reservationService.getTotalCount(loginNum);
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("loginNum", loginNum);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		List<JoinHomeStayReservationDto> list = reservationService.getAllDatas(map);
+		List<JoinHomeStayReservationDto> list = reservationService.getAllDatas(loginNum);
 		
-		return new JsonReservationDataList(list, totalCount, totalPage);
+		return new JsonReservationDataList(list, totalCount);
 	}
 	
 	/*
 	 *  예약확인 리스트 출력(예약대기)
 	 */
-	@GetMapping("/mypage/reservations/wating/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/reservations/wating/{loginNum}")
 	public JsonReservationDataList getWatingReservationDataList(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage
+			@PathVariable(name="loginNum") int loginNum
 			) {
 		int totalCount = reservationService.getCountByWating(loginNum);
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("loginNum", loginNum);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		List<JoinHomeStayReservationDto> list = reservationService.getDatasByWating(map);
-		return new JsonReservationDataList(list, totalCount, totalPage);
+		List<JoinHomeStayReservationDto> list = reservationService.getDatasByWating(loginNum);
+		return new JsonReservationDataList(list, totalCount);
 	}
 	
 	// 예약확인 리스트 출력(예약취소)
-	@GetMapping("/mypage/reservations/cancel/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/reservations/cancel/{loginNum}")
 	public JsonReservationDataList getCanCelReservationDataList(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage
+			@PathVariable(name="loginNum") int loginNum
 			) {
 		int totalCount = reservationService.getCountByCancel(loginNum);
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("loginNum", loginNum);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		List<JoinHomeStayReservationDto> list = reservationService.getDatasByCancel(map);
-		return new JsonReservationDataList(list, totalCount, totalPage);
+		List<JoinHomeStayReservationDto> list = reservationService.getDatasByCancel(loginNum);
+		return new JsonReservationDataList(list, totalCount);
 	}
 	
 	/*
 	 *  예약확인 리스트 출력(예약승인)
 	 */
-	@GetMapping("/mypage/reservations/approved/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/reservations/approved/{loginNum}")
 	public JsonReservationDataList getApprovedReservationDataList(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage
+			@PathVariable(name="loginNum") int loginNum
 			) {
 		int totalCount = reservationService.getCountByApproved(loginNum);
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("loginNum", loginNum);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		List<JoinHomeStayReservationDto> list = reservationService.getDatasByApproved(map);
-		return new JsonReservationDataList(list, totalCount, totalPage);
+		List<JoinHomeStayReservationDto> list = reservationService.getDatasByApproved(loginNum);
+		return new JsonReservationDataList(list, totalCount);
 	}
 	
 	/*
@@ -216,46 +182,29 @@ public class HomeStayMyPageController implements SessionNames{
 	static class JsonReservationsForReview {
 		private List<JoinMypageReviewWithPhotoDto> reservations;
 		private int totalCount;
-		private int totalPage;
 	}
 	
 	/*
 	 * 후기 작성할 숙박완료 리스트 출력
 	 */
-	@GetMapping("/mypage/reservations-for-review/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/reservations-for-review/{loginNum}")
 	public JsonReservationsForReview getReservationsForReview(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage
+			@PathVariable(name="loginNum") int loginNum
 			) {
 		int totalCount = reservationService.getTotalCountOfReservationsForReview(loginNum);
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("loginNum", loginNum);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		List<JoinMypageReviewWithPhotoDto> reservations = reservationService.getDoneReservationsByUser(map);
+		List<JoinMypageReviewWithPhotoDto> reservations = reservationService.getDoneReservationsByUser(loginNum);
 		
-		return new JsonReservationsForReview(reservations, totalCount, totalPage);
+		return new JsonReservationsForReview(reservations, totalCount);
 	}
 	
 	/**
 	 * 유저의 후기 리스트
 	 */
-	@GetMapping("/mypage/reviews/{loginNum}/{currentPage}")
+	@GetMapping("/mypage/reviews/{loginNum}")
 	public JsonReviewsByLoginNum getReviewListByLoginNum(
-			@PathVariable(name="loginNum") int loginNum,
-			@PathVariable(name="currentPage") int currentPage) {
+			@PathVariable(name="loginNum") int loginNum) {
 		int totalCount = reviewService.getTotalCountOfReviewsByLoginNum(loginNum);
-		int totalPage = pagingService.getPagingData(totalCount, currentPage).get("totalPage");
-		int start = pagingService.getPagingData(totalCount, currentPage).get("start");
-		int perPage = pagingService.getPagingData(totalCount, currentPage).get("perPage");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("loginNum", loginNum);
-		map.put("start", start);
-		map.put("perPage", perPage);
-		List<HomeStayReviewDto> rlist = reviewService.getReviewByloginNum(map);
+		List<HomeStayReviewDto> rlist = reviewService.getReviewByloginNum(loginNum);
 		List<JsonReviewWithPhotos> reviews = new ArrayList<HomeStayMyPageController.JsonReviewWithPhotos>();
 		for(HomeStayReviewDto rdto: rlist) {
 			int homeStayReviewNum = rdto.getHomeStayReviewNum();
@@ -292,7 +241,7 @@ public class HomeStayMyPageController implements SessionNames{
 			reviews.add(review);
 		}
 		
-		return new JsonReviewsByLoginNum(reviews, totalCount, totalPage);
+		return new JsonReviewsByLoginNum(reviews, totalCount);
 	}
 	
 	/**
