@@ -1,6 +1,7 @@
 package com.bitcamp.korea_tour.controller.restapi.homestay;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -147,7 +148,7 @@ public class HomeStayReviewController implements SessionNames{
 					Calendar cal = Calendar.getInstance();
 					String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 					String changeFilename = "review" +day+ "_" + fileName;
-					filePath = s3Service.upload(file, basePath, changeFilename);
+					filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
 					System.out.println(filePath);
 				}
 				
