@@ -9,8 +9,6 @@
 
 <!-- index.html 고유 스크립트 추가 -->
 <th:block layout:fragment="script">
-	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cfeccb771fba9c549dcb00d6e0332d8b&libraries=drawing" ></script>
 	<script th:src="@{/js/festivalDetail.js}" defer></script>
 </th:block>
 
@@ -42,7 +40,7 @@
 			<ul class="detail-info">
 			</ul>	
 	</div>
-	<h3 id="fesPhoto" onclic="showimages()">사진보기</h3>
+	<h3 id="fesPhoto" >사진보기</h3>
 	<div class="fes-photo hidden" id="fesPhotos">
 	</div>
 	
