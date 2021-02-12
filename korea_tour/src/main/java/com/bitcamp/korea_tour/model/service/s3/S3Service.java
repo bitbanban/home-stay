@@ -54,7 +54,10 @@ public class S3Service {
     public void delete(String filePath){
         boolean isExistObject = s3Client.doesObjectExist(bucket, filePath);
         if (isExistObject == true) {
+        	System.out.println("s3에 존재하는 파일입니다.");
             s3Client.deleteObject(bucket, filePath);
+        }else {
+        	System.out.println("s3에 존재하지 않는 파일입니다.");
         }
     }
 }
