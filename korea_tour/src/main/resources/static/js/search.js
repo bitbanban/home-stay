@@ -280,3 +280,18 @@ function searchCourse(sort, keyword, pageNum) {
   };
   xhr.send(null);
 }
+document.querySelector('#closeMenu').addEventListener('click', e => {
+  document.querySelector('.categories').style.display = 'none';
+});
+
+document.querySelector('#showMenu').addEventListener('click', e => {
+  document.querySelector('.categories').style.display = 'block';
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1024) {
+    document.querySelector('.categories').style.display = 'block';
+  } else {
+    document.querySelector('.categories').style.display = 'none';
+  }
+});

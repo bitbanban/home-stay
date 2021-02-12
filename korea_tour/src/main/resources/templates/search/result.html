@@ -15,7 +15,7 @@
 <div layout:fragment="content">
 	<div class="list-container">
 		<h1 class="keyword-title" th:keyword=${keyword}>"[[${keyword}]]" 검색 결과</h1>
-		
+		<i id="showMenu" class="fas fa-search hidden"></i>
 		<ul class="array-list sort-place">
 			<li class="sort active" id="placeTitle" th:place="title" >제목순</li>
 			<li class="sort" id="placeLike" th:place="like" >좋아요순</li>
@@ -32,7 +32,7 @@
 		<ul class="category__search">
 			<li class='search-list' th:search='tourplace'>관광지검색결과</li>
 			<li class='search-list' th:search='courses'>코스검색결과</li>
-			
+			<div id="closeMenu"><i class="fas fa-times-circle"></i></div>
 		</ul>
 		
 	</div>
