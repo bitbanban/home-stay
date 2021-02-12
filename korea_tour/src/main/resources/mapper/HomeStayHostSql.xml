@@ -48,6 +48,17 @@
    </update>
    <select id="getTotalCount" parameterType="hashmap" resultType="int">
    	select count(*) from homeStayReservation where userNum=#{userNum} and deleted=0 and approval=#{approval}
+   	   	<if test = 'approval==1'>
+   		and checkOutDay > now() - interval 1 day
+   	</if>
+   	<if test = 'approval==0'>
+    	and checkInDay > now() - interval 1 day
+   	 </if>
+   	 <if test = 'approval==2'>
+   	 	and checkinDay > now() - interval 1 day
+   	 </if>
+  
+   	 
    </select>
    <select id="getAllReservation" parameterType="hashmap" resultType="homestayreservation">
    	select * from homeStayReservation where userNum=#{userNum} and approval=#{approval} and deleted=0
@@ -61,7 +72,7 @@
    	 	and checkinDay > now() - interval 1 day
    	 </if>
    	 
-   	  order by homeStayReservationNum asc Limit #{start},#{perPage}
+   	  order by checkInDay asc Limit #{start},#{perPage}
    </select>
    <select id="getApprovalCount" parameterType="int" resultType="int">
     select count(*) from homeStayReservation where homeStayNum=#{homeStayNum} and approval=2 and deleted=0

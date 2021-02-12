@@ -89,17 +89,6 @@ public class HomeStayReviewController implements SessionNames{
 	@PostMapping("/homestays/{homeStayNum}/insertanswerofreview")
 	public void insertAnswerReview(@PathVariable(value="homeStayNum") int homeStayNum,
 			HttpServletRequest request, @ModelAttribute HomeStayReviewDto dto) {
-		HttpSession session=request.getSession();
-		UserDto user=(UserDto)session.getAttribute(USER);
-		int loginNum = user.getUserNum();
-		String loginId = user.getName();
-		String loginPhoto = user.getPhoto();
-
-		dto.setHomeStayNum(homeStayNum);
-		dto.setLoginNum(loginNum);
-		dto.setLoginId(loginId);
-		dto.setLoginPhoto(loginPhoto);
-
 		System.out.println(dto);
 
 		s.insertAnswerReview(dto);
