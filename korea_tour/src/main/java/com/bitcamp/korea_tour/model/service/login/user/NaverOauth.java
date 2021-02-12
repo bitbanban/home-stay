@@ -33,7 +33,7 @@ public class NaverOauth implements OauthService {
 	private final String NAVER_SNS_TOKEN_BASE_URL="https://nid.naver.com/oauth2.0/token";
 	private final String NAVER_SNS_CLIENT_ID="XsYIxoQxXx7dgXFoawSE";
 	private final String NAVER_SNS_CLIENT_SECRET="wrKclTiM_B";
-	private final String NAVER_SNS_CALLBACK_URL="http://localhost:9003/login/naver/callback";
+	private final String NAVER_SNS_CALLBACK_URL="http://www.raonnadri.tk/login/naver/callback";
 	
 	
 	@Override
