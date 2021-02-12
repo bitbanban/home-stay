@@ -252,3 +252,6 @@ erl_crash.dump
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+### my ignore ###
+src/main/resources/application.yml

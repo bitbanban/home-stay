@@ -1,5 +1,6 @@
 package com.bitcamp.korea_tour.controller.restapi.homestay;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayStarService;
 import com.bitcamp.korea_tour.model.service.login.setting.SessionNames;
+import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +41,7 @@ public class HomeStayReviewController implements SessionNames{
 	private final HomeStayStarService ss;
 	private final HomeStayReservationService rs;
 	private final HomeStayReviewPhotoService ps;
+	private final S3Service s3Service;
 
 	//해당 집의 댓글 출력
 	@GetMapping("/homestays/{homeStayNum}/allreview")
@@ -101,9 +104,9 @@ public class HomeStayReviewController implements SessionNames{
 	public String insertReviewByUser(
 			@RequestParam int homeStayReservationNum, int homeStayNum, int loginNum, String loginId, String loginPhoto,
 			String content, double cleanliness, double communication, double checkIn, double accuracy,
-			double location, double satisfactionForPrice, List<MultipartFile> photos,
-			HttpServletRequest request
-			) {
+			double location, double satisfactionForPrice, List<MultipartFile> photos,HttpServletRequest request
+			) throws IOException {
+		
 		if(s.checkReviewWritten(homeStayReservationNum) == 0) {
 			HomeStayReviewDto rdto = new HomeStayReviewDto();
 			int max = s.maxOfRegroup();
@@ -135,24 +138,30 @@ public class HomeStayReviewController implements SessionNames{
 
 			// 파일 업로드 경로
 //			String path = request.getSession().getServletContext().getRealPath("/homeStayReviewImg");
-			String path = "/home/ec2-user/apps/korea-tour/korea_tour/src/main/webapp/homeStayReviewImg";
-			System.out.println(path);
-			SpringFileWriter writer = new SpringFileWriter();
-			String upload = "";
+//			String path = "/home/ec2-user/apps/korea-tour/korea_tour/src/main/webapp/homeStayReviewImg";
+//			System.out.println(path);
+//			SpringFileWriter writer = new SpringFileWriter();
+//			String upload = "";
+			String basePath = "homeStayReviewImg";
 			for(MultipartFile file: photos) {
-				// 업로드 안한경우 첫파일의 파일명이 빈문자열
-				if(file.getOriginalFilename().length() == 0) {
-					upload = "no";
+				String fileName = file.getOriginalFilename();
+				String filePath = "";
+//				 //업로드 안한경우 첫파일의 파일명이 빈문자열
+				if(file.isEmpty()) {
+					filePath = "no";
 					break;
+				}else {
+					filePath = s3Service.upload(file);
+					System.out.println(filePath);
 				}
-
-				upload = writer.changeFilename(file.getOriginalFilename());
-				// 이미지 save 폴더에 저장
-				writer.writeFile(file, upload, path);
-
+//
+//				upload = writer.changeFilename(file.getOriginalFilename());
+//				// 이미지 save 폴더에 저장
+//				writer.writeFile(file, upload, path);
+				
 				HomeStayReviewPhotoDto pdto = new HomeStayReviewPhotoDto();
 				pdto.setHomeStayReviewNum(homeStayReviewNum);
-				pdto.setPhotoName(upload);
+				pdto.setPhotoName(filePath);
 				ps.insertData(pdto);
 			}
 
