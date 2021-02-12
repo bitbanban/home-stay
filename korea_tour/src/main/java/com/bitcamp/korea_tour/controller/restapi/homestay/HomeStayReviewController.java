@@ -134,7 +134,8 @@ public class HomeStayReviewController implements SessionNames{
 			ss.insertStar(sdto);
 
 			// 파일 업로드 경로
-			String path = request.getSession().getServletContext().getRealPath("/homeStayReviewImg");
+//			String path = request.getSession().getServletContext().getRealPath("/homeStayReviewImg");
+			String path = "/home/ec2-user/apps/korea-tour/korea_tour/src/main/webapp/homeStayReviewImg";
 			System.out.println(path);
 			SpringFileWriter writer = new SpringFileWriter();
 			String upload = "";
