@@ -41,11 +41,9 @@
 }
 
 .card img {
-  max-width: 10vw;
-  width: 10vw;
-  max-height: 20vh;
-  height: 20vh;
-  border: 3px solid var(--b-color);
+  width: 160px;
+  height: 150px;
+  border: 1px solid var(--b-color);
   vertical-align: middle;
 }
 
@@ -55,10 +53,30 @@
   margin-left: 5vw;
 }
 
+.array-list {
+  display: flex;
+  flex: row;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+.info .title {
+  font-size: var(--font-large);
+  margin: 1vh 0;
+}
+
+.info .place {
+  margin: 0 0 2vh 0;
+}
+.sort {
+  margin-left: 15px;
+}
 .info {
   width: 35vw;
-  float: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   padding: 1em;
+  height: 100%;
 }
 
 a:link {
@@ -77,22 +95,22 @@ a:visited {
 .title {
   display: block;
 }
-
-/*선택됬을시 class*/
+i.fa-heart {
+  color: #ff7279;
+  margin: 0 0 1vh 0;
+}
 .active {
   border-bottom: 3px solid var(--b-color);
   color: var(--b-color);
 }
-
-/*페이징 처리 css!!!!*/
-
-/*.page_wrap {
-   text-align:center;
-   font-size:0;
- }*/
+.tag-box .tag {
+  margin-right: 1vw;
+}
 
 .pagination {
-  display: inline-block;
+  margin: 2vh 0 2vh 0;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination li {
