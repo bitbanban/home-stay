@@ -1,7 +1,9 @@
 package com.bitcamp.korea_tour.controller.restapi.tour;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,12 +32,14 @@ import com.bitcamp.korea_tour.model.PlaceMarkDto;
 import com.bitcamp.korea_tour.model.PlacePhotoDto;
 import com.bitcamp.korea_tour.model.TourAnswerDto;
 import com.bitcamp.korea_tour.model.UserDto;
+import com.bitcamp.korea_tour.model.homestay.HomeStayReviewPhotoDto;
 import com.bitcamp.korea_tour.model.service.JoinPlaceService;
 import com.bitcamp.korea_tour.model.service.PlaceLikeService;
 import com.bitcamp.korea_tour.model.service.PlaceMarkService;
 import com.bitcamp.korea_tour.model.service.PlacePhotoService;
 import com.bitcamp.korea_tour.model.service.login.setting.SessionNames;
 import com.bitcamp.korea_tour.model.service.paging.PagingService;
+import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,6 +55,7 @@ public class PlaceController implements SessionNames{
 	private final PlaceLikeService service3;
 	private final PlaceMarkService service4;
 	private final PagingService pagingService;
+	private final S3Service s3Service;
 	
 	int totalCount = 0;
 	int start = 0;
@@ -309,30 +314,25 @@ public class PlaceController implements SessionNames{
 			@RequestParam int contentId,
 			@RequestParam List<MultipartFile> images,
 			@RequestParam int loginNum
-			,HttpServletRequest request
-			) {
-		// 파일 업로드 경로
-		String path = request.getSession().getServletContext().getRealPath("/placeImg");
-		System.out.println(path);
-		SpringFileWriter writer = new SpringFileWriter();
-		String upload = "";
+			) throws IOException {
+		String basePath = "placeImg";
 		for(MultipartFile file: images) {
-			// 업로드 안한경우 첫파일의 파일명이 빈문자열
-			if(file.getOriginalFilename().length() == 0) {
-				upload = "no";
+			String filePath = "";
+			if(file.isEmpty()) {
 				break;
+			}else {
+				String fileName = file.getOriginalFilename();
+				Calendar cal = Calendar.getInstance();
+				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
+				String changeFilename = "place" +day+ "_" + fileName;
+				filePath = s3Service.upload(file, basePath, changeFilename);
+				System.out.println(filePath);
 			}
-			
-			upload = writer.changeFilename(file.getOriginalFilename());
-			// 이미지 save 폴더에 저장
-			writer.writeFile(file, upload, path);
-			
 			PlacePhotoDto dto = new PlacePhotoDto();
 			dto.setContentId(contentId);
-			dto.setImage(upload);
+			dto.setImage(filePath);
 			dto.setLoginNum(loginNum);
 			service2.insertData(dto);
 		}
-		
 	}
 }

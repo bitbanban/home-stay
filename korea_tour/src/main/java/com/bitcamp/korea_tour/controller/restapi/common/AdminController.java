@@ -19,6 +19,7 @@ import com.bitcamp.korea_tour.model.TourAnswerDto;
 import com.bitcamp.korea_tour.model.service.PlacePhotoService;
 import com.bitcamp.korea_tour.model.service.TourAnswerService;
 import com.bitcamp.korea_tour.model.service.paging.PagingService;
+import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class AdminController {
 	private final TourAnswerService tas;
 	private final PagingService pagingService;
 	private final PlacePhotoService pps;
+	private final S3Service s3Service;
 	
 	int totalCount=0;
 	int start=0;
@@ -101,22 +103,19 @@ public class AdminController {
 	 * @param photoNum
 	 */
 	@DeleteMapping("/admin/place/photo/{photoNum}")
-	public void deleteData(@PathVariable(name="photoNum") int photoNum
-			,HttpServletRequest request) {
+	public void deleteData(@PathVariable(name="photoNum") int photoNum) {
 		// 파일 업로드 경로
-		String path = request.getSession().getServletContext().getRealPath("/placeImg");
-		System.out.println(path);
-		// db에 저장된 파일명들 얻기
 		String deleteFile = pps.getData(photoNum).getImage();
-		// 저장된 파일들 먼저 삭제
-		if(!deleteFile.equals("no")) {
-			File file = new File(path +"/"+ deleteFile);
-			if(file.exists()) {
-				file.delete();
-			}
+		int num = deleteFile.indexOf("com");
+		if(num != -1) {
+			num+=4;
+			String changeDeleteFile = deleteFile.substring(num);
+			System.out.println(changeDeleteFile);
+			s3Service.delete(changeDeleteFile);
+			// db데이터 삭제
+			pps.deleteData(photoNum);
 		}
-		// db데이터 삭제
-		pps.deleteData(photoNum);
+		System.out.println("삭제실패!!!");
 	}
 	
 	/*
