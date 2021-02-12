@@ -239,10 +239,9 @@ function parseDetailIntro(contentId) {
       s += `<li><b>행사종료일</b><span>${
         list[0].getElementsByTagName('eventenddate')[0].childNodes[0].nodeValue
       }</span></li>`;
-      s += `<li><b>이용료</b><span>${
-        list[0].getElementsByTagName('usetimefestival')[0].childNodes[0]
-          .nodeValue
-      }</span></li>`;
+      s += `<li><b>이용료</b><span>${list[0]
+        .getElementsByTagName('usetimefestival')[0]
+        .childNodes[0].nodeValue.replace('<br>', '  ')}</span></li>`;
 
       document.querySelector('.detail-info').innerHTML = s;
     }
@@ -347,24 +346,21 @@ function parseDetailImage(contentId) {
       xmlDoc = xmlParser.parseFromString(xmlStr, 'text/xml');
 
       let list = xmlDoc.getElementsByTagName('item');
-      let img = "<div class='slider'>";
-
-      for (let i = 0; i < list.length; i++) {
-        img += `<a href='#slide-${i + 1}'>${i + 1}</a>`;
-      }
-
-      img += '<div class="slides">';
+      let img = '';
 
       for (let i = 0; i < list.length; i++) {
         img += `<img src='${
           list[i].getElementsByTagName('originimgurl')[0].childNodes[0]
             .nodeValue
-        }' id="slide-${i + 1}" class="slide-img">`;
+        }'  class="slide-img">`;
       }
 
-      img += '</div></div>';
       document.querySelector('.fes-photo').innerHTML = img;
     }
   };
   xhr.send(null);
 }
+
+document.querySelector('#fesPhoto').addEventListener('click', () => {
+  document.querySelector('#fesPhotos').classList.toggle('hidden');
+});
