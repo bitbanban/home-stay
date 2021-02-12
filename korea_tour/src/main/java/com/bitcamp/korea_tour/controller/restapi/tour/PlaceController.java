@@ -2,6 +2,7 @@ package com.bitcamp.korea_tour.controller.restapi.tour;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -322,10 +323,11 @@ public class PlaceController implements SessionNames{
 				break;
 			}else {
 				String fileName = file.getOriginalFilename();
+				System.out.println(fileName);
 				Calendar cal = Calendar.getInstance();
 				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 				String changeFilename = "place" +day+ "_" + fileName;
-				filePath = s3Service.upload(file, basePath, changeFilename);
+				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
 				System.out.println(filePath);
 			}
 			PlacePhotoDto dto = new PlacePhotoDto();
