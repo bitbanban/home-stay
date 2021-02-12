@@ -111,3 +111,24 @@ p.description {
 .hidden {
   display: none;
 }
+
+@media all and (min-width: 600px) and (max-width: 768px) {
+  h1.fes-title {
+    font-family: 'bold';
+  }
+
+  ul.nav {
+    font-size: 1rem;
+  }
+}
+
+@media all and (max-width: 599px) {
+  h1.fes-title {
+    font-family: 'regular';
+    font-size: var(--font-medium);
+  }
+  h3,
+  ul.nav {
+    font-size: var(--font-small);
+  }
+}

@@ -57,19 +57,16 @@ body {
 }
 
 #userPhoto {
-	height:70px;
-	width:70px;
-	padding:-3rem;
-	border-radius: 50%;
-	
+  height: 70px;
+  width: 70px;
+  padding: -3rem;
+  border-radius: 50%;
 }
 
-#homeLogout{
-	font-size:15px;
-	text-align: center;
-	padding:-0.5rem;
-	
-
+#homeLogout {
+  font-size: 15px;
+  text-align: center;
+  padding: -0.5rem;
 }
 .search-bar__input,
 .search-bar__btn {
@@ -196,6 +193,7 @@ li {
 }
 
 @media all and (max-width: 767px) {
+  .header-logo,
   .reference,
   .description {
     display: none;
@@ -205,5 +203,69 @@ li {
     justify-content: center;
     align-items: center;
     min-width: 280px;
+  }
+
+  #layoutHeader {
+    justify-content: flex-start;
+  }
+
+  header .hamburger-menu {
+    right: 20px;
+  }
+
+  #searchBar {
+    margin-left: 10px;
+  }
+}
+@media all and (max-width: 767px) {
+  .header-logo,
+  .reference,
+  .description {
+    display: none;
+  }
+  div.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 280px;
+  }
+
+  #layoutHeader {
+    justify-content: flex-start;
+  }
+
+  header .hamburger-menu {
+    right: 20px;
+  }
+
+  #searchBar {
+    margin-left: 10px;
+  }
+}
+@media all and (max-width: 370px) {
+  .reference,
+  .description {
+    display: none;
+  }
+  .header-logo {
+    display: block;
+  }
+  div.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 280px;
+  }
+
+  #layoutHeader {
+    justify-content: flex-start;
+  }
+
+  header .hamburger-menu {
+    right: 20px;
+  }
+  #btnSearch,
+  #searchBar {
+    display: none;
   }
 }

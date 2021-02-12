@@ -94,7 +94,7 @@ function searchPlace(sort, keyword, pageNum) {
         n += `<div class='info'><span class='title' >${item[i].title}</span>`;
 
         n += `<span class='place'>${item[i].addr1}</span>`;
-        n += `<span class='lieks'><i class="fas fa-heart"></i> ${item[i].likeCount}</span>`;
+        n += `<span class='likes'><i class="fas fa-heart"></i> ${item[i].likeCount}</span>`;
         n += `</div></div></a>`;
       }
       document.querySelector('.list').innerHTML = n;
@@ -222,10 +222,10 @@ function searchCourse(sort, keyword, pageNum) {
           n += `<img src='/img/noimage.png' class='thumbnail' />`;
         }
         n += `<div class='info'><span class='title' >${item[i].name}</span>`;
-        n += `<span class='content'>${item[i].content}</span>`;
+
         n += `<span class='place'>${item[i].addr1}</span>`;
-        n += `<span class='lieks'><i class="fas fa-heart"></i> ${item[i].totalLike}</span>`;
-        n += `<div class='tag-box'><span class='tag'>${who}</span><span class='tag'>${during}</span><span class='tag'>${how}</span></div>`;
+        n += `<span class='likes'><i class="fas fa-heart"></i> ${item[i].totalLike}</span>`;
+        n += `<div class='tag-box'><span class='tag'>#${who}</span><span class='tag'>#${during}</span><span class='tag'>#${how}</span></div>`;
         n += `</div></div></a>`;
       }
       document.querySelector('.list').innerHTML = n;
@@ -280,3 +280,18 @@ function searchCourse(sort, keyword, pageNum) {
   };
   xhr.send(null);
 }
+document.querySelector('#closeMenu').addEventListener('click', e => {
+  document.querySelector('.categories').style.display = 'none';
+});
+
+document.querySelector('#showMenu').addEventListener('click', e => {
+  document.querySelector('.categories').style.display = 'block';
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 1024) {
+    document.querySelector('.categories').style.display = 'block';
+  } else {
+    document.querySelector('.categories').style.display = 'none';
+  }
+});
