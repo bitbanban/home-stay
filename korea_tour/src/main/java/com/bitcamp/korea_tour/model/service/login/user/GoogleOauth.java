@@ -25,9 +25,7 @@ public class GoogleOauth implements OauthService {
 	private final String GOOGLE_SNS_BASE_URL="https://accounts.google.com/o/oauth2/v2/auth";
 	private final String GOOGLE_SNS_CLIENT_ID="779685065070-lbrojg14lasf8j3g0gcapnctskou7pct.apps.googleusercontent.com";
 	private final String GOOGLE_SNS_CLIENT_SECRET="_WNRGmyeo5A6VsXxkOWSXJLx";
-//	private final String GOOGLE_SNS_CLIENT_ID="848389228191-4bcd7bl1iil8fqnibinp1ff9j9a1pukk.apps.googleusercontent.com";
-//	private final String GOOGLE_SNS_CLIENT_SECRET="7t6nDNV8BmDdSLAmIDiKh9x3";
-	private final String GOOGLE_SNS_CALLBACK_URL="http://localhost:9003/login/google/callback";
+	private final String GOOGLE_SNS_CALLBACK_URL="http://www.raonnadri.tk/login/google/callback";
 	private final String GOOGLE_SNS_TOKEN_BASE_URL="https://oauth2.googleapis.com/token";
 
 	@Override
