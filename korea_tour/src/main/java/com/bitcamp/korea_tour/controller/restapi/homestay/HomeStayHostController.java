@@ -1,9 +1,11 @@
 package com.bitcamp.korea_tour.controller.restapi.homestay;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +35,7 @@ import com.bitcamp.korea_tour.model.homestay.JoinHomeStayDetailDto;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReservationService;
+import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,6 +47,7 @@ public class HomeStayHostController {
 	private final HomeStayHostService hsas;
 	private final HomeStayHostPhotoService hshps;
 	private final HomeStayReservationService hsrs;
+	private final S3Service s3Service;
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -198,6 +202,7 @@ public class HomeStayHostController {
 	 * @param userNum
 	 * @param images
 	 * @param request
+	 * @throws IOException 
 	 */
 	@PostMapping("/homestays/photo/{userNum}")
 	public void insertPhoto(
@@ -205,22 +210,35 @@ public class HomeStayHostController {
 			/* @RequestParam int homeStayNum, */
 			@RequestParam List<MultipartFile> images,
 			HttpServletRequest request
-			) {
-		String path = request.getSession().getServletContext().getRealPath("/homeStayImg");
-		SpringFileWriter writer = new SpringFileWriter(); 
-		String upload = "";
+			) throws IOException {
+				/*
+				 * String path =
+				 * request.getSession().getServletContext().getRealPath("/homeStayImg");
+				 * SpringFileWriter writer = new SpringFileWriter(); String upload = "";
+				 * for(MultipartFile file: images) { if(file.getOriginalFilename().length() ==
+				 * 0) { upload = "no"; break; }
+				 * 
+				 * upload = writer.changeFilename(file.getOriginalFilename());
+				 * writer.writeFile(file, upload, path);
+				 */
+
+		String basePath = "homeStayReviewImg";
 		for(MultipartFile file: images) {
-			if(file.getOriginalFilename().length() == 0) {
-				upload = "no";
-				break;			
+			String filePath = "";
+			if(file.isEmpty()) {
+				break;
+			}else {
+				String fileName = file.getOriginalFilename();
+				Calendar cal = Calendar.getInstance();
+				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
+				String changeFilename = "home" +day+ "_" + fileName;
+				filePath = s3Service.upload(file, basePath, changeFilename);
+				System.out.println(filePath);
 			}
-
-			upload = writer.changeFilename(file.getOriginalFilename());
-			writer.writeFile(file, upload, path);
-
+			
 			int homeStayNum = hsas.getHomeStayNum2(userNum);
 			HomeStayPhotoDto dto = new HomeStayPhotoDto();
-			dto.setPhotoName(upload);
+			dto.setPhotoName(filePath);
 			dto.setUserNum(userNum);
 			dto.setHomeStayNum(homeStayNum);
 			hshps.insertPhoto(dto);
