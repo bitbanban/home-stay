@@ -114,8 +114,9 @@ public class AdminController {
 			s3Service.delete(changeDeleteFile);
 			// db데이터 삭제
 			pps.deleteData(photoNum);
+		}else {
+			System.out.println("삭제실패!!!");
 		}
-		System.out.println("삭제실패!!!");
 	}
 	
 	/*
