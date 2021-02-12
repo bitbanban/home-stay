@@ -222,7 +222,7 @@ public class HomeStayHostController {
 				 * writer.writeFile(file, upload, path);
 				 */
 
-		String basePath = "homeStayReviewImg";
+		String basePath = "homeStayImg";
 		for(MultipartFile file: images) {
 			String filePath = "";
 			if(file.isEmpty()) {
@@ -254,16 +254,16 @@ public class HomeStayHostController {
 	@DeleteMapping("/homestays/photo/{homeStayPhotoNum}")
 	public void deleteData(@PathVariable(name="homeStayPhotoNum") int homeStayPhotoNum
 			,HttpServletRequest request) {
-		String path = request.getSession().getServletContext().getRealPath("/homeStayImg");
 		String deleteFile = hshps.getData(homeStayPhotoNum).getPhotoName();
-		if(!deleteFile.equals("no")) {
-			File file = new File(path +"/"+ deleteFile);
-			if(file.exists()) {
-				file.delete();
-			}
+		int num = deleteFile.indexOf("com");
+		if(num != -1) {
+			num+=4;
+			String changeDeleteFile = deleteFile.substring(num);
+			s3Service.delete(changeDeleteFile);
+			hshps.deletePhoto(homeStayPhotoNum);
+		}else {
+			System.out.println("삭제실패!!");
 		}
-		// db데이터 삭제
-		hshps.deletePhoto(homeStayPhotoNum);
 	}
 
 
