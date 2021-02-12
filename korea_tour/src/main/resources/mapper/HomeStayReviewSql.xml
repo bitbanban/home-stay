@@ -54,7 +54,7 @@
 	
 	<!-- 유저의 리뷰목록출력 -->
 	<select id="getReviewByloginNum" parameterType="int" resultType="homestayreview">
-		select * from homeStayReview where loginNum=#{loginNum}
+		select * from homeStayReview where loginNum=#{loginNum} order by homeStayReviewNum desc
 	</select>
 	
 	<!-- 유저 리뷰 상세 -->
