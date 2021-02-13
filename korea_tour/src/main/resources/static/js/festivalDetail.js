@@ -299,7 +299,7 @@ function parseDetailInfo(contentId) {
 
       for (let i = 0; i < list.length; i++) {
         let infotext =
-          "<p class='description'>" +
+          '<p>' +
           list[i].getElementsByTagName('infotext')[0].childNodes[0].nodeValue +
           '</p>';
 

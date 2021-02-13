@@ -116,13 +116,18 @@ p.description {
   h1.fes-title {
     font-family: 'bold';
   }
-
+  .fes-description {
+    font-size: var(--font-small);
+  }
   ul.nav {
     font-size: 1rem;
   }
 }
 
 @media all and (max-width: 599px) {
+  .fes-description {
+    font-size: 0.8rem;
+  }
   h1.fes-title {
     font-family: 'regular';
     font-size: var(--font-medium);
