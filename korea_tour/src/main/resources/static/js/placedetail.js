@@ -64,9 +64,6 @@ function getPlace() {
       w += `<h1>${placeName}</h1>`;
       
 
-      //t += `<div id="heart" data-id="${userLike}" class="${userLike}" onclick="updateLike()"><div class="heart"></div></div>`;
-      //t += `<span id="favorite" data-id="${userMark}" class="${userMark}" onclick="updateFavorite()"><i class="fas fa-star"></i></span>`;
-      
       //상단 이미지(DB저장)
       y += `<img id="mainImage" src=${src} onerror="this.src='/img/noimage.png'">`;
       if (src != null) {
@@ -75,21 +72,18 @@ function getPlace() {
         for (let i = 0; i < photo.length; i++) {
           y += `<img class="sub-image" src=${photo[i].originImgUrl} onerror="this.src='/img/noimage.png'">`;
         }
+        for (let b = 0; b < userPhoto.length; b++) {
+        y += `<img class="userPhoto" src="/placeImg/${userPhoto[b].image}">`;
       }
-
+       y += `</div>`;
 
       //글내용
       t += `<p>주소 : ${addr}</p><br>`;
       t += `<p>${overview}</p>`;
 
-      //유저사진
-      t += `<div id="userPicture">`;
-      for (let b = 0; b < userPhoto.length; b++) {
-        t += `<img class="userPhoto" src="/placeImg/${userPhoto[b].image}">`;
-        console.log(userPhoto[b].image);
   
       }
-      t += `</div>`;
+      
 
         UsNum =document.getElementById("uNum");
         if (UsNum != null) 
@@ -104,14 +98,13 @@ function getPlace() {
         if(Answer[d].relevel == 0 && Answer[d].deleted == 0) {
 	    //댓글
         u += `<div class="Answer">`;
+        u += `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
+        u += `<p id="loginId">${Answer[d].loginId}</p>`;
+        u += `<p id="day">${Answer[d].writeDay}</p>`;
+        u += `<p id="content">${Answer[d].content}</p>`;
         if(str==Answer[d].loginNum){
            u += `<i class="fas fa-trash-alt" id=${Answer[d].tourAnswerNum} onclick="deleteAnswer(this)"></i>`
 	    }
-        u += `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
-        u += `<p id="loginId">${Answer[d].loginId}</p>`;
-        
-        u += `<p id="content">${Answer[d].content}</p>`;
-        u += `<p id="day">${Answer[d].writeDay}</p>`;
         u += `<input type="hidden" class="Rerestep" th:value=${Answer[d].restep}></input>`;
         u += `</div>`;
         
@@ -128,45 +121,45 @@ function getPlace() {
          }
         }else if(Answer[d].relevel != 0 && Answer[d].deleted == 0){
 	     u+= `<div class=ReAnswer>`
-	      if(str==Answer[d].loginNum){
-	         u += `<i class="fas fa-trash-alt" id=${Answer[d].tourAnswerNum} onclick="deleteAnswer(this)"></i>`;
-	       }
          u += `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
          u += `<p id="loginId">${Answer[d].loginId}</p>`;
-         u += `<p id="content">${Answer[d].content}</p>`;
          u += `<p id="day">${Answer[d].writeDay}</p>`;
+         u += `<p id="content">${Answer[d].content}</p>`;
+         if(str==Answer[d].loginNum){
+	         u += `<i class="fas fa-trash-alt" id=${Answer[d].tourAnswerNum} onclick="deleteAnswer(this)"></i>`;
+	       }
          u += `</div>`
          }else if(Answer[d].relevel != 0 && Answer[d].deleted == 1){
 	     u+= `<div class="ReAnswer">`;
          u+= `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
          u+= `<p id="loginId">${Answer[d].loginId}</p>`;
 	     u+= `<div class="deleteUser">`;      
-         u+= `<div>사용자가 삭제한 답글입니다</div>`;
-         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></div>`;
+         u+= `<p id="content">사용자가 삭제한 답글입니다</p>`;
+         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></input></div>`;
          u+= `</div>`;
          }else if(Answer[d].relevel == 0 && Answer[d].deleted == 1){
 	     u+= `<div class="Answer">`;
 	     u += `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
          u += `<p id="loginId">${Answer[d].loginId}</p>`;
          u+= `<div class="deleteUser">`;      
-         u+= `<div>사용자가 삭제한 댓글입니다</div>`;
-         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></div>`;
+         u+= `<div id="content">사용자가 삭제한 댓글입니다</div>`;
+         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></input></div>`;
          u+= `</div>`;
          }else if(Answer[d].relevel != 0 && Answer[d].deleted == 2){
 	     u+= `<div class="ReAnswer">`;
          u += `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
          u += `<p id="loginId">${Answer[d].loginId}</p>`;
 	     u+= `<div class="deleteAdmin">`;
-         u+= `<div>관리자가 삭제한 답글입니다</div>`
-         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></div>`;
+         u+= `<div id="content">관리자가 삭제한 답글입니다</div>`
+         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></input></div>`;
          u+= `</div>`;
          }else if(Answer[d].relevel == 0 && Answer[d].deleted == 2){
 	     u+= `<div class="Answer">`;
          u += `<img id="loginPhoto" src=${Answer[d].loginPhoto}>`;
          u += `<p id="loginId">${Answer[d].loginId}</p>`; 
 	     u+= `<div class="deleteAdmin">`;
-         u+= `<div>관리자가 삭제한 댓글입니다</div>`
-         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></div>`;
+         u+= `<div id="content">관리자가 삭제한 댓글입니다</div>`
+         u+= `<input type="hidden" id=${Answer[d].tourAnswerNum}></input></div>`;
          u+= `</div>`;
          }
       }
@@ -194,6 +187,7 @@ function getPlace() {
       ReAnswerClick.addEventListener("click",	()=>{ //대댓글 버튼을 클릭했을때 
       ReAnswerClick.nextElementSibling.classList.toggle("active");    
       regroupId = ReAnswerClick.getAttribute("id");
+      console.log("ok!");
        })
       } // for문끝 
       // document.querySelector('#heart').addEventListener('click', e => {
@@ -236,8 +230,6 @@ const imageClick = () => {
     return (subPhoto.style.display = 'none');
   else return (subPhoto.style.display = 'block');
 };
-
-
 function updateLike() {
   //const contentId = document.querySelector('#hiddenPlaceId').getAttribute('value');
   const liked = document.querySelector('#heart');

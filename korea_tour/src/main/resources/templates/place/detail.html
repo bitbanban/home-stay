@@ -12,7 +12,6 @@
 <th:block layout:fragment="script" >
 	<script th:src="@{/js/placedetail.js}" defer></script>
 	<script th:src="@{/js/addCourse.js}" defer></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=30e51142908a50d68c98944e3b54d529"></script>
 </th:block>
 
 <div layout:fragment="content">
@@ -32,7 +31,7 @@
   </div>
   <hr>
   
-  <div id="list">관광지 목록들 출력할거에요</div>
+  <div id="list"></div>
   <div id="likeAndFavorite">
     <div id=heart  onclick="updateLike()">
       <div class="heart">
@@ -60,24 +59,25 @@
     </th:block>
     <input type="hidden" id="placeContent" name="contentId"></input>
     <input type="file"  multiple="multiple" name="images" id="userPicture"/>
-    <button type="submit" onclick="insertUserPicture()">사진 등록하기</button>
+    <button id="sendButton" type="submit" onclick="insertUserPicture()">사진 등록하기</button>
     </form>
     <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
     </div>
     </div>
+    <!--/* 코스담기 버튼 */-->
+    <span id="addCourse" onclick="showCourses()" >
+    <i class="fas fa-share-square"></i>
+    </span>
     <div class="modal hidden" id="addModal" >
-      <div id="courseList"></div>
       <div id="createCourse" class='hidden'>
             <input type="text" name="name" placeholder="코스 이름을 정해주세요" id="courseName"/>
             <button type="button" onclick="createCousre() ">코스만들기</button>
       </div>
       <button type="button" onclick="showInput()" class="create-btn">코스만들기</button>
+      <div id="courseList"></div>
     </div>
    
-   <!--/* 코스담기 버튼 */-->
-    <span id="addCourse" onclick="showCourses()" >
-    <i class="fas fa-share-square"></i>
-    </span>
+   
     
     <!--/* 코스담기모달 */-->
    <!--  <div class="modal">
@@ -88,7 +88,6 @@
     </div></div> -->
 
   </div>
-  <hr>
   
   <div id="picture">
   
@@ -110,15 +109,17 @@
     <input type="hidden" id="uNum"name="loginNum" th:value=${session.user.userNum}></input>
     <input type="hidden" id="lId" name="loginId" th:value=${session.user.name}></input>
     <input type="hidden" id="lPhoto" name="loginPhoto" th:value=${session.user.photo}></input>
-    <textarea id="content" name="content" onblur="forceOut(this.value)"></textarea>
-    <button onclick="insertAnswer()">보내기</button>
+    <textarea id="writeContent" name="content" onblur="forceOut(this.value)"></textarea>
+    <button id="answerButton" onclick="insertAnswer()">보내기</button>
   </div>
   </th:block>
   <th:block th:if="${session.user == null}">
-  <span>로그인후 작성가능합니다</span>
+    <div id="answerInsert">
+    <textarea id="disabledContent" name="content" onblur="forceOut(this.value)" placeholder="로그인 후 작성 가능합니다." disabled="disabled"></textarea>
+  </div>
   </th:block>
 </div>
-
+<hr id="answerListHr">
 <div id="answerList">
 
 

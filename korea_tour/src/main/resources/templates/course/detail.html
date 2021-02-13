@@ -96,6 +96,7 @@
                   <div id="mapBox"></div>
 
                   <!-- 댓글입력창 -->
+                  <th:block th:if="${session.user != null}">
                   <div id="createAnswerBox">
                         <div id="answerCount"><i class="far fa-comment-dots"></i>&nbsp;여행톡 2</div>
                         <input type="hidden" id="userLoginNum" name="loginNum" th:value=${session.user.userNum}></input>
@@ -104,6 +105,7 @@
                         <textarea id="textBox" name="textBox" onblur="forceOut(this.value)" placeholder="소중한 댓글을 남겨주세요."></textarea>
                         <button onclick="insertAnswer()">보내기</button>
                   </div>
+                  </th:block>
 
                   <!-- 반복문 댓글출력창 -->
                   <div id="printAnswer">
@@ -152,6 +154,7 @@
 
                                     
                                     <!-- 답글입력창 -->
+                                    <th:block th:if="${session.user != null}">
                                     <div class="create-ReAnswerBox">
                                           
                                           <input type="hidden" id="reUserLoginNum" name="reLoginNum" th:value=${session.user.userNum}></input>
@@ -160,6 +163,7 @@
                                           <textarea class="reTextBox" name="textBox" onblur="ReforceOut(this.value)" placeholder="답글을 남겨주세요."></textarea>
                                           <button class="reAnswer-push" onclick="insertReAnswer()">보내기</button>
                                     </div>
+                                    </th:block>
                               </div>
                         </div>
                         
