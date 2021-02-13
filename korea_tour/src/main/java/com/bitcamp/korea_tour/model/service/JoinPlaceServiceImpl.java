@@ -25,9 +25,14 @@ public class JoinPlaceServiceImpl implements JoinPlaceService{
    private final JoinPlaceMapper mapper;
    
    @Override
-   public List<JoinPlaceDto> getTotalPlaceMark(int loginNum,HashMap<String, Object> map) {
+   public List<JoinPlaceDto> getTotalPlaceMark(int loginNum, int start, int perPage) {
       // TODO Auto-generated method stub
-      return mapper.getTotalPlaceMark(loginNum, map);
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("perPage", perPage);
+		map.put("loginNum", loginNum);
+		List<JoinPlaceDto> list = mapper.getTotalPlaceMark(map);
+      return list;
    }
 
    @Override

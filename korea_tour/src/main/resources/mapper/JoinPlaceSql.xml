@@ -5,7 +5,7 @@
     SELECT  m.markNum, p.title, p.contentId, p.addr1, p.addr2, p.mapX, p.mapY,
      p.areaCode, p.linkedURL, p.firstImage, p.mlevel
      FROM place p LEFT JOIN placeMark m ON p.contentId=m.contentId
-        WHERE userNum=#{loginNum}
+        WHERE userNum=#{loginNum} order by m.markNum asc LIMIT #{start},#{perPage}
    </select>
    <select id="getTotalCountMyPlaceMark" parameterType="int" resultType="int">
       select count(*) from placeMark where userNum=#{loginNum}
