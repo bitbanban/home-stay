@@ -23,7 +23,18 @@
             <div id="mainBox">
                   <div id="infoBox">
                         <h4 class="count-box">총0건</h4>
-                        <div id="makeCourse">코스 만들기</div>
+                        <div id="makeCourseBox__main">
+                              <div id="makeCourseBox" class="hide">
+                                    <form th:action="@{/api/courses}" method="POST" target="iframe1">
+                                          <div id="makeCourseBox2">
+                                                <input type="text" id="courseName" name="name" required placeholder="코스 이름을 정해주세요">
+                                                <button type="submit" onclick="reload()" id="createCourse__btn">코스만들기</button>
+                                          </div>
+                                    </form>
+                                    <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
+                              </div>
+                              <div id="makeCourse" onclick="showInput()">코스 만들기</div>
+                        </div>
                   </div>
                   <hr class="hr2">
                   <!-- 반복문 -->
@@ -58,7 +69,7 @@
             </div>
 
       </div>
-      <div id="paging"></div>
+      <!-- <div id="paging"></div> -->
       
 </div>
    

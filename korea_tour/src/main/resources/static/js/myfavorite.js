@@ -5,12 +5,16 @@ const courseMark = document.getElementById("courseMark");
 const totalCount = document.getElementById("totalCount");
 const t1 = document.querySelector("#t1");
 
+const perBlock = 5;
+let currentPage;
+let startPage;
+let endPage;
 
-let currentPage = document.querySelector('#paging').getAttribute('currentPage');
+
 
 
     function placeMarkspage(currentPage){
-   
+    if (currentPage == undefined) currentPage = 1;
     var xhr = new XMLHttpRequest();
     var url = `/api/tourmypage/placemarks/${currentPage}`;
     xhr.open('GET', url);
@@ -43,7 +47,10 @@ let currentPage = document.querySelector('#paging').getAttribute('currentPage');
                 s+="</div>";
                 s+="</div>";
                 s+="<hr class='hr2'>";
-            }   
+            }
+            s+="<div class='pageing-box'>";
+            s+="<div class='pagination' th:currentPage="+currentPage+"></div>";
+            s+="</div>";   
             t1.innerHTML=s;
 
                 
@@ -53,6 +60,44 @@ let currentPage = document.querySelector('#paging').getAttribute('currentPage');
             placeMark.style.fontSize="1.1em";
             courseMark.style.color="#98938d";
             courseMark.style.fontSize="1em";
+
+            //페이징 처리
+            const totalPage = data.totalPage; //
+            startPage = Math.floor((currentPage - 1) / perBlock) * perBlock + 1;
+            endPage = startPage + perBlock - 1;
+            if (endPage > totalPage) {
+                endPage = totalPage;
+            }
+
+            let p = '';
+            if (startPage > 1) {
+                p += `<li class='page-list'  page='${
+                startPage - 1
+                }'><i class="fas fa-chevron-left"></i></li>`;
+            }
+            for (let i = startPage; i <= endPage; i++) {
+                if (i == currentPage) {
+                p += `<li page='${i}' class='page-list active' >${i}</li>`;
+                } else {
+                p += `<li page='${i}' class='page-list' >${i}</li>`;
+                }
+            }
+            if (endPage < totalPage) {
+                p += `<li page='${
+                endPage + 1
+                }' class='page-list'><i class="fas fa-chevron-right"></i></li>`;
+            }
+            document.querySelector('.pagination').innerHTML = p;
+
+            let pageList = document.querySelectorAll('.page-list');
+            for (const page of pageList) {
+                page.addEventListener('click', function (e) {
+                let pageNum = e.target.getAttribute('page');
+
+                if (totalPage < pageNum) pageNum = totalPage;
+                placeMarkspage(pageNum);
+                });
+            }
         }
     }
     
@@ -76,6 +121,7 @@ function deleteFavoritePlace(n){
 
 
 function courseMarkForm(currentPage){
+    if (currentPage == undefined) currentPage = 1;
     var xhr = new XMLHttpRequest();
     var url = `/api/tourmypage/coursemarks/${currentPage}`;
     xhr.open('GET', url);
@@ -101,16 +147,19 @@ function courseMarkForm(currentPage){
                 console.log(`who ${item[i].who}`);
                 switch (item[i].who) {
                 case 'W1':
-                    who = '혼자';
+                    who = '혼자여행';
                     break;
                 case 'W2':
-                    who = '가족';
+                    who = '가족여행';
                     break;
                 case 'W3':
-                    who = '연인';
+                    who = '커플여행';
                     break;
                 case 'W4':
-                    who = '우정';
+                    who = '우정여행';
+                    break;
+                case null:
+                    who = '테마를 지정하세요'
                     break;
                 }
                 switch (item[i].during) {
@@ -123,6 +172,9 @@ function courseMarkForm(currentPage){
                 case 'D3':
                     during = '2박3일 이상';
                     break;
+                case null:
+                    during = '테마를 지정하세요'
+                    break;
                 }
                 switch (item[i].how) {
                 case 'H1':
@@ -132,10 +184,13 @@ function courseMarkForm(currentPage){
                     how = '자전거';
                     break;
                 case 'H3':
-                    how = '자동차';
+                    how = '드라이브';
                     break;
                 case 'H4':
-                    how = '기차';
+                    how = '기차여행';
+                    break;
+                case null:
+                    how = '테마를 지정하세요'
                     break;
                 }
                 
@@ -156,6 +211,9 @@ function courseMarkForm(currentPage){
                 c+="</div>";
                 c+="<hr class='hr2'>";
             }   
+            c+="<div class='pageing-box'>";
+            c+="<div class='pagination' th:currentPage="+currentPage+"></div>";
+            c+="</div>";
             t1.innerHTML=c;
             
            
@@ -165,6 +223,44 @@ function courseMarkForm(currentPage){
             courseMark.style.fontSize="1.1em";
             placeMark.style.color="#98938d";
             placeMark.style.fontSize="1em";
+
+            //페이징 처리
+            const totalPage = data.totalPage; //
+            startPage = Math.floor((currentPage - 1) / perBlock) * perBlock + 1;
+            endPage = startPage + perBlock - 1;
+            if (endPage > totalPage) {
+                endPage = totalPage;
+            }
+
+            let p = '';
+            if (startPage > 1) {
+                p += `<li class='page-list'  page='${
+                startPage - 1
+                }'><i class="fas fa-chevron-left"></i></li>`;
+            }
+            for (let i = startPage; i <= endPage; i++) {
+                if (i == currentPage) {
+                p += `<li page='${i}' class='page-list active' >${i}</li>`;
+                } else {
+                p += `<li page='${i}' class='page-list' >${i}</li>`;
+                }
+            }
+            if (endPage < totalPage) {
+                p += `<li page='${
+                endPage + 1
+                }' class='page-list'><i class="fas fa-chevron-right"></i></li>`;
+            }
+            document.querySelector('.pagination').innerHTML = p;
+
+            let pageList = document.querySelectorAll('.page-list');
+            for (const page of pageList) {
+                page.addEventListener('click', function (e) {
+                let pageNum = e.target.getAttribute('page');
+
+                if (totalPage < pageNum) pageNum = totalPage;
+                courseMarkForm(pageNum)
+                });
+            }
         }
     
     }

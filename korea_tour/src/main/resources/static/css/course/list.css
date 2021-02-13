@@ -1,18 +1,44 @@
 .container {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
 }
 .tag.active {
   border-bottom: solid 3px var(--a-color);
+}
+.tag__who.active{
+  background-color: #ccccc4;
+  border-radius: 20px;
+  width: 125%;
+  text-align: center;
+}
+.tag__during.active{
+  background-color: #ccccc4;
+  border-radius: 20px;
+  width: 125%;
+  text-align: center;
+}
+.tag__how.active{
+  background-color: #ccccc4;
+  border-radius: 20px;
+  width: 125%;
+  text-align: center;
 }
 /* .pagination {
   display: flex;
   flex-direction: row;
 	text-align:center;
 	font-size:0;
+  margin: auto;
+  cursor: pointer;
  } */
+ .pageing-box{
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
 .pagination {
   display: inline-block;
+  cursor: pointer;
 }
 
 .pagination li {
@@ -48,5 +74,124 @@
 }
 
 .sort-list.active {
+  color: black;
+  font-weight: bold;
   border-bottom: solid 3px var(--a-color);
+}
+.sort-list{
+  margin-left: 10px;
+  font-weight: 200;
+}
+
+#topBox{
+  margin-top: 3%;
+  margin-left: 10%;
+}
+
+.mainBox{
+  width: 65%;
+  height: 100%;
+  margin-bottom: 100px;
+}
+.count-box{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.sort{
+  display: flex;
+  color: #98938d;
+  cursor: pointer;
+
+}
+
+.hr2{
+  width: 100%;
+  height: 2px;
+  background-color: #b6b0a9;
+  border: 0;
+}
+
+.nav{
+  width: 13%;
+  height: 450px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0ece6;
+  position: sticky;
+  top: 20%;
+  margin-left: 2%;
+}
+
+.favorite-infobox{
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.favortie-tema{
+  color: black;
+}
+.image-box{
+  width: 20%;
+  height: 150px;
+  background-color: #353535;
+}
+
+.image-box img{
+  width: 100%;
+  height: 150px;;
+}
+
+.favorite-info__box{
+  display: flex;
+  justify-content: space-between;
+  width:78%;
+  margin-left: 2%;
+}
+
+.favorite-icon{
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.favorite-name{
+  font-size: 2rem;
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: black;
+}
+.favorite-start{
+  margin-bottom: 30px;
+  color: black;
+}
+
+.favorite-info span{
+  margin-right: 10px;
+}
+
+.fa-heart{
+  color: #FF7E79;
+}
+
+.lieks{
+  color: black;
+}
+
+.tag{
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.nav-subbox{
+  margin-left: 10%;
+  margin-right: 30%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.tag-during{
+  margin-top: 30px;
+  margin-bottom: 30px;
 }

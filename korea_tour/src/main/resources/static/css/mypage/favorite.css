@@ -126,3 +126,53 @@ hr{
     transition: 0.5s;
 }
 
+.pageing-box{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .pagination {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .pagination li {
+    display: block;
+    margin: 0 3px;
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 13px;
+    color: #999999;
+    text-decoration: none;
+  }
+  .pagination li a {
+    color: #999999;
+  }
+  
+  .pagination .arrow {
+    border: 1px solid #ccc;
+  }
+  
+  .pagination li.active {
+    background-color: #42454c;
+  
+    border: 1px solid #42454c;
+  }
+  
+  .pagination li.active {
+    color: #fff;
+  }
+
+  
+
+
+  @media all and (max-width: 600px) {
+    body {
+        color: red;
+    }
+}

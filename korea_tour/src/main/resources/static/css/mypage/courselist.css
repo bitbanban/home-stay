@@ -110,8 +110,108 @@ hr{
 
 #makeCourse{
     margin: 20px 0;
+    width: 100px;
+    text-align: center;
     cursor: pointer;
     background-color: #98938d;
     color: white;
-    padding: 1%;
+    padding: 2%;
+    margin-left: 20px;
+}
+
+#makeCourseBox__main{
+    display: flex;
+    justify-content: space-between;
+}
+#makeCourseBox{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+#makeCourseBox2{
+    display: flex;
+    margin: auto auto;
+}
+
+.show{
+    display: flex;
+}
+.hide{
+    display: none;
+}
+
+#courseName{
+    height: 50%;
+}
+#createCourse__btn{
+    width: 100px;
+}
+
+.pageing-box{
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .pagination {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .pagination li {
+    display: block;
+    margin: 0 3px;
+    float: left;
+    border: 1px solid #e6e6e6;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    background-color: #fff;
+    font-size: 13px;
+    color: #999999;
+    text-decoration: none;
+  }
+  .pagination li a {
+    color: #999999;
+  }
+  
+  .pagination .arrow {
+    border: 1px solid #ccc;
+  }
+  
+  .pagination li.active {
+    background-color: #42454c;
+  
+    border: 1px solid #42454c;
+  }
+  
+  .pagination li.active {
+    color: #fff;
+  }
+
+
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    #middleBox{
+        display: block;
+    }
+   #navBox{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+   }
+}
+
+
+@media screen and (max-width: 768px) {
+    body{
+        background-color: #42454c;
+    }
+    #middleBox{
+        display: block;
+        border: 1px solid red;
+    }
+   #navBox{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+   }
 }
