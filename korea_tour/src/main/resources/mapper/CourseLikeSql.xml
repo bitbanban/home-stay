@@ -10,8 +10,8 @@
 	<delete id="deleteCourseLike" parameterType="HashMap">
 		delete from courseLike where likeNum=#{likeNum}
 	</delete>
-	<select id="getCourseLike" parameterType="HashMap" resultType="String">
-		select concat(likeNum) from courseLike where courseNum=#{courseNum} and loginNum=#{loginNum}
+	<select id="getCourseLike" parameterType="HashMap" resultType="java.lang.Integer">
+		select likeNum from courseLike where courseNum=#{courseNum} and loginNum=#{loginNum}
 	</select>
 		<!-- 해당 코스 좋아요된 개수 -->
 	<select id="getCoursLikeTotal" parameterType="int" resultType="int">

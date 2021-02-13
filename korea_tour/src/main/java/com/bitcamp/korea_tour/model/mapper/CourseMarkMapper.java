@@ -15,7 +15,7 @@ public interface CourseMarkMapper {
 	
 	void insertCourseMark(CourseMarkDto dto);
 	void deleteCourseMark(int courseMarkNum);
-	String getCourseMark(Map<String, Integer> map);
+	Integer getCourseMark(Map<String, Integer> map);
 	int getMyCourseMarkCount(int loginNum);
 	int getCourseMarkTotal(int courseNum);
 }

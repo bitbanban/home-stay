@@ -39,7 +39,7 @@ public class JoinCourseDetailServiceImpl implements JoinCourseDetailService {
 	}
 	
 	@Override
-	public String getCourseMark(int courseNum, int loginNum) {
+	public Integer getCourseMark(int courseNum, int loginNum) {
 		Map<String, Integer> map=new HashMap<String, Integer>();
 		map.put("courseNum", courseNum);
 		map.put("loginNum", loginNum);
@@ -47,7 +47,7 @@ public class JoinCourseDetailServiceImpl implements JoinCourseDetailService {
 	}
 	
 	@Override
-	public String getCourseLike(int courseNum, int loginNum) {
+	public Integer getCourseLike(int courseNum, int loginNum) {
 		Map<String, Integer> map=new HashMap<String, Integer>();
 		map.put("courseNum", courseNum);
 		map.put("loginNum", loginNum);
