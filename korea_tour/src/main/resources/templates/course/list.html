@@ -16,46 +16,53 @@
 </th:block>
 
 <div layout:fragment="content">
-      <div id="header">
-            <h1>코스</h1>
-           
+      <div id="topBox">
+            <h1>코스별 보기</h1>
       </div>
       <div class="container">
-            <div class="main">
+            
+            <div class="mainBox">
                   <div class="count-box">
                         <h4></h4>
                         <div class="sort">
-                              <h4 class="sort-list" th:sort="like">인기</h4>
-                              <h4 class="sort-list active" th:sort="time">최신</h4>
+                              <h4 class="sort-list" th:sort="like">인기순</h4>
+                              <h4 class="sort-list active" th:sort="time">최신순</h4>
                         </div>
                   </div>
+                  <hr class="hr2">
                   <div class="course-list">
 <!--/*ajax 출력*/-->
                   </div>
-                  
-                  
+                  <div class="pageing-box">
+                        <div class="pagination" th:currentPage="${currentPage}" ></div>
+                  </div>
             </div>
             <div class="nav">
-                  <ul id="tag-list">
-                        <li class='tag tag__who' th:who="W1">혼자여행</li>
-                        <li class='tag tag__who' th:who="W2">가족여행</li>
-                        <li class='tag tag__who' th:who="W3">커플여행</li>
-                        <li class='tag tag__who' th:who="W4">우정여행</li>
-                  </ul>
-                  <ul id="tag-list">
-                        <li class='tag tag__during' th:during="D1">당일치기</li>
-                        <li class='tag tag__during' th:during="D2">1박2일</li>
-                        <li class='tag tag__during' th:during="D3">2박3일</li>
-                  </ul>
-                  <ul id="tag-list">
-                        <li class='tag tag__how' th:how="H1">뚜벅이</li>
-                        <li class='tag tag__how' th:how="H2">자전거</li>
-                        <li class='tag tag__how' th:how="H3">드라이브</li>
-                        <li class='tag tag__how' th:how="H4">기차여행</li>
-                  </ul>
+                  <div class="nav-subbox">
+                        <ul class="tag-list tag-who">
+                              <li class='tag tag__who' th:who="W1">혼자여행</li>
+                              <li class='tag tag__who' th:who="W2">가족여행</li>
+                              <li class='tag tag__who' th:who="W3">커플여행</li>
+                              <li class='tag tag__who' th:who="W4">우정여행</li>
+                        </ul>
+                        <ul class="tag-list tag-during">
+                              <li class='tag tag__during' th:during="D1">당일치기</li>
+                              <li class='tag tag__during' th:during="D2">1박2일</li>
+                              <li class='tag tag__during' th:during="D3">2박3일</li>
+                        </ul>
+                        <ul class="tag-list tag-how">
+                              <li class='tag tag__how' th:how="H1">뚜벅이</li>
+                              <li class='tag tag__how' th:how="H2">자전거</li>
+                              <li class='tag tag__how' th:how="H3">드라이브</li>
+                              <li class='tag tag__how' th:how="H4">기차여행</li>
+                        </ul>
+                  </div>
             </div>
+            
+
+            
       </div>
-      <div class="pagination" th:currentPage="${currentPage}" ></div>
+      
 </div>
    
 </html>

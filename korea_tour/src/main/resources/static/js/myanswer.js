@@ -5,9 +5,15 @@ const answerBox = document.querySelector(".count-box__answer-text");
 const reanswerBox = document.querySelector(".count-box__reanswer-text");
 const printBox = document.querySelector("#printBox");
 
-function myAnswerList(){
+const perBlock = 5;
+let currentPage;
+let startPage;
+let endPage;
+
+function myAnswerList(currentPage){
+   if (currentPage == undefined) currentPage = 1;
     var xhr = new XMLHttpRequest();
-    var url = '/api/tourmypage/answer/1';
+    var url = `/api/tourmypage/answer/${currentPage}`;
     xhr.open('GET', url);
     xhr.send();
     console.log(url);
@@ -63,7 +69,10 @@ function myAnswerList(){
                
                 
                 
-             }   
+             }
+            s+="<div class='pageing-box'>";
+            s+=`<div class="pagination" th:currentPage=${currentPage}></div>`
+            s+="</div>";  
              printBox.innerHTML=s;
             
             
@@ -75,14 +84,53 @@ function myAnswerList(){
             answerBox.style.fontSize="1.1em";
             reanswerBox.style.color="#98938d";
             reanswerBox.style.fontSize="1em";
+
+            //페이징 처리
+            const totalPage = data.totalPage; //
+            startPage = Math.floor((currentPage - 1) / perBlock) * perBlock + 1;
+            endPage = startPage + perBlock - 1;
+            if (endPage > totalPage) {
+            endPage = totalPage;
+            }
+
+            let p = '';
+            if (startPage > 1) {
+            p += `<li class='page-list'  page='${
+               startPage - 1
+            }'><i class="fas fa-chevron-left"></i></li>`;
+            }
+            for (let i = startPage; i <= endPage; i++) {
+            if (i == currentPage) {
+               p += `<li page='${i}' class='page-list active' >${i}</li>`;
+            } else {
+               p += `<li page='${i}' class='page-list' >${i}</li>`;
+            }
+            }
+            if (endPage < totalPage) {
+            p += `<li page='${
+               endPage + 1
+            }' class='page-list'><i class="fas fa-chevron-right"></i></li>`;
+            }
+            document.querySelector('.pagination').innerHTML = p;
+
+            let pageList = document.querySelectorAll('.page-list');
+            for (const page of pageList) {
+            page.addEventListener('click', function (e) {
+               let pageNum = e.target.getAttribute('page');
+
+               if (totalPage < pageNum) pageNum = totalPage;
+               myAnswerList(pageNum);
+            });
+            }
         }
     
     }
 }
 
-function reAnserList(){
+function reAnserList(currentPage){
+   if (currentPage == undefined) currentPage = 1;
     var xhr = new XMLHttpRequest();
-    var url = '/api/tourmypage/reanswer/1';
+    var url = `/api/tourmypage/reanswer/${currentPage}`;
     xhr.open('GET', url);
     xhr.send();
     console.log(url);
@@ -140,6 +188,9 @@ function reAnserList(){
                
                 
              }   
+            c+="<div class='pageing-box'>";
+            c+=`<div class="pagination" th:currentPage=${currentPage}></div>`
+            c+="</div>"; 
              printBox.innerHTML=c;
             
             
@@ -152,6 +203,44 @@ function reAnserList(){
             reanswerBox.style.fontSize="1.1em";
             answerBox.style.color="#98938d";
             answerBox.style.fontSize="1em";
+
+            //페이징 처리
+            const totalPage = data.totalPage; //
+            startPage = Math.floor((currentPage - 1) / perBlock) * perBlock + 1;
+            endPage = startPage + perBlock - 1;
+            if (endPage > totalPage) {
+            endPage = totalPage;
+            }
+
+            let p = '';
+            if (startPage > 1) {
+            p += `<li class='page-list'  page='${
+               startPage - 1
+            }'><i class="fas fa-chevron-left"></i></li>`;
+            }
+            for (let i = startPage; i <= endPage; i++) {
+            if (i == currentPage) {
+               p += `<li page='${i}' class='page-list active' >${i}</li>`;
+            } else {
+               p += `<li page='${i}' class='page-list' >${i}</li>`;
+            }
+            }
+            if (endPage < totalPage) {
+            p += `<li page='${
+               endPage + 1
+            }' class='page-list'><i class="fas fa-chevron-right"></i></li>`;
+            }
+            document.querySelector('.pagination').innerHTML = p;
+
+            let pageList = document.querySelectorAll('.page-list');
+            for (const page of pageList) {
+            page.addEventListener('click', function (e) {
+               let pageNum = e.target.getAttribute('page');
+
+               if (totalPage < pageNum) pageNum = totalPage;
+               reAnserList(pageNum);
+            });
+            }
         }
     
     }
@@ -187,4 +276,4 @@ function deleteReAnswer(n){
         }   
 
 
-myAnswerList();
+myAnswerList(currentPage);

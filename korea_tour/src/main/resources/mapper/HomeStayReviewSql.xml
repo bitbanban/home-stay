@@ -4,7 +4,7 @@
 	<!-- 리뷰출력(글쓴이, 내용) -->
 	<select id="getAllReview" parameterType="int" resultType="homestayreview">
 	SELECT * FROM homeStayReview
-	WHERE homeStayNum=#{homeStayNum} ORDER BY regroup desc
+	WHERE homeStayNum=#{homeStayNum} ORDER BY regroup desc, relevel
 	</select>
 	
 	<!-- 리뷰출력(해당 댓글에 해당하는 사진) -->

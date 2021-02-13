@@ -1,5 +1,6 @@
 .top-box__h3{
     color: #b6b0a9;
+    margin-bottom: 10px;
 }
 
 #topBox{
@@ -195,4 +196,11 @@ hr{
     padding: 20px;
     border: 1px solid #888;
     width: 10%;
+}
+
+#courseName{
+    margin-bottom: 5px;
+}
+#selectBox{
+    margin-bottom: 10px;
 }

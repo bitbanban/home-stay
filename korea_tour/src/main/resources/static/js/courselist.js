@@ -107,8 +107,59 @@ function getCourse(sort, who, during, how, currentPage) {
 
       for (let i = 0; i < item.length; i++) {
         const courseNum = item[i].courseNum;
+        let who;
+        let during;
+        let how;
+        switch (item[i].who) {
+                case 'W1':
+                    who = '혼자여행';
+                    break;
+                case 'W2':
+                    who = '가족여행';
+                    break;
+                case 'W3':
+                    who = '커플여행';
+                    break;
+                case 'W4':
+                    who = '우정여행';
+                    break;
+                case null:
+                    who = '테마를 지정하세요'
+                    break;
+                }
+                switch (item[i].during) {
+                case 'D1':
+                    during = '당일치기';
+                    break;
+                case 'D2':
+                    during = '1박2일';
+                    break;
+                case 'D3':
+                    during = '2박3일 이상';
+                    break;
+                case null:
+                    during = '테마를 지정하세요'
+                    break;
+                }
+                switch (item[i].how) {
+                case 'H1':
+                    how = '뚜벅이';
+                    break;
+                case 'H2':
+                    how = '자전거';
+                    break;
+                case 'H3':
+                    how = '드라이브';
+                    break;
+                case 'H4':
+                    how = '기차여행';
+                    break;
+                case null:
+                    how = '테마를 지정하세요'
+                    break;
+                }
         n += `<a href='/tourcourse/detail?courseNum=${courseNum}'
-        >`;
+        class="detail-link">`;
 
         n += `<div class="favorite-infobox">`;
         n += `<div class="image-box">`;
@@ -121,8 +172,12 @@ function getCourse(sort, who, during, how, currentPage) {
         n += `<div class="favorite-info">`;
         n += `<p class="favorite-name">${item[i].name}</p>`;
         n += `<p class="favorite-start">${item[i].addr1}</p>`;
-        n += `<span class='lieks'><i class="fas fa-heart"></i> ${item[i].totalLike}</span></div>`;
-        n += `<i class="fas fa-ellipsis-v favorite-icon"></i></div></div></a>`;
+        n += `<span class='lieks'><i class="fas fa-heart"></i> ${item[i].totalLike}</span>`;
+        n +=`<span class='favortie-tema'>#${who}</span>`;
+        n +=`<span class='favortie-tema'>#${during}</span>`;
+        n +=`<span class='favortie-tema'>#${how}</span>`;
+        n +=`</div>`;
+        n += `</div></div></a><hr class="hr2">`;
       }
       document.querySelector('.course-list').innerHTML = n;
 
