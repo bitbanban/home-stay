@@ -195,7 +195,8 @@ hr{
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 10%;
+    width: 13%;
+    text-align: center;
 }
 
 #courseName{
@@ -203,4 +204,80 @@ hr{
 }
 #selectBox{
     margin-bottom: 10px;
+}
+
+
+@media screen and (max-width: 768px) {
+   
+    #middleBox{
+        display: block;
+        
+    }
+   
+   #mainBox{
+   	width: calc(40px + 100% - 40px);
+   	margin-bottom:40px;
+   	text-align: center;
+   }
+   #topBox{
+   	width:100%;
+   	padding:0px;
+   	margin:0px;
+   }
+   #topBox hr{
+   	width:100%;
+   }
+   .tema-text{
+   	font-size: 0.8em;
+   }
+   .far{
+   	font-size: 0.8em;
+   }
+   .course-info{
+   	text-align: left;
+   }
+   #contentBox{
+   	margin-bottom: 30px;
+   	margin-top: 30px;
+   }
+   .course-name{
+   	font-size: 1.2rem;
+   	font-weight: bold;
+   }
+   .duringBox, .whoBox, .howBox{
+   	margin-bottom: 10px;
+   }
+   .image-box{
+   	width:140px;
+   }
+   #temaBox{
+   	display: inline-block;
+   	margin-top: 30px;
+   }
+   #answerCount{
+   	display: none;
+   }
+   #textBox{
+   	width: 75%;
+   }
+   
+   #createAnswerBox button{
+   	font-size: 0.8rem;
+   }
+   .text-box{
+   	text-align: left;
+   	font-size: 0.7rem;
+   	line-height: 25px;
+   }
+   #navBox{
+   	display: none;
+   }
+   #selectBox select{
+   	display: block;
+   	margin-bottom: 10px; 
+   }
+   .modal-content{
+   	width: 100%;	
+   }
+   
 }

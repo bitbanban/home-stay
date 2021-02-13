@@ -189,7 +189,7 @@ hr{
   }
 
 
-  @media screen and (min-width: 768px) and (max-width: 1024px) {
+  /*@media screen and (min-width: 768px) and (max-width: 1024px) {
     #middleBox{
         display: block;
     }
@@ -198,20 +198,55 @@ hr{
     top: 0px;
     left: 0px;
    }
-}
+}*/
 
 
 @media screen and (max-width: 768px) {
-    body{
-        background-color: #42454c;
-    }
+   
     #middleBox{
         display: block;
-        border: 1px solid red;
+        
     }
    #navBox{
     position: absolute;
-    top: 0px;
+    top: 10%;
     left: 0px;
+    display:inline-block;
+    width:100%;
+    margin:0;
+    height:40px;
+    line-height:40px;
+    text-align:center;
    }
+   #mainBox{
+   	width: calc(40px + 100% - 40px);
+   	margin-bottom:40px;
+   }
+   #topBox{
+   	padding:0px;
+   	margin:0px;
+   }
+   #topBox hr{
+   	width:100%;
+   }
+   .nav-text{
+   	margin-top:auto;
+   	margin-bottom:auto;
+   }
+   .courselist-icon{
+   	font-size:1em;
+   }
+   .courselist-info{
+   	font-size:0.8em;
+   }
+   .image-box{
+   	width:140px;
+   }
+   .courselist-name{
+   	font-size:1.5rem;
+   }
+   
+   
+   
+   
 }

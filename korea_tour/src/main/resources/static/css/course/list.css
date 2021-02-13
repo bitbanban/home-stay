@@ -195,3 +195,63 @@
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+
+@media screen and (max-width: 768px) {
+   
+    #middleBox{
+        display: block;
+        
+    }
+   .nav{
+    position: absolute;
+    top: 11%;
+    left: 0px;
+    display:inline-block;
+    width:100%;
+    margin:0;
+    height:150px;
+    padding-top:10px;
+   }
+   .mainBox{
+   	width: calc(40px + 100% - 40px);
+   	margin-bottom:40px;
+   }
+   #topBox{
+   	padding:0px;
+   	margin:0px;
+   }
+   .favorite-name{
+  	font-size:1.5rem;
+   }
+   .favorite-start{
+   	margin-bottom: 10px;
+   	font-size: 0.9em;
+   }
+   .favortie-tema{
+   	font-size: 0.8em;
+   }
+   .lieks{
+   	display: block;
+   	margin-bottom: 10px
+   }
+   .image-box{
+   	width:140px;
+   }
+   
+   
+   .nav-subbox{
+   	display:flex;
+   	justify-content: space-around;
+   	margin-left:0px;
+   	margin-right: 0px;
+   }
+   
+   .tag-during{
+   	margin-top:0px;
+   	margin-bottom:0px;
+   }
+   #layoutContainer{
+   	margin-top: 150px;
+   }
+}
