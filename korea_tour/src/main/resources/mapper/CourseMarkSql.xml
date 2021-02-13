@@ -7,8 +7,8 @@
 	<delete id="deleteCourseMark" parameterType="int">
 		delete from courseMark where courseMarkNum=#{courseMarkNum}
 	</delete>
-	<select id="getCourseMark" parameterType="HashMap" resultType="String">
-		select concat(courseMarkNum) from courseMark where courseNum=#{courseNum} and loginNum=#{loginNum}
+	<select id="getCourseMark" parameterType="HashMap" resultType="java.lang.Integer">
+		select courseMarkNum from courseMark where courseNum=#{courseNum} and loginNum=#{loginNum}
 	</select>
 	<!-- 내가 즐겨찾기한 코스의 개수 -->
  	<select id="getMyCourseMarkCount" parameterType="int" resultType="int">

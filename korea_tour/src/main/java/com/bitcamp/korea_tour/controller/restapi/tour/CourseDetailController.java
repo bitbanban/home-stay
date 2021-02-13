@@ -72,24 +72,17 @@ public class CourseDetailController implements SessionNames {
 			) {
 		HttpSession session=request.getSession();
 		UserDto user=(UserDto) session.getAttribute(USER);
-		int loginNum;
-		String markNumStr;
-		String likeNumStr;
-		int markNum;
-		int likeNum;
+		int loginNum=0;
+		int markNum=0;
+		int likeNum=0;
 		
-		if(user==null) {
-			loginNum=0;
-		}else {
+		if(user!=null) {
 			loginNum=user.getUserNum();
+			if(joincourseDetailService.getCourseMark(courseNum, loginNum)!=null) 
+				markNum=joincourseDetailService.getCourseMark(courseNum, loginNum);
+			if(joincourseDetailService.getCourseLike(courseNum, loginNum)!=null) 
+				likeNum=joincourseDetailService.getCourseLike(courseNum, loginNum);
 		}
-		markNumStr=joincourseDetailService.getCourseMark(courseNum, loginNum);
-		likeNumStr=joincourseDetailService.getCourseLike(courseNum, loginNum);
-		
-		if(markNumStr==null) markNum=0;
-		else markNum=Integer.parseInt(markNumStr);
-		if(likeNumStr==null) likeNum=0;
-		else likeNum=Integer.parseInt(likeNumStr);
 		
 		return new MarkLikeData(markNum,likeNum);
 	}
