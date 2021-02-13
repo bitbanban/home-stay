@@ -30,7 +30,7 @@ import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReviewService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayStarService;
 import com.bitcamp.korea_tour.model.service.login.setting.SessionNames;
-import com.bitcamp.korea_tour.model.service.s3.S3Service;
+//import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,7 +43,7 @@ public class HomeStayReviewController implements SessionNames{
 	private final HomeStayStarService ss;
 	private final HomeStayReservationService rs;
 	private final HomeStayReviewPhotoService ps;
-	private final S3Service s3Service;
+//	private final S3Service s3Service;
 
 	//해당 집의 댓글 출력
 	@GetMapping("/homestays/{homeStayNum}/allreview")
@@ -148,7 +148,7 @@ public class HomeStayReviewController implements SessionNames{
 					Calendar cal = Calendar.getInstance();
 					String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 					String changeFilename = "review" +day+ "_" + fileName;
-					filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
+//					filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
 					System.out.println(filePath);
 				}
 				

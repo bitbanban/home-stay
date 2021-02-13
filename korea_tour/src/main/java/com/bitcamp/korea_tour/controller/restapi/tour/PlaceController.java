@@ -40,7 +40,7 @@ import com.bitcamp.korea_tour.model.service.PlaceMarkService;
 import com.bitcamp.korea_tour.model.service.PlacePhotoService;
 import com.bitcamp.korea_tour.model.service.login.setting.SessionNames;
 import com.bitcamp.korea_tour.model.service.paging.PagingService;
-import com.bitcamp.korea_tour.model.service.s3.S3Service;
+//import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -56,7 +56,7 @@ public class PlaceController implements SessionNames{
 	private final PlaceLikeService service3;
 	private final PlaceMarkService service4;
 	private final PagingService pagingService;
-	private final S3Service s3Service;
+//	private final S3Service s3Service;
 	
 	int totalCount = 0;
 	int start = 0;
@@ -327,7 +327,7 @@ public class PlaceController implements SessionNames{
 				Calendar cal = Calendar.getInstance();
 				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 				String changeFilename = "place" +day+ "_" + fileName;
-				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
+//				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
 				System.out.println(filePath);
 			}
 			PlacePhotoDto dto = new PlacePhotoDto();
