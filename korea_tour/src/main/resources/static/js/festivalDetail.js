@@ -135,7 +135,7 @@ function parseCommonInfo(contentId) {
         .nodeValue;
       getAreaName(areaCode);
       let poster;
-      if (list[i].getElementsByTagName('firstimage')[0] != undefined) {
+      if (list[0].getElementsByTagName('firstimage')[0] != undefined) {
         poster = `<img src='${
           list[0].getElementsByTagName('firstimage')[0].childNodes[0].nodeValue
         }'  >`;
