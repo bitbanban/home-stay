@@ -14,7 +14,7 @@ import com.bitcamp.korea_tour.model.TourAnswerDto;
 import com.bitcamp.korea_tour.model.JoinPlaceDto;
 
 public interface JoinPlaceService {
-   List<JoinPlaceDto> getTotalPlaceMark(int loginNum, HashMap<String, Object> map);
+   List<JoinPlaceDto> getTotalPlaceMark(int loginNum, int start, int perPage);
    int getTotalCountMyPlaceMark(int userNum);
    List<PlaceDto> getFourDatasByRandom(int areaCode);
    int getTotalCount();
@@ -35,5 +35,6 @@ public interface JoinPlaceService {
    int getTotalCountByKeywordSearch(String keyword);
    List<JoinPlaceListDto> keywordSearchPlaceByTitle(HashMap<String, Object> map);
    List<JoinPlaceListDto> keywordSearchPlaceBylike(HashMap<String, Object> map);
+
    
 }

@@ -17,7 +17,7 @@ import com.bitcamp.korea_tour.model.JoinPlaceDto;
 
 @Mapper
 public interface JoinPlaceMapper {
-   List<JoinPlaceDto> getTotalPlaceMark(int loginNum, HashMap<String, Object> map);
+   List<JoinPlaceDto> getTotalPlaceMark(Map<String, Object> map);
    int getTotalCountMyPlaceMark(int userNum);
    List<PlaceDto> getFourDatasByRandom(int areaCode);
    int getTotalCount();

@@ -55,7 +55,7 @@ public class TourMypageController implements SessionNames {
 
 	int totalCount=0;
 	int start=0;
-	int perPage=0;
+	int perPage=10;
 	int totalPage=0;
 
 	//mypage 첫 페이지
@@ -97,7 +97,7 @@ public class TourMypageController implements SessionNames {
 		//세션가져오기
 		HttpSession session = request.getSession();
 		UserDto user = (UserDto)session.getAttribute(USER);
-		int loginNum = user.getUserNum();
+		int loginNum = 676;
 
 		totalCount=jcms.getMarkTotalCount(loginNum);
 		start=pagingService.getPagingData(totalCount, currentPage).get("start");
@@ -116,7 +116,7 @@ public class TourMypageController implements SessionNames {
 		//세션가져오기
 		HttpSession session = request.getSession();
 		UserDto user = (UserDto)session.getAttribute(USER);
-		int loginNum = user.getUserNum();
+		int loginNum = 676;
 		totalCount=jps.getTotalCountMyPlaceMark(loginNum);
 		start=pagingService.getPagingData(totalCount, currentPage).get("start");
 		perPage=pagingService.getPagingData(totalCount, currentPage).get("perPage");
@@ -124,9 +124,12 @@ public class TourMypageController implements SessionNames {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		List<JoinPlaceDto> list = new ArrayList<JoinPlaceDto>();
-				list = jps.getTotalPlaceMark(loginNum, map);
+				list = jps.getTotalPlaceMark(loginNum, start, perPage);
 		//System.out.println(list);
 		System.out.println("즐겨찾기 관광지 모아보기 토탈개수: "+totalCount);
+		System.out.println("즐겨찾기 관광지 모아보기 퍼페이지: "+perPage);
+		System.out.println("즐겨찾기 관광지 모아보기 토탈페이지: "+totalPage);
+		System.out.println("즐겨찾기 관광지 모아보기 스타트: "+start);
 		return new JsonData<List<JoinPlaceDto>>(list, totalPage);
 	}
 	
