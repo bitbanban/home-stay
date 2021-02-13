@@ -49,12 +49,12 @@
 	
 	<!-- 유저의 리뷰목록 총갯수 출력 -->
 	<select id="getTotalCountOfReviewsByLoginNum" parameterType="int" resultType="int">
-		select count(*) from homeStayReview where loginNum=#{loginNum}
+		select count(*) from homeStayReview where loginNum=#{loginNum} and relevel=0
 	</select>
 	
 	<!-- 유저의 리뷰목록출력 -->
 	<select id="getReviewByloginNum" parameterType="int" resultType="homestayreview">
-		select * from homeStayReview where loginNum=#{loginNum} order by homeStayReviewNum desc
+		select * from homeStayReview where loginNum=#{loginNum} and relevel=0 order by homeStayReviewNum desc
 	</select>
 	
 	<!-- 유저 리뷰 상세 -->
