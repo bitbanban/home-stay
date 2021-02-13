@@ -8,7 +8,15 @@ cloud:
     stack:
       auto: false
     credentials:
+      accessKey: 1234
+      secretKey: 1234
       instanceProfile: true
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
 #tomacat port
 server:
   port: 9003
