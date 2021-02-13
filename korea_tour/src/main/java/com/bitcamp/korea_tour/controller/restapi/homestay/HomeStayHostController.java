@@ -222,19 +222,20 @@ public class HomeStayHostController {
 				 * writer.writeFile(file, upload, path);
 				 */
 		
-		
+		System.out.println(userNum);
+		System.out.println(images);
 		String basePath = "homeStayImg";
 		for(MultipartFile file: images) {
 			String filePath = "";
 			if(file.isEmpty()) {
 				break;
 			}else {
+				System.out.println(file);
 				String fileName = file.getOriginalFilename();
 				Calendar cal = Calendar.getInstance();
 				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 				String changeFilename ="home" +day+ "_" + fileName;
 				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
-				System.out.println(changeFilename);
 				System.out.println(filePath);
 			}
 			
@@ -243,6 +244,7 @@ public class HomeStayHostController {
 			dto.setPhotoName(filePath);
 			dto.setUserNum(userNum);
 			dto.setHomeStayNum(homeStayNum);
+			System.out.println(dto);
 			hshps.insertPhoto(dto);
 		}
 	}
