@@ -36,7 +36,7 @@ import com.bitcamp.korea_tour.model.homestay.JoinHomeStayDetailDto;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReservationService;
-//import com.bitcamp.korea_tour.model.service.s3.S3Service;
+import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -48,7 +48,7 @@ public class HomeStayHostController {
 	private final HomeStayHostService hsas;
 	private final HomeStayHostPhotoService hshps;
 	private final HomeStayReservationService hsrs;
-//	private final S3Service s3Service;
+	private final S3Service s3Service;
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -209,8 +209,7 @@ public class HomeStayHostController {
 	public void insertPhoto(
 			@PathVariable(value = "userNum") int userNum,
 			/* @RequestParam int homeStayNum, */
-			@RequestParam List<MultipartFile> images,
-			HttpServletRequest request
+			@RequestParam List<MultipartFile> images
 			) throws IOException {
 				/*
 				 * String path =
@@ -223,19 +222,20 @@ public class HomeStayHostController {
 				 * writer.writeFile(file, upload, path);
 				 */
 		
-		
+		System.out.println(userNum);
+		System.out.println(images);
 		String basePath = "homeStayImg";
 		for(MultipartFile file: images) {
 			String filePath = "";
 			if(file.isEmpty()) {
 				break;
 			}else {
+				System.out.println(file);
 				String fileName = file.getOriginalFilename();
 				Calendar cal = Calendar.getInstance();
 				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 				String changeFilename ="home" +day+ "_" + fileName;
-//				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
-				System.out.println(changeFilename);
+				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
 				System.out.println(filePath);
 			}
 			
@@ -244,6 +244,7 @@ public class HomeStayHostController {
 			dto.setPhotoName(filePath);
 			dto.setUserNum(userNum);
 			dto.setHomeStayNum(homeStayNum);
+			System.out.println(dto);
 			hshps.insertPhoto(dto);
 		}
 	}
@@ -263,7 +264,7 @@ public class HomeStayHostController {
 			num+=4;
 			String changeDeleteFile = deleteFile.substring(num);
 			System.out.println(changeDeleteFile);
-//			s3Service.delete(changeDeleteFile);
+			s3Service.delete(changeDeleteFile);
 			hshps.deletePhoto(homeStayPhotoNum);
 		}else {
 			System.out.println("삭제실패!!");
