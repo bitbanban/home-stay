@@ -19,7 +19,7 @@ import com.bitcamp.korea_tour.model.TourAnswerDto;
 import com.bitcamp.korea_tour.model.service.PlacePhotoService;
 import com.bitcamp.korea_tour.model.service.TourAnswerService;
 import com.bitcamp.korea_tour.model.service.paging.PagingService;
-//import com.bitcamp.korea_tour.model.service.s3.S3Service;
+import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class AdminController {
 	private final TourAnswerService tas;
 	private final PagingService pagingService;
 	private final PlacePhotoService pps;
-//	private final S3Service s3Service;
+	private final S3Service s3Service;
 	
 	int totalCount=0;
 	int start=0;
@@ -111,7 +111,7 @@ public class AdminController {
 			num+=4;
 			String changeDeleteFile = deleteFile.substring(num);
 			System.out.println(changeDeleteFile);
-//			s3Service.delete(changeDeleteFile);
+			s3Service.delete(changeDeleteFile);
 			// db데이터 삭제
 			pps.deleteData(photoNum);
 		}else {
