@@ -117,3 +117,7 @@ label {
 	background-image: none;
 	padding:0.500em 0.625em;
 }
+
+a {
+	cursor: pointer;
+}
