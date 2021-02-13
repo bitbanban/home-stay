@@ -9,21 +9,17 @@ h1 {
 .heart {
   width: 100px;
   height: 100px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  float:right;
+  margin-right: 5vw;
+  transform: scale(0.9);
+  margin-top:-1.4em;
   background: url(https://cssanimation.rocks/images/posts/steps/heart.png)
     no-repeat;
   background-position: 0 0;
   cursor: pointer;
   animation: fave-heart 1s steps(28);
 }
-.heart:hover {
-  background-position: -2800px 0;
-  transition: background 1s steps(28);
-}
-
 .liked .heart {
   background-position: -2800px 0;
   transition: background 1s steps(28);
@@ -44,6 +40,7 @@ h1 {
 
 #picture {
   text-align: center;
+  margin-top: 6vh;
 }
 
 #mainImage {
@@ -66,6 +63,16 @@ h1 {
   border: 2px solid var(--brown);
 }
 
+.userPhoto{
+  display: block;
+  margin: 0 auto;
+  width: 50vw;
+  margin-top: 5vw;
+  border: 2px solid var(--brown);
+}
+
+
+
 #placeInfo {
   margin: 1em auto;
   width: 80%;
@@ -81,38 +88,112 @@ h1 {
 hr {
   margin: 1em auto;
   border: 0px;
-  height: 2px;
+  height: 1px;
   background-color: var(--b-color);
   width: 85%;
 }
 
 /*댓글*/
 #loginPhoto {
-  width: 4em;
-  height: 4em;
+  width: 2.5em;
+  height: 2.5em;
   border-radius: 2.5em;
+  float:left;
+  margin-left: 2vw;
+}
+#loginId{
+  float:left;
+  font-size: var(--font-small);
+  margin-top:0.5em;
+  margin-left:0.5vw;
+ 
 }
 
-.ReAnswer-List {
-	display: none;
+#content {
+	clear: both;
+	font-size: var(--font-middle);
+	margin-left: 5vw;
+	margin-top:3em;
+	width:40vw
+}
+
+#day {
+	float: right;
+	margin-right: 3vw;
+	margin-top:1em;
+	font-size: 0.5rem;
+}
+
+.ReAnswerClick
+{
+	float: right;
+	margin-top: -2vw;
+	margin-right: 20vw;
 }
 
 .ReAnswer, .Answer{
    height: 10vh;
    border-bottom: 1px solid gray;
+   clear: both;
+   padding :1em;
 }
 
 .ReAnswer {
-	margin-left: 5vw;
-	background: pink;
+	padding-left: 5vw;
+	width:50vw;
+	margin:0 auto;
 	
 }
 
 .Answer {
-	background: yellow;
+	width:55vw;
+	margin:0 auto;
 }
 
+#answer {
+	margin: auto;
+	text-align: center;
+}
 
+#disabledContent{
+	width:55vw;
+	height: 10vh;
+	resize:none;
+}
+
+#writeContent {
+	width: 50vw;
+	height: 10vh;
+	resize:none;
+}
+
+.ReContent {
+	width: 45vw;
+	height: 10vh;
+	resize:none;
+}
+
+#answerButton, .insertRe {
+	vertical-align: top;
+    margin-top: 3.5vh;
+    
+}
+
+#likeAndFavorite{
+	margin-left: 8vw;
+	font-size: var(--font-medium);
+}
+
+#answerListHr {
+	margin-bottom: 0;
+}
+
+.ReAnswer-List{
+	margin: auto;
+	text-align: center;
+	display: none;
+	margin-top:1em;
+}
 
 
 
@@ -149,11 +230,80 @@ hr {
 }
 
 .modalBox button {
+	 
      display: block;
-     width: 80px;
-     margin: 0 auto;
+     margin: auto;
 }
 
 .hidden {
      display: none;
 }
+
+#userPicture {
+	width: 98%;
+	margin: 6vh auto;
+}
+.course {
+	display: block;
+	font-size: var(--font-small);
+}
+
+.fa-trash-alt:before {
+	margin-left: 47vw;
+	margin-top: -2vw;
+	float: right;
+}
+
+@media all and (min-width: 769px) and (max-width: 1023px) {
+    .fa-trash-alt:before {
+	margin-top: -2.4vw;
+}
+
+.ReAnswerClick
+{
+	margin-top: -2.4vw;
+    margin-right: 18vw;
+}
+
+}
+
+@media all and (width:768px){
+ 
+.ReAnswerClick
+{
+	margin-top: -6.1vw;
+    margin-right: 18vw;
+}
+
+}
+
+
+@media all and (max-width:767px){
+ 
+.ReAnswerClick
+{
+	margin-top: -6.1vw;
+    margin-right: 18vw;
+}
+h1 {
+  text-align: center;
+  font-size: var(--font-large);
+}
+}
+
+
+@media all and (max-width: 360px) {
+h1 {
+  text-align: center;
+  font-size: var(--font-meddle);
+}
+.fa-trash-alt:before {
+	font-size: 0.8em;
+}
+
+.ReAnswerClick
+{
+    font-size: 0.8em;
+}
+
+}	

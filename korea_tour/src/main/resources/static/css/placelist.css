@@ -138,7 +138,9 @@ a:visited {
 }
 
 #paging {
-  display: inline-block;
+  clear: both;
+  margin-left: 23vw;
+  margin-bottom: 5vh;
 }
 
 #paging li {
@@ -228,6 +230,17 @@ a:visited {
   #mainCity {
     font-size: var(--font-medium);
   }
+  .place-list img {
+  max-width: 15vw;
+  width: 15vw;
+  height: 10vh;
+}
+
+
+#paging {
+  margin-left: 30vw;
+}
+  
 }
 
 @media all and (max-width: 767px) {
@@ -280,4 +293,25 @@ a:visited {
     font-size: var(--font-medium);
     margin: 0;
   }
+  
+  .place-list img {
+  max-width: 15vw;
+  width: 15vw;
+  height: 10vh;
+  }
+
+  #paging {
+  margin-left: 20vw;
+  }
+  
+  
+.placeName {
+  font-size: var(--font-small);
+}
+.addr {
+   font-size: 0.8rem;
+}
+.likes {
+	font-size: 0.6rem;
+}
 }
