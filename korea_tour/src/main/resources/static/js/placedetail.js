@@ -73,7 +73,7 @@ function getPlace() {
           y += `<img class="sub-image" src=${photo[i].originImgUrl} onerror="this.src='/img/noimage.png'">`;
         }
         for (let b = 0; b < userPhoto.length; b++) {
-        y += `<img class="userPhoto" src="/placeImg/${userPhoto[b].image}">`;
+        y += `<img class="userPhoto" src="${userPhoto[b].image}">`;
       }
        y += `</div>`;
 
@@ -234,6 +234,7 @@ function updateLike() {
   //const contentId = document.querySelector('#hiddenPlaceId').getAttribute('value');
   const liked = document.querySelector('#heart');
   const status = liked.getAttribute('data-id');
+  const unset = liked.setAttribute('data-id','unset');
   const xhr = new XMLHttpRequest();
   if (status == 'liked') {
     const url = `/api/place/detail/like/delete/${id}`;
@@ -253,6 +254,7 @@ function updateLike() {
       const msg = xhr.responseText;
       if (msg == 'needlogin') {
         alert('로그인후 이용할 수 있습니다');
+        return unset;
  console.log('Error!' + xhr.responseText);
       }
 
@@ -275,6 +277,7 @@ function updateFavorite() {
  // const contentId = document.querySelector('#hiddenPlaceId').getAttribute('value');
   const favorited = document.querySelector('#favorite');
   const status = favorited.getAttribute('data-id');
+  const unset = favorited.setAttribute('data-id','unset');
   const xhr = new XMLHttpRequest();
   if (status == 'favorite') {
     const url = `/api/place/detail/mark/delete/${id}`;
@@ -294,6 +297,7 @@ function updateFavorite() {
       const msg = xhr.responseText;
       if (msg == 'needlogin') {
         alert('로그인후 이용할 수 있습니다');
+        return unset;
       }
 
       if (status == 'favorite') {
