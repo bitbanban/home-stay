@@ -1,63 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorator="layout/default">
+   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorator="layout/default">
 
 <th:block layout:fragment="css">
-	<link rel="stylesheet" th:href="@{/css/admin/list.css}">
+   <link rel="stylesheet" th:href="@{/css/admin/list.css}">
 </th:block>
 
 <th:block layout:fragment="script" >
-	<script th:src="@{/js/placephotolist.js}" defer></script>
+   <script th:src="@{/js/placephotolist.js}" defer></script>
 </th:block>
 
 
 <div layout:fragment="content">
 <!-- Sub Title -->
-	<div class="opt_tit">
+   <div class="opt_tit">
 
-		<div class="opt_tit_right">
-			<div class="elmt">
-			<a href="/admin" class="btn_txt btn_type_c btn_color_a"> <span
-					class="txt">메인으로 </span>
-				</a>
-			</div>
-		</div>
-	</div>
-	<!-- //Sub Title -->
+      <div class="opt_tit_right">
+         <div class="elmt">
+         <a href="/admin" class="btn_txt btn_type_c btn_color_a"> <span
+               class="txt">메인으로 </span>
+            </a>
+         </div>
+      </div>
+   </div>
+   <!-- //Sub Title -->
 
-	<!-- Board List -->
-	<div class="board_list">
-		<table class="board_list_table">
-			<colgroup>
-				<col width="55" />
-				<col width="80" />
-				<col width="170" />
-				<col width="200" />
-				<col width="70" />
-				<col width="70" />
-				<col width="70" />
-			</colgroup>
-			<thead>
-				<tr class="board_list_row">
-					<th class="board_list_head" scope="col">차례</th>
-					<th class="board_list_head" scope="col">고유번호</th>
-					<th class="board_list_head" scope="col">내용</th>
-					<th class="board_list_head" scope="col">사진</th>
-					<th class="board_list_head" scope="col">아이디</th>
-					<th class="board_list_head" scope="col"></th>
-					<th class="board_list_head" scope="col"></th>
-		
-				</tr>
-			</thead>
-			<tbody class="list_row">
-				
-			</tbody>
-		</table>
-	</div>
-	<!-- //Board List -->
+   <!-- Board List -->
+   <div class="board_list">
+      <table class="board_list_table">
+         <colgroup>
+            <col width="55" />
+            <col width="80" />
+            
+            <col width="150" />
+            <col width="200" />
+            <col width="70" />
+            <col width="70" />
+         </colgroup>
+         <thead>
+            <tr class="board_list_row">
+               <th class="board_list_head" scope="col">차례</th>
+               <th class="board_list_head" scope="col">사진 고유번호</th>
+               <th class="board_list_head" scope="col">아이디넘버</th>
+               <th class="board_list_head" scope="col">사진</th>
+               
+               <th class="board_list_head" scope="col"></th>
+               <th class="board_list_head" scope="col"></th>
+      
+            </tr>
+         </thead>
+         <tbody class="list_row">
+            
+         </tbody>
+      </table>
+   </div>
+   <!-- //Board List -->
 
-	
+   
 </div>
 
 
