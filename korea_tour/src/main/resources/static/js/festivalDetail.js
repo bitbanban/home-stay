@@ -134,9 +134,14 @@ function parseCommonInfo(contentId) {
       areaCode = list[0].getElementsByTagName('areacode')[0].childNodes[0]
         .nodeValue;
       getAreaName(areaCode);
-      let poster = `<img src='${
-        list[0].getElementsByTagName('firstimage')[0].childNodes[0].nodeValue
-      }'  >`;
+      let poster;
+      if (list[0].getElementsByTagName('firstimage')[0] != undefined) {
+        poster = `<img src='${
+          list[0].getElementsByTagName('firstimage')[0].childNodes[0].nodeValue
+        }'  >`;
+      } else {
+        poster = `<img src='/img/noimage.png' class='thumbnail' />`;
+      }
 
       let title = list[0].getElementsByTagName('title')[0].childNodes[0]
         .nodeValue;
@@ -294,7 +299,7 @@ function parseDetailInfo(contentId) {
 
       for (let i = 0; i < list.length; i++) {
         let infotext =
-          "<p class='description'>" +
+          '<p>' +
           list[i].getElementsByTagName('infotext')[0].childNodes[0].nodeValue +
           '</p>';
 
