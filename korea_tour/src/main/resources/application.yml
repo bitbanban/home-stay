@@ -9,6 +9,12 @@ cloud:
       auto: false
     credentials:
       instanceProfile: true
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
 #tomacat port
 server:
   port: 9003
