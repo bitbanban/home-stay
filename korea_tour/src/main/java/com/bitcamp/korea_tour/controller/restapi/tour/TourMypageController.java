@@ -97,7 +97,7 @@ public class TourMypageController implements SessionNames {
 		//세션가져오기
 		HttpSession session = request.getSession();
 		UserDto user = (UserDto)session.getAttribute(USER);
-		int loginNum = 676;
+		int loginNum = user.getUserNum();
 
 		totalCount=jcms.getMarkTotalCount(loginNum);
 		start=pagingService.getPagingData(totalCount, currentPage).get("start");
