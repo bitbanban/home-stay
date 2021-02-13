@@ -36,7 +36,7 @@ import com.bitcamp.korea_tour.model.homestay.JoinHomeStayDetailDto;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostPhotoService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayHostService;
 import com.bitcamp.korea_tour.model.service.homestay.HomeStayReservationService;
-import com.bitcamp.korea_tour.model.service.s3.S3Service;
+//import com.bitcamp.korea_tour.model.service.s3.S3Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -48,7 +48,7 @@ public class HomeStayHostController {
 	private final HomeStayHostService hsas;
 	private final HomeStayHostPhotoService hshps;
 	private final HomeStayReservationService hsrs;
-	private final S3Service s3Service;
+//	private final S3Service s3Service;
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -234,7 +234,7 @@ public class HomeStayHostController {
 				Calendar cal = Calendar.getInstance();
 				String day = cal.get(Calendar.HOUR) +""+ cal.get(Calendar.MINUTE)+""+cal.get(Calendar.SECOND);
 				String changeFilename ="home" +day+ "_" + fileName;
-				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
+//				filePath = URLDecoder.decode(s3Service.upload(file, basePath, changeFilename),"UTF-8");
 				System.out.println(changeFilename);
 				System.out.println(filePath);
 			}
@@ -263,7 +263,7 @@ public class HomeStayHostController {
 			num+=4;
 			String changeDeleteFile = deleteFile.substring(num);
 			System.out.println(changeDeleteFile);
-			s3Service.delete(changeDeleteFile);
+//			s3Service.delete(changeDeleteFile);
 			hshps.deletePhoto(homeStayPhotoNum);
 		}else {
 			System.out.println("삭제실패!!");
