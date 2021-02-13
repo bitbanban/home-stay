@@ -92,7 +92,7 @@ mapxhr.onreadystatechange = function () {
     var mapContainer = document.getElementById('mapBox'), // 지도를 표시할 div
       mapOption = {
         center: new kakao.maps.LatLng(35.56568016231779, 127.93715554020916), // 지도의 중심좌표
-        level: 12, // 지도의 확대 레벨
+        level: 13, // 지도의 확대 레벨
       };
 
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
