@@ -2,8 +2,8 @@
 cloud:
   aws:
     credentials:
-      accessKey: AKIA5YQIMEDRTMF4ZCMH
-      secretKey: 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
+      accessKey: 
+      secretKey: 
     s3:
       bucket: raonnadri
     region:
