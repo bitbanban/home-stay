@@ -133,7 +133,7 @@ function getPlace(sort, areaCode, currentPage) {
 
         c += `<div class="list-content">`;
         c += `<div class="placeName">${placeName}</div>`;
-        c += `<div class="addr">${addr}</div>`;
+        c += `<div class="addr">${addr}</div><br>`;
         c += `<div class="likes"><i class="fas fa-heart"></i><span>${item[i].likeCount}</span></div>`;
         c += `</div></div></a>`;
       }

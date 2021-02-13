@@ -181,18 +181,46 @@ width:0.3rem;height:0.3rem;background:transparent;}
 
 
 .city-place-menu {
-	background-color:var(--c-color);
-	border-radius: 2em;
 	width: 80%;
 	margin: 0.5em auto;
 	}
 	
 /*Ajax부분*/
 .mainImage{
-   width: 35vw;	
+   width: 15vw;	
+   height:20vh;
    border-radius: 1em;
+   
 }
-	
+
+.place-list{
+	background-color: var(--c-color);
+	width: 60vw;
+	height:25vh;
+	margin: 0 auto;
+	margin-bottom: 5vh;
+	border-radius: 1em;
+	display: flex;
+   flex-direction:row;
+   justify-content:center;
+   align-items:center;
+   box-shadow: 5px 5px 3px gray;
+}
+
+.list-content {
+	width: 40vw;
+	font-size: var(--font-medium);
+	padding: 2em;
+	font-weight: 600;
+}
+
+.fa-chevron-right {
+	font-size: var(--font-large);
+}
+
+a {
+	color:var(--brown);
+}
 
 	
 @media all and (min-width: 768px) and (max-width: 1023px) {
@@ -208,6 +236,19 @@ width:0.3rem;height:0.3rem;background:transparent;}
 	 .all-city {
 	 margin-top:2vh;
 	 }
+	 
+	 .mainImage{
+     width: 15vw;	
+     height:13vh;
+     border-radius: 1em;
+   
+    }
+	 
+	 .place-list{
+	width: 60vw;
+	height:15vh;
+
+}
 }
 
 
@@ -249,6 +290,26 @@ width:0.3rem;height:0.3rem;background:transparent;}
       height: 7.5px;
       width: 7.5px;
     }
+    
+    .mainImage{
+     width: 20vw;	
+     height:10vh;
+     border-radius: 1em;
+   
+    }
+	 
+	.place-list{
+	height:15vh;
+	width: 80vw;
+
+}
+
+.list-content {
+	width: 40vw;
+	font-size: var(--font-small);
+	padding: 2em;
+	font-weight: 600;
+}
 }
 
 

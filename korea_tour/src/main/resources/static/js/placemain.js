@@ -136,7 +136,7 @@ function getMainPlace(areaCode) {
         c += `<img class="mainImage" src=${src} onerror="this.src='/img/noimage.png'">`;
         c += `<div class="list-content">`;
         c += `<div class="placeName">${placeName}</div>`;
-        c += `</div></div></a>`;
+        c += `</div><i class="fas fa-chevron-right"></i></div></a>`;
       }
 
       document.querySelector('.city-place-menu').innerHTML = c;
@@ -146,7 +146,3 @@ function getMainPlace(areaCode) {
 }
 xhr.send();
 }
-
-
-
- 
