@@ -31,7 +31,8 @@ public class KakaoOauth implements OauthService{
 	private final String KAKAO_SNS_BASE_URL="https://kapi.kakao.com/v2/user/me";
 	private final String KAKAO_SNS_CLIENT_ID="5d2136e7d58ec45f7275dcd5dd09cf7c";
 	private final String KAKAO_SNS_CLIENT_SECRET="jeYn5R9K3CFHZDYqmdryIDdGpJQ8Cp9w";
-	private final String KAKAO_SNS_CALLBACK_URL="http://www.raonnadri.tk/login/kakao/callback";
+//	private final String KAKAO_SNS_CALLBACK_URL="http://www.raonnadri.tk/login/kakao/callback";
+	private final String KAKAO_SNS_CALLBACK_URL="http://localhost:9003/login/kakao/callback";
 	private final String KAKAO_SNS_TOKEN_BASE_URL="https://kauth.kakao.com/oauth/token";
 	
 	
