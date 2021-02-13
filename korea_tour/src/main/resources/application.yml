@@ -1,9 +1,6 @@
 #aws s3
 cloud:
   aws:
-    credentials:
-      accessKey: 
-      secretKey: 
     s3:
       bucket: raonnadri
     region:
