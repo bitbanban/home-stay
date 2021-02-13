@@ -167,3 +167,55 @@ hr{
   .pagination li.active {
     color: #fff;
   }
+  
+  
+  @media screen and (max-width: 768px) {
+   
+    #middleBox{
+        display: block;
+        
+    }
+   #navBox{
+    position: absolute;
+    top: 10%;
+    left: 0px;
+    display:inline-block;
+    width:100%;
+    margin:0;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+   }
+   #mainBox{
+   	width: calc(40px + 100% - 40px);
+   	margin-bottom:40px;
+   }
+   #topBox{
+   	padding:0px;
+   	margin:0px;
+   }
+   #topBox hr{
+   	width:100%;
+   }
+   .nav-text{
+   	margin-top:auto;
+   	margin-bottom:auto;
+   }
+   .answer-icon{
+   	font-size:1em;
+   }
+   .answer-info{
+   	font-size:0.8em;
+   }
+   
+   .image-box{
+   	width:140px;
+   }
+   .answer-name{
+   	font-size:1.5rem;
+   }
+   
+   
+   
+   
+}
