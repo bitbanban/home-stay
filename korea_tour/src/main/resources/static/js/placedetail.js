@@ -24,6 +24,8 @@ function getPlace() {
       let data = JSON.parse(this.responseText);
       let item = data.place;
       let src = item.firstImage;
+      let srcUser = data.userPhoto;
+      let srcSub = data.apiPhoto;
       let photo = data.apiPhoto;
       let placeName = item.title;
       let addr = item.addr1;
@@ -66,7 +68,7 @@ function getPlace() {
 
       //상단 이미지(DB저장)
       y += `<img id="mainImage" src=${src} onerror="this.src='/img/noimage.png'">`;
-      if (src != null) {
+      if (srcUser != null || srcSub != null) {
         y += `<p id="showImage" onclick='imageClick()'>이미지 더보기</p><div id=subImage>`;
 
         for (let i = 0; i < photo.length; i++) {
@@ -76,17 +78,19 @@ function getPlace() {
         y += `<img class="userPhoto" src="${userPhoto[b].image}">`;
       }
        y += `</div>`;
-
+       }
       //글내용
+      if (addr != null)
       t += `<p>주소 : ${addr}</p><br>`;
+      if (overview != null)
       t += `<p>${overview}</p>`;
-
-  
-      }
+      else
+      t += `<p>조회된 데이터가 없습니다</p>`;
       
-
+  
+      
         UsNum =document.getElementById("uNum");
-        if (UsNum != null) 
+        if (UsNum != null && srcSub != null ) 
          str = UsNum.value;
         
         else 
