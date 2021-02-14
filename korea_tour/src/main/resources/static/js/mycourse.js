@@ -108,11 +108,16 @@ mapxhr.onreadystatechange = function () {
       //linePath 배열안에 좌표넣기
       linePath.push(new kakao.maps.LatLng(mapY, mapX));
 
+      var imageSrc = '/img/markerNumber'+[m]+'.png', // 마커이미지의 주소입니다    
+          imageSize = new kakao.maps.Size(40, 40), // 마커이미지의 크기입니다
+          imageOption = {offset: new kakao.maps.Point(21, 41)};
       //마커의 위치
+      var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption)
       var markerPosition = new kakao.maps.LatLng(mapY, mapX);
 
       // 마커를 생성합니다
       var marker = new kakao.maps.Marker({
+        image: markerImage,
         position: markerPosition,
       });
 
