@@ -111,7 +111,10 @@ public class HomeStayReviewController implements SessionNames{
 		
 		if(s.checkReviewWritten(homeStayReservationNum) == 0) {
 			HomeStayReviewDto rdto = new HomeStayReviewDto();
-			int max = s.maxOfRegroup();
+			int max = 0;
+			if(s.checkFirstData()!=0) {
+				max = s.maxOfRegroup();
+			}
 			rdto.setHomeStayNum(homeStayNum);
 			rdto.setRegroup(max+1);
 			rdto.setLoginNum(loginNum);
