@@ -127,7 +127,7 @@ hr {
 .ReAnswerClick
 {
 	float: right;
-	margin-top: -2vw;
+	margin-top: -5vh;
 	margin-right: 20vw;
 }
 
@@ -249,25 +249,26 @@ hr {
 }
 
 .fa-trash-alt:before {
-	margin-left: 47vw;
-	margin-top: -2vw;
+	margin-left: 9.5vw;
+	margin-top: -10.6vh;
 	float: right;
 }
 
 @media all and (min-width: 769px) and (max-width: 1023px) {
     .fa-trash-alt:before {
-	margin-top: -2.4vw;
+    margin-left: 13.5vw;
 }
 
 .ReAnswerClick
 {
-	margin-top: -2.4vw;
+	margin-top: -5.4vh;
     margin-right: 18vw;
 }
 
 }
 
-@media all and (width:768px){
+
+@media all and (max-width:768px){
  
 .ReAnswerClick
 {
@@ -275,16 +276,12 @@ hr {
     margin-right: 18vw;
 }
 
+.fa-trash-alt:before {
+	margin-left: 13.5vw;
+	margin-top: -10.6vh;
+	float: right;
 }
 
-
-@media all and (max-width:767px){
- 
-.ReAnswerClick
-{
-	margin-top: -6.1vw;
-    margin-right: 18vw;
-}
 h1 {
   text-align: center;
   font-size: var(--font-large);
