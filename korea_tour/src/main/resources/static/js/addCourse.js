@@ -11,9 +11,9 @@ function createCousre() {
   const xhr = new XMLHttpRequest();
   const input = document.querySelector('input#courseName');
   const name = input.value;
-  const url = `/api/courses`;
+  const url = `/api/courses?name=`+name;
   xhr.open('POST', url);
-  xhr.setRequestHeader('Content-type', 'application/json');
+  //xhr.setRequestHeader('Content-type', 'application/json');
 
   const userNum = document.querySelector('span#num').getAttribute('data-id');
 
@@ -21,7 +21,7 @@ function createCousre() {
     name: name,
   };
 
-  console.log(url);
+  console.log(name);
   xhr.send(null);
 
   xhr.onreadystatechange = function (e) {
