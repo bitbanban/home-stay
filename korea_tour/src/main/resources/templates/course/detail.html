@@ -97,23 +97,33 @@
 
                   <!-- 댓글입력창 -->
                   <th:block th:if="${session.user != null}">
-                  <div id="createAnswerBox">
-                  
-                        <div id="answerCount"><i class="far fa-comment-dots"></i>&nbsp;여행톡 2</div>
-                        <input type="hidden" id="userLoginNum" name="loginNum" th:value=${session.user.userNum}></input>
-                        <input type="hidden" id="userId" name="loginId" th:value=${session.user.name}></input>
-                        <input type="hidden" id="userPhotoGo" name="loginPhoto" th:value=${session.user.photo}></input>
-                        <textarea id="textBox" name="textBox" onblur="forceOut(this.value)" placeholder="소중한 댓글을 남겨주세요."></textarea>
-                        <button onclick="insertAnswer()">보내기</button>
-                  
-                  </div>
+                        <div id="createAnswerBox">
+                        
+                              <div id="answerCount"><i class="far fa-comment-dots"></i>&nbsp;여행톡 2</div>
+                              <input type="hidden" id="userLoginNum" name="loginNum" th:value=${session.user.userNum}></input>
+                              <input type="hidden" id="userId" name="loginId" th:value=${session.user.name}></input>
+                              <input type="hidden" id="userPhotoGo" name="loginPhoto" th:value=${session.user.photo}></input>
+                              <textarea id="textBox" name="textBox" onblur="forceOut(this.value)" placeholder="소중한 댓글을 남겨주세요."></textarea>
+                              <button onclick="insertAnswer()">보내기</button>
+                        
+                        </div>
+                  </th:block>
+                  <th:block th:unless="${session.user != null}">
+                        <div id="createAnswerBox">
+                        
+                              <div id="answerCount"><i class="far fa-comment-dots"></i>&nbsp;여행톡 2</div>
+                              <input type="hidden" id="userLoginNum" name="loginNum" ></input>
+                              <input type="hidden" id="userId" name="loginId" ></input>
+                              <input type="hidden" id="userPhotoGo" name="loginPhoto" ></input>
+                              <textarea id="textBox" name="textBox" onblur="forceOut(this.value)" readonly placeholder="로그인을 해주세요"></textarea>
+                        
+                        </div>
                   </th:block>
 
                   <!-- 반복문 댓글출력창 -->
-                  <div id="printAnswer">
+                  <div id="printAnswer"></div>
                       
                         
-                  </div>
 
             </div>
       </div>
