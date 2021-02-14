@@ -87,4 +87,10 @@ public class HomeStayReviewServiceImpl implements HomeStayReviewService{
 		return m.getReviewByHomeStayReviewNum(homeStayReviewNum);
 	}
 
+	@Override
+	public int checkFirstData() {
+		// TODO Auto-generated method stub
+		return m.checkFirstData();
+	}
+
 }

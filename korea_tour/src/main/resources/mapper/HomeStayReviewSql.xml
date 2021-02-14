@@ -42,6 +42,11 @@
 		select reviewWrite from homeStayReservation where homeStayReservationNum=#{homeStayReservationNum}
 	</select>
 	
+	<!--  첫댓글인지 확인 -->
+	<select id="checkFirstData" resultType="int">
+		select count(*) from homeStayReview 
+	</select>
+	
 	<!-- homeStayReviewNum 찾기 -->
 	<select id="getReviewNum" parameterType="hashmap" resultType="int">
 		select max(homeStayReviewNum) from homeStayReview where homeStayNum=#{homeStayNum} and loginNum=#{loginNum}
