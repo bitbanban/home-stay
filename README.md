@@ -9,7 +9,7 @@
 ### PL 
 최보라 [github](https://github.com/september21st)
 ### 팀원
-김경오[github](https://github.com/KIM-KYOUNG-OH), 도가영[github](https://github.com/young-d), 박진우[github](https://github.com/krapoownij), 소다미[github](https://github.com/dami7177),이승민[github](https://github.com/smin9408), 이지영[github], 정수진[github](https://github.com/tkznzl12)
+김경오[github](https://github.com/KIM-KYOUNG-OH), 도가영[github](https://github.com/young-d), 박진우[github](https://github.com/krapoownij), 소다미[github](https://github.com/dami7177),이승민[github](https://github.com/smin9408), 이지영[github](https://github.com/Leejeoung), 정수진[github](https://github.com/tkznzl12)
 
 ### 역할
 * front-end: 소다미,이승민,정수진,최보라
