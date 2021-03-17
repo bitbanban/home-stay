@@ -15,11 +15,7 @@ let eventEndDate;
 
 parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
 getAreaName(areaCode);
-monthOnclick();
-areaOnclick();
-
 /* ----- functions ---- */
-
 //eventEndDate 구하기
 function getEndDate(month, currentYear) {
   let endDate = '';
@@ -55,21 +51,19 @@ function getStartDate(month, currentYear) {
   return eventStartDate;
 }
 
-function monthOnclick() {
-  let monthList = document.querySelectorAll('.month-list');
-  for (const monthBtn of monthList) {
-    monthBtn.addEventListener('click', function (e) {
-      month = e.target.getAttribute('month');
-      const children = monthBtn.parentElement.children;
-      for (const child of children) {
-        child.classList.remove('active');
-      }
+let categories = document.querySelector('.categories');
 
-      monthBtn.classList.add('active');
-      parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
-    });
-  }
-}
+categories.addEventListener('click', function (e) {
+  console.log(e.target);
+  // month = e.target.getAttribute('month');
+  // const children = monthBtn.parentElement.children;
+  // for (const child of children) {
+  //   child.classList.remove('active');
+  // }
+
+  // monthBtn.classList.add('active');
+  parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
+});
 
 function areaOnclick() {
   let areaList = document.querySelectorAll('.area-list');
@@ -215,8 +209,6 @@ function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
     '=' +
     encodeURIComponent(eventEndDate);
 
-  /**/
-  // console.log(url + queryParams);
   xhr.open('GET', url + queryParams);
   xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
@@ -228,7 +220,6 @@ function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
         .childNodes[0].nodeValue;
 
       totalPage = Math.ceil(parseInt(totalCount) / numOfRows);
-      // console.log(totalCount);
 
       let list = xmlDoc.getElementsByTagName('item');
       let n = '';

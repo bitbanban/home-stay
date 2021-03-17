@@ -2,16 +2,16 @@
 
 @font-face {
   font-family: 'light';
-  src: url(SCDream2.otf) format('truetype');
+  src: url(NotoSansCJKkr-Light.otf) format('truetype');
 }
 @font-face {
   font-family: 'regular';
-  src: url(SCDream4.otf) format('truetype');
+  src: url(NotoSansCJKkr-Medium.otf) format('truetype');
 }
 
 @font-face {
   font-family: 'bold';
-  src: url(SCDream7.otf) format('truetype');
+  src: url(NotoSansCJKkr-Black.otf) format('truetype');
 }
 
 :root {
