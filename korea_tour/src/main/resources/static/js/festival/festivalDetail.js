@@ -5,10 +5,10 @@ let areaCode;
 const pageNum = getParam('pageNum');
 const month = getParam('month');
 //API 실행
-parseDetailInfo(contentId);
-parseDetailImage(contentId);
-parseCommonInfo(contentId);
-parseDetailIntro(contentId);
+loadDetailInfo(contentId);
+loadDetailImage(contentId);
+loadCommonInfo(contentId);
+loadDetailIntro(contentId);
 
 /* functions  */
 
@@ -22,13 +22,10 @@ function getParam(key) {
 }
 
 //***** APIs ******
-function getAreaName(areaCode) {
-  let xmlStr;
-  let xmlDoc;
-  var xhr = new XMLHttpRequest();
-  var url =
+async function getAreaName(areaCode) {
+  let url =
     'http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode'; /*URL*/
-  var queryParams =
+  let queryParams =
     '?' +
     encodeURIComponent('serviceKey') +
     '=' +
@@ -46,42 +43,33 @@ function getAreaName(areaCode) {
     '&' + encodeURIComponent('arrange') + '=' + encodeURIComponent('Y');
   queryParams +=
     '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y');
-  console.log(url + queryParams);
-  xhr.open('GET', url + queryParams);
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      xmlStr = this.responseText;
-      var xmlParser, xmlDoc;
-      xmlParser = new DOMParser();
-      xmlDoc = xmlParser.parseFromString(xmlStr, 'text/xml');
 
-      let list = xmlDoc.getElementsByTagName('item');
-      let areaName;
-      for (let i = 0; i < list.length; i++) {
-        if (
-          list[i].getElementsByTagName('code')[0].childNodes[0].nodeValue ===
-          areaCode
-        )
-          areaName = list[i].getElementsByTagName('name')[0].childNodes[0]
-            .nodeValue;
-      }
-      document.querySelector('.area').innerHTML = areaName;
-      document.querySelector('#goList').addEventListener('click', () => {
-        location.href = `/festival/list?areaCode=${areaCode}&pageNum=${pageNum}&month=${month}`;
-      });
-    }
-  };
-  xhr.send(null);
+  const response = await fetch(url + queryParams).then(response =>
+    response.text()
+  );
+
+  const data = new window.DOMParser().parseFromString(response, 'text/xml');
+  let list = await data.getElementsByTagName('item');
+  let areaName;
+  list = [...list];
+  list.map(item => {
+    if (
+      item.getElementsByTagName('code')[0].childNodes[0].nodeValue === areaCode
+    )
+      areaName = item.getElementsByTagName('name')[0].childNodes[0].nodeValue;
+  });
+
+  document.querySelector('.area').innerHTML = areaName;
+  document.querySelector('#goList').addEventListener('click', () => {
+    location.href = `/festival/list?areaCode=${areaCode}&pageNum=${pageNum}&month=${month}`;
+  });
 }
 
 //종합정보
-function parseCommonInfo(contentId) {
-  let xmlStr;
-  let xmlDoc;
-  var xhr = new XMLHttpRequest();
-  var url =
+async function loadCommonInfo(contentId) {
+  let url =
     'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon'; /*URL*/
-  var queryParams =
+  let queryParams =
     '?' +
     encodeURIComponent('serviceKey') +
     '=' +
@@ -123,80 +111,70 @@ function parseCommonInfo(contentId) {
   queryParams +=
     '&' + encodeURIComponent('transGuideYN') + '=' + encodeURIComponent('Y');
 
-  xhr.open('GET', url + queryParams);
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      xmlStr = this.responseText;
-      var xmlParser, xmlDoc;
-      xmlParser = new DOMParser();
-      xmlDoc = xmlParser.parseFromString(xmlStr, 'text/xml');
-      let list = xmlDoc.getElementsByTagName('item');
-      areaCode = list[0].getElementsByTagName('areacode')[0].childNodes[0]
-        .nodeValue;
-      getAreaName(areaCode);
-      let poster;
-      if (list[0].getElementsByTagName('firstimage')[0] != undefined) {
-        poster = `<img src='${
-          list[0].getElementsByTagName('firstimage')[0].childNodes[0].nodeValue
-        }'  >`;
-      } else {
-        poster = `<img src='/img/noimage.png' class='thumbnail' />`;
-      }
+  const response = await fetch(url + queryParams).then(response =>
+    response.text()
+  );
 
-      let title = list[0].getElementsByTagName('title')[0].childNodes[0]
-        .nodeValue;
-      let addr = list[0].getElementsByTagName('addr1')[0].childNodes[0]
-        .nodeValue;
-      document.querySelector('.addr').innerHTML = addr;
-      document.querySelector('.fes-title').innerHTML = title;
-      document.querySelector('.fes-poster').innerHTML = poster;
+  const data = new window.DOMParser().parseFromString(response, 'text/xml');
 
-      let mapx = list[0].getElementsByTagName('mapx')[0].childNodes[0]
-        .nodeValue;
-      let mapy = list[0].getElementsByTagName('mapy')[0].childNodes[0]
-        .nodeValue;
+  let list = await data.getElementsByTagName('item');
 
-      var mapContainer = document.querySelector('.fes-map'), // 지도를 표시할 div
-        mapOption = {
-          center: new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
-          level: 3, // 지도의 확대 레벨
-        };
+  areaCode = list[0].getElementsByTagName('areacode')[0].childNodes[0]
+    .nodeValue;
+  getAreaName(areaCode);
+  let poster;
+  if (list[0].getElementsByTagName('firstimage')[0] != undefined) {
+    poster = `<img src='${
+      list[0].getElementsByTagName('firstimage')[0].childNodes[0].nodeValue
+    }'  >`;
+  } else {
+    poster = `<img src='/img/noimage.png' class='thumbnail' />`;
+  }
 
-      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+  let title = list[0].getElementsByTagName('title')[0].childNodes[0].nodeValue;
+  let addr = list[0].getElementsByTagName('addr1')[0].childNodes[0].nodeValue;
+  document.querySelector('.addr').innerHTML = addr;
+  document.querySelector('.title').innerHTML = title;
+  document.querySelector('.poster').innerHTML = poster;
 
-      var imageSrc = '/img/location-pin.png', // 마커이미지의 주소입니다
-        imageSize = new kakao.maps.Size(60, 64), // 마커이미지의 크기입니다
-        imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+  let mapx = list[0].getElementsByTagName('mapx')[0].childNodes[0].nodeValue;
+  let mapy = list[0].getElementsByTagName('mapy')[0].childNodes[0].nodeValue;
 
-      // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-      var markerImage = new kakao.maps.MarkerImage(
-          imageSrc,
-          imageSize,
-          imageOption
-        ),
-        markerPosition = new kakao.maps.LatLng(mapy, mapx); // 마커가 표시될 위치입니다
+  let mapContainer = document.querySelector('.map'), // 지도를 표시할 div
+    mapOption = {
+      center: new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
+      level: 3, // 지도의 확대 레벨
+    };
 
-      // 마커를 생성합니다
-      var marker = new kakao.maps.Marker({
-        position: markerPosition,
-        image: markerImage, // 마커이미지 설정
-      });
+  let map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-      // 마커가 지도 위에 표시되도록 설정합니다
-      marker.setMap(map);
-    }
-  };
-  xhr.send(null);
+  let imageSrc = '/img/location-pin.png', // 마커이미지의 주소입니다
+    imageSize = new kakao.maps.Size(60, 64), // 마커이미지의 크기입니다
+    imageOption = { offset: new kakao.maps.Point(27, 69) }; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+  // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+  let markerImage = new kakao.maps.MarkerImage(
+      imageSrc,
+      imageSize,
+      imageOption
+    ),
+    markerPosition = new kakao.maps.LatLng(mapy, mapx); // 마커가 표시될 위치입니다
+
+  // 마커를 생성합니다
+  let marker = new kakao.maps.Marker({
+    position: markerPosition,
+    image: markerImage, // 마커이미지 설정
+  });
+
+  // 마커가 지도 위에 표시되도록 설정합니다
+  marker.setMap(map);
 }
 
 //디테일소개
-function parseDetailIntro(contentId) {
-  let xmlStr;
-  let xmlDoc;
-  var xhr = new XMLHttpRequest();
-  var url =
+async function loadDetailIntro(contentId) {
+  let url =
     'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro'; /*URL*/
-  var queryParams =
+  let queryParams =
     '?' +
     encodeURIComponent('serviceKey') +
     '=' +
@@ -221,47 +199,39 @@ function parseDetailIntro(contentId) {
   queryParams +=
     '&' + encodeURIComponent('introYN') + '=' + encodeURIComponent('Y'); /**/
 
-  xhr.open('GET', url + queryParams);
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      xmlStr = this.responseText;
-      var xmlParser, xmlDoc;
-      xmlParser = new DOMParser();
-      xmlDoc = xmlParser.parseFromString(xmlStr, 'text/xml');
-      let list = xmlDoc.getElementsByTagName('item');
+  const response = await fetch(url + queryParams).then(response =>
+    response.text()
+  );
 
-      let s = '';
-      s += `<li><b>주최기관</b><span>${
-        list[0].getElementsByTagName('sponsor1')[0].childNodes[0].nodeValue
-      }</span></li>`;
-      s += `<li><b>행사장소</b><span>${
-        list[0].getElementsByTagName('eventplace')[0].childNodes[0].nodeValue
-      }</span></li>`;
-      s += `<li><b>행사시작일</b><span>${
-        list[0].getElementsByTagName('eventstartdate')[0].childNodes[0]
-          .nodeValue
-      }</span></li>`;
-      s += `<li><b>행사종료일</b><span>${
-        list[0].getElementsByTagName('eventenddate')[0].childNodes[0].nodeValue
-      }</span></li>`;
-      s += `<li><b>이용료</b><span>${list[0]
-        .getElementsByTagName('usetimefestival')[0]
-        .childNodes[0].nodeValue.replace('<br>', '  ')}</span></li>`;
+  const data = new window.DOMParser().parseFromString(response, 'text/xml');
 
-      document.querySelector('.detail-info').innerHTML = s;
-    }
-  };
-  xhr.send(null);
+  let list = await data.getElementsByTagName('item');
+
+  let s = '';
+  s += `<li><b>주최기관</b><span>${
+    list[0].getElementsByTagName('sponsor1')[0].childNodes[0].nodeValue
+  }</span></li>`;
+  s += `<li><b>행사장소</b><span>${
+    list[0].getElementsByTagName('eventplace')[0].childNodes[0].nodeValue
+  }</span></li>`;
+  s += `<li><b>행사시작일</b><span>${
+    list[0].getElementsByTagName('eventstartdate')[0].childNodes[0].nodeValue
+  }</span></li>`;
+  s += `<li><b>행사종료일</b><span>${
+    list[0].getElementsByTagName('eventenddate')[0].childNodes[0].nodeValue
+  }</span></li>`;
+  s += `<li><b>이용료</b><span>${list[0]
+    .getElementsByTagName('usetimefestival')[0]
+    .childNodes[0].nodeValue.replace('<br>', '  ')}</span></li>`;
+
+  document.querySelector('.detail-info').innerHTML = s;
 }
 
 //디테일 정보
-function parseDetailInfo(contentId) {
-  let xmlStr;
-  let xmlDoc;
-  var xhr = new XMLHttpRequest();
-  var url =
+async function loadDetailInfo(contentId) {
+  let url =
     'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo'; /*URL*/
-  var queryParams =
+  let queryParams =
     '?' +
     encodeURIComponent('serviceKey') +
     '=' +
@@ -286,38 +256,29 @@ function parseDetailInfo(contentId) {
   queryParams +=
     '&' + encodeURIComponent('listYN') + '=' + encodeURIComponent('Y'); /**/
 
-  xhr.open('GET', url + queryParams);
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      xmlStr = this.responseText;
-      var xmlParser, xmlDoc;
-      xmlParser = new DOMParser();
-      xmlDoc = xmlParser.parseFromString(xmlStr, 'text/xml');
+  let fesDescription = document.querySelector('.description');
+  const response = await fetch(url + queryParams).then(response =>
+    response.text()
+  );
 
-      let list = xmlDoc.getElementsByTagName('item');
-      let fesDescription = document.querySelector('.fes-description');
+  const data = new window.DOMParser().parseFromString(response, 'text/xml');
 
-      for (let i = 0; i < list.length; i++) {
-        let infotext =
-          '<p>' +
-          list[i].getElementsByTagName('infotext')[0].childNodes[0].nodeValue +
-          '</p>';
+  let list = await data.getElementsByTagName('item');
+  for (let i = 0; i < list.length; i++) {
+    let infotext =
+      '<p>' +
+      list[i].getElementsByTagName('infotext')[0].childNodes[0].nodeValue +
+      '</p>';
 
-        fesDescription.innerHTML = infotext;
-      }
-    }
-  };
-  xhr.send(null);
+    fesDescription.innerHTML = infotext;
+  }
 }
 
 //사진가져오기
-function parseDetailImage(contentId) {
-  let xmlStr;
-  let xmlDoc;
-  var xhr = new XMLHttpRequest();
-  var url =
+async function loadDetailImage(contentId) {
+  let url =
     'http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage'; /*URL*/
-  var queryParams =
+  let queryParams =
     '?' +
     encodeURIComponent('serviceKey') +
     '=' +
@@ -342,28 +303,21 @@ function parseDetailImage(contentId) {
   queryParams +=
     '&' + encodeURIComponent('imageYN') + '=' + encodeURIComponent('Y');
 
-  xhr.open('GET', url + queryParams);
-  xhr.onreadystatechange = function () {
-    if (this.readyState == 4) {
-      xmlStr = this.responseText;
-      var xmlParser, xmlDoc;
-      xmlParser = new DOMParser();
-      xmlDoc = xmlParser.parseFromString(xmlStr, 'text/xml');
+  let img = '';
+  const response = await fetch(url + queryParams).then(response =>
+    response.text()
+  );
 
-      let list = xmlDoc.getElementsByTagName('item');
-      let img = '';
+  const data = new window.DOMParser().parseFromString(response, 'text/xml');
 
-      for (let i = 0; i < list.length; i++) {
-        img += `<img src='${
-          list[i].getElementsByTagName('originimgurl')[0].childNodes[0]
-            .nodeValue
-        }'  class="slide-img">`;
-      }
+  let list = await data.getElementsByTagName('item');
+  for (let i = 0; i < list.length; i++) {
+    img += `<img src='${
+      list[i].getElementsByTagName('originimgurl')[0].childNodes[0].nodeValue
+    }'  class="slide-img">`;
+  }
 
-      document.querySelector('.fes-photo').innerHTML = img;
-    }
-  };
-  xhr.send(null);
+  document.querySelector('.photo').innerHTML = img;
 }
 
 document.querySelector('#fesPhoto').addEventListener('click', () => {

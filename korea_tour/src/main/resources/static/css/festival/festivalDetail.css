@@ -15,7 +15,7 @@ a {
   flex-direction: column;
   align-items: center;
 }
-h1.fes-title {
+h1.title {
   font-family: 'bold';
   margin: 5% 0 3% 0;
   color: #333;
@@ -51,17 +51,17 @@ ul.nav {
 li a {
   color: #555;
 }
-div.fes-area-addr {
+div.area-addr {
   color: var(--b-color);
 }
 
-.fes-map {
+.map {
   width: 80vw;
   height: 50vh;
   margin: auto;
 }
 
-.fes-poster {
+.poster {
   margin: auto;
   width: 100%;
   display: flex;
@@ -69,7 +69,7 @@ div.fes-area-addr {
   justify-content: center;
   align-items: center;
 }
-.fes-poster img {
+.poster img {
   max-width: 80%;
   max-height: 80vh;
   border: 1px solid var(--b-color);
@@ -101,7 +101,7 @@ p.description {
 #fesPhoto {
   cursor: pointer;
 }
-.fes-photo {
+.photo {
   margin: 1%;
   display: flex;
   flex-direction: column;
@@ -113,10 +113,10 @@ p.description {
 }
 
 @media all and (min-width: 600px) and (max-width: 768px) {
-  h1.fes-title {
+  h1.title {
     font-family: 'bold';
   }
-  .fes-description {
+  .description {
     font-size: var(--font-small);
   }
   ul.nav {
@@ -125,10 +125,10 @@ p.description {
 }
 
 @media all and (max-width: 599px) {
-  .fes-description {
+  .description {
     font-size: 0.8rem;
   }
-  h1.fes-title {
+  h1.title {
     font-family: 'regular';
     font-size: var(--font-medium);
   }
