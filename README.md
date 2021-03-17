@@ -29,3 +29,7 @@ MySql
 ### Tools
 Eclipes, VScode, MySQL workbench, SourceTree, Notion, Slack, postman,discode,chrome remote desktop
 
+---
+## 버전
+배포 2021.02.14
+리팩토링 진행중 2021.02.14~
