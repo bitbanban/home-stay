@@ -13,7 +13,7 @@ let endPage;
 let eventStartDate;
 let eventEndDate;
 
-parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
+fetchAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
 getAreaName(areaCode);
 /* ----- functions ---- */
 //eventEndDate 구하기
@@ -40,7 +40,6 @@ function getEndDate(month, currentYear) {
       endDate = 31;
       break;
   }
-  // console.log(endDate);
   return currentYear + (month > 10 ? month : '0' + month) + endDate;
 }
 function getStartDate(month, currentYear) {
@@ -53,37 +52,20 @@ function getStartDate(month, currentYear) {
 
 let categories = document.querySelector('.categories');
 
-categories.addEventListener('click', function (e) {
-  console.log(e.target);
-  // month = e.target.getAttribute('month');
-  // const children = monthBtn.parentElement.children;
-  // for (const child of children) {
-  //   child.classList.remove('active');
-  // }
-
-  // monthBtn.classList.add('active');
-  parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
+categories.addEventListener('click', e => {
+  month = e.target.dataset.month ? e.target.dataset.month : month;
+  areaCode = e.target.dataset.area ? e.target.dataset.area : areaCode;
+  if (areaCode == 'all') areaCode = '';
+  if (e.target.classList.value !== 'category') return;
+  const children = e.target.parentElement.children;
+  for (const child of children) {
+    child.classList.remove('active');
+  }
+  e.target.classList.add('active');
+  getAreaName(areaCode);
+  fetchAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
 });
 
-function areaOnclick() {
-  let areaList = document.querySelectorAll('.area-list');
-  for (const areaBtn of areaList) {
-    areaBtn.addEventListener('click', function (e) {
-      areaCode = e.target.getAttribute('area');
-      if (areaCode == 'all') {
-        areaCode = '';
-      }
-      const children = areaBtn.parentElement.children;
-      for (const child of children) {
-        child.classList.remove('active');
-      }
-
-      areaBtn.classList.add('active');
-      parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
-      getAreaName(areaCode);
-    });
-  }
-}
 // parameter value 읽기
 function getParam(key) {
   let param;
@@ -148,7 +130,7 @@ function getAreaName(areaCode) {
 }
 
 //api 데이터
-function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
+function fetchAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
   if (month == 'all' || month == undefined) {
     eventStartDate = getStartDate(month, currentYear);
     eventEndDate = '';
@@ -158,7 +140,6 @@ function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
   }
   if (pageNum == undefined) pageNum = 1;
   let xmlStr;
-  let xmlDoc;
   var xhr = new XMLHttpRequest();
   var url =
     'http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival'; /*URL*/
@@ -288,14 +269,14 @@ function parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear) {
           endPage + 1
         }' class='page-list'><i class="fas fa-chevron-right"></i></li>`;
       }
-      console.log(totalPage);
+
       document.querySelector('.pagination').innerHTML = p;
       let pageList = document.querySelectorAll('.page-list');
       for (const page of pageList) {
         page.addEventListener('click', function (e) {
           pageNum = e.target.getAttribute('page');
           if (totalPage < pageNum) pageNum = totalPage;
-          parseAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
+          fetchAreaBased(areaCode, pageNum, numOfRows, month, currentYear);
           getAreaName(areaCode);
         });
       }
